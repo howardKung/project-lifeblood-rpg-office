@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 68,
+    "remaining": 66,
     "max": 100,
-    "totalSpent": 32,
+    "totalSpent": 34,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-25 22:02:04",
@@ -35,13 +35,13 @@
       "tier": 1,
       "reportsTo": "boss",
       "conversationId": "a737e45b-0fc5-4039-adeb-314b3cfbc85e",
-      "status": "working",
+      "status": "idle",
       "isBoss": false,
-      "quota": 81,
+      "quota": 79,
       "maxQuota": 100,
-      "tasksCompleted": 7,
-      "currentTask": "指揮 Top 1 Multi-ATS Apify Actor 開發與驗收，嚴格把關零費用紅線",
-      "lastUpdate": "2026-11-26 06:47:05",
+      "tasksCompleted": 8,
+      "currentTask": "已完成 Top 1 Multi-ATS 驗收、GitHub 推送與 Google Drive 歸檔，待命等待大 Boss 上架 Apify 或派工 Top 2",
+      "lastUpdate": "2026-11-26 06:53:23",
       "color": "#3b82f6",
       "shirt": "#2563eb",
       "hair": "#0f172a"
@@ -120,6 +120,14 @@
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-26 06:53:23",
+      "agentId": "commander",
+      "agentName": "Antigravity",
+      "status": "idle",
+      "cost": 2,
+      "summary": "驗收通過！Top 1 Multi-ATS Apify Actor 實測 10/10 家真實企業 4.91 秒抓出 2,999 筆職缺、0 扣費保護生效，已推送至 howardKung/multi-ats-hiring-signals 並備份上架指南至 Google Drive。"
+    },
     {
       "time": "2026-11-26 06:52:43",
       "agentId": "indie_hacker_builder",
@@ -203,27 +211,39 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 15,
+    "totalLocalFiles": 17,
     "driveSyncedFiles": 15,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 7235,
-        "mtime": "2026-11-26 06:52:43",
-        "mtimeTs": 1795675963.3701942
+        "size": 7667,
+        "mtime": "2026-11-26 06:53:23",
+        "mtimeTs": 1795676003.2650034
       },
       {
-        "path": "rpg-office/rpg_office.html",
-        "size": 31012,
-        "mtime": "2026-11-26 06:47:05",
-        "mtimeTs": 1795675625.3379476
+        "path": "products/top1-multi-ats/README.md",
+        "size": 5838,
+        "mtime": "2026-11-26 06:53:22",
+        "mtimeTs": 1795676002.9016345
+      },
+      {
+        "path": "products/top1-multi-ats/APIFY_LAUNCH_GUIDE_ZH.md",
+        "size": 2837,
+        "mtime": "2026-11-26 06:53:22",
+        "mtimeTs": 1795676002.8984315
       },
       {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 3532,
-        "mtime": "2026-11-26 06:45:59",
-        "mtimeTs": 1795675559.047462
+        "size": 3987,
+        "mtime": "2026-11-26 06:52:44",
+        "mtimeTs": 1795675964.92248
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 31482,
+        "mtime": "2026-11-26 06:52:43",
+        "mtimeTs": 1795675963.428275
       },
       {
         "path": "CHARTER.md",
@@ -254,20 +274,8 @@
         "size": 12589,
         "mtime": "2026-11-26 06:15:31",
         "mtimeTs": 1795673731.9192412
-      },
-      {
-        "path": "INDEX_戰隊紀錄總覽.md",
-        "size": 2069,
-        "mtime": "2026-11-26 06:01:57",
-        "mtimeTs": 1795672917.3228333
-      },
-      {
-        "path": "dashboard/idea_squad_board.html",
-        "size": 9692,
-        "mtime": "2026-11-26 05:48:01",
-        "mtimeTs": 1795672081.8150408
       }
     ],
-    "snapshotTime": "2026-11-26 06:52:43"
+    "snapshotTime": "2026-11-26 06:53:23"
   }
 }
