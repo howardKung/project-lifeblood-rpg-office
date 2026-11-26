@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 38,
+    "remaining": 32,
     "max": 100,
-    "totalSpent": 62,
+    "totalSpent": 68,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-25 22:02:04",
@@ -73,11 +73,11 @@
       "conversationId": "4d45eadf25e3a97eff77f4c65e29f773",
       "status": "working",
       "isBoss": false,
-      "quota": 59,
+      "quota": 53,
       "maxQuota": 100,
-      "tasksCompleted": 3,
-      "currentTask": "平行開發項目 A (domain-dns-tech-trust-signals) 與項目 B (sec-form-d-funding-signals)",
-      "lastUpdate": "2026-11-26 10:09:44",
+      "tasksCompleted": 4,
+      "currentTask": "已完成項目 A (DNS & Tech-Stack Actor)，等待項目 B 同步收尾",
+      "lastUpdate": "2026-11-26 10:26:23",
       "color": "#06b6d4",
       "shirt": "#0891b2",
       "hair": "#1e293b"
@@ -120,6 +120,14 @@
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-26 10:26:23",
+      "agentId": "indie_hacker_builder",
+      "agentName": "平台套利駭客",
+      "status": "working",
+      "cost": 6,
+      "summary": "Apify Actor #2 (howardKung/domain-dns-tech-trust-signals, commit abd1c9e) 已 100% 開發實測並推送至 GitHub main！內建完整 .actor 四件套 (含 output_schema.json)、85+ 企業 SaaS DNS TXT/SPF 指紋庫 (突破 Docker UDP 512B 截斷)、CNAME Trust Center 確定性偵測、數學級 0-PII 淨化器與 /bin/bash.008 PPE 零扣費保護。11 網域並發實測 1.93 秒全數通過 (OpenAI 30項/Figma 26項/Ramp 25項/Linear 23項/Stripe 22項，NXDOMAIN 15ms 0扣費，37KB JSON 驗證 0 Email/0 mailto)。"
+    },
     {
       "time": "2026-11-26 10:24:48",
       "agentId": "pain_hunter",
@@ -281,21 +289,21 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 11019,
-        "mtime": "2026-11-26 10:24:48",
-        "mtimeTs": 1795688688.859081
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 34383,
-        "mtime": "2026-11-26 10:09:46",
-        "mtimeTs": 1795687786.780503
+        "size": 11716,
+        "mtime": "2026-11-26 10:26:23",
+        "mtimeTs": 1795688783.4554949
       },
       {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 6255,
-        "mtime": "2026-11-26 10:09:42",
-        "mtimeTs": 1795687782.4046295
+        "size": 6737,
+        "mtime": "2026-11-26 10:24:50",
+        "mtimeTs": 1795688690.3493476
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 34932,
+        "mtime": "2026-11-26 10:24:48",
+        "mtimeTs": 1795688688.9119992
       },
       {
         "path": "products/top2-agentguard/AgentGuard_Kit_Pro_v1.0.0.zip",
@@ -340,6 +348,6 @@
         "mtimeTs": 1795676002.9016345
       }
     ],
-    "snapshotTime": "2026-11-26 10:24:48"
+    "snapshotTime": "2026-11-26 10:26:23"
   }
 }
