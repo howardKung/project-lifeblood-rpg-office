@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 54,
+    "remaining": 46,
     "max": 100,
-    "totalSpent": 46,
+    "totalSpent": 54,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-25 22:02:04",
@@ -71,13 +71,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "4d45eadf25e3a97eff77f4c65e29f773",
-      "status": "working",
+      "status": "idle",
       "isBoss": false,
-      "quota": 67,
+      "quota": 59,
       "maxQuota": 100,
-      "tasksCompleted": 2,
-      "currentTask": "開發 Top 2 AgentGuard Kit (防燒錢熔斷 + 白牌戰情室) 與 Top 1 n8n/MCP 免費導流模板",
-      "lastUpdate": "2026-11-26 07:52:36",
+      "tasksCompleted": 3,
+      "currentTask": "已完成 Top 2 AgentGuard Kit 與 Top 1 導流包並推送至 GitHub",
+      "lastUpdate": "2026-11-26 08:00:01",
       "color": "#06b6d4",
       "shirt": "#0891b2",
       "hair": "#1e293b"
@@ -120,6 +120,14 @@
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-26 08:00:01",
+      "agentId": "indie_hacker_builder",
+      "agentName": "平台套利駭客",
+      "status": "idle",
+      "cost": 8,
+      "summary": "已交付 AgentGuard Kit v1.0.0（3 套 n8n 免費引流範本含 Top 1 howardkung/multi-ats-hiring-signals 導流管線、Supabase FOR UPDATE consume_budget_atomic() 商業 Schema、零依賴 Node.js 22 MCP 護欄 Proxy、一鍵換裝白牌甲方 ROI 戰情室、英文銷售 README 與 5 分鐘 Gumroad/Lemon Squeezy 上架指南）。npm test 實測 12/12 PASS，已推上 origin main (89324c5)。"
+    },
     {
       "time": "2026-11-26 07:59:56",
       "agentId": "ruthless_critic",
@@ -249,27 +257,27 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 9064,
+        "size": 9623,
+        "mtime": "2026-11-26 08:00:01",
+        "mtimeTs": 1795680001.0123115
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 5249,
+        "mtime": "2026-11-26 07:59:57",
+        "mtimeTs": 1795679997.7794948
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 33110,
         "mtime": "2026-11-26 07:59:56",
-        "mtimeTs": 1795679996.279824
+        "mtimeTs": 1795679996.339139
       },
       {
         "path": "AUDIT_ROUND2.md",
         "size": 15822,
         "mtime": "2026-11-26 07:59:46",
         "mtimeTs": 1795679986.5147948
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 32785,
-        "mtime": "2026-11-26 07:57:16",
-        "mtimeTs": 1795679836.8388507
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 4925,
-        "mtime": "2026-11-26 07:56:22",
-        "mtimeTs": 1795679782.1463978
       },
       {
         "path": "proposals/R2_02_monetization_architect.md",
@@ -308,6 +316,6 @@
         "mtimeTs": 1795674520.031154
       }
     ],
-    "snapshotTime": "2026-11-26 07:59:56"
+    "snapshotTime": "2026-11-26 08:00:01"
   }
 }
