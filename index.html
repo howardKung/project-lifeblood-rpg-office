@@ -953,6 +953,7 @@
             <button class="cam-btn" data-preset="scooter">🛵 跟拍總務小綿羊</button>
             <button class="cam-btn" data-preset="empire">🏰 帝寶總裁大樓</button>
             <button class="cam-btn" data-preset="twse">📈 台灣證交所</button>
+            <button class="cam-btn" data-preset="news">📺 新聞情報台</button>
           </div>
           <span class="cam-hint">👆 單指拖曳旋轉 · 雙指縮放 · 點角色看資料卡</span>
         </div>
@@ -1048,25 +1049,27 @@
       chip_momentum_tracker:  [ { icon: "🎯", name: "籌碼鎖定卡", desc: "法人買盤狙擊" }, { icon: "📊", name: "量價紅盤卡", desc: "右側動能確認" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
       macro_etf_strategist:   [ { icon: "👒", name: "錢夫人貴婦卡", desc: "跨市場大格局" }, { icon: "🌐", name: "總經水位卡", desc: "股債 ETF 平衡" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
       chief_risk_officer:     [ { icon: "🚧", name: "停損路障卡", desc: "破年線直接退件" }, { icon: "🛡️", name: "免罪合規卡", desc: "12% 現金紅線" }, { icon: "🧠", name: "PRO 終審卡", desc: "嚴控盈虧比" } ],
-      paper_fund_manager:     [ { icon: "📈", name: "紅漲買進卡", desc: "台股紅漲綠跌" }, { icon: "🏦", name: "百萬操盤卡", desc: "實盤條件單" }, { icon: "🤖", name: "零額度自動卡", desc: "Python 0 消耗" } ]
+      paper_fund_manager:     [ { icon: "📈", name: "紅漲買進卡", desc: "台股紅漲綠跌" }, { icon: "🏦", name: "百萬操盤卡", desc: "實盤條件單" }, { icon: "🤖", name: "零額度自動卡", desc: "Python 0 消耗" } ],
+      news_social_radar:      [ { icon: "📰", name: "頭條快報卡", desc: "台美股 AI 關稅早報" }, { icon: "📡", name: "散戶反指標雷達", desc: "PTT/Reddit 情緒監測" }, { icon: "🦅", name: "順風耳情報卡", desc: "HN/X 矽谷風向快搜" } ]
     };
 
     // 3D World Positions for Agents (desk / meeting / park lounge)
     const POS_3D = {
-      boss:                   { desk: [-10.2, -9.8], meet: [11.6, -9.8], lounge: [-10.2, -9.8] },
-      commander:              { desk: [-1.8, -9.8],  meet: [9.0, -10.4], lounge: [3.6, -2.8] },
-      office_steward:         { desk: [2.2, -8.3],   meet: [14.0, -10.4], lounge: [6.4, -2.8] },
+      boss:                   { desk: [-10.2, -9.8], meet: [11.6, -9.8],  lounge: [-10.2, -9.8] },
+      commander:              { desk: [-1.8, -9.8],  meet: [9.0, -10.4],  lounge: [3.2, -0.2] },
+      office_steward:         { desk: [2.2, -8.3],   meet: [14.0, -10.4], lounge: [6.4, -0.4] },
       // Division 1: 金流商店街 (front of shops at z = -0.3)
-      pain_hunter:            { desk: [-9.2, -0.3],  meet: [9.3, -11.8], lounge: [8.8, -2.5] },
-      indie_hacker_builder:   { desk: [-6.7, -0.3],  meet: [10.8, -12.0], lounge: [3.4, 0.5] },
-      monetization_architect: { desk: [-4.2, -0.3],  meet: [12.4, -12.0], lounge: [9.2, 0.5] },
-      ruthless_critic:        { desk: [-1.7, -0.3],  meet: [13.9, -11.8], lounge: [3.6, 3.6] },
-      // Division 2: 台灣證券交易所 (front of TWSE at z = 6.0)
-      supply_chain_scout:     { desk: [-9.6, 6.0],   meet: [9.8, -9.5],  lounge: [6.4, 4.0] },
-      chip_momentum_tracker:  { desk: [-7.6, 6.0],   meet: [13.4, -9.5], lounge: [9.0, 3.6] },
-      macro_etf_strategist:   { desk: [-5.6, 6.0],   meet: [10.4, -10.8], lounge: [4.6, 4.7] },
-      chief_risk_officer:     { desk: [-3.6, 6.0],   meet: [12.8, -10.8], lounge: [8.1, 4.7] },
-      paper_fund_manager:     { desk: [-1.6, 6.0],   meet: [11.6, -11.4], lounge: [6.4, 2.5] }
+      pain_hunter:            { desk: [-9.2, -0.3],  meet: [9.3, -11.8],  lounge: [9.5, -0.2] },
+      indie_hacker_builder:   { desk: [-6.7, -0.3],  meet: [10.8, -12.0], lounge: [3.1, 1.6] },
+      monetization_architect: { desk: [-4.2, -0.3],  meet: [12.4, -12.0], lounge: [9.7, 1.6] },
+      ruthless_critic:        { desk: [-1.7, -0.3],  meet: [13.9, -11.8], lounge: [3.3, 3.6] },
+      // Division 2: 台灣證券交易所 (front of TWSE at z = 6.0) & 大富翁新聞電視台 (z = -1.4)
+      supply_chain_scout:     { desk: [-9.6, 6.0],   meet: [9.8, -9.5],   lounge: [6.4, 5.1] },
+      chip_momentum_tracker:  { desk: [-7.6, 6.0],   meet: [13.4, -9.5],  lounge: [9.5, 3.6] },
+      macro_etf_strategist:   { desk: [-5.6, 6.0],   meet: [10.4, -10.8], lounge: [4.6, 5.1] },
+      chief_risk_officer:     { desk: [-3.6, 6.0],   meet: [12.8, -10.8], lounge: [8.2, 5.1] },
+      paper_fund_manager:     { desk: [-1.6, 6.0],   meet: [11.6, -11.4], lounge: [4.0, 2.3] },
+      news_social_radar:      { desk: [6.4, -1.4],   meet: [14.2, -9.4],  lounge: [8.8, 2.3] }
     };
 
     function targetFor3D(a) {
@@ -1331,7 +1334,7 @@
     }
     [
       [-15.2, -12.6, 1.0], [-15.2, 9.6, 0.95], [16.8, -12.8, 1.05], [16.8, 10.2, 0.95],
-      [2.2, -1.0, 0.85], [10.4, -4.4, 0.9], [2.4, 4.4, 0.88], [10.4, 4.6, 0.92],
+      [2.2, 0.1, 0.85], [10.4, -0.2, 0.88], [2.4, 5.2, 0.88], [10.4, 5.2, 0.92],
       [-15.4, -1.5, 0.85], [15.4, 1.2, 0.88]
     ].forEach(([tx, tz, ts]) => addTree(tx, tz, ts));
 
@@ -2009,7 +2012,7 @@
     twse.add(twseScreen);
 
     // --- LANDMARK 6: ☕ 陽光噴水池公園（待命省電區 + 3D 噴水池粒子 + 長椅）---
-    makePlazaPad(6.4, 1.0, 9.2, 10.6, 0x86efac, 0x15803d);
+    makePlazaPad(6.4, 2.3, 9.2, 7.2, 0x86efac, 0x15803d);
 
     const parkSignTex = makeCanvasTexture(420, 92, (g, w, h) => {
       g.fillStyle = "#9a3412";
@@ -2022,27 +2025,27 @@
       g.textAlign = "center";
       g.fillText("☕ 陽光噴水池公園 · 省電區", w / 2, 60);
     });
-    addSignBoard(6.4, 1.45, -3.7, 4.4, 0.78, parkSignTex.tex);
+    addSignBoard(6.4, 1.35, -0.9, 4.4, 0.76, parkSignTex.tex);
 
     // Fountain Center
     const fountain = new THREE.Group();
-    fountain.position.set(6.4, 0.14, 0.8);
+    fountain.position.set(6.4, 0.14, 2.3);
     scene.add(fountain);
     const fRim = new THREE.Mesh(
-      new THREE.CylinderGeometry(2.1, 2.25, 0.36, 24),
+      new THREE.CylinderGeometry(1.85, 2.0, 0.36, 24),
       new THREE.MeshStandardMaterial({ color: 0xe0f2fe, roughness: 0.4 })
     );
     fRim.position.y = 0.18;
     fRim.receiveShadow = true;
     fountain.add(fRim);
     const fWater = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.78, 1.78, 0.39, 24),
+      new THREE.CylinderGeometry(1.56, 1.56, 0.39, 24),
       new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15, metalness: 0.15 })
     );
     fWater.position.y = 0.2;
     fountain.add(fWater);
     const fSpire = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.28, 0.45, 1.05, 14),
+      new THREE.CylinderGeometry(0.26, 0.42, 1.02, 14),
       whiteMat
     );
     fSpire.position.y = 0.65;
@@ -2052,7 +2055,7 @@
     // 3D Fountain Water Droplet Particles
     const waterDrops = [];
     const dropMat = new THREE.MeshStandardMaterial({ color: 0xe0f2fe, emissive: 0x7dd3fc, emissiveIntensity: 0.35, roughness: 0.1 });
-    const dropGeo = new THREE.SphereGeometry(0.09, 8, 8);
+    const dropGeo = new THREE.SphereGeometry(0.085, 8, 8);
     for (let i = 0; i < 28; i++) {
       const m = new THREE.Mesh(dropGeo, dropMat);
       fountain.add(m);
@@ -2062,37 +2065,263 @@
         ang,
         phase: (i % 7) / 7,
         speed: 0.016 + (i % 3) * 0.004,
-        radius: 0.8 + (i % 4) * 0.2
+        radius: 0.72 + (i % 4) * 0.18
       });
     }
 
     // Cafe Umbrella Table
     const umbrellaPole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 1.6, 8), darkMat);
-    umbrellaPole.position.set(3.4, 0.94, -1.6);
+    umbrellaPole.position.set(3.2, 0.94, 0.4);
     scene.add(umbrellaPole);
     const umbrellaTop = new THREE.Mesh(
-      new THREE.ConeGeometry(1.15, 0.55, 8),
+      new THREE.ConeGeometry(1.1, 0.55, 8),
       new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.5 })
     );
-    umbrellaTop.position.set(3.4, 1.8, -1.6);
+    umbrellaTop.position.set(3.2, 1.8, 0.4);
     umbrellaTop.castShadow = true;
     scene.add(umbrellaTop);
 
     // Wooden Park Benches
     const benchMat = new THREE.MeshStandardMaterial({ color: 0xb45309, roughness: 0.75 });
     [
-      [3.6, 3.2],
-      [9.2, 3.2]
+      [3.5, 4.5],
+      [9.3, 4.5]
     ].forEach(([bx, bz]) => {
-      const seat = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.16, 0.55), benchMat);
+      const seat = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.16, 0.52), benchMat);
       seat.position.set(bx, 0.42, bz);
       seat.castShadow = true;
       scene.add(seat);
-      const back = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.36, 0.12), benchMat);
-      back.position.set(bx, 0.68, bz - 0.22);
+      const back = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.34, 0.12), benchMat);
+      back.position.set(bx, 0.66, bz - 0.2);
       back.castShadow = true;
       scene.add(back);
     });
+
+    // --- LANDMARK 7: 📺 大富翁新聞電視台 (News & Social Tower + 旋轉 SNG 衛星天線 + 動態招牌) ---
+    makePlazaPad(6.4, -3.8, 9.2, 3.8, 0xfce7f3, 0xe11d48);
+
+    const newsTower = new THREE.Group();
+    newsTower.position.set(6.4, 0.14, -4.1);
+    scene.add(newsTower);
+
+    // Lower Broadcast Studio Block (Vibrant Richman 4 Rose-Magenta & Indigo)
+    const newsLower = new THREE.Mesh(
+      new THREE.BoxGeometry(7.2, 2.35, 2.3),
+      new THREE.MeshStandardMaterial({ color: 0xbe123c, roughness: 0.42 })
+    );
+    newsLower.position.y = 1.175;
+    newsLower.castShadow = true;
+    newsLower.receiveShadow = true;
+    newsTower.add(newsLower);
+
+    // Golden Decorative Cornice Trim
+    const newsTrim = new THREE.Mesh(
+      new THREE.BoxGeometry(7.5, 0.22, 2.52),
+      goldMat
+    );
+    newsTrim.position.y = 2.4;
+    newsTrim.castShadow = true;
+    newsTower.add(newsTrim);
+
+    // Upper Broadcast Control Room Deck
+    const newsUpper = new THREE.Mesh(
+      new THREE.BoxGeometry(4.2, 1.35, 1.85),
+      new THREE.MeshStandardMaterial({ color: 0x1e3a8a, roughness: 0.45 })
+    );
+    newsUpper.position.set(-0.8, 3.15, 0);
+    newsUpper.castShadow = true;
+    newsTower.add(newsUpper);
+
+    const newsUpperTrim = new THREE.Mesh(
+      new THREE.BoxGeometry(4.45, 0.18, 2.02),
+      goldMat
+    );
+    newsUpperTrim.position.set(-0.8, 3.88, 0);
+    newsTower.add(newsUpperTrim);
+
+    // Glowing Studio Side Windows
+    const newsWinMat = new THREE.MeshBasicMaterial({ color: 0xfef08a });
+    [-2.85, 2.85].forEach(wx => {
+      const wPane = new THREE.Mesh(new THREE.PlaneGeometry(0.95, 1.2), newsWinMat);
+      wPane.position.set(wx, 1.15, 1.17);
+      newsTower.add(wPane);
+    });
+
+    // Dynamic CanvasTexture Sign & Live Ticker: "📺 NEWS 全球情報台"
+    const newsSignTexObj = makeCanvasTexture(640, 220, () => {});
+    let newsScrollX = 0;
+    function redrawNewsSign(tSec = 0) {
+      const { ctx: g, canvas: c } = newsSignTexObj;
+      const w = c.width, h = c.height;
+      g.fillStyle = "#090d16";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#fde047";
+      g.lineWidth = 8;
+      g.strokeRect(4, 4, w - 8, h - 8);
+
+      // Top Richman 4 News Header Bar
+      const hdrGrad = g.createLinearGradient(0, 0, w, 0);
+      hdrGrad.addColorStop(0, "#e11d48");
+      hdrGrad.addColorStop(0.55, "#be123c");
+      hdrGrad.addColorStop(1, "#7c3aed");
+      g.fillStyle = hdrGrad;
+      g.fillRect(10, 10, w - 20, 74);
+
+      g.fillStyle = "#fef08a";
+      g.font = "900 40px 'PingFang TC', 'Microsoft JhengHei', sans-serif";
+      g.textAlign = "left";
+      g.fillText("📺 NEWS 全球情報台", 24, 62);
+
+      // Blinking ON AIR badge
+      const blink = Math.floor(tSec * 2.5) % 2 === 0;
+      g.fillStyle = blink ? "#ef4444" : "#991b1b";
+      g.beginPath(); g.roundRect(w - 156, 22, 134, 48, 10); g.fill();
+      g.strokeStyle = "#fffbeb";
+      g.lineWidth = 3;
+      g.stroke();
+      g.fillStyle = "#ffffff";
+      g.font = "900 26px ui-monospace, monospace";
+      g.textAlign = "center";
+      g.fillText(blink ? "● ON AIR" : "○ ON AIR", w - 89, 55);
+
+      // Middle Audio / Signal Spectrum Bars
+      for (let i = 0; i < 18; i++) {
+        const barH = 12 + Math.abs(Math.sin(tSec * 5.2 + i * 0.65)) * 34;
+        g.fillStyle = i % 3 === 0 ? "#38bdf8" : (i % 2 === 0 ? "#fde047" : "#fb7185");
+        g.fillRect(24 + i * 33, 146 - barH, 22, barH);
+      }
+
+      // Bottom Live Scrolling Breaking Ticker
+      g.fillStyle = "#172554";
+      g.fillRect(10, 156, w - 20, 52);
+      g.save();
+      g.beginPath();
+      g.rect(14, 156, w - 28, 52);
+      g.clip();
+      const tickerMsg = "🔴 BREAKING：台美股雷達即時連線中 · PTT/Reddit/HN/X 四大社群風向掃描 · AI供應鏈＆國際關稅速報 · ";
+      g.fillStyle = "#fef08a";
+      g.font = "900 26px 'PingFang TC', 'Microsoft JhengHei', sans-serif";
+      g.textAlign = "left";
+      const tw = g.measureText(tickerMsg).width;
+      const ox = -((newsScrollX) % tw);
+      g.fillText(tickerMsg, 20 + ox, 192);
+      g.fillText(tickerMsg, 20 + ox + tw, 192);
+      g.restore();
+
+      newsSignTexObj.tex.needsUpdate = true;
+    }
+    redrawNewsSign(0);
+
+    // Front Broadcast Screen + Upper Rooftop Marquee
+    const newsScreen = new THREE.Mesh(
+      new THREE.PlaneGeometry(4.4, 1.55),
+      new THREE.MeshBasicMaterial({ map: newsSignTexObj.tex })
+    );
+    newsScreen.position.set(0, 1.25, 1.18);
+    newsTower.add(newsScreen);
+
+    const newsRoofSign = new THREE.Mesh(
+      new THREE.BoxGeometry(4.1, 1.05, 0.16),
+      [
+        goldMat, goldMat, goldMat, goldMat,
+        new THREE.MeshBasicMaterial({ map: newsSignTexObj.tex }),
+        new THREE.MeshBasicMaterial({ map: newsSignTexObj.tex })
+      ]
+    );
+    newsRoofSign.position.set(-0.8, 3.16, 0.98);
+    newsRoofSign.castShadow = true;
+    newsTower.add(newsRoofSign);
+
+    // Rooftop Broadcast Mast + Blinking Aviation Beacon
+    const mastPole = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.06, 0.11, 2.1, 10),
+      whiteMat
+    );
+    mastPole.position.set(-2.2, 4.95, -0.1);
+    mastPole.castShadow = true;
+    newsTower.add(mastPole);
+    const mastBeaconMat = new THREE.MeshBasicMaterial({ color: 0xff2d55 });
+    const mastBeacon = new THREE.Mesh(new THREE.SphereGeometry(0.16, 10, 10), mastBeaconMat);
+    mastBeacon.position.set(-2.2, 6.08, -0.1);
+    newsTower.add(mastBeacon);
+
+    // Rotating 3D SNG Satellite Broadcast Dish on Rooftop!
+    const sngDishBase = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.38, 0.52, 0.55, 14),
+      new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.5, metalness: 0.4 })
+    );
+    sngDishBase.position.set(2.15, 2.75, 0);
+    sngDishBase.castShadow = true;
+    newsTower.add(sngDishBase);
+
+    const sngDishGroup = new THREE.Group();
+    sngDishGroup.position.set(2.15, 3.1, 0);
+    newsTower.add(sngDishGroup);
+
+    const dishYoke = new THREE.Mesh(
+      new THREE.BoxGeometry(0.26, 0.65, 0.26),
+      goldMat
+    );
+    dishYoke.position.y = 0.28;
+    sngDishGroup.add(dishYoke);
+
+    const dishTilt = new THREE.Group();
+    dishTilt.position.y = 0.62;
+    dishTilt.rotation.x = -0.62;
+    sngDishGroup.add(dishTilt);
+
+    // Parabolic Dish Bowl
+    const dishBowl = new THREE.Mesh(
+      new THREE.SphereGeometry(1.15, 24, 14, 0, Math.PI * 2, 0, 1.05),
+      new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.28, metalness: 0.35, side: THREE.DoubleSide })
+    );
+    dishBowl.rotation.x = Math.PI;
+    dishBowl.position.y = 0.95;
+    dishBowl.castShadow = true;
+    dishTilt.add(dishBowl);
+
+    // Crimson-Gold Dish Rim Ring
+    const dishRim = new THREE.Mesh(
+      new THREE.TorusGeometry(0.99, 0.065, 10, 28),
+      new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.35 })
+    );
+    dishRim.rotation.x = Math.PI / 2;
+    dishRim.position.y = 0.38;
+    dishTilt.add(dishRim);
+
+    // Feed Horn Stem + Glowing SNG Signal Tip
+    const feedRod = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.035, 0.045, 1.15, 8),
+      goldMat
+    );
+    feedRod.position.y = 0.55;
+    dishTilt.add(feedRod);
+    const feedTip = new THREE.Mesh(
+      new THREE.SphereGeometry(0.14, 12, 10),
+      new THREE.MeshBasicMaterial({ color: 0xfde047 })
+    );
+    feedTip.position.y = 1.14;
+    dishTilt.add(feedTip);
+
+    // Cute 3D SNG Broadcast Camera Tripod on Plaza
+    const camStand = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.16, 0.72, 8), darkMat);
+    camStand.position.set(8.6, 0.5, -2.1);
+    scene.add(camStand);
+    const camBody = new THREE.Mesh(
+      new THREE.BoxGeometry(0.45, 0.32, 0.58),
+      new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.45 })
+    );
+    camBody.position.set(8.6, 0.95, -2.1);
+    camBody.rotation.y = -0.55;
+    camBody.castShadow = true;
+    scene.add(camBody);
+    const camLens = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.1, 0.12, 0.25, 10),
+      goldMat
+    );
+    camLens.rotation.x = Math.PI / 2;
+    camLens.position.set(0, 0, 0.35);
+    camBody.add(camLens);
 
     // =========================================================================
     // 7. CENTRAL 3D GIANT INTERACTIVE BOUNCING DICE
@@ -2172,7 +2401,7 @@
     }
 
     // =========================================================================
-    // 8. 12 Q-CHIBI 3D CHARACTERS + 3D TAIWAN SCOOTER WITH EXHAUST PUFFS
+    // 8. 13 Q-CHIBI 3D CHARACTERS + 3D TAIWAN SCOOTER WITH EXHAUST PUFFS
     // =========================================================================
     const skinMat = new THREE.MeshStandardMaterial({ color: 0xfde68a, roughness: 0.65 });
     const shoeMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.7 });
@@ -2315,13 +2544,14 @@
       { tMax: 0.14, note: "校準台灣標準鐘樓！" },
       { tMax: 0.30, note: "帝寶摩天樓亮晶晶！" },
       { tMax: 0.48, note: "巡視金流商店街！" },
-      { tMax: 0.70, note: "檢查證交所紅盤！" },
-      { tMax: 0.88, note: "公園噴泉水質滿分！" },
+      { tMax: 0.62, note: "檢查證交所紅盤！" },
+      { tMax: 0.78, note: "公園噴泉水質滿分！" },
+      { tMax: 0.90, note: "新聞台開播收視第一！" },
       { tMax: 1.01, note: "今夜做夢也會笑！" }
     ];
     let scooterProgress = 0;
 
-    // Build all 12 Q-Chibi Characters
+    // Build all 13 Q-Chibi Characters
     const agentObjects = {};
     const clickableMeshes = [];
 
@@ -2413,6 +2643,33 @@
       const handR = new THREE.Mesh(new THREE.SphereGeometry(0.13, 10, 10), skinMat);
       handR.position.set(0.44, 0.68, 0.1);
       bodyPivot.add(handR);
+
+      // 3D News Interview Microphone for news_social_radar!
+      if (a.id === "news_social_radar") {
+        const micGroup = new THREE.Group();
+        const micShaft = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.036, 0.028, 0.36, 10),
+          new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.55, roughness: 0.3 })
+        );
+        micShaft.position.y = 0.18;
+        micGroup.add(micShaft);
+        const micCollar = new THREE.Mesh(
+          new THREE.BoxGeometry(0.15, 0.08, 0.15),
+          new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.4 })
+        );
+        micCollar.position.y = 0.28;
+        micGroup.add(micCollar);
+        const micFoam = new THREE.Mesh(
+          new THREE.SphereGeometry(0.105, 12, 10),
+          new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.7 })
+        );
+        micFoam.position.y = 0.40;
+        micFoam.castShadow = true;
+        micGroup.add(micFoam);
+        micGroup.position.set(0, 0.04, 0.06);
+        micGroup.rotation.x = 0.38;
+        handR.add(micGroup);
+      }
 
       // Big Q-Chibi Head
       const headGroup = new THREE.Group();
@@ -2510,6 +2767,32 @@
           pearl.position.set(cx * 0.96, -0.18, 0.14);
           headGroup.add(pearl);
         });
+      } else if (a.id === "news_social_radar") {
+        // 致敬《大富翁4》新聞女主播 / 莎拉公主：俏麗棕紅髮箍造型！
+        const auburnHairMat = new THREE.MeshStandardMaterial({ color: 0x881337, roughness: 0.62 });
+        const topHair = new THREE.Mesh(new THREE.SphereGeometry(0.51, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.55), auburnHairMat);
+        topHair.position.y = 0.05;
+        topHair.castShadow = true;
+        headGroup.add(topHair);
+        [-0.45, 0.45].forEach(sx => {
+          const sideBob = new THREE.Mesh(new THREE.SphereGeometry(0.19, 10, 10), auburnHairMat);
+          sideBob.scale.set(0.85, 1.25, 0.9);
+          sideBob.position.set(sx, -0.04, -0.02);
+          headGroup.add(sideBob);
+        });
+        // Bright Rose-Gold Princess Headband (髮箍) + Bow Accent
+        const bandMat = new THREE.MeshStandardMaterial({ color: 0xfde047, roughness: 0.3, metalness: 0.4 });
+        const headband = new THREE.Mesh(new THREE.TorusGeometry(0.49, 0.055, 10, 26, Math.PI * 1.04), bandMat);
+        headband.position.set(0, 0.12, 0.12);
+        headband.rotation.x = -0.35;
+        headGroup.add(headband);
+        const bowGem = new THREE.Mesh(
+          new THREE.SphereGeometry(0.095, 10, 8),
+          new THREE.MeshStandardMaterial({ color: 0xf43f5e, roughness: 0.35 })
+        );
+        bowGem.scale.set(1.4, 0.85, 0.7);
+        bowGem.position.set(0.28, 0.46, 0.24);
+        headGroup.add(bowGem);
       } else {
         const cap = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.52), hairMat);
         cap.position.y = 0.05;
@@ -2619,7 +2902,8 @@
     const PRESETS = {
       overview: { pos: new THREE.Vector3(0, 25, 29), target: new THREE.Vector3(0, 0.5, -1.2) },
       empire:   { pos: new THREE.Vector3(-8.2, 9.2, -1.8), target: new THREE.Vector3(-11.4, 2.5, -12.6) },
-      twse:     { pos: new THREE.Vector3(-3.2, 6.8, 12.6), target: new THREE.Vector3(-5.6, 1.8, 3.0) }
+      twse:     { pos: new THREE.Vector3(-3.2, 6.8, 12.6), target: new THREE.Vector3(-5.6, 1.8, 3.0) },
+      news:     { pos: new THREE.Vector3(8.4, 7.2, 5.4),   target: new THREE.Vector3(6.4, 1.9, -3.8) }
     };
 
     function setCameraPreset(preset) {
@@ -2771,7 +3055,7 @@
       const msgs = [
         `🎲 擲出 ${rolled} 點！3D 黃金財神骰落地，正在同步最新點券與實盤資產！`,
         `🎲 擲出 ${rolled} 點！總務長騎 3D 小綿羊推進 ${rolled} 格，校準台灣標準時間成功！`,
-        `🎲 擲出 ${rolled} 點！觸發「機會？紅盤大吉」，已向 GitHub 總部拉取最新報表！`,
+        `🎲 擲出 ${rolled} 點！觸發「📰 NEWS 頭條快報卡」，新聞台 SNG 天線同步掃描輿情！`,
         `🎲 擲出 ${rolled} 點！3D 證交所紅漲綠跌看盤牆刷新完畢，一切秩序井然！`
       ];
       toastEl.textContent = msgs[rolled % msgs.length];
@@ -2911,7 +3195,7 @@
           <div class="org-grid">${div1.map(a => card(a)).join("")}</div>
         </div>
         <div class="div-box" style="border-color:rgba(248,113,113,0.6);">
-          <div class="div-title" style="color:#fca5a5;">📈 第二事業部：台灣證券交易所（含百萬實盤模擬操盤室）</div>
+          <div class="div-title" style="color:#fca5a5;">📈 第二事業部：台灣證券交易所（含百萬實盤室＆新聞情報台）</div>
           <div class="org-grid">${div2.map(a => card(a)).join("")}</div>
         </div>
       `;
@@ -3039,13 +3323,19 @@
         if (c.mesh.position.x > 34) c.mesh.position.x = -34;
       });
 
-      // 5. Spinning Golden Ingot & Roof Coins
+      // 5. Spinning Golden Ingot, Roof Coins, & News Tower Rotating SNG Dish + Dynamic Marquee
       ingotGroup.rotation.y = t * 1.4;
       ingotGroup.position.y = 9.35 + Math.sin(t * 2.4) * 0.28;
       roofCoins.forEach(rc => {
         rc.mesh.rotation.z = t * 2.0 + rc.phase;
         rc.mesh.position.y = 3.45 + Math.sin(t * 2.6 + rc.phase) * 0.12;
       });
+      sngDishGroup.rotation.y = t * 0.95;
+      mastBeaconMat.color.setHex(Math.floor(t * 2.5) % 2 === 0 ? 0xff2d55 : 0x7f1d1d);
+      newsScrollX += dt * 78;
+      if (twsePulseAcc === 0 || Math.floor(t * 15) !== Math.floor((t - dt) * 15)) {
+        redrawNewsSign(t);
+      }
 
       // 6. Park Fountain Water Droplet Particles
       waterDrops.forEach(wd => {
@@ -3164,7 +3454,12 @@
           obj.legR.rotation.x = -legSwing;
           const hw = a.status === "working" ? Math.sin(t * 10 + seed) * 0.08 : 0;
           obj.handL.position.set(-0.44, 0.68 + hw, 0.1);
-          obj.handR.position.set(0.44, 0.68 - hw, 0.1);
+          if (a.id === "news_social_radar" && a.status === "working") {
+            const micWave = Math.sin(t * 4.2) * 0.08;
+            obj.handR.position.set(0.38, 0.84 + micWave, 0.26);
+          } else {
+            obj.handR.position.set(0.44, 0.68 - hw, 0.1);
+          }
         }
 
         // Expressive Blinking!

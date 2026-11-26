@@ -249,6 +249,26 @@
       "shirt": "#15803d",
       "hair": "#0f172a",
       "brainTier": "🤖 0-額度自動"
+    },
+    {
+      "id": "news_social_radar",
+      "name": "新聞輿情特派員",
+      "role": "跨部門情報台 · 全球財經新聞＆社群風向雷達",
+      "division": "stock",
+      "brainTier": "⚡ FLASH + 🤖 0-額度自動",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "alpha-news-social-radar",
+      "status": "working",
+      "isBoss": false,
+      "quota": 80,
+      "maxQuota": 100,
+      "tasksCompleted": 1,
+      "currentTask": "【大富翁新聞電視台】蒐集台美股、國際關稅、AI商機與 PTT/Reddit/HN/X 輿情早報",
+      "lastUpdate": "2026-11-27 06:47:00",
+      "color": "#f43f5e",
+      "shirt": "#e11d48",
+      "hair": "#451a03"
     }
   ],
   "reports": [
@@ -440,15 +460,39 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 51,
+    "totalLocalFiles": 52,
     "driveSyncedFiles": 51,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 18977,
+        "size": 19462,
+        "mtime": "2026-11-26 22:51:49",
+        "mtimeTs": 1795704709.670617
+      },
+      {
+        "path": "stock-division/portfolio.json",
+        "size": 11022,
+        "mtime": "2026-11-26 22:51:49",
+        "mtimeTs": 1795704709.6675205
+      },
+      {
+        "path": "rpg-office/auto_checkin_settlement.py",
+        "size": 4630,
+        "mtime": "2026-11-26 22:51:17",
+        "mtimeTs": 1795704677.607747
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 10473,
+        "mtime": "2026-11-26 22:20:47",
+        "mtimeTs": 1795702847.3402727
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 139323,
         "mtime": "2026-11-26 22:20:45",
-        "mtimeTs": 1795702845.7358892
+        "mtimeTs": 1795702845.8032525
       },
       {
         "path": "rpg-office/classic2d.html",
@@ -461,18 +505,6 @@
         "size": 123339,
         "mtime": "2026-11-26 22:20:25",
         "mtimeTs": 1795702825.3937895
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 10190,
-        "mtime": "2026-11-26 22:05:09",
-        "mtimeTs": 1795701909.960937
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 131743,
-        "mtime": "2026-11-26 22:05:08",
-        "mtimeTs": 1795701908.3939376
       },
       {
         "path": "hq-handover/skill-bundle/SKILL.md",
@@ -491,20 +523,8 @@
         "size": 13449,
         "mtime": "2026-11-26 21:42:26",
         "mtimeTs": 1795700546.2967696
-      },
-      {
-        "path": "hq-handover/subagent_roster.json",
-        "size": 13449,
-        "mtime": "2026-11-26 21:41:34",
-        "mtimeTs": 1795700494.7821438
-      },
-      {
-        "path": "hq-handover/bootstrap_hq.py",
-        "size": 5843,
-        "mtime": "2026-11-26 21:40:29",
-        "mtimeTs": 1795700429.8101122
       }
     ],
-    "snapshotTime": "2026-11-26 22:20:45"
+    "snapshotTime": "2026-11-26 22:51:50"
   }
 }

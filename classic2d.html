@@ -835,28 +835,30 @@
     // Character positions on the Richman 4 Board Town!
     const POS = {
       boss:                   { desk: { x: 118, y: 122 }, meet: { x: 618, y: 74 },  lounge: { x: 118, y: 122 } },
-      commander:              { desk: { x: 306, y: 122 }, meet: { x: 545, y: 105 }, lounge: { x: 550, y: 242 } },
-      office_steward:         { desk: { x: 415, y: 164 }, meet: { x: 695, y: 105 }, lounge: { x: 615, y: 234 } },
+      commander:              { desk: { x: 306, y: 122 }, meet: { x: 545, y: 105 }, lounge: { x: 536, y: 318 } },
+      office_steward:         { desk: { x: 415, y: 164 }, meet: { x: 695, y: 105 }, lounge: { x: 612, y: 318 } },
       // Division 1: 金流商店街
-      pain_hunter:            { desk: { x: 195, y: 312 }, meet: { x: 565, y: 126 }, lounge: { x: 680, y: 242 } },
-      indie_hacker_builder:   { desk: { x: 275, y: 312 }, meet: { x: 605, y: 126 }, lounge: { x: 542, y: 325 } },
-      monetization_architect: { desk: { x: 355, y: 312 }, meet: { x: 645, y: 126 }, lounge: { x: 684, y: 325 } },
-      ruthless_critic:        { desk: { x: 435, y: 312 }, meet: { x: 685, y: 126 }, lounge: { x: 545, y: 396 } },
-      // Division 2: 台灣證券交易所
-      supply_chain_scout:     { desk: { x: 185, y: 462 }, meet: { x: 555, y: 82 },  lounge: { x: 615, y: 412 } },
-      chip_momentum_tracker:  { desk: { x: 252, y: 462 }, meet: { x: 680, y: 82 },  lounge: { x: 685, y: 396 } },
-      macro_etf_strategist:   { desk: { x: 319, y: 462 }, meet: { x: 585, y: 112 }, lounge: { x: 572, y: 456 } },
-      chief_risk_officer:     { desk: { x: 386, y: 462 }, meet: { x: 655, y: 112 }, lounge: { x: 658, y: 456 } },
-      paper_fund_manager:     { desk: { x: 453, y: 462 }, meet: { x: 620, y: 126 }, lounge: { x: 615, y: 352 } }
+      pain_hunter:            { desk: { x: 195, y: 312 }, meet: { x: 565, y: 126 }, lounge: { x: 682, y: 318 } },
+      indie_hacker_builder:   { desk: { x: 275, y: 312 }, meet: { x: 605, y: 126 }, lounge: { x: 540, y: 372 } },
+      monetization_architect: { desk: { x: 355, y: 312 }, meet: { x: 645, y: 126 }, lounge: { x: 684, y: 372 } },
+      ruthless_critic:        { desk: { x: 435, y: 312 }, meet: { x: 685, y: 126 }, lounge: { x: 542, y: 424 } },
+      // Division 2: 台灣證券交易所 & 大富翁新聞電視台
+      supply_chain_scout:     { desk: { x: 185, y: 462 }, meet: { x: 555, y: 82 },  lounge: { x: 612, y: 446 } },
+      chip_momentum_tracker:  { desk: { x: 252, y: 462 }, meet: { x: 680, y: 82 },  lounge: { x: 684, y: 424 } },
+      macro_etf_strategist:   { desk: { x: 319, y: 462 }, meet: { x: 585, y: 112 }, lounge: { x: 568, y: 466 } },
+      chief_risk_officer:     { desk: { x: 386, y: 462 }, meet: { x: 655, y: 112 }, lounge: { x: 656, y: 466 } },
+      paper_fund_manager:     { desk: { x: 453, y: 462 }, meet: { x: 620, y: 126 }, lounge: { x: 612, y: 392 } },
+      news_social_radar:      { desk: { x: 610, y: 278 }, meet: { x: 706, y: 92 },  lounge: { x: 676, y: 344 } }
     };
 
-    // 總務長小綿羊沿著棋盤馬路 6 個巡邏點穿梭！
+    // 總務長小綿羊沿著棋盤馬路 7 個巡邏點穿梭！
     const STEWARD_WAYPOINTS = [
       { x: 415, y: 164, note: "校準台灣鐘樓！" },
       { x: 125, y: 164, note: "總裁摩天樓亮晶晶！" },
       { x: 110, y: 310, note: "巡視金流商店街！" },
       { x: 330, y: 512, note: "檢查證交所紅盤！" },
       { x: 750, y: 380, note: "公園噴泉水質滿分！" },
+      { x: 750, y: 230, note: "新聞台開播收視第一！" },
       { x: 630, y: 164, note: "今夜做夢也會笑！" }
     ];
 
@@ -873,7 +875,8 @@
       chip_momentum_tracker:  [ { icon: "🎯", name: "籌碼鎖定卡", desc: "法人買盤狙擊" }, { icon: "📊", name: "量價紅盤卡", desc: "右側動能確認" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
       macro_etf_strategist:   [ { icon: "👒", name: "錢夫人貴婦卡", desc: "跨市場大格局" }, { icon: "🌐", name: "總經水位卡", desc: "股債 ETF 平衡" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
       chief_risk_officer:     [ { icon: "🚧", name: "停損路障卡", desc: "破年線直接退件" }, { icon: "🛡️", name: "免罪合規卡", desc: "12% 現金紅線" }, { icon: "🧠", name: "PRO 終審卡", desc: "嚴控盈虧比" } ],
-      paper_fund_manager:     [ { icon: "📈", name: "紅漲買進卡", desc: "台股紅漲綠跌" }, { icon: "🏦", name: "百萬操盤卡", desc: "實盤條件單" }, { icon: "🤖", name: "零額度自動卡", desc: "Python 0 消耗" } ]
+      paper_fund_manager:     [ { icon: "📈", name: "紅漲買進卡", desc: "台股紅漲綠跌" }, { icon: "🏦", name: "百萬操盤卡", desc: "實盤條件單" }, { icon: "🤖", name: "零額度自動卡", desc: "Python 0 消耗" } ],
+      news_social_radar:      [ { icon: "📰", name: "頭條快報卡", desc: "台美股 AI 關稅早報" }, { icon: "📡", name: "散戶反指標雷達", desc: "PTT/Reddit 情緒監測" }, { icon: "🦅", name: "順風耳情報卡", desc: "HN/X 矽谷風向快搜" } ]
     };
 
     let STATE = null;
@@ -1131,7 +1134,7 @@
           <div class="org-grid">${div1.map(a => card(a)).join("")}</div>
         </div>
         <div class="div-box" style="border-color:rgba(248,113,113,0.6);">
-          <div class="div-title" style="color:#fca5a5;">📈 第二事業部：台灣證券交易所（含百萬實盤模擬操盤室）</div>
+          <div class="div-title" style="color:#fca5a5;">📈 第二事業部：台灣證券交易所（含百萬實盤室＆新聞情報台）</div>
           <div class="org-grid">${div2.map(a => card(a)).join("")}</div>
         </div>
       `;
@@ -1716,58 +1719,127 @@
       ctx.fillText("紅漲綠跌 · 實盤LIVE", 220, 424);
       ctx.restore();
 
-      // --- LANDMARK 6: ☕ 大富翁陽光公園 / 樂透咖啡座 (待命省電休息區) ---
+      // --- LANDMARK 6: 📺 大富翁新聞電視台 (News & Social Tower + 旋轉 SNG 衛星天線) ---
       ctx.save();
-      const parkGrad = ctx.createLinearGradient(498, 194, 498, 480);
+      ctx.fillStyle = "#fce7f3";
+      ctx.strokeStyle = "#e11d48";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.roundRect(498, 194, 224, 98, 12); ctx.fill(); ctx.stroke();
+
+      // Broadcast Studio Building
+      ctx.fillStyle = "#be123c";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.roundRect(510, 214, 152, 52, 6); ctx.fill(); ctx.stroke();
+
+      // Gold Trim + Upper Control Room
+      ctx.fillStyle = "#fde047";
+      ctx.fillRect(508, 211, 156, 5);
+      ctx.fillStyle = "#1e3a8a";
+      ctx.beginPath(); ctx.roundRect(522, 198, 92, 16, 4); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#fef08a";
+      ctx.font = "900 8.5px 'PingFang TC', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("📺 NEWS 全球情報台", 568, 209);
+
+      // Rotating SNG Satellite Dish on Rooftop Right!
+      const sngSwing = Math.sin(frame * 0.06) * 0.55;
+      ctx.save();
+      ctx.translate(686, 232);
+      ctx.fillStyle = "#334155";
+      ctx.fillRect(-5, 6, 10, 14);
+      ctx.rotate(sngSwing);
+      ctx.fillStyle = "#f8fafc";
+      ctx.beginPath(); ctx.arc(0, 0, 15, Math.PI * 0.9, Math.PI * 2.1); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = "#e11d48";
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(-14, 0); ctx.lineTo(14, 0); ctx.stroke();
+      ctx.strokeStyle = "#fde047";
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -14); ctx.stroke();
+      ctx.fillStyle = (Math.floor(frame / 18) % 2 === 0) ? "#fde047" : "#fb7185";
+      ctx.beginPath(); ctx.arc(0, -15, 3, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+
+      // Dynamic Live Broadcast Screen & Scrolling Breaking News Ticker
+      ctx.fillStyle = "#090d16";
+      ctx.beginPath(); ctx.roundRect(518, 222, 136, 36, 4); ctx.fill(); ctx.stroke();
+      const onAir = Math.floor(frame / 20) % 2 === 0;
+      ctx.fillStyle = onAir ? "#ef4444" : "#991b1b";
+      ctx.beginPath(); ctx.roundRect(610, 225, 40, 12, 3); ctx.fill();
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "900 6.8px ui-monospace, monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(onAir ? "● ON AIR" : "○ ON AIR", 630, 233.5);
+
+      ctx.fillStyle = "#38bdf8";
+      ctx.font = "800 7.5px 'PingFang TC', sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText("台美股×PTT/Reddit/HN", 523, 234);
+
+      ctx.save();
+      ctx.beginPath(); ctx.rect(520, 240, 132, 14); ctx.clip();
+      const newsTicker2d = "🔴 BREAKING：全球財經早報與散戶反指標雷達 LIVE 連線中 · ";
+      ctx.fillStyle = "#fde047";
+      ctx.font = "800 8px 'PingFang TC', sans-serif";
+      const ntw = ctx.measureText(newsTicker2d).width;
+      const nox = -((frame * 1.1) % ntw);
+      ctx.fillText(newsTicker2d, 522 + nox, 250);
+      ctx.fillText(newsTicker2d, 522 + nox + ntw, 250);
+      ctx.restore();
+      ctx.restore();
+
+      // --- LANDMARK 7: ☕ 大富翁陽光公園 / 樂透咖啡座 (待命省電休息區) ---
+      ctx.save();
+      const parkGrad = ctx.createLinearGradient(498, 298, 498, 484);
       parkGrad.addColorStop(0, "#bbf7d0");
       parkGrad.addColorStop(1, "#86efac");
       ctx.fillStyle = parkGrad;
       ctx.strokeStyle = "#15803d";
       ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.roundRect(498, 194, 224, 286, 12); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(498, 298, 224, 186, 12); ctx.fill(); ctx.stroke();
 
       // Cafe header banner
       ctx.fillStyle = "#9a3412";
       ctx.strokeStyle = OUTLINE;
       ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.roundRect(524, 198, 172, 20, 8); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(524, 302, 172, 18, 8); ctx.fill(); ctx.stroke();
       ctx.fillStyle = "#fef08a";
-      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
+      ctx.font = "900 9px 'PingFang TC', sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText("☕ 陽光公園 · 樂透咖啡省電區", 610, 211.5);
+      ctx.fillText("☕ 陽光公園 · 樂透咖啡省電區", 610, 314.5);
 
       // Espresso umbrella table
       ctx.fillStyle = "#dc2626";
-      ctx.beginPath(); ctx.arc(544, 232, 14, Math.PI, 0); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(542, 336, 12, Math.PI, 0); ctx.fill(); ctx.stroke();
       ctx.fillStyle = "#ffffff";
-      ctx.beginPath(); ctx.arc(544, 232, 6, Math.PI, 0); ctx.fill();
+      ctx.beginPath(); ctx.arc(542, 336, 5, Math.PI, 0); ctx.fill();
 
       // Animated Blue Water Fountain in Park Center!
       ctx.fillStyle = "#e0f2fe";
-      ctx.beginPath(); ctx.ellipse(612, 315, 34, 20, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(612, 386, 30, 17, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       ctx.fillStyle = "#38bdf8";
-      ctx.beginPath(); ctx.ellipse(612, 315, 26, 14, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(612, 386, 23, 12, 0, 0, Math.PI * 2); ctx.fill();
       // Fountain water spray
       const sp = Math.sin(frame * 0.16) * 3;
       ctx.strokeStyle = "#ffffff";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(612, 313); ctx.quadraticCurveTo(600, 294 + sp, 594, 310);
-      ctx.moveTo(612, 313); ctx.quadraticCurveTo(624, 294 - sp, 630, 310);
+      ctx.moveTo(612, 384); ctx.quadraticCurveTo(600, 366 + sp, 594, 381);
+      ctx.moveTo(612, 384); ctx.quadraticCurveTo(624, 366 - sp, 630, 381);
       ctx.stroke();
 
       // Wooden Park Benches
       ctx.fillStyle = "#b45309";
       ctx.strokeStyle = OUTLINE;
       ctx.lineWidth = 1.6;
-      ctx.beginPath(); ctx.roundRect(520, 386, 46, 12, 3); ctx.fill(); ctx.stroke();
-      ctx.beginPath(); ctx.roundRect(654, 386, 46, 12, 3); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(520, 424, 46, 11, 3); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(654, 424, 46, 11, 3); ctx.fill(); ctx.stroke();
 
       // Decorative Cartoon Trees around Town
-      drawRichmanTree(516, 272, 0.85);
-      drawRichmanTree(702, 272, 0.85);
-      drawRichmanTree(516, 456, 0.9);
-      drawRichmanTree(702, 456, 0.9);
+      drawRichmanTree(516, 356, 0.78);
+      drawRichmanTree(702, 356, 0.78);
+      drawRichmanTree(516, 462, 0.84);
+      drawRichmanTree(702, 462, 0.84);
       drawRichmanTree(84, 214, 0.85);
       drawRichmanTree(824, 166, 0.9);
       ctx.restore();
@@ -1921,6 +1993,20 @@
       ctx.beginPath(); ctx.arc(x - 10, y + 1 + hw, 3, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       ctx.beginPath(); ctx.arc(x + 10, y + 1 - hw, 3, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
 
+      // News Anchor Microphone for news_social_radar!
+      if (a.id === "news_social_radar") {
+        ctx.save();
+        ctx.translate(x + 11, y - 1 - hw);
+        ctx.rotate(0.25);
+        ctx.fillStyle = "#334155";
+        ctx.fillRect(-1.2, -10, 2.4, 10);
+        ctx.fillStyle = "#e11d48";
+        ctx.fillRect(-2.6, -12, 5.2, 3);
+        ctx.fillStyle = "#facc15";
+        ctx.beginPath(); ctx.arc(0, -14, 3.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.restore();
+      }
+
       // Auditors hold 《大富翁4》路障卡 / 查稅卡!
       if (a.id === "ruthless_critic" || a.id === "chief_risk_officer") {
         drawRoadblockCard(x, y);
@@ -1963,6 +2049,19 @@
         ctx.fillStyle = "#fef08a";
         ctx.beginPath(); ctx.arc(x - 11.5, y - 14, 1.8, 0, Math.PI * 2); ctx.fill();
         ctx.beginPath(); ctx.arc(x + 11.5, y - 14, 1.8, 0, Math.PI * 2); ctx.fill();
+      } else if (a.id === "news_social_radar") {
+        // 致敬《大富翁4》新聞女主播 / 莎拉公主：俏麗棕紅髮箍造型！
+        ctx.fillStyle = "#881337";
+        ctx.beginPath(); ctx.roundRect(x - 12, y - 29.5, 24, 10, [9, 9, 3, 3]); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x - 11, y - 18, 3.4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x + 11, y - 18, 3.4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.strokeStyle = "#fde047";
+        ctx.lineWidth = 2.4;
+        ctx.beginPath(); ctx.arc(x, y - 20, 10.8, Math.PI * 1.12, Math.PI * 1.88); ctx.stroke();
+        ctx.strokeStyle = OUTLINE;
+        ctx.lineWidth = 1.4;
+        ctx.fillStyle = "#f43f5e";
+        ctx.beginPath(); ctx.arc(x + 6.5, y - 28.5, 2.8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       } else {
         ctx.fillStyle = a.hair || "#1e293b";
         ctx.beginPath(); ctx.roundRect(x - 12, y - 29.5, 24, 9.5, [9, 9, 3, 3]); ctx.fill(); ctx.stroke();
