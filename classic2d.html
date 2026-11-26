@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>大 Boss 雙事業部集團總部 · 《大富翁4》24/7 LIVE RPG 辦公室</title>
+  <style>
+    :root {
+      --ocean-dark: #071e3d;
+      --ocean-mid: #0c2d5c;
+      --ocean-light: #133f7d;
+      --panel-bg: #0a2549;
+      --card-bg: #103263;
+      --gold-light: #fef08a;
+      --gold: #fbbf24;
+      --gold-dark: #d97706;
+      --gold-deep: #92400e;
+      --text: #ffffff;
+      --text-soft: #dbeafe;
+      --muted: #93c5fd;
+      --tw-up: #ff4d4f;
+      --tw-down: #22c55e;
+      --cyan: #38bdf8;
+      --danger: #fb7185;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, #1d5ca8 0%, #0b2b59 48%, #061834 100%);
+      color: var(--text);
+      font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: #061730;
+      color: #fde047;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      padding: 1px 6px;
+      border-radius: 5px;
+      font-size: 11px;
+    }
+
+    /* ===== 《大富翁4》黃金雙層浮雕外框 ===== */
+    .r4-bevel {
+      background: linear-gradient(180deg, #0f366e 0%, #092349 100%);
+      border: 3px solid var(--gold);
+      border-radius: 16px;
+      box-shadow:
+        inset 0 2px 0 rgba(254, 240, 138, 0.65),
+        inset 0 -3px 0 rgba(180, 83, 9, 0.75),
+        0 5px 0 var(--gold-deep),
+        0 10px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ===== 頂部《大富翁4》黃金 HUD ===== */
+    .header {
+      background: linear-gradient(180deg, #174b94 0%, #0c2e61 55%, #071e42 100%);
+      border-bottom: 4px solid var(--gold);
+      box-shadow:
+        inset 0 2px 0 rgba(254, 240, 138, 0.5),
+        inset 0 -3px 0 #b45309,
+        0 6px 18px rgba(0, 0, 0, 0.45);
+      padding: 10px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    .container { max-width: 1480px; margin: 0 auto; }
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .hud-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* 經典《大富翁4》撕頁日曆牌 + 手機同步台灣時鐘 */
+    .r4-calendar-clock {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(180deg, #0b264e 0%, #061733 100%);
+      border: 2.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 5px 12px 5px 7px;
+      box-shadow: inset 0 1px 0 rgba(254, 240, 138, 0.45), 0 3px 0 #92400e;
+    }
+    .r4-cal-leaf {
+      width: 44px;
+      background: #ffffff;
+      border-radius: 7px;
+      overflow: hidden;
+      border: 2px solid #fbbf24;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+      flex-shrink: 0;
+    }
+    .r4-cal-head {
+      background: linear-gradient(180deg, #ef4444, #b91c1c);
+      color: #fff;
+      font-size: 9.5px;
+      font-weight: 900;
+      padding: 1px 0;
+      letter-spacing: 0.04em;
+    }
+    .r4-cal-day {
+      color: #0f172a;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.1;
+      padding: 1px 0 2px;
+    }
+    .clock-time {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 18px;
+      font-weight: 900;
+      color: #fde047;
+      text-shadow: 0 2px 0 #92400e, 0 0 8px rgba(250, 204, 21, 0.35);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+    .clock-date {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #bae6fd;
+    }
+
+    .brand-info { display: flex; flex-direction: column; gap: 3px; }
+    .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .title {
+      font-size: 16px;
+      font-weight: 900;
+      margin: 0;
+      color: #fef08a;
+      text-shadow: 0 2px 0 #92400e, 1px 1px 0 #1e1b18;
+      letter-spacing: 0.02em;
+    }
+    .subtitle {
+      font-size: 11.5px;
+      color: #e0f2fe;
+      margin: 0;
+      font-weight: 600;
+    }
+    .pill {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: #0c2a54;
+      border: 1.5px solid rgba(251, 191, 36, 0.55);
+      color: #fef9c3;
+      font-weight: 800;
+    }
+    .pill-live {
+      background: linear-gradient(180deg, #065f46, #064e3b);
+      color: #6ee7b7;
+      border: 1.5px solid #34d399;
+      font-family: ui-monospace, monospace;
+    }
+
+    /* 四大數值膠囊 */
+    .hud-stats {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+    }
+    .r4-capsule {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(180deg, #10376d 0%, #071e3f 100%);
+      border: 2.5px solid var(--gold);
+      border-radius: 999px;
+      padding: 5px 13px 5px 9px;
+      box-shadow:
+        inset 0 1px 0 rgba(254, 240, 138, 0.5),
+        0 3px 0 #92400e;
+    }
+    .r4-cap-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #fde047, #d97706);
+      border: 1.5px solid #fffbeb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      box-shadow: 0 2px 0 #78350f;
+      flex-shrink: 0;
+    }
+    .r4-cap-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: #93c5fd;
+      line-height: 1.1;
+    }
+    .r4-cap-val {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #fef08a;
+      text-shadow: 0 1px 0 #451a03;
+      line-height: 1.2;
+    }
+    .quota-capsule {
+      border-radius: 14px;
+      padding: 5px 12px;
+      min-width: 185px;
+    }
+    .quota-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: #dbeafe;
+    }
+    .bar-bg {
+      height: 9px;
+      border-radius: 999px;
+      background: #041126;
+      overflow: hidden;
+      border: 1.5px solid #fbbf24;
+    }
+    .bar-fill {
+      height: 100%;
+      transition: width 0.4s ease;
+      background: linear-gradient(90deg, #22c55e, #eab308, #38bdf8);
+    }
+
+    /* 大富翁骰子按鈕 */
+    .dice-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(180deg, #fde047 0%, #f59e0b 52%, #d97706 100%);
+      border: 2.5px solid #fffbeb;
+      color: #451a03;
+      padding: 7px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #92400e, 0 6px 14px rgba(0, 0, 0, 0.35);
+      transition: transform 0.1s ease, filter 0.15s ease;
+    }
+    .dice-btn:hover { filter: brightness(1.06); }
+    .dice-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #92400e;
+    }
+    .dice-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: #ffffff;
+      border: 2px solid #1e1b18;
+      border-radius: 5px;
+      font-size: 13px;
+      color: #dc2626;
+      font-weight: 900;
+    }
+    .dice-icon.rolling {
+      animation: diceSpin 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes diceSpin {
+      0% { transform: rotate(0deg) scale(1); }
+      35% { transform: rotate(190deg) scale(1.28) translateY(-4px); }
+      70% { transform: rotate(330deg) scale(1.15); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .toast-banner {
+      display: none;
+      margin-top: 8px;
+      padding: 6px 12px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #fef08a, #fde047);
+      color: #451a03;
+      border: 2px solid #d97706;
+      font-weight: 900;
+      font-size: 12px;
+      text-align: center;
+      box-shadow: 0 3px 0 #92400e;
+    }
+    .toast-banner.show { display: block; }
+
+    /* ===== 主版面 ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: 1.44fr 1fr;
+      gap: 16px;
+      padding: 16px;
+    }
+    @media (max-width: 1040px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: linear-gradient(180deg, #0e3062 0%, #081e40 100%);
+      border: 3px solid var(--gold);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        inset 0 2px 0 rgba(254, 240, 138, 0.45),
+        inset 0 -3px 0 rgba(180, 83, 9, 0.6),
+        0 5px 0 var(--gold-deep),
+        0 12px 28px rgba(0, 0, 0, 0.45);
+    }
+    .card-head {
+      padding: 10px 14px;
+      background: linear-gradient(180deg, #16488d 0%, #0d3063 100%);
+      border-bottom: 2.5px solid var(--gold);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #fef08a;
+      text-shadow: 0 1px 0 #1e1b18;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-weight: 700;
+      color: #e0f2fe;
+      font-size: 11px;
+      text-shadow: none;
+    }
+    .dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-right: 4px;
+      border: 1.5px solid #1e1b18;
+    }
+    .canvas-wrap {
+      padding: 10px;
+      background: linear-gradient(180deg, #09244a 0%, #051630 100%);
+      display: flex;
+      justify-content: center;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 3px solid #fbbf24;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+      cursor: pointer;
+      display: block;
+    }
+
+    /* ===== 下方《大富翁4》人物資料卡 + 道具卡片欄 ===== */
+    .inspector { padding: 14px; }
+    .inspector-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    @media (max-width: 640px) { .inspector-grid { grid-template-columns: 1fr; } }
+    .insp-box {
+      background: rgba(6, 23, 49, 0.72);
+      border: 1.5px solid rgba(251, 191, 36, 0.45);
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .r4-cards-bar {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1.5px dashed rgba(251, 191, 36, 0.45);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .r4-item-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(180deg, #fef9c3 0%, #fde047 100%);
+      color: #451a03;
+      border: 2px solid #d97706;
+      border-radius: 9px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 900;
+      box-shadow: 0 3px 0 #92400e;
+    }
+    .r4-item-card small {
+      font-weight: 700;
+      color: #78350f;
+      font-size: 10px;
+    }
+
+    /* ===== 右側頁籤面板 ===== */
+    .tabs {
+      display: flex;
+      background: #082042;
+      border-bottom: 3px solid var(--gold);
+    }
+    .tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-right: 1px solid rgba(251, 191, 36, 0.25);
+      border-bottom: 3px solid transparent;
+      color: #93c5fd;
+      padding: 11px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .tab-btn:last-child { border-right: none; }
+    .tab-btn.active {
+      background: linear-gradient(180deg, #17498f 0%, #0e3266 100%);
+      color: #fef08a;
+      border-bottom-color: #fde047;
+    }
+    .panel-body {
+      max-height: 735px;
+      overflow-y: auto;
+      padding: 12px;
+      background: rgba(7, 25, 54, 0.65);
+    }
+    .hidden { display: none; }
+
+    .report-item {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(251, 191, 36, 0.4);
+      background: #0d2b57;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+    }
+    .report-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+      font-size: 11.5px;
+    }
+    .org-node {
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(147, 197, 253, 0.35);
+      background: #0e3162;
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: transform 0.1s, border-color 0.15s;
+    }
+    .org-node:hover { border-color: #fbbf24; }
+    .org-node.selected {
+      border-color: #fde047;
+      background: #154282;
+      box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.35);
+    }
+    .org-node.boss-node {
+      background: linear-gradient(180deg, rgba(217, 119, 6, 0.35), rgba(146, 64, 14, 0.35));
+      border: 2px solid #fbbf24;
+    }
+    .div-box {
+      padding: 10px;
+      border-radius: 12px;
+      border: 2px solid rgba(251, 191, 36, 0.45);
+      background: rgba(6, 22, 46, 0.72);
+      margin-bottom: 10px;
+    }
+    .div-title { font-size: 12px; font-weight: 900; margin-bottom: 8px; }
+    .org-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    @media (max-width: 520px) { .org-grid { grid-template-columns: 1fr; } }
+    .arrow { text-align: center; color: #fde047; font-size: 11px; font-weight: 800; margin: 3px 0 6px; }
+    .file-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      background: #0d2b57;
+      margin-bottom: 6px;
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+    }
+    .mono { font-family: ui-monospace, monospace; }
+    .muted { color: var(--muted); }
+    a { color: #fde047; text-decoration: none; font-weight: 700; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-row">
+        <div class="hud-left">
+          <!-- 《大富翁4》經典日曆牌 + 手機同步台灣標準時間 -->
+          <div class="r4-calendar-clock" title="已與你的手機台灣時間 100% 即時同步">
+            <div class="r4-cal-leaf">
+              <div id="cal-month" class="r4-cal-head">11月</div>
+              <div id="cal-day" class="r4-cal-day">26</div>
+            </div>
+            <div>
+              <div id="local-clock" class="clock-time">--:--:--</div>
+              <div id="local-date" class="clock-date">台灣標準時間同步中</div>
+            </div>
+          </div>
+
+          <div class="brand-info">
+            <div class="badges">
+              <h1 class="title">👑 大 Boss 雙事業部總部 · 《大富翁4》24/7 LIVE 城鎮</h1>
+              <span id="live-pill" class="pill pill-live">● LIVE 連線中</span>
+              <span id="status-pill" class="pill">載入中...</span>
+            </div>
+            <p class="subtitle">
+              總務長小綿羊全天候巡邏 · Retina 高畫質 ·
+              <a href="https://howardkung.github.io/alpha-stock-warroom/" target="_blank">股市二部百萬實盤戰情網 ↗</a> ·
+              <a href="https://drive.google.com/drive/folders/1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844" target="_blank">Google Drive ↗</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- 《大富翁4》經典四大數值膠囊 -->
+        <div class="hud-stats">
+          <div class="r4-capsule" title="模擬基金實盤可用戰備現金">
+            <div class="r4-cap-icon">💵</div>
+            <div>
+              <div class="r4-cap-label">現金 (實盤戰備)</div>
+              <div id="hud-cash" class="r4-cap-val">NT$321,347</div>
+            </div>
+          </div>
+
+          <div class="r4-capsule" title="模擬基金實盤總資產淨值 NAV">
+            <div class="r4-cap-icon">🏦</div>
+            <div>
+              <div class="r4-cap-label">總資產 (NAV)</div>
+              <div id="hud-nav" class="r4-cap-val">NT$999,179</div>
+            </div>
+          </div>
+
+          <div class="r4-capsule quota-capsule" title="集團算力點券額度（決定員工工時）">
+            <div class="r4-cap-icon">🎟️</div>
+            <div style="flex:1;">
+              <div class="quota-head">
+                <span>點券額度</span>
+                <span id="quota-text" class="mono" style="color:#fde047;">-- / -- 點</span>
+              </div>
+              <div class="bar-bg"><div id="quota-bar" class="bar-fill" style="width:0%;"></div></div>
+            </div>
+          </div>
+
+          <button id="dice-sync-btn" class="dice-btn" onclick="rollDiceAndSync()">
+            <span id="dice-face" class="dice-icon">6</span>
+            <span>🎲 擲骰同步</span>
+          </button>
+        </div>
+      </div>
+      <div id="dice-toast" class="toast-banner"></div>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div class="card">
+        <div class="card-head">
+          <span>🗺️ 《大富翁4》集團陽光棋盤城鎮（點擊任一 Q 版角色檢視資料卡與專屬道具卡）</span>
+          <div class="legend">
+            <span><i class="dot" style="background:#22c55e"></i>上工</span>
+            <span><i class="dot" style="background:#38bdf8"></i>開會</span>
+            <span><i class="dot" style="background:#fbbf24"></i>待命省電</span>
+            <span><i class="dot" style="background:#fb7185"></i>點券耗盡下班</span>
+          </div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="office-canvas"></canvas>
+        </div>
+      </div>
+
+      <div class="card inspector" id="inspector">載入《大富翁4》人物資料卡中...</div>
+    </div>
+
+    <div class="card" style="display:flex; flex-direction:column;">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="org">🏛️ 集團組織與腦力編制</button>
+        <button class="tab-btn" data-tab="reports">📋 真實打卡回報</button>
+        <button class="tab-btn" data-tab="files">☁️ 檔案與 Drive</button>
+      </div>
+
+      <div id="tab-org" class="panel-body"></div>
+      <div id="tab-reports" class="panel-body hidden"></div>
+      <div id="tab-files" class="panel-body hidden"></div>
+    </div>
+  </main>
+
+  <script>
+    // =========================================================================
+    // 1. REAL-TIME PHONE-SYNCED CLOCK (100% EXACT DEVICE LOCAL TIME)
+    // =========================================================================
+    let liveClockStr = "--:--:--";
+    function updateLocalClock() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      liveClockStr = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      const days = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+      const dateStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} (${days[now.getDay()]})`;
+      document.getElementById("local-clock").textContent = liveClockStr;
+      document.getElementById("local-date").textContent = dateStr;
+      document.getElementById("cal-month").textContent = `${now.getMonth() + 1}月`;
+      document.getElementById("cal-day").textContent = now.getDate();
+    }
+    updateLocalClock();
+    setInterval(updateLocalClock, 1000);
+
+    // =========================================================================
+    // 2. RICHMAN 4 BOARD-TOWN CANVAS SETUP (RETINA HIDPI)
+    // =========================================================================
+    const LOGICAL_W = 860;
+    const LOGICAL_H = 620;
+    const canvas = document.getElementById("office-canvas");
+    const ctx = canvas.getContext("2d");
+
+    function setupHiDPI() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+      canvas.width = Math.round(LOGICAL_W * dpr);
+      canvas.height = Math.round(LOGICAL_H * dpr);
+      canvas.style.aspectRatio = `${LOGICAL_W} / ${LOGICAL_H}`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    setupHiDPI();
+    window.addEventListener("resize", setupHiDPI);
+
+    const STATUS_META = {
+      boss:     { label: "財神總裁視察", icon: "👑", color: "#fbbf24" },
+      working:  { label: "上工衝刺中",   icon: "💻", color: "#22c55e" },
+      meeting:  { label: "市政開會中",   icon: "🗣️", color: "#38bdf8" },
+      idle:     { label: "公園省電待命", icon: "☕", color: "#f59e0b" },
+      depleted: { label: "點券耗盡下班", icon: "💤", color: "#fb7185" }
+    };
+
+    // Character positions on the Richman 4 Board Town!
+    const POS = {
+      boss:                   { desk: { x: 118, y: 122 }, meet: { x: 618, y: 74 },  lounge: { x: 118, y: 122 } },
+      commander:              { desk: { x: 306, y: 122 }, meet: { x: 545, y: 105 }, lounge: { x: 550, y: 242 } },
+      office_steward:         { desk: { x: 415, y: 164 }, meet: { x: 695, y: 105 }, lounge: { x: 615, y: 234 } },
+      // Division 1: 金流商店街
+      pain_hunter:            { desk: { x: 195, y: 312 }, meet: { x: 565, y: 126 }, lounge: { x: 680, y: 242 } },
+      indie_hacker_builder:   { desk: { x: 275, y: 312 }, meet: { x: 605, y: 126 }, lounge: { x: 542, y: 325 } },
+      monetization_architect: { desk: { x: 355, y: 312 }, meet: { x: 645, y: 126 }, lounge: { x: 684, y: 325 } },
+      ruthless_critic:        { desk: { x: 435, y: 312 }, meet: { x: 685, y: 126 }, lounge: { x: 545, y: 396 } },
+      // Division 2: 台灣證券交易所
+      supply_chain_scout:     { desk: { x: 185, y: 462 }, meet: { x: 555, y: 82 },  lounge: { x: 615, y: 412 } },
+      chip_momentum_tracker:  { desk: { x: 252, y: 462 }, meet: { x: 680, y: 82 },  lounge: { x: 685, y: 396 } },
+      macro_etf_strategist:   { desk: { x: 319, y: 462 }, meet: { x: 585, y: 112 }, lounge: { x: 572, y: 456 } },
+      chief_risk_officer:     { desk: { x: 386, y: 462 }, meet: { x: 655, y: 112 }, lounge: { x: 658, y: 456 } },
+      paper_fund_manager:     { desk: { x: 453, y: 462 }, meet: { x: 620, y: 126 }, lounge: { x: 615, y: 352 } }
+    };
+
+    // 總務長小綿羊沿著棋盤馬路 6 個巡邏點穿梭！
+    const STEWARD_WAYPOINTS = [
+      { x: 415, y: 164, note: "校準台灣鐘樓！" },
+      { x: 125, y: 164, note: "總裁摩天樓亮晶晶！" },
+      { x: 110, y: 310, note: "巡視金流商店街！" },
+      { x: 330, y: 512, note: "檢查證交所紅盤！" },
+      { x: 750, y: 380, note: "公園噴泉水質滿分！" },
+      { x: 630, y: 164, note: "今夜做夢也會笑！" }
+    ];
+
+    // 《大富翁4》專屬道具卡片設定
+    const AGENT_CARDS = {
+      boss:                   [ { icon: "👑", name: "財神附身卡", desc: "全軍士氣 +100%" }, { icon: "🏰", name: "帝寶地契卡", desc: "LV.5 連鎖總部" }, { icon: "💎", name: "無限統帥卡", desc: "最終裁決權" } ],
+      commander:              [ { icon: "🎯", name: "雙部調度卡", desc: "精算三級大腦" }, { icon: "🧠", name: "PRO 算力卡", desc: "核心架構攻堅" }, { icon: "🔄", name: "全域同步卡", desc: "即時指令下達" } ],
+      office_steward:         [ { icon: "🛵", name: "綿羊巡邏卡", desc: "全城鎮移動檢修" }, { icon: "🕒", name: "台灣校時卡", desc: "UTC+8 零誤差" }, { icon: "🎨", name: "富翁畫質卡", desc: "Retina 卡通渲染" } ],
+      pain_hunter:            [ { icon: "🎩", name: "阿土伯草帽", desc: "深耕痛點挖礦" }, { icon: "🔍", name: "流量雷達卡", desc: "Apify 導流整備" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
+      indie_hacker_builder:   [ { icon: "🖨️", name: "印鈔機卡",   desc: "5 支 Actor 運轉" }, { icon: "📋", name: "Form4 透視卡", desc: "高管買進雷達" }, { icon: "🛠️", name: "0-Charge 卡", desc: "低耗能交付" } ],
+      monetization_architect: [ { icon: "🎀", name: "小美飛輪卡", desc: "商業變現設計" }, { icon: "💰", name: "財神紅利卡", desc: "現金流複利" }, { icon: "⚡", name: "烏龜省電卡", desc: "保留關鍵算力" } ],
+      ruthless_critic:        [ { icon: "🚧", name: "路障把關卡", desc: "退件低品質方案" }, { icon: "🧾", name: "查稅審計卡", desc: "合規零漏洞" }, { icon: "🧠", name: "PRO 毒舌卡", desc: "嚴苛壓力測試" } ],
+      supply_chain_scout:     [ { icon: "🔗", name: "供應鏈地圖", desc: "美台題材共振" }, { icon: "🚀", name: "均線突破卡", desc: "Stage 2 追蹤" }, { icon: "⚡", name: "輕快偵察卡", desc: "FLASH 高效率" } ],
+      chip_momentum_tracker:  [ { icon: "🎯", name: "籌碼鎖定卡", desc: "法人買盤狙擊" }, { icon: "📊", name: "量價紅盤卡", desc: "右側動能確認" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
+      macro_etf_strategist:   [ { icon: "👒", name: "錢夫人貴婦卡", desc: "跨市場大格局" }, { icon: "🌐", name: "總經水位卡", desc: "股債 ETF 平衡" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
+      chief_risk_officer:     [ { icon: "🚧", name: "停損路障卡", desc: "破年線直接退件" }, { icon: "🛡️", name: "免罪合規卡", desc: "12% 現金紅線" }, { icon: "🧠", name: "PRO 終審卡", desc: "嚴控盈虧比" } ],
+      paper_fund_manager:     [ { icon: "📈", name: "紅漲買進卡", desc: "台股紅漲綠跌" }, { icon: "🏦", name: "百萬操盤卡", desc: "實盤條件單" }, { icon: "🤖", name: "零額度自動卡", desc: "Python 0 消耗" } ]
+    };
+
+    let STATE = null;
+    let PORTFOLIO = {
+      summary: { cashTwd: 321347, navTwd: 999179 },
+      positions: [
+        { symbol: "3661.TW", name: "世芯-KY", unrealizedPnlPct: 1.85 },
+        { symbol: "3017.TW", name: "奇鋐", unrealizedPnlPct: 2.40 },
+        { symbol: "2330.TW", name: "台積電", unrealizedPnlPct: 0.95 },
+        { symbol: "META", name: "META", unrealizedPnlPct: 1.12 },
+        { symbol: "TLT", name: "TLT", unrealizedPnlPct: -0.45 }
+      ]
+    };
+    let selectedId = "office_steward";
+    const sprites = {};
+    let frame = 0;
+    let stewardWpIdx = 0;
+
+    setInterval(() => {
+      stewardWpIdx = (stewardWpIdx + 1) % STEWARD_WAYPOINTS.length;
+    }, 5500);
+
+    function targetFor(a) {
+      if (a.id === "office_steward" && a.status === "working") {
+        return STEWARD_WAYPOINTS[stewardWpIdx];
+      }
+      const p = POS[a.id] || { desk: { x: 280, y: 312 }, meet: { x: 618, y: 110 }, lounge: { x: 615, y: 350 } };
+      if (a.isBoss || a.status === "working") return p.desk;
+      if (a.status === "meeting") return p.meet;
+      return p.lounge;
+    }
+
+    // =========================================================================
+    // 3. LIVE GITHUB API POLLING (STATE + PORTFOLIO) & DICE ROLL
+    // =========================================================================
+    function renderPortfolioHUD() {
+      const s = PORTFOLIO?.summary || {};
+      const cash = Number(s.cashTwd ?? 321347);
+      const nav = Number(s.navTwd ?? 999179);
+      document.getElementById("hud-cash").textContent = "NT$" + Math.round(cash).toLocaleString("en-US");
+      document.getElementById("hud-nav").textContent = "NT$" + Math.round(nav).toLocaleString("en-US");
+    }
+
+    async function fetchPortfolio() {
+      try {
+        const res = await fetch(
+          `https://api.github.com/repos/howardKung/alpha-stock-warroom/contents/portfolio.json?ref=main`,
+          { headers: { "Accept": "application/vnd.github.raw+json" }, cache: "no-store" }
+        );
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        if (data?.summary) {
+          PORTFOLIO = data;
+          renderPortfolioHUD();
+        }
+      } catch (_e) {
+        renderPortfolioHUD();
+      }
+    }
+
+    function hydrateSpritesAndUI(pillText = "● LIVE 已同步") {
+      if (!STATE?.agents) return;
+      STATE.agents.forEach((a, idx) => {
+        const t = targetFor(a);
+        if (!sprites[a.id]) sprites[a.id] = { x: t.x, y: t.y, dir: 1, seed: idx * 37 };
+      });
+      document.getElementById("live-pill").textContent = pillText;
+      renderUI();
+    }
+
+    async function fetchState(manual = false) {
+      const pill = document.getElementById("live-pill");
+      if (STATE && !manual) hydrateSpritesAndUI("● LIVE 快照已載入");
+      if (manual) pill.textContent = "● 同步中...";
+      try {
+        let res = await fetch(
+          `https://api.github.com/repos/howardKung/project-lifeblood-rpg-office/contents/state.json?ref=main`,
+          { headers: { "Accept": "application/vnd.github.raw+json" }, cache: "no-store" }
+        );
+        if (!res.ok) {
+          res = await fetch(`./state.json?t=${Date.now()}`, { cache: "no-store" });
+        }
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        STATE = await res.json();
+        hydrateSpritesAndUI("● LIVE 已同步");
+      } catch (e) {
+        if (STATE) {
+          hydrateSpritesAndUI("● 離線實盤快照");
+        } else {
+          pill.textContent = "● 讀取失敗: " + e.message;
+        }
+      }
+    }
+
+    function rollDiceAndSync() {
+      const faceEl = document.getElementById("dice-face");
+      const toastEl = document.getElementById("dice-toast");
+      faceEl.classList.remove("rolling");
+      void faceEl.offsetWidth;
+      faceEl.classList.add("rolling");
+
+      const rolled = Math.floor(Math.random() * 6) + 1;
+      faceEl.textContent = rolled;
+
+      const msgs = [
+        `🎲 擲出 ${rolled} 點！小財神降臨帝寶總部，正在同步最新點券與實盤資產！`,
+        `🎲 擲出 ${rolled} 點！總務長騎小綿羊推進 ${rolled} 格，校準台灣標準時間成功！`,
+        `🎲 擲出 ${rolled} 點！觸發「機會？紅盤大吉」，已向 GitHub 總部拉取最新報表！`,
+        `🎲 擲出 ${rolled} 點！證交所紅漲綠跌看盤牆刷新完畢，一切秩序井然！`
+      ];
+      toastEl.textContent = msgs[rolled % msgs.length];
+      toastEl.classList.add("show");
+      setTimeout(() => toastEl.classList.remove("show"), 4200);
+
+      fetchState(true);
+      fetchPortfolio();
+    }
+
+    function divBadge(div) {
+      if (div === "stock") return `<span class="pill" style="background:rgba(239,68,68,0.22); border-color:#fca5a5; color:#fecaca;">📈 股市二部</span>`;
+      if (div === "cashflow") return `<span class="pill" style="background:rgba(56,189,248,0.22); border-color:#7dd3fc; color:#e0f2fe;">💰 金流一部</span>`;
+      return `<span class="pill" style="background:rgba(251,191,36,0.22); border-color:#fde047; color:#fef08a;">🏛️ 集團總部</span>`;
+    }
+
+    function renderUI() {
+      if (!STATE) return;
+      const q = STATE.quota;
+      const pct = Math.max(0, Math.min(100, (q.remaining / q.max) * 100));
+      document.getElementById("quota-text").textContent = `${q.remaining} / ${q.max} 點`;
+      const bar = document.getElementById("quota-bar");
+      bar.style.width = pct + "%";
+      bar.style.background = pct > 35
+        ? "linear-gradient(90deg, #22c55e, #4ade80)"
+        : (pct > 0 ? "linear-gradient(90deg, #f59e0b, #fde047)" : "#fb7185");
+
+      const workers = STATE.agents.filter(a => !a.isBoss);
+      const w = workers.filter(a => a.status === "working").length;
+      const m = workers.filter(a => a.status === "meeting").length;
+      const i = workers.filter(a => a.status === "idle").length;
+      document.getElementById("status-pill").textContent = q.remaining <= 0
+        ? "💤 點券歸零・全員下班"
+        : `總編制 ${STATE.agents.length} 人｜上工 ${w} · 開會 ${m} · 待命 ${i}`;
+
+      renderInspector();
+      renderOrg();
+      renderReports();
+      renderFiles();
+    }
+
+    function renderInspector() {
+      const a = STATE.agents.find(x => x.id === selectedId) || STATE.agents[0];
+      const meta = STATUS_META[a.status] || STATUS_META.idle;
+      const cards = AGENT_CARDS[a.id] || [
+        { icon: "🎲", name: "大富翁卡片", desc: "總部標準裝備" }
+      ];
+      document.getElementById("inspector").innerHTML = `
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; padding-bottom:9px; border-bottom:1.5px solid rgba(251,191,36,0.4);">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span class="dot" style="background:${a.color}; width:12px; height:12px; margin:0;"></span>
+            <strong style="font-size:15.5px; color:#fef08a;">${a.name}</strong>
+            ${divBadge(a.division)}
+            ${a.brainTier ? `<span class="pill" style="background:#082042;">${a.brainTier}</span>` : ""}
+            <span class="pill" style="color:${meta.color}; border-color:${meta.color};">${meta.icon} ${meta.label}</span>
+          </div>
+          <span class="mono" style="font-size:11px; color:#bae6fd; font-weight:700;">台灣打卡時間：${a.lastUpdate}</span>
+        </div>
+        <div class="inspector-grid">
+          <div class="insp-box">
+            <div class="muted" style="font-size:11px; font-weight:700;">🏷️ 角色職稱與業務</div>
+            <div style="margin-top:3px; font-weight:800; color:#ffffff;">${a.role}</div>
+          </div>
+          <div class="insp-box">
+            <div class="muted" style="font-size:11px; font-weight:700;">📌 當前真實任務</div>
+            <div style="margin-top:3px; color:#e0f2fe;">${a.currentTask}</div>
+          </div>
+          <div class="insp-box">
+            <div class="muted" style="font-size:11px; font-weight:700;">🎟️ 剩餘點券 / 累計交付</div>
+            <div class="mono" style="margin-top:3px; font-weight:800; color:#fde047;">
+              ${a.isBoss ? "∞ 無限統帥權" : `${a.quota} 點`} · 已完成 ${a.tasksCompleted} 項
+            </div>
+          </div>
+        </div>
+        <div class="r4-cards-bar">
+          <span style="font-size:11.5px; font-weight:900; color:#fde047;">🃏 專屬《大富翁4》道具卡：</span>
+          ${cards.map(c => `
+            <div class="r4-item-card" title="${c.desc}">
+              <span>${c.icon}</span>
+              <span>${c.name}</span>
+              <small>· ${c.desc}</small>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderOrg() {
+      const boss = STATE.agents.find(a => a.tier === 0);
+      const hqStaff = STATE.agents.filter(a => a.division === "hq" && !a.isBoss);
+      const div1 = STATE.agents.filter(a => a.division === "cashflow");
+      const div2 = STATE.agents.filter(a => a.division === "stock");
+
+      const card = (a, isBoss = false) => {
+        const meta = STATUS_META[a.status] || STATUS_META.idle;
+        return `
+          <div class="org-node ${isBoss ? 'boss-node' : ''} ${a.id === selectedId ? 'selected' : ''}" onclick="selectedId='${a.id}'; renderInspector(); renderOrg();">
+            <div style="display:flex; justify-content:space-between; gap:6px; align-items:center;">
+              <div style="color:#ffffff;"><i class="dot" style="background:${a.color}"></i><strong>${a.name}</strong></div>
+              <span style="color:${meta.color}; font-size:11px; font-weight:800;">${meta.icon} ${meta.label}</span>
+            </div>
+            <div style="color:#bfdbfe; font-size:11px; margin-top:3px;">
+              ${a.role} ${a.brainTier ? `<span class="pill" style="margin-left:4px; font-size:10px; padding:1px 6px;">${a.brainTier}</span>` : ""}
+            </div>
+          </div>
+        `;
+      };
+
+      document.getElementById("tab-org").innerHTML = `
+        <div style="color:#fde047; font-size:11px; font-weight:900; margin-bottom:4px;">👑 LEVEL 0 · 帝寶總部最高統帥</div>
+        ${card(boss, true)}
+        <div class="arrow">⬇ 全權指揮（嚴守付費前必先請示紅線）</div>
+        <div class="div-box" style="border-color:rgba(251,191,36,0.65);">
+          <div class="div-title" style="color:#fde047;">🏛️ 集團行政＆點券中心（總管調度 ＋ 總務小綿羊時鐘維護）</div>
+          <div class="org-grid">${hqStaff.map(a => card(a)).join("")}</div>
+        </div>
+        <div class="div-box" style="border-color:rgba(56,189,248,0.6);">
+          <div class="div-title" style="color:#7dd3fc;">💰 第一事業部：金流商店街（Apify 印鈔店 x5 ＋ Gumroad 道具屋）</div>
+          <div class="org-grid">${div1.map(a => card(a)).join("")}</div>
+        </div>
+        <div class="div-box" style="border-color:rgba(248,113,113,0.6);">
+          <div class="div-title" style="color:#fca5a5;">📈 第二事業部：台灣證券交易所（含百萬實盤模擬操盤室）</div>
+          <div class="org-grid">${div2.map(a => card(a)).join("")}</div>
+        </div>
+      `;
+    }
+
+    function renderReports() {
+      document.getElementById("tab-reports").innerHTML = STATE.reports.map(r => {
+        const meta = STATUS_META[r.status] || STATUS_META.working;
+        return `
+          <div class="report-item">
+            <div class="report-top">
+              <div><strong style="color:#fef08a;">${r.agentName}</strong> <span class="pill" style="color:${meta.color}; border-color:${meta.color}; margin-left:4px;">${meta.icon} ${meta.label}</span></div>
+              <span class="mono" style="color:#93c5fd; font-weight:700;">${r.time.slice(5)} ${r.cost > 0 ? `· -${r.cost}點` : ""}</span>
+            </div>
+            <div style="color:#f1f5f9;">${r.summary}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderFiles() {
+      const t = STATE.telemetry || { totalLocalFiles: 0, driveSyncedFiles: 0, recentFiles: [], snapshotTime: "--" };
+      document.getElementById("tab-files").innerHTML = `
+        <div class="report-item" style="margin-bottom:12px;">
+          <strong style="color:#fef08a;">☁️ Google Drive 集團永久歸檔庫</strong>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+            <div class="org-node" style="margin:0; cursor:default;"><div class="muted" style="font-size:11px;">工作區實檔數</div><div class="mono" style="font-size:15px; font-weight:900; color:#ffffff;">${t.totalLocalFiles} 檔</div></div>
+            <div class="org-node" style="margin:0; cursor:default;"><div class="muted" style="font-size:11px;">已同步 Drive</div><div class="mono" style="font-size:15px; font-weight:900; color:#4ade80;">${t.driveSyncedFiles} 檔</div></div>
+          </div>
+          <div style="color:#dbeafe; font-size:11.5px; margin-top:8px;">
+            最後歸檔 (台灣時間)：<code>${t.snapshotTime}</code><br/>
+            Drive 資料夾：<a href="https://drive.google.com/drive/folders/${STATE.driveFolderId}" target="_blank">開啟 Antigravity_生存金流點子戰隊 ↗</a>
+          </div>
+        </div>
+        <div style="font-weight:900; color:#fde047; margin-bottom:6px;">📂 最近異動檔案（真實磁碟掃描）</div>
+        ${(t.recentFiles || []).map(f => `<div class="file-row"><span style="color:#7dd3fc; overflow:hidden; text-overflow:ellipsis;">${f.path}</span><span style="color:#cbd5e1;">${f.mtime.slice(5)}</span></div>`).join("")}
+      `;
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.tab;
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === target));
+        ["org", "reports", "files"].forEach(t => document.getElementById("tab-" + t).classList.toggle("hidden", t !== target));
+      });
+    });
+
+    canvas.addEventListener("click", e => {
+      if (!STATE) return;
+      const r = canvas.getBoundingClientRect();
+      const cx = (e.clientX - r.left) * (LOGICAL_W / r.width);
+      const cy = (e.clientY - r.top) * (LOGICAL_H / r.height);
+      let hit = null, minD = 36;
+      STATE.agents.forEach(a => {
+        const p = sprites[a.id];
+        if (!p) return;
+        const d = Math.hypot(p.x - cx, p.y - cy);
+        if (d < minD) { minD = d; hit = a; }
+      });
+      if (hit) { selectedId = hit.id; renderInspector(); renderOrg(); }
+    });
+
+    // =========================================================================
+    // 4. RICHMAN 4 (大富翁4) SUNNY BOARD-TOWN & Q-CHIBI RENDERER
+    // =========================================================================
+    const OUTLINE = "#1e1b18";
+
+    function drawCloud(x, y, s = 1) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(s, s);
+      ctx.fillStyle = "rgba(255,255,255,0.92)";
+      ctx.strokeStyle = "#93c5fd";
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.arc(-14, 2, 10, 0, Math.PI * 2);
+      ctx.arc(0, -4, 14, 0, Math.PI * 2);
+      ctx.arc(15, 2, 10, 0, Math.PI * 2);
+      ctx.rect(-14, 0, 29, 12);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-24, 6);
+      ctx.quadraticCurveTo(0, 14, 25, 6);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawRichmanTree(x, y, s = 1) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(s, s);
+      // Shadow
+      ctx.fillStyle = "rgba(20, 83, 45, 0.28)";
+      ctx.beginPath(); ctx.ellipse(0, 12, 13, 5, 0, 0, Math.PI * 2); ctx.fill();
+      // Trunk
+      ctx.fillStyle = "#92400e";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 1.8;
+      ctx.beginPath(); ctx.roundRect(-3.5, 0, 7, 13, 2); ctx.fill(); ctx.stroke();
+      // Round fluffy cartoon foliage
+      ctx.fillStyle = "#16a34a";
+      ctx.beginPath(); ctx.arc(0, -6, 13, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#22c55e";
+      ctx.beginPath(); ctx.arc(-4, -8, 8.5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#4ade80";
+      ctx.beginPath(); ctx.arc(-5, -11, 4.5, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
+    function drawBoardTile(x, y, w, h, topColor, title, sub, icon = "") {
+      ctx.save();
+      // Drop shadow
+      ctx.fillStyle = "rgba(0, 0, 0, 0.26)";
+      ctx.beginPath(); ctx.roundRect(x + 2, y + 3, w, h, 6); ctx.fill();
+      // Tile white body
+      ctx.fillStyle = "#fffbeb";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(x, y, w, h, 6); ctx.fill(); ctx.stroke();
+      // Top color banner
+      ctx.save();
+      ctx.beginPath(); ctx.roundRect(x + 1, y + 1, w - 2, h - 2, 5); ctx.clip();
+      ctx.fillStyle = topColor;
+      ctx.fillRect(x, y, w, 13);
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(x, y + 13); ctx.lineTo(x + w, y + 13); ctx.stroke();
+      ctx.restore();
+      // Text
+      ctx.fillStyle = "#1e1b18";
+      ctx.font = "900 8.5px 'PingFang TC', 'Microsoft JhengHei', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(icon ? `${icon}${title}` : title, x + w / 2, y + 25);
+      if (sub) {
+        ctx.fillStyle = "#b45309";
+        ctx.font = "800 7.5px ui-monospace, monospace";
+        ctx.fillText(sub, x + w / 2, y + 36);
+      }
+      ctx.restore();
+    }
+
+    function drawRedSportsCar(x, y) {
+      ctx.save();
+      ctx.translate(x, y);
+      // Shadow
+      ctx.fillStyle = "rgba(0,0,0,0.3)";
+      ctx.beginPath(); ctx.ellipse(0, 7, 17, 5, 0, 0, Math.PI * 2); ctx.fill();
+      // Car body (red convertible)
+      ctx.fillStyle = "#ef4444";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 1.8;
+      ctx.beginPath(); ctx.roundRect(-16, -3, 32, 9, 4); ctx.fill(); ctx.stroke();
+      // Windshield & cream interior
+      ctx.fillStyle = "#fef3c7";
+      ctx.fillRect(-6, -5, 11, 3.5);
+      ctx.fillStyle = "#7dd3fc";
+      ctx.beginPath(); ctx.moveTo(-7, -3); ctx.lineTo(-4, -8); ctx.lineTo(3, -8); ctx.lineTo(5, -3); ctx.closePath(); ctx.fill(); ctx.stroke();
+      // Racing gold stripe
+      ctx.fillStyle = "#fde047";
+      ctx.fillRect(-14, 0, 28, 2);
+      // Wheels
+      [-9, 9].forEach(wx => {
+        ctx.fillStyle = "#1e293b";
+        ctx.beginPath(); ctx.arc(wx, 6, 3.8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#e2e8f0";
+        ctx.beginPath(); ctx.arc(wx, 6, 1.5, 0, Math.PI * 2); ctx.fill();
+      });
+      ctx.restore();
+    }
+
+    function drawGodOfWealthAura(x, y) {
+      ctx.save();
+      const floatY = Math.sin(frame * 0.08) * 3;
+      ctx.translate(x, y + floatY);
+      // Golden glow
+      ctx.fillStyle = "rgba(250, 204, 21, 0.28)";
+      ctx.beginPath(); ctx.arc(0, 0, 14, 0, Math.PI * 2); ctx.fill();
+      // Mini Gold Ingot (元寶)
+      ctx.fillStyle = "#facc15";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(-10, -2);
+      ctx.quadraticCurveTo(0, 4, 10, -2);
+      ctx.lineTo(7, 5);
+      ctx.quadraticCurveTo(0, 8, -7, 5);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#fef08a";
+      ctx.beginPath(); ctx.ellipse(0, -2, 5.5, 2.8, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      // Sparkle text
+      ctx.fillStyle = "#fef08a";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2.2;
+      ctx.font = "900 8px sans-serif";
+      ctx.textAlign = "center";
+      ctx.strokeText("財神附身", 0, -9);
+      ctx.fillText("財神附身", 0, -9);
+      ctx.restore();
+    }
+
+    function drawRichmanTown() {
+      // 1. Sunny Sky & Lush Meadow Base
+      const meadowGrad = ctx.createLinearGradient(0, 0, 0, LOGICAL_H);
+      meadowGrad.addColorStop(0, "#bae6fd");
+      meadowGrad.addColorStop(0.09, "#7dd3fc");
+      meadowGrad.addColorStop(0.11, "#86efac");
+      meadowGrad.addColorStop(0.5, "#4ade80");
+      meadowGrad.addColorStop(1, "#22c55e");
+      ctx.fillStyle = meadowGrad;
+      ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
+
+      // Subtle sunny lawn checker patches
+      ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+      for (let gx = 0; gx < LOGICAL_W; gx += 40) {
+        for (let gy = 68; gy < LOGICAL_H; gy += 40) {
+          if (((gx + gy) / 40) % 2 === 0) ctx.fillRect(gx, gy, 40, 40);
+        }
+      }
+
+      // 2. Blue Coastal Corner (Top-Right Ocean Bay + Beach + Waves + Sailboat)
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(690, 0);
+      ctx.lineTo(860, 0);
+      ctx.lineTo(860, 145);
+      ctx.quadraticCurveTo(785, 115, 748, 52);
+      ctx.quadraticCurveTo(722, 18, 690, 0);
+      ctx.closePath();
+      // Sandy beach rim
+      ctx.fillStyle = "#fde68a";
+      ctx.fill();
+      ctx.strokeStyle = "#eab308";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Deep ocean inside beach
+      ctx.beginPath();
+      ctx.moveTo(712, 0);
+      ctx.lineTo(860, 0);
+      ctx.lineTo(860, 122);
+      ctx.quadraticCurveTo(798, 95, 765, 42);
+      ctx.closePath();
+      const seaGrad = ctx.createLinearGradient(730, 0, 860, 120);
+      seaGrad.addColorStop(0, "#38bdf8");
+      seaGrad.addColorStop(1, "#0284c7");
+      ctx.fillStyle = seaGrad;
+      ctx.fill();
+
+      // Animated white sea waves
+      ctx.strokeStyle = "rgba(255,255,255,0.75)";
+      ctx.lineWidth = 1.6;
+      const wOff = Math.sin(frame * 0.06) * 4;
+      ctx.beginPath();
+      ctx.moveTo(782 + wOff, 32); ctx.quadraticCurveTo(796 + wOff, 27, 810 + wOff, 32);
+      ctx.moveTo(806 - wOff, 64); ctx.quadraticCurveTo(820 - wOff, 59, 834 - wOff, 64);
+      ctx.stroke();
+
+      // Cute tiny sailboat
+      const boatY = 48 + Math.sin(frame * 0.07) * 2;
+      ctx.fillStyle = "#dc2626";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 1.3;
+      ctx.beginPath(); ctx.moveTo(818, boatY); ctx.lineTo(840, boatY); ctx.lineTo(835, boatY + 6); ctx.lineTo(823, boatY + 6); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath(); ctx.moveTo(829, boatY); ctx.lineTo(829, boatY - 15); ctx.lineTo(838, boatY - 2); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.restore();
+
+      // 3. Fluffy Moving Clouds
+      drawCloud((frame * 0.18) % 920 - 40, 22, 0.85);
+      drawCloud(((frame * 0.12) + 340) % 920 - 40, 16, 0.72);
+      drawCloud(((frame * 0.15) + 640) % 920 - 40, 26, 0.65);
+
+      // 4. Asphalt Road Loop with Yellow Dashed Lines
+      ctx.save();
+      // Road outer curb
+      ctx.strokeStyle = "#cbd5e1";
+      ctx.lineWidth = 42;
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      ctx.roundRect(110, 164, 640, 348, 22);
+      ctx.stroke();
+
+      // Road asphalt
+      ctx.strokeStyle = "#334155";
+      ctx.lineWidth = 34;
+      ctx.stroke();
+
+      // Yellow dashed lane markings
+      ctx.strokeStyle = "#facc15";
+      ctx.lineWidth = 2.5;
+      ctx.setLineDash([12, 10]);
+      ctx.lineDashOffset = -(frame * 0.25) % 22;
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      // 5. Richman 4 Perimeter Colorful Board Tiles!
+      const bottomTiles = [
+        { c: "#ef4444", t: "起點 GO",  s: "+NT$2萬", i: "🚩" },
+        { c: "#3b82f6", t: "帝寶大道", s: "$8,800",  i: "" },
+        { c: "#f59e0b", t: "機會",     s: "？",      i: "❓" },
+        { c: "#0ea5e9", t: "台股紅盤", s: "▲2.4%",   i: "📈" },
+        { c: "#22c55e", t: "銀行BANK", s: "存款",    i: "🏦" },
+        { c: "#ec4899", t: "印鈔店x5", s: "LV.5",    i: "💰" },
+        { c: "#a855f7", t: "命運",     s: "！",      i: "❗" },
+        { c: "#f97316", t: "點券中心", s: "算力+10", i: "🎟️" },
+        { c: "#14b8a6", t: "美股雷達", s: "Form4",   i: "🇺🇸" },
+        { c: "#eab308", t: "財神大吉", s: "附身",    i: "🧧" },
+        { c: "#ef4444", t: "證交所",   s: "紅漲綠跌",i: "🏛️" }
+      ];
+      bottomTiles.forEach((tl, idx) => {
+        drawBoardTile(92 + idx * 62, 540, 58, 46, tl.c, tl.t, tl.s, tl.i);
+      });
+
+      const leftTiles = [
+        { c: "#06b6d4", t: "道具屋",   s: "$3,200", i: "🛒" },
+        { c: "#3b82f6", t: "金流街",   s: "LV.5",   i: "💵" },
+        { c: "#ef4444", t: "查稅卡",   s: "風控",   i: "🚧" },
+        { c: "#f59e0b", t: "機會",     s: "？",     i: "❓" },
+        { c: "#eab308", t: "財神廟",   s: "許願",   i: "🏮" }
+      ];
+      leftTiles.forEach((tl, idx) => {
+        drawBoardTile(20, 468 - idx * 62, 62, 50, tl.c, tl.t, tl.s, tl.i);
+      });
+
+      const rightTiles = [
+        { c: "#22c55e", t: "陽光公園", s: "省電區", i: "⛲" },
+        { c: "#ec4899", t: "樂透咖啡", s: "☕+1",  i: "☕" },
+        { c: "#a855f7", t: "命運",     s: "！",     i: "❗" },
+        { c: "#0ea5e9", t: "海濱別墅", s: "$6,500", i: "🏖️" },
+        { c: "#f59e0b", t: "點券站",   s: "免費",   i: "🎟️" }
+      ];
+      rightTiles.forEach((tl, idx) => {
+        drawBoardTile(778, 468 - idx * 62, 62, 50, tl.c, tl.t, tl.s, tl.i);
+      });
+
+      // =====================================================================
+      // 6. SIX CORE RICHMAN 4 LANDMARK BUILDINGS
+      // =====================================================================
+
+      // --- LANDMARK 1: 🏰 大 Boss 總裁摩天大樓 (LV.5 連鎖地標 · 帝寶總部) ---
+      ctx.save();
+      // Plaza ground
+      ctx.fillStyle = "#fef3c7";
+      ctx.strokeStyle = "#d97706";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.roundRect(22, 24, 192, 114, 12); ctx.fill(); ctx.stroke();
+      // Skyscraper body
+      ctx.fillStyle = "#7c3aed";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.roundRect(42, 34, 72, 74, 4); ctx.fill(); ctx.stroke();
+      // Gold facade stripes & glowing windows
+      ctx.fillStyle = "#fde047";
+      for (let wy = 42; wy < 94; wy += 12) {
+        for (let wx = 50; wx < 106; wx += 14) {
+          ctx.fillRect(wx, wy, 9, 7);
+        }
+      }
+      // Red-Gold Crown Roof
+      ctx.fillStyle = "#dc2626";
+      ctx.beginPath();
+      ctx.moveTo(36, 36); ctx.lineTo(78, 14); ctx.lineTo(120, 36); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#facc15";
+      ctx.beginPath(); ctx.arc(78, 12, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      // Red carpet
+      ctx.fillStyle = "#dc2626";
+      ctx.fillRect(68, 108, 20, 26);
+      // LV.5 Stars & Sign
+      ctx.fillStyle = "#b91c1c";
+      ctx.beginPath(); ctx.roundRect(120, 36, 86, 32, 6); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#fef08a";
+      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("🏰 帝寶總部 LV.5", 163, 50);
+      ctx.fillStyle = "#fde047";
+      ctx.font = "800 8px sans-serif";
+      ctx.fillText("★★★★★ 連鎖地標", 163, 62);
+      // Sports car + God of Wealth aura
+      drawRedSportsCar(166, 98);
+      drawGodOfWealthAura(174, 78);
+      ctx.restore();
+
+      // --- LANDMARK 2: 🏛️ 集團行政＆點券中心 (HQ & 台灣標準時間鐘樓) ---
+      ctx.save();
+      ctx.fillStyle = "#e0f2fe";
+      ctx.strokeStyle = "#0284c7";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.roundRect(236, 24, 240, 114, 12); ctx.fill(); ctx.stroke();
+
+      // Classical Blue-Gold HQ Hall
+      ctx.fillStyle = "#1d4ed8";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.roundRect(250, 50, 122, 62, 6); ctx.fill(); ctx.stroke();
+      // Gold dome
+      ctx.fillStyle = "#fbbf24";
+      ctx.beginPath(); ctx.arc(311, 50, 28, Math.PI, 0); ctx.fill(); ctx.stroke();
+      // Columns
+      ctx.fillStyle = "#f8fafc";
+      [262, 282, 332, 352].forEach(cx => {
+        ctx.fillRect(cx, 62, 7, 46);
+      });
+      // HQ Sign
+      ctx.fillStyle = "#0f172a";
+      ctx.beginPath(); ctx.roundRect(258, 54, 106, 17, 4); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#fde047";
+      ctx.font = "900 9px 'PingFang TC', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("🏛️ 行政＆點券中心", 311, 66);
+
+      // Taiwan Standard Time LED Clock Tower!
+      ctx.fillStyle = "#0369a1";
+      ctx.beginPath(); ctx.roundRect(382, 36, 84, 76, 6); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#f59e0b";
+      ctx.beginPath(); ctx.moveTo(378, 36); ctx.lineTo(424, 18); ctx.lineTo(470, 36); ctx.closePath(); ctx.fill(); ctx.stroke();
+      // LED Clock Screen
+      ctx.fillStyle = "#020617";
+      ctx.beginPath(); ctx.roundRect(388, 44, 72, 32, 5); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#7dd3fc";
+      ctx.font = "800 7.5px 'PingFang TC', sans-serif";
+      ctx.fillText("台灣標準鐘樓", 424, 54);
+      ctx.fillStyle = "#fde047";
+      ctx.font = "900 12px ui-monospace, monospace";
+      ctx.fillText(liveClockStr, 424, 70);
+      // Ticket booth window
+      ctx.fillStyle = "#fef08a";
+      ctx.beginPath(); ctx.roundRect(396, 82, 56, 22, 4); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#b45309";
+      ctx.font = "900 8.5px sans-serif";
+      ctx.fillText("🎟️ 算力補給站", 424, 96);
+      ctx.restore();
+
+      // --- LANDMARK 3: 🗣️ 市政廳會議廣場 (開會區) ---
+      ctx.save();
+      ctx.fillStyle = "#f0f9ff";
+      ctx.strokeStyle = "#0ea5e9";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.roundRect(498, 24, 240, 114, 12); ctx.fill(); ctx.stroke();
+      // Banner
+      ctx.fillStyle = "#0284c7";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(528, 30, 180, 20, 6); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("🗣️ 市政廳會議廣場 · PRO/FLASH", 618, 43.5);
+      // Round conference table
+      ctx.fillStyle = "#bae6fd";
+      ctx.beginPath(); ctx.ellipse(618, 92, 58, 22, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#fde047";
+      ctx.beginPath(); ctx.ellipse(618, 92, 22, 8, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+
+      // --- LANDMARK 4: 💰 第一事業部：金流商店街 (LV.5 連鎖店鋪群) ---
+      ctx.save();
+      // Boardwalk base
+      ctx.fillStyle = "#dbeafe";
+      ctx.strokeStyle = "#2563eb";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.roundRect(154, 194, 326, 134, 12); ctx.fill(); ctx.stroke();
+
+      // Shop A: Apify 印鈔店 x5
+      ctx.fillStyle = "#0284c7";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.roundRect(166, 212, 146, 78, 7); ctx.fill(); ctx.stroke();
+      // Striped awning
+      for (let i = 0; i < 7; i++) {
+        ctx.fillStyle = i % 2 === 0 ? "#ef4444" : "#ffffff";
+        ctx.fillRect(168 + i * 20.2, 246, 20.2, 11);
+      }
+      ctx.strokeRect(168, 246, 142, 11);
+      // Shop sign
+      ctx.fillStyle = "#fde047";
+      ctx.beginPath(); ctx.roundRect(172, 200, 134, 22, 5); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#1e1b18";
+      ctx.font = "900 10px 'PingFang TC', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("💰 Apify 印鈔店 x5", 239, 215);
+      // Windows
+      ctx.fillStyle = "#fef9c3";
+      ctx.fillRect(178, 262, 54, 22); ctx.strokeRect(178, 262, 54, 22);
+      ctx.fillRect(244, 262, 54, 22); ctx.strokeRect(244, 262, 54, 22);
+
+      // Shop B: Gumroad 道具屋
+      ctx.fillStyle = "#0d9488";
+      ctx.beginPath(); ctx.roundRect(324, 212, 144, 78, 7); ctx.fill(); ctx.stroke();
+      for (let i = 0; i < 7; i++) {
+        ctx.fillStyle = i % 2 === 0 ? "#f59e0b" : "#fef3c7";
+        ctx.fillRect(326 + i * 20, 246, 20, 11);
+      }
+      ctx.strokeRect(326, 246, 140, 11);
+      ctx.fillStyle = "#a7f3d0";
+      ctx.beginPath(); ctx.roundRect(330, 200, 132, 22, 5); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#064e3b";
+      ctx.fillText("🛒 Gumroad 道具屋", 396, 215);
+      ctx.fillStyle = "#fef9c3";
+      ctx.fillRect(336, 262, 54, 22); ctx.strokeRect(336, 262, 54, 22);
+      ctx.fillRect(402, 262, 54, 22); ctx.strokeRect(402, 262, 54, 22);
+
+      // Division 1 Street Label
+      ctx.fillStyle = "#1e3a8a";
+      ctx.beginPath(); ctx.roundRect(236, 293, 162, 16, 8); ctx.fill();
+      ctx.fillStyle = "#fef08a";
+      ctx.font = "900 8.5px 'PingFang TC', sans-serif";
+      ctx.fillText("第一事業部 · 金流商店街 LV.5", 317, 304);
+      ctx.restore();
+
+      // --- LANDMARK 5: 📈 第二事業部：台灣證券交易所 (紅漲綠跌) ---
+      ctx.save();
+      ctx.fillStyle = "#fee2e2";
+      ctx.strokeStyle = "#dc2626";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.roundRect(154, 342, 326, 138, 12); ctx.fill(); ctx.stroke();
+
+      // Greek-column Exchange Building
+      ctx.fillStyle = "#991b1b";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.roundRect(166, 362, 302, 76, 7); ctx.fill(); ctx.stroke();
+      // Pediment roof
+      ctx.fillStyle = "#facc15";
+      ctx.beginPath();
+      ctx.moveTo(160, 364); ctx.lineTo(317, 344); ctx.lineTo(474, 364); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#451a03";
+      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("📈 台灣證券交易所 · 股市二部 & 百萬實盤室", 317, 360);
+
+      // Left & Right White Marble Pillars
+      ctx.fillStyle = "#f8fafc";
+      [174, 192, 434, 452].forEach(px => {
+        ctx.fillRect(px, 370, 9, 64); ctx.strokeRect(px, 370, 9, 64);
+      });
+
+      // Giant Taiwan Stock LED Wall (紅漲綠跌!)
+      ctx.fillStyle = "#090d16";
+      ctx.beginPath(); ctx.roundRect(212, 370, 210, 60, 5); ctx.fill(); ctx.stroke();
+
+      // Candlesticks (Red = UP, Green = DOWN)
+      const bars = [
+        { x: 222, h: 20, up: true }, { x: 232, h: 28, up: true },
+        { x: 242, h: 14, up: false }, { x: 252, h: 32, up: true },
+        { x: 262, h: 25, up: true }, { x: 272, h: 16, up: false },
+        { x: 282, h: 34, up: true }
+      ];
+      bars.forEach((b, idx) => {
+        const pulse = (frame + idx * 7) % 40 < 20 ? 1 : 0.85;
+        ctx.fillStyle = b.up ? "#ff4d4f" : "#22c55e";
+        const bh = b.h * pulse;
+        ctx.fillRect(b.x, 412 - bh, 6, bh);
+      });
+
+      // Live Ticker Text on LED Wall (Taiwan Red-Up / Green-Down)
+      const posList = (PORTFOLIO?.positions || []).slice(0, 4);
+      const tickItems = posList.length
+        ? posList.map(p => ({
+            sym: p.symbol.replace(".TW", ""),
+            up: (p.unrealizedPnlPct ?? 0) >= 0,
+            pct: Math.abs(p.unrealizedPnlPct ?? 0).toFixed(2)
+          }))
+        : [
+            { sym: "3661世芯", up: true, pct: "2.15" },
+            { sym: "3017奇鋐", up: true, pct: "1.80" },
+            { sym: "META", up: true, pct: "1.12" },
+            { sym: "TLT", up: false, pct: "0.45" }
+          ];
+      ctx.font = "800 9px ui-monospace, monospace";
+      ctx.textAlign = "left";
+      tickItems.forEach((tk, i) => {
+        const ty = 384 + i * 12;
+        ctx.fillStyle = tk.up ? "#ff4d4f" : "#4ade80";
+        ctx.fillText(`${tk.sym} ${tk.up ? "▲" : "▼"}${tk.pct}%`, 300, ty);
+      });
+      ctx.fillStyle = "#fde047";
+      ctx.font = "800 8px 'PingFang TC', sans-serif";
+      ctx.fillText("紅漲綠跌 · 實盤LIVE", 220, 424);
+      ctx.restore();
+
+      // --- LANDMARK 6: ☕ 大富翁陽光公園 / 樂透咖啡座 (待命省電休息區) ---
+      ctx.save();
+      const parkGrad = ctx.createLinearGradient(498, 194, 498, 480);
+      parkGrad.addColorStop(0, "#bbf7d0");
+      parkGrad.addColorStop(1, "#86efac");
+      ctx.fillStyle = parkGrad;
+      ctx.strokeStyle = "#15803d";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.roundRect(498, 194, 224, 286, 12); ctx.fill(); ctx.stroke();
+
+      // Cafe header banner
+      ctx.fillStyle = "#9a3412";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(524, 198, 172, 20, 8); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#fef08a";
+      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("☕ 陽光公園 · 樂透咖啡省電區", 610, 211.5);
+
+      // Espresso umbrella table
+      ctx.fillStyle = "#dc2626";
+      ctx.beginPath(); ctx.arc(544, 232, 14, Math.PI, 0); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath(); ctx.arc(544, 232, 6, Math.PI, 0); ctx.fill();
+
+      // Animated Blue Water Fountain in Park Center!
+      ctx.fillStyle = "#e0f2fe";
+      ctx.beginPath(); ctx.ellipse(612, 315, 34, 20, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#38bdf8";
+      ctx.beginPath(); ctx.ellipse(612, 315, 26, 14, 0, 0, Math.PI * 2); ctx.fill();
+      // Fountain water spray
+      const sp = Math.sin(frame * 0.16) * 3;
+      ctx.strokeStyle = "#ffffff";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(612, 313); ctx.quadraticCurveTo(600, 294 + sp, 594, 310);
+      ctx.moveTo(612, 313); ctx.quadraticCurveTo(624, 294 - sp, 630, 310);
+      ctx.stroke();
+
+      // Wooden Park Benches
+      ctx.fillStyle = "#b45309";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.roundRect(520, 386, 46, 12, 3); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(654, 386, 46, 12, 3); ctx.fill(); ctx.stroke();
+
+      // Decorative Cartoon Trees around Town
+      drawRichmanTree(516, 272, 0.85);
+      drawRichmanTree(702, 272, 0.85);
+      drawRichmanTree(516, 456, 0.9);
+      drawRichmanTree(702, 456, 0.9);
+      drawRichmanTree(84, 214, 0.85);
+      drawRichmanTree(824, 166, 0.9);
+      ctx.restore();
+    }
+
+    // =========================================================================
+    // 5. RICHMAN 4 SCOOTER & Q-CHIBI BIG-HEAD CHARACTER RENDERER
+    // =========================================================================
+    function drawScooter(x, y, dir = 1) {
+      ctx.save();
+      ctx.translate(x, y + 6);
+      ctx.scale(dir, 1);
+
+      // Putt-putt exhaust white puffs
+      const puff = (frame % 24) / 24;
+      ctx.fillStyle = `rgba(255, 255, 255, ${0.85 - puff * 0.7})`;
+      ctx.beginPath(); ctx.arc(-18 - puff * 16, 2 - puff * 6, 3 + puff * 3, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(-23 - puff * 10, 0 - puff * 3, 2.2 + puff * 2, 0, Math.PI * 2); ctx.fill();
+
+      // Warm headlight beam
+      ctx.fillStyle = "rgba(254, 240, 138, 0.36)";
+      ctx.beginPath(); ctx.moveTo(14, -7); ctx.lineTo(36, -15); ctx.lineTo(36, 2); ctx.closePath(); ctx.fill();
+
+      // Wheels
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2;
+      [-10, 11].forEach(wx => {
+        ctx.fillStyle = "#1e293b";
+        ctx.beginPath(); ctx.arc(wx, 6, 5.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#e2e8f0";
+        ctx.beginPath(); ctx.arc(wx, 6, 2, 0, Math.PI * 2); ctx.fill();
+      });
+
+      // Classic Taiwan Mint/Gold Scooter Body
+      ctx.fillStyle = "#14b8a6";
+      ctx.beginPath();
+      ctx.moveTo(-14, 4);
+      ctx.quadraticCurveTo(-15, -5, -4, -5);
+      ctx.lineTo(4, -3);
+      ctx.lineTo(8, -14);
+      ctx.lineTo(14, -14);
+      ctx.lineTo(15, 4);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+
+      // Seat
+      ctx.fillStyle = "#78350f";
+      ctx.beginPath(); ctx.roundRect(-12, -8, 12, 5, 2.5); ctx.fill(); ctx.stroke();
+
+      // Headlight
+      ctx.fillStyle = "#fef08a";
+      ctx.beginPath(); ctx.arc(14, -10, 3.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawRoadblockCard(x, y) {
+      ctx.save();
+      ctx.translate(x + 15, y - 4);
+      ctx.rotate(0.15);
+      ctx.fillStyle = "#fef08a";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.roundRect(-6, -9, 12, 16, 2.5); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#ef4444";
+      ctx.fillRect(-4, -6, 8, 5);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(-3, -4.2, 6, 1.5);
+      ctx.restore();
+    }
+
+    function drawCharacter(a) {
+      const p = sprites[a.id];
+      if (!p) return;
+      const t = targetFor(a);
+      const dx = t.x - p.x, dy = t.y - p.y, dist = Math.hypot(dx, dy);
+      const moving = dist > 1.5;
+      if (moving) {
+        const spd = a.id === "office_steward" ? 1.85 : 2.8;
+        p.x += (dx / dist) * spd;
+        p.y += (dy / dist) * spd;
+        if (Math.abs(dx) > 0.3) p.dir = dx > 0 ? 1 : -1;
+      } else {
+        p.x = t.x; p.y = t.y;
+      }
+
+      const bounce = moving
+        ? Math.abs(Math.sin(frame * 0.28)) * 3.2
+        : (a.status === "working" ? Math.abs(Math.sin((frame + p.seed) * 0.14)) * 1.8 : Math.sin((frame + p.seed) * 0.08) * 0.8);
+      const onScooter = a.id === "office_steward" && a.status === "working";
+      const x = p.x;
+      const y = p.y - bounce - (onScooter ? 5 : 0);
+      const meta = STATUS_META[a.status] || STATUS_META.idle;
+
+      ctx.save();
+
+      // Richman 4 Board-Piece Disc Base (棋子圓盤底座)
+      if (a.id === selectedId) {
+        ctx.strokeStyle = "#fde047";
+        ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.ellipse(x, p.y + 12, 22, 9.5, 0, 0, Math.PI * 2); ctx.stroke();
+      }
+      ctx.fillStyle = "rgba(0, 0, 0, 0.32)";
+      ctx.beginPath(); ctx.ellipse(x, p.y + 13, 16, 6.8, 0, 0, Math.PI * 2); ctx.fill();
+
+      ctx.fillStyle = a.color || "#38bdf8";
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.ellipse(x, p.y + 11, 14.5, 6, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+      // Scooter if Steward is working!
+      if (onScooter) {
+        drawScooter(x, p.y + 2, p.dir || 1);
+      }
+
+      // Chibi Body with Thick Black Cartoon Outline
+      ctx.strokeStyle = OUTLINE;
+      ctx.lineWidth = 2;
+
+      if (!onScooter) {
+        const legSwing = moving ? Math.sin(frame * 0.28) * 3 : 0;
+        ctx.fillStyle = "#1e293b";
+        ctx.beginPath(); ctx.roundRect(x - 6, y + 4 + legSwing * 0.4, 5, 6.5, 2); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.roundRect(x + 1, y + 4 - legSwing * 0.4, 5, 6.5, 2); ctx.fill(); ctx.stroke();
+      }
+
+      // Boss Royal Purple-Gold Cape
+      if (a.isBoss) {
+        ctx.fillStyle = "#b91c1c";
+        ctx.beginPath();
+        ctx.moveTo(x - 12, y - 6);
+        ctx.lineTo(x + 12, y - 6);
+        ctx.lineTo(x + 15, y + 9);
+        ctx.lineTo(x - 15, y + 9);
+        ctx.closePath();
+        ctx.fill(); ctx.stroke();
+      }
+
+      // Torso (Vibrant Richman 4 Suit / Outfit)
+      ctx.fillStyle = a.status === "depleted" ? "#64748b" : (a.shirt || a.color);
+      ctx.beginPath(); ctx.roundRect(x - 9.5, y - 7, 19, 13, 5); ctx.fill(); ctx.stroke();
+
+      // Collar / Tie
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath(); ctx.moveTo(x - 4, y - 7); ctx.lineTo(x + 4, y - 7); ctx.lineTo(x, y - 1); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#fde047";
+      ctx.fillRect(x - 1.2, y - 3.5, 2.4, 5.5);
+
+      // Hands
+      ctx.fillStyle = "#fde68a";
+      const hw = a.status === "working" ? Math.sin(frame * 0.4 + p.seed) * 1.5 : 0;
+      ctx.beginPath(); ctx.arc(x - 10, y + 1 + hw, 3, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x + 10, y + 1 - hw, 3, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+      // Auditors hold 《大富翁4》路障卡 / 查稅卡!
+      if (a.id === "ruthless_critic" || a.id === "chief_risk_officer") {
+        drawRoadblockCard(x, y);
+      }
+
+      // ===== Q 版大頭娃娃 (Big Richman 4 Cartoon Head) =====
+      ctx.fillStyle = "#fde68a";
+      ctx.beginPath(); ctx.roundRect(x - 11.5, y - 27, 23, 20, 9.5); ctx.fill(); ctx.stroke();
+
+      // Rosy Cheeks
+      ctx.fillStyle = "rgba(244, 63, 94, 0.42)";
+      ctx.beginPath(); ctx.ellipse(x - 7, y - 13.5, 2.8, 1.5, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(x + 7, y - 13.5, 2.8, 1.5, 0, 0, Math.PI * 2); ctx.fill();
+
+      // Character-specific Hair & Tribute Accessories!
+      if (a.id === "monetization_architect") {
+        // 致敬孫小美雙丸子頭！
+        ctx.fillStyle = "#1e1b18";
+        ctx.beginPath(); ctx.arc(x - 11, y - 26, 5.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x + 11, y - 26, 5.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#ef4444";
+        ctx.beginPath(); ctx.arc(x - 9, y - 23, 2.2, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 9, y - 23, 2.2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#1e1b18";
+        ctx.beginPath(); ctx.roundRect(x - 11.5, y - 29, 23, 8.5, [9, 9, 3, 3]); ctx.fill(); ctx.stroke();
+      } else if (a.id === "pain_hunter") {
+        // 致敬阿土伯斗笠 / 草帽！
+        ctx.fillStyle = "#eab308";
+        ctx.beginPath();
+        ctx.moveTo(x - 16, y - 23); ctx.lineTo(x, y - 34); ctx.lineTo(x + 16, y - 23); ctx.closePath();
+        ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#dc2626";
+        ctx.fillRect(x - 8, y - 25, 16, 2.5);
+      } else if (a.id === "macro_etf_strategist") {
+        // 致敬錢夫人貴婦波浪髮型＋珍珠耳環！
+        ctx.fillStyle = "#7c2d12";
+        ctx.beginPath(); ctx.roundRect(x - 12.5, y - 30, 25, 10, [10, 10, 4, 4]); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x - 12, y - 19, 3.8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x + 12, y - 19, 3.8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#fef08a";
+        ctx.beginPath(); ctx.arc(x - 11.5, y - 14, 1.8, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 11.5, y - 14, 1.8, 0, Math.PI * 2); ctx.fill();
+      } else {
+        ctx.fillStyle = a.hair || "#1e293b";
+        ctx.beginPath(); ctx.roundRect(x - 12, y - 29.5, 24, 9.5, [9, 9, 3, 3]); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x - 10, y - 20, 2.6, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 10, y - 20, 2.6, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // Expressive Big Richman 4 Eyes + Blinking
+      const blinking = ((frame + p.seed) % 150) < 5;
+      ctx.fillStyle = OUTLINE;
+      if (a.status === "depleted" || blinking) {
+        ctx.fillRect(x - 6.5, y - 17, 4.5, 1.6);
+        ctx.fillRect(x + 2, y - 17, 4.5, 1.6);
+      } else {
+        ctx.beginPath(); ctx.arc(x - 4.5, y - 16.8, 2.3, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 4.5, y - 16.8, 2.3, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath(); ctx.arc(x - 5.1, y - 17.6, 0.9, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 3.9, y - 17.6, 0.9, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // Happy Smile
+      ctx.strokeStyle = "#b45309";
+      ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.arc(x, y - 12.5, 3, 0.15 * Math.PI, 0.85 * Math.PI); ctx.stroke();
+
+      // Reflective Glasses on Auditors / CRO
+      if (a.id === "ruthless_critic" || a.id === "chief_risk_officer") {
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 1.4;
+        ctx.fillStyle = "rgba(56, 189, 248, 0.22)";
+        ctx.fillRect(x - 8, y - 19.5, 6.5, 5); ctx.strokeRect(x - 8, y - 19.5, 6.5, 5);
+        ctx.fillRect(x + 1.5, y - 19.5, 6.5, 5); ctx.strokeRect(x + 1.5, y - 19.5, 6.5, 5);
+        ctx.beginPath(); ctx.moveTo(x - 1.5, y - 17); ctx.lineTo(x + 1.5, y - 17); ctx.stroke();
+      }
+
+      // Boss Jeweled Golden Crown
+      if (a.isBoss) {
+        ctx.fillStyle = "#facc15";
+        ctx.strokeStyle = OUTLINE;
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(x - 9, y - 28);
+        ctx.lineTo(x - 10, y - 36);
+        ctx.lineTo(x - 4.5, y - 32);
+        ctx.lineTo(x, y - 38);
+        ctx.lineTo(x + 4.5, y - 32);
+        ctx.lineTo(x + 10, y - 36);
+        ctx.lineTo(x + 9, y - 28);
+        ctx.closePath();
+        ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#ef4444";
+        ctx.beginPath(); ctx.arc(x, y - 31.5, 2, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // Steward Richman 4 White-Gold Speech Bubble!
+      if (onScooter) {
+        const note = STEWARD_WAYPOINTS[stewardWpIdx].note;
+        ctx.font = "900 9.5px 'PingFang TC', sans-serif";
+        const bw = ctx.measureText(note).width + 16;
+        ctx.fillStyle = "#ffffff";
+        ctx.strokeStyle = "#d97706";
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.roundRect(x - bw / 2, y - 50, bw, 17, 7); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#78350f";
+        ctx.textAlign = "center";
+        ctx.fillText(note, x, y - 38.2);
+      }
+
+      // Richman 4 Beveled Nameplate
+      ctx.font = "900 9px 'PingFang TC', sans-serif";
+      ctx.textAlign = "center";
+      const lw = ctx.measureText(a.name).width + 18;
+      ctx.fillStyle = a.id === selectedId ? "#fef08a" : "#0b2549";
+      ctx.strokeStyle = a.id === selectedId ? "#d97706" : "#fbbf24";
+      ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.roundRect(x - lw / 2, p.y + 15, lw, 14.5, 6); ctx.fill(); ctx.stroke();
+
+      ctx.fillStyle = meta.color;
+      ctx.beginPath(); ctx.arc(x - lw / 2 + 6, p.y + 22.2, 2.8, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = a.id === selectedId ? "#451a03" : "#ffffff";
+      ctx.fillText(a.name, x + 4, p.y + 25.3);
+
+      if (a.status === "depleted") {
+        ctx.fillStyle = "#fb7185";
+        ctx.strokeStyle = OUTLINE;
+        ctx.lineWidth = 2;
+        ctx.font = "900 10px ui-monospace, monospace";
+        ctx.strokeText("Zzz", x + 16, y - 28 - (frame % 45) * 0.25);
+        ctx.fillText("Zzz", x + 16, y - 28 - (frame % 45) * 0.25);
+      }
+
+      ctx.restore();
+    }
+
+    function draw() {
+      frame++;
+      drawRichmanTown();
+      if (STATE?.agents) {
+        [...STATE.agents]
+          .sort((a, b) => (sprites[a.id]?.y || 0) - (sprites[b.id]?.y || 0))
+          .forEach(a => drawCharacter(a));
+      }
+      requestAnimationFrame(draw);
+    }
+
+    fetchState();
+    fetchPortfolio();
+    setInterval(() => fetchState(false), 20000);
+    setInterval(fetchPortfolio, 60000);
+    draw();
+  </script>
+</body>
+</html>

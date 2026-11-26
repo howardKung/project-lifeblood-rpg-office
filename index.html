@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>大 Boss 雙事業部集團總部 · 《大富翁4》24/7 LIVE RPG 辦公室</title>
+  <title>大 Boss 雙事業部集團總部 · Three.js 真 3D《大富翁4》LIVE RPG 辦公室</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
   <style>
     :root {
       --ocean-dark: #071e3d;
@@ -44,18 +52,6 @@
       font-size: 11px;
     }
 
-    /* ===== 《大富翁4》黃金雙層浮雕外框 ===== */
-    .r4-bevel {
-      background: linear-gradient(180deg, #0f366e 0%, #092349 100%);
-      border: 3px solid var(--gold);
-      border-radius: 16px;
-      box-shadow:
-        inset 0 2px 0 rgba(254, 240, 138, 0.65),
-        inset 0 -3px 0 rgba(180, 83, 9, 0.75),
-        0 5px 0 var(--gold-deep),
-        0 10px 24px rgba(0, 0, 0, 0.45);
-    }
-
     /* ===== 頂部《大富翁4》黃金 HUD ===== */
     .header {
       background: linear-gradient(180deg, #174b94 0%, #0c2e61 55%, #071e42 100%);
@@ -67,7 +63,7 @@
       padding: 10px 16px;
       position: sticky;
       top: 0;
-      z-index: 30;
+      z-index: 40;
     }
     .container { max-width: 1480px; margin: 0 auto; }
     .header-row {
@@ -77,7 +73,6 @@
       justify-content: space-between;
       gap: 12px;
     }
-
     .hud-left {
       display: flex;
       align-items: center;
@@ -167,8 +162,13 @@
       border: 1.5px solid #34d399;
       font-family: ui-monospace, monospace;
     }
+    .pill-3d {
+      background: linear-gradient(180deg, #7c3aed, #5b21b6);
+      color: #fef08a;
+      border: 1.5px solid #fbbf24;
+    }
 
-    /* 四大數值膠囊 */
+    /* 四大數值膠囊 + 切換按鈕 */
     .hud-stats {
       display: flex;
       flex-wrap: wrap;
@@ -217,7 +217,7 @@
     .quota-capsule {
       border-radius: 14px;
       padding: 5px 12px;
-      min-width: 185px;
+      min-width: 180px;
     }
     .quota-head {
       display: flex;
@@ -242,7 +242,7 @@
       background: linear-gradient(90deg, #22c55e, #eab308, #38bdf8);
     }
 
-    /* 大富翁骰子按鈕 */
+    /* 大富翁骰子按鈕 & 2D經典切換按鈕 */
     .dice-btn {
       display: inline-flex;
       align-items: center;
@@ -260,6 +260,26 @@
     }
     .dice-btn:hover { filter: brightness(1.06); }
     .dice-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #92400e;
+    }
+    .classic-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(180deg, #1e40af 0%, #0f2961 100%);
+      border: 2.5px solid #fbbf24;
+      color: #fef08a !important;
+      padding: 7px 12px;
+      border-radius: 14px;
+      font-size: 12.5px;
+      font-weight: 900;
+      text-decoration: none !important;
+      box-shadow: 0 4px 0 #92400e, 0 6px 14px rgba(0, 0, 0, 0.35);
+      transition: transform 0.1s ease, filter 0.15s ease;
+    }
+    .classic-btn:hover { filter: brightness(1.12); }
+    .classic-btn:active {
       transform: translateY(2px);
       box-shadow: 0 2px 0 #92400e;
     }
@@ -304,11 +324,11 @@
     /* ===== 主版面 ===== */
     .grid {
       display: grid;
-      grid-template-columns: 1.44fr 1fr;
+      grid-template-columns: 1.46fr 1fr;
       gap: 16px;
       padding: 16px;
     }
-    @media (max-width: 1040px) { .grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1060px) { .grid { grid-template-columns: 1fr; } }
 
     .card {
       background: linear-gradient(180deg, #0e3062 0%, #081e40 100%);
@@ -322,9 +342,9 @@
         0 12px 28px rgba(0, 0, 0, 0.45);
     }
     .card-head {
-      padding: 10px 14px;
+      padding: 9px 14px;
       background: linear-gradient(180deg, #16488d 0%, #0d3063 100%);
-      border-bottom: 2.5px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -352,20 +372,161 @@
       margin-right: 4px;
       border: 1.5px solid #1e1b18;
     }
-    .canvas-wrap {
+
+    /* ===== 視角快捷列 (Camera Presets) ===== */
+    .cam-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      background: linear-gradient(180deg, #0a264d 0%, #061833 100%);
+      border-bottom: 2px solid rgba(251, 191, 36, 0.45);
+    }
+    .cam-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+    }
+    .cam-btn {
+      background: linear-gradient(180deg, #133c78 0%, #0b264e 100%);
+      border: 2px solid rgba(251, 191, 36, 0.65);
+      color: #e0f2fe;
+      border-radius: 10px;
+      padding: 5px 11px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 2px 0 #78350f;
+      transition: all 0.12s ease;
+    }
+    .cam-btn:hover {
+      border-color: #fde047;
+      color: #fef08a;
+    }
+    .cam-btn.active {
+      background: linear-gradient(180deg, #fde047 0%, #f59e0b 100%);
+      border-color: #fffbeb;
+      color: #451a03;
+      box-shadow: 0 2px 0 #92400e, 0 0 10px rgba(250, 204, 21, 0.45);
+    }
+    .cam-hint {
+      font-size: 11px;
+      color: #93c5fd;
+      font-weight: 700;
+    }
+
+    /* ===== 3D WebGL 畫布與 HTML Overlay 標籤層 ===== */
+    .viewport-wrap {
       padding: 10px;
       background: linear-gradient(180deg, #09244a 0%, #051630 100%);
-      display: flex;
-      justify-content: center;
     }
-    canvas {
+    .stage-3d {
+      position: relative;
       width: 100%;
-      height: auto;
+      height: 580px;
       border-radius: 12px;
       border: 3px solid #fbbf24;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-      cursor: pointer;
+      overflow: hidden;
+      background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 50%, #0284c7 100%);
+      touch-action: none;
+      user-select: none;
+    }
+    @media (max-width: 720px) {
+      .stage-3d { height: 430px; }
+    }
+    #webgl-canvas {
+      width: 100%;
+      height: 100%;
       display: block;
+      outline: none;
+      cursor: grab;
+    }
+    #webgl-canvas:active { cursor: grabbing; }
+
+    #overlay-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .agent-label {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(11, 37, 73, 0.92);
+      border: 1.5px solid #fbbf24;
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 900;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+      transition: border-color 0.12s, background 0.12s;
+    }
+    .agent-label.selected {
+      background: #fef08a;
+      border-color: #b45309;
+      color: #451a03;
+      box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.55), 0 3px 10px rgba(0,0,0,0.5);
+      z-index: 5;
+    }
+    .agent-label .st-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .steward-bubble {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -100%);
+      pointer-events: none;
+      background: #ffffff;
+      color: #78350f;
+      border: 2px solid #d97706;
+      border-radius: 10px;
+      padding: 3px 9px;
+      font-size: 10.5px;
+      font-weight: 900;
+      white-space: nowrap;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+      z-index: 6;
+    }
+    .steward-bubble::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      transform: translateX(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid #d97706;
+    }
+    .fps-badge {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      pointer-events: none;
+      background: rgba(6, 23, 51, 0.78);
+      border: 1px solid rgba(251, 191, 36, 0.6);
+      color: #fde047;
+      font-family: ui-monospace, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
     }
 
     /* ===== 下方《大富翁4》人物資料卡 + 道具卡片欄 ===== */
@@ -436,7 +597,7 @@
       border-bottom-color: #fde047;
     }
     .panel-body {
-      max-height: 735px;
+      max-height: 755px;
       overflow-y: auto;
       padding: 12px;
       background: rgba(7, 25, 54, 0.65);
@@ -525,19 +686,20 @@
 
           <div class="brand-info">
             <div class="badges">
-              <h1 class="title">👑 大 Boss 雙事業部總部 · 《大富翁4》24/7 LIVE 城鎮</h1>
+              <h1 class="title">👑 大 Boss 雙事業部總部 · 真 3D《大富翁4》城鎮</h1>
+              <span class="pill pill-3d">🧊 WebGL 3D</span>
               <span id="live-pill" class="pill pill-live">● LIVE 連線中</span>
               <span id="status-pill" class="pill">載入中...</span>
             </div>
             <p class="subtitle">
-              總務長小綿羊全天候巡邏 · Retina 高畫質 ·
+              Three.js 3D 立體陽光島嶼 · 總務小綿羊環城巡邏 ·
               <a href="https://howardkung.github.io/alpha-stock-warroom/" target="_blank">股市二部百萬實盤戰情網 ↗</a> ·
               <a href="https://drive.google.com/drive/folders/1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844" target="_blank">Google Drive ↗</a>
             </p>
           </div>
         </div>
 
-        <!-- 《大富翁4》經典四大數值膠囊 -->
+        <!-- 《大富翁4》四大數值膠囊 + 擲骰子 + 2D 經典切換 -->
         <div class="hud-stats">
           <div class="r4-capsule" title="模擬基金實盤可用戰備現金">
             <div class="r4-cap-icon">💵</div>
@@ -566,10 +728,14 @@
             </div>
           </div>
 
-          <button id="dice-sync-btn" class="dice-btn" onclick="rollDiceAndSync()">
+          <button id="dice-sync-btn" class="dice-btn">
             <span id="dice-face" class="dice-icon">6</span>
             <span>🎲 擲骰同步</span>
           </button>
+
+          <a class="classic-btn" href="./classic2d.html" title="切換回 2D 經典插畫版《大富翁4》辦公室">
+            <span>🖼️ 2D 經典版</span>
+          </a>
         </div>
       </div>
       <div id="dice-toast" class="toast-banner"></div>
@@ -580,7 +746,7 @@
     <div style="display:flex; flex-direction:column; gap:14px;">
       <div class="card">
         <div class="card-head">
-          <span>🗺️ 《大富翁4》集團陽光棋盤城鎮（點擊任一 Q 版角色檢視資料卡與專屬道具卡）</span>
+          <span>🧊 Three.js 3D《大富翁4》陽光島嶼棋盤城鎮（拖曳旋轉／雙指縮放／點擊 3D 角色）</span>
           <div class="legend">
             <span><i class="dot" style="background:#22c55e"></i>上工</span>
             <span><i class="dot" style="background:#38bdf8"></i>開會</span>
@@ -588,8 +754,24 @@
             <span><i class="dot" style="background:#fb7185"></i>點券耗盡下班</span>
           </div>
         </div>
-        <div class="canvas-wrap">
-          <canvas id="office-canvas"></canvas>
+
+        <!-- 視角快捷列 (Camera Presets) -->
+        <div class="cam-bar">
+          <div class="cam-presets">
+            <button class="cam-btn active" data-preset="overview">📐 經典45°全景</button>
+            <button class="cam-btn" data-preset="scooter">🛵 跟拍總務小綿羊</button>
+            <button class="cam-btn" data-preset="empire">🏰 帝寶總裁大樓</button>
+            <button class="cam-btn" data-preset="twse">📈 台灣證交所</button>
+          </div>
+          <span class="cam-hint">👆 單指拖曳旋轉 · 雙指縮放 · 點角色看資料卡</span>
+        </div>
+
+        <div class="viewport-wrap">
+          <div class="stage-3d" id="stage-3d">
+            <canvas id="webgl-canvas"></canvas>
+            <div id="overlay-layer"></div>
+            <div id="fps-badge" class="fps-badge">3D WebGL · 60 FPS</div>
+          </div>
         </div>
       </div>
 
@@ -609,95 +791,36 @@
     </div>
   </main>
 
-  <script>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
     // =========================================================================
     // 1. REAL-TIME PHONE-SYNCED CLOCK (100% EXACT DEVICE LOCAL TIME)
     // =========================================================================
     let liveClockStr = "--:--:--";
+    let liveDateShort = "";
+    let clockNeedsRedraw = true;
+
     function updateLocalClock() {
       const now = new Date();
       const pad = n => String(n).padStart(2, "0");
       liveClockStr = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
       const days = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
       const dateStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} (${days[now.getDay()]})`;
+      liveDateShort = `${pad(now.getMonth() + 1)}/${pad(now.getDate())} ${days[now.getDay()]}`;
       document.getElementById("local-clock").textContent = liveClockStr;
       document.getElementById("local-date").textContent = dateStr;
       document.getElementById("cal-month").textContent = `${now.getMonth() + 1}月`;
       document.getElementById("cal-day").textContent = now.getDate();
+      clockNeedsRedraw = true;
     }
     updateLocalClock();
     setInterval(updateLocalClock, 1000);
 
     // =========================================================================
-    // 2. RICHMAN 4 BOARD-TOWN CANVAS SETUP (RETINA HIDPI)
+    // 2. DATA & STATE HYDRATION (KEEP EXACT "let STATE = null;" FOR CLI)
     // =========================================================================
-    const LOGICAL_W = 860;
-    const LOGICAL_H = 620;
-    const canvas = document.getElementById("office-canvas");
-    const ctx = canvas.getContext("2d");
-
-    function setupHiDPI() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-      canvas.width = Math.round(LOGICAL_W * dpr);
-      canvas.height = Math.round(LOGICAL_H * dpr);
-      canvas.style.aspectRatio = `${LOGICAL_W} / ${LOGICAL_H}`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    setupHiDPI();
-    window.addEventListener("resize", setupHiDPI);
-
-    const STATUS_META = {
-      boss:     { label: "財神總裁視察", icon: "👑", color: "#fbbf24" },
-      working:  { label: "上工衝刺中",   icon: "💻", color: "#22c55e" },
-      meeting:  { label: "市政開會中",   icon: "🗣️", color: "#38bdf8" },
-      idle:     { label: "公園省電待命", icon: "☕", color: "#f59e0b" },
-      depleted: { label: "點券耗盡下班", icon: "💤", color: "#fb7185" }
-    };
-
-    // Character positions on the Richman 4 Board Town!
-    const POS = {
-      boss:                   { desk: { x: 118, y: 122 }, meet: { x: 618, y: 74 },  lounge: { x: 118, y: 122 } },
-      commander:              { desk: { x: 306, y: 122 }, meet: { x: 545, y: 105 }, lounge: { x: 550, y: 242 } },
-      office_steward:         { desk: { x: 415, y: 164 }, meet: { x: 695, y: 105 }, lounge: { x: 615, y: 234 } },
-      // Division 1: 金流商店街
-      pain_hunter:            { desk: { x: 195, y: 312 }, meet: { x: 565, y: 126 }, lounge: { x: 680, y: 242 } },
-      indie_hacker_builder:   { desk: { x: 275, y: 312 }, meet: { x: 605, y: 126 }, lounge: { x: 542, y: 325 } },
-      monetization_architect: { desk: { x: 355, y: 312 }, meet: { x: 645, y: 126 }, lounge: { x: 684, y: 325 } },
-      ruthless_critic:        { desk: { x: 435, y: 312 }, meet: { x: 685, y: 126 }, lounge: { x: 545, y: 396 } },
-      // Division 2: 台灣證券交易所
-      supply_chain_scout:     { desk: { x: 185, y: 462 }, meet: { x: 555, y: 82 },  lounge: { x: 615, y: 412 } },
-      chip_momentum_tracker:  { desk: { x: 252, y: 462 }, meet: { x: 680, y: 82 },  lounge: { x: 685, y: 396 } },
-      macro_etf_strategist:   { desk: { x: 319, y: 462 }, meet: { x: 585, y: 112 }, lounge: { x: 572, y: 456 } },
-      chief_risk_officer:     { desk: { x: 386, y: 462 }, meet: { x: 655, y: 112 }, lounge: { x: 658, y: 456 } },
-      paper_fund_manager:     { desk: { x: 453, y: 462 }, meet: { x: 620, y: 126 }, lounge: { x: 615, y: 352 } }
-    };
-
-    // 總務長小綿羊沿著棋盤馬路 6 個巡邏點穿梭！
-    const STEWARD_WAYPOINTS = [
-      { x: 415, y: 164, note: "校準台灣鐘樓！" },
-      { x: 125, y: 164, note: "總裁摩天樓亮晶晶！" },
-      { x: 110, y: 310, note: "巡視金流商店街！" },
-      { x: 330, y: 512, note: "檢查證交所紅盤！" },
-      { x: 750, y: 380, note: "公園噴泉水質滿分！" },
-      { x: 630, y: 164, note: "今夜做夢也會笑！" }
-    ];
-
-    // 《大富翁4》專屬道具卡片設定
-    const AGENT_CARDS = {
-      boss:                   [ { icon: "👑", name: "財神附身卡", desc: "全軍士氣 +100%" }, { icon: "🏰", name: "帝寶地契卡", desc: "LV.5 連鎖總部" }, { icon: "💎", name: "無限統帥卡", desc: "最終裁決權" } ],
-      commander:              [ { icon: "🎯", name: "雙部調度卡", desc: "精算三級大腦" }, { icon: "🧠", name: "PRO 算力卡", desc: "核心架構攻堅" }, { icon: "🔄", name: "全域同步卡", desc: "即時指令下達" } ],
-      office_steward:         [ { icon: "🛵", name: "綿羊巡邏卡", desc: "全城鎮移動檢修" }, { icon: "🕒", name: "台灣校時卡", desc: "UTC+8 零誤差" }, { icon: "🎨", name: "富翁畫質卡", desc: "Retina 卡通渲染" } ],
-      pain_hunter:            [ { icon: "🎩", name: "阿土伯草帽", desc: "深耕痛點挖礦" }, { icon: "🔍", name: "流量雷達卡", desc: "Apify 導流整備" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
-      indie_hacker_builder:   [ { icon: "🖨️", name: "印鈔機卡",   desc: "5 支 Actor 運轉" }, { icon: "📋", name: "Form4 透視卡", desc: "高管買進雷達" }, { icon: "🛠️", name: "0-Charge 卡", desc: "低耗能交付" } ],
-      monetization_architect: [ { icon: "🎀", name: "小美飛輪卡", desc: "商業變現設計" }, { icon: "💰", name: "財神紅利卡", desc: "現金流複利" }, { icon: "⚡", name: "烏龜省電卡", desc: "保留關鍵算力" } ],
-      ruthless_critic:        [ { icon: "🚧", name: "路障把關卡", desc: "退件低品質方案" }, { icon: "🧾", name: "查稅審計卡", desc: "合規零漏洞" }, { icon: "🧠", name: "PRO 毒舌卡", desc: "嚴苛壓力測試" } ],
-      supply_chain_scout:     [ { icon: "🔗", name: "供應鏈地圖", desc: "美台題材共振" }, { icon: "🚀", name: "均線突破卡", desc: "Stage 2 追蹤" }, { icon: "⚡", name: "輕快偵察卡", desc: "FLASH 高效率" } ],
-      chip_momentum_tracker:  [ { icon: "🎯", name: "籌碼鎖定卡", desc: "法人買盤狙擊" }, { icon: "📊", name: "量價紅盤卡", desc: "右側動能確認" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
-      macro_etf_strategist:   [ { icon: "👒", name: "錢夫人貴婦卡", desc: "跨市場大格局" }, { icon: "🌐", name: "總經水位卡", desc: "股債 ETF 平衡" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
-      chief_risk_officer:     [ { icon: "🚧", name: "停損路障卡", desc: "破年線直接退件" }, { icon: "🛡️", name: "免罪合規卡", desc: "12% 現金紅線" }, { icon: "🧠", name: "PRO 終審卡", desc: "嚴控盈虧比" } ],
-      paper_fund_manager:     [ { icon: "📈", name: "紅漲買進卡", desc: "台股紅漲綠跌" }, { icon: "🏦", name: "百萬操盤卡", desc: "實盤條件單" }, { icon: "🤖", name: "零額度自動卡", desc: "Python 0 消耗" } ]
-    };
-
     let STATE = null;
     let PORTFOLIO = {
       summary: { cashTwd: 321347, navTwd: 999179 },
@@ -710,33 +833,1672 @@
       ]
     };
     let selectedId = "office_steward";
-    const sprites = {};
-    let frame = 0;
-    let stewardWpIdx = 0;
+    let twseNeedsRedraw = true;
 
-    setInterval(() => {
-      stewardWpIdx = (stewardWpIdx + 1) % STEWARD_WAYPOINTS.length;
-    }, 5500);
+    const STATUS_META = {
+      boss:     { label: "財神總裁視察", icon: "👑", color: "#fbbf24" },
+      working:  { label: "上工衝刺中",   icon: "💻", color: "#22c55e" },
+      meeting:  { label: "市政開會中",   icon: "🗣️", color: "#38bdf8" },
+      idle:     { label: "公園省電待命", icon: "☕", color: "#f59e0b" },
+      depleted: { label: "點券耗盡下班", icon: "💤", color: "#fb7185" }
+    };
 
-    function targetFor(a) {
-      if (a.id === "office_steward" && a.status === "working") {
-        return STEWARD_WAYPOINTS[stewardWpIdx];
-      }
-      const p = POS[a.id] || { desk: { x: 280, y: 312 }, meet: { x: 618, y: 110 }, lounge: { x: 615, y: 350 } };
+    const AGENT_CARDS = {
+      boss:                   [ { icon: "👑", name: "財神附身卡", desc: "全軍士氣 +100%" }, { icon: "🏰", name: "帝寶地契卡", desc: "LV.5 連鎖總部" }, { icon: "💎", name: "無限統帥卡", desc: "最終裁決權" } ],
+      commander:              [ { icon: "🎯", name: "雙部調度卡", desc: "精算三級大腦" }, { icon: "🧠", name: "PRO 算力卡", desc: "核心架構攻堅" }, { icon: "🔄", name: "全域同步卡", desc: "即時指令下達" } ],
+      office_steward:         [ { icon: "🛵", name: "綿羊巡邏卡", desc: "全城鎮移動檢修" }, { icon: "🕒", name: "台灣校時卡", desc: "UTC+8 零誤差" }, { icon: "🧊", name: "真3D畫質卡", desc: "WebGL 立體城鎮" } ],
+      pain_hunter:            [ { icon: "🎩", name: "阿土伯草帽", desc: "深耕痛點挖礦" }, { icon: "🔍", name: "流量雷達卡", desc: "Apify 導流整備" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
+      indie_hacker_builder:   [ { icon: "🖨️", name: "印鈔機卡",   desc: "5 支 Actor 運轉" }, { icon: "📋", name: "Form4 透視卡", desc: "高管買進雷達" }, { icon: "🛠️", name: "0-Charge 卡", desc: "低耗能交付" } ],
+      monetization_architect: [ { icon: "🎀", name: "小美飛輪卡", desc: "商業變現設計" }, { icon: "💰", name: "財神紅利卡", desc: "現金流複利" }, { icon: "⚡", name: "烏龜省電卡", desc: "保留關鍵算力" } ],
+      ruthless_critic:        [ { icon: "🚧", name: "路障把關卡", desc: "退件低品質方案" }, { icon: "🧾", name: "查稅審計卡", desc: "合規零漏洞" }, { icon: "🧠", name: "PRO 毒舌卡", desc: "嚴苛壓力測試" } ],
+      supply_chain_scout:     [ { icon: "🔗", name: "供應鏈地圖", desc: "美台題材共振" }, { icon: "🚀", name: "均線突破卡", desc: "Stage 2 追蹤" }, { icon: "⚡", name: "輕快偵察卡", desc: "FLASH 高效率" } ],
+      chip_momentum_tracker:  [ { icon: "🎯", name: "籌碼鎖定卡", desc: "法人買盤狙擊" }, { icon: "📊", name: "量價紅盤卡", desc: "右側動能確認" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
+      macro_etf_strategist:   [ { icon: "👒", name: "錢夫人貴婦卡", desc: "跨市場大格局" }, { icon: "🌐", name: "總經水位卡", desc: "股債 ETF 平衡" }, { icon: "⚡", name: "烏龜省電卡", desc: "待命 0 消耗" } ],
+      chief_risk_officer:     [ { icon: "🚧", name: "停損路障卡", desc: "破年線直接退件" }, { icon: "🛡️", name: "免罪合規卡", desc: "12% 現金紅線" }, { icon: "🧠", name: "PRO 終審卡", desc: "嚴控盈虧比" } ],
+      paper_fund_manager:     [ { icon: "📈", name: "紅漲買進卡", desc: "台股紅漲綠跌" }, { icon: "🏦", name: "百萬操盤卡", desc: "實盤條件單" }, { icon: "🤖", name: "零額度自動卡", desc: "Python 0 消耗" } ]
+    };
+
+    // 3D World Positions for Agents (desk / meeting / park lounge)
+    const POS_3D = {
+      boss:                   { desk: [-10.2, -9.8], meet: [11.6, -9.8], lounge: [-10.2, -9.8] },
+      commander:              { desk: [-1.8, -9.8],  meet: [9.0, -10.4], lounge: [3.6, -2.8] },
+      office_steward:         { desk: [2.2, -8.3],   meet: [14.0, -10.4], lounge: [6.4, -2.8] },
+      // Division 1: 金流商店街 (front of shops at z = -0.3)
+      pain_hunter:            { desk: [-9.2, -0.3],  meet: [9.3, -11.8], lounge: [8.8, -2.5] },
+      indie_hacker_builder:   { desk: [-6.7, -0.3],  meet: [10.8, -12.0], lounge: [3.4, 0.5] },
+      monetization_architect: { desk: [-4.2, -0.3],  meet: [12.4, -12.0], lounge: [9.2, 0.5] },
+      ruthless_critic:        { desk: [-1.7, -0.3],  meet: [13.9, -11.8], lounge: [3.6, 3.6] },
+      // Division 2: 台灣證券交易所 (front of TWSE at z = 6.0)
+      supply_chain_scout:     { desk: [-9.6, 6.0],   meet: [9.8, -9.5],  lounge: [6.4, 4.0] },
+      chip_momentum_tracker:  { desk: [-7.6, 6.0],   meet: [13.4, -9.5], lounge: [9.0, 3.6] },
+      macro_etf_strategist:   { desk: [-5.6, 6.0],   meet: [10.4, -10.8], lounge: [4.6, 4.7] },
+      chief_risk_officer:     { desk: [-3.6, 6.0],   meet: [12.8, -10.8], lounge: [8.1, 4.7] },
+      paper_fund_manager:     { desk: [-1.6, 6.0],   meet: [11.6, -11.4], lounge: [6.4, 2.5] }
+    };
+
+    function targetFor3D(a) {
+      const p = POS_3D[a.id] || { desk: [0, 0], meet: [11.6, -10.5], lounge: [6.4, 1.0] };
       if (a.isBoss || a.status === "working") return p.desk;
       if (a.status === "meeting") return p.meet;
       return p.lounge;
     }
 
     // =========================================================================
-    // 3. LIVE GITHUB API POLLING (STATE + PORTFOLIO) & DICE ROLL
+    // 3. THREE.JS SCENE, LIGHTING, SKY, OCEAN & CONTROLS
     // =========================================================================
+    const stageEl = document.getElementById("stage-3d");
+    const canvasEl = document.getElementById("webgl-canvas");
+    const overlayEl = document.getElementById("overlay-layer");
+    const fpsBadge = document.getElementById("fps-badge");
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x60a5fa);
+    scene.fog = new THREE.FogExp2(0x7dd3fc, 0.0085);
+
+    const camera = new THREE.PerspectiveCamera(42, stageEl.clientWidth / stageEl.clientHeight, 0.5, 220);
+    camera.position.set(0, 26, 30);
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvasEl, antialias: true, powerPreference: "high-performance" });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(stageEl.clientWidth, stageEl.clientHeight, false);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.08;
+    const MAX_ANISO = renderer.capabilities.getMaxAnisotropy();
+
+    const controls = new OrbitControls(camera, canvasEl);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.07;
+    controls.maxPolarAngle = Math.PI / 2.15;
+    controls.minPolarAngle = 0.22;
+    controls.minDistance = 8;
+    controls.maxDistance = 62;
+    controls.target.set(0, 0.5, -1.2);
+    controls.update();
+
+    // Sunny Richman 4 Lighting
+    const hemiLight = new THREE.HemisphereLight(0xf0f9ff, 0x166534, 0.95);
+    scene.add(hemiLight);
+
+    const sunLight = new THREE.DirectionalLight(0xfffbeb, 1.65);
+    sunLight.position.set(22, 34, 24);
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.set(2048, 2048);
+    sunLight.shadow.camera.near = 5;
+    sunLight.shadow.camera.far = 95;
+    sunLight.shadow.camera.left = -28;
+    sunLight.shadow.camera.right = 28;
+    sunLight.shadow.camera.top = 24;
+    sunLight.shadow.camera.bottom = -24;
+    sunLight.shadow.bias = -0.0005;
+    scene.add(sunLight);
+
+    const fillLight = new THREE.DirectionalLight(0xbae6fd, 0.45);
+    fillLight.position.set(-20, 14, -18);
+    scene.add(fillLight);
+
+    // Helper: CanvasTexture generator (zero external image/font dependencies!)
+    function makeCanvasTexture(w, h, drawFn) {
+      const c = document.createElement("canvas");
+      c.width = w;
+      c.height = h;
+      const g = c.getContext("2d");
+      drawFn(g, w, h);
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = MAX_ANISO;
+      tex.needsUpdate = true;
+      return { tex, canvas: c, ctx: g };
+    }
+
+    // Helper: Rounded Rectangle shape for extruded slabs
+    function roundedRectShape(w, h, r) {
+      const s = new THREE.Shape();
+      const hw = w / 2, hh = h / 2;
+      s.moveTo(-hw + r, -hh);
+      s.lineTo(hw - r, -hh);
+      s.quadraticCurveTo(hw, -hh, hw, -hh + r);
+      s.lineTo(hw, hh - r);
+      s.quadraticCurveTo(hw, hh, hw - r, hh);
+      s.lineTo(-hw + r, hh);
+      s.quadraticCurveTo(-hw, hh, -hw, hh - r);
+      s.lineTo(-hw, -hh + r);
+      s.quadraticCurveTo(-hw, -hh, -hw + r, -hh);
+      return s;
+    }
+
+    // =========================================================================
+    // 4. SUNNY OCEAN, SAILBOAT, ISLAND, CLOUDS & TREES
+    // =========================================================================
+    // Sparkling Ocean
+    const oceanGeo = new THREE.PlaneGeometry(240, 240, 48, 48);
+    oceanGeo.rotateX(-Math.PI / 2);
+    const oceanPos = oceanGeo.attributes.position;
+    const oceanBaseY = new Float32Array(oceanPos.count);
+    for (let i = 0; i < oceanPos.count; i++) oceanBaseY[i] = oceanPos.getY(i);
+    const oceanMat = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      roughness: 0.22,
+      metalness: 0.12,
+      flatShading: true
+    });
+    const oceanMesh = new THREE.Mesh(oceanGeo, oceanMat);
+    oceanMesh.position.y = -0.95;
+    oceanMesh.receiveShadow = true;
+    scene.add(oceanMesh);
+
+    // Coastal Foam Ring
+    const foamShape = roundedRectShape(43.6, 33.2, 4.2);
+    const foamMesh = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(foamShape, { depth: 0.16, bevelEnabled: false }),
+      new THREE.MeshStandardMaterial({ color: 0xe0f2fe, transparent: true, opacity: 0.72, roughness: 0.5 })
+    );
+    foamMesh.rotation.x = -Math.PI / 2;
+    foamMesh.position.y = -0.92;
+    scene.add(foamMesh);
+
+    // Sandy Beach Platform
+    const beachShape = roundedRectShape(41.8, 31.4, 3.6);
+    const beachMesh = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(beachShape, { depth: 0.55, bevelEnabled: true, bevelThickness: 0.14, bevelSize: 0.18, bevelSegments: 2 }),
+      new THREE.MeshStandardMaterial({ color: 0xfde68a, roughness: 0.85 })
+    );
+    beachMesh.rotation.x = -Math.PI / 2;
+    beachMesh.position.y = -0.82;
+    beachMesh.receiveShadow = true;
+    scene.add(beachMesh);
+
+    // Lush Green Grass Island with subtle checkerboard lawn texture
+    const lawnTexObj = makeCanvasTexture(512, 512, (g, w, h) => {
+      g.fillStyle = "#4ade80";
+      g.fillRect(0, 0, w, h);
+      const step = 64;
+      for (let y = 0; y < h; y += step) {
+        for (let x = 0; x < w; x += step) {
+          if (((x + y) / step) % 2 === 0) {
+            g.fillStyle = "rgba(34, 197, 94, 0.32)";
+            g.fillRect(x, y, step, step);
+          }
+        }
+      }
+    });
+    lawnTexObj.tex.wrapS = lawnTexObj.tex.wrapT = THREE.RepeatWrapping;
+    lawnTexObj.tex.repeat.set(4, 3);
+
+    const grassShape = roundedRectShape(39.4, 29.0, 3.0);
+    const grassMesh = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(grassShape, { depth: 0.35, bevelEnabled: true, bevelThickness: 0.08, bevelSize: 0.1, bevelSegments: 2 }),
+      new THREE.MeshStandardMaterial({ map: lawnTexObj.tex, roughness: 0.88 })
+    );
+    grassMesh.rotation.x = -Math.PI / 2;
+    grassMesh.position.y = -0.35;
+    grassMesh.receiveShadow = true;
+    scene.add(grassMesh);
+
+    // 3D White Sailboat gently bobbing on the ocean bay (Top-Right coast)
+    const sailboat = new THREE.Group();
+    const hull = new THREE.Mesh(
+      new THREE.BoxGeometry(2.6, 0.65, 1.15),
+      new THREE.MeshStandardMaterial({ color: 0xef4444, roughness: 0.45 })
+    );
+    hull.position.y = 0.25;
+    hull.castShadow = true;
+    sailboat.add(hull);
+    const deck = new THREE.Mesh(
+      new THREE.BoxGeometry(2.2, 0.18, 0.96),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 })
+    );
+    deck.position.y = 0.62;
+    sailboat.add(deck);
+    const mast = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.06, 0.08, 2.9, 8),
+      new THREE.MeshStandardMaterial({ color: 0xfef3c7, roughness: 0.6 })
+    );
+    mast.position.set(0.1, 2.0, 0);
+    mast.castShadow = true;
+    sailboat.add(mast);
+    const sailShape = new THREE.Shape();
+    sailShape.moveTo(0, 0);
+    sailShape.lineTo(1.5, 0);
+    sailShape.lineTo(0, 2.35);
+    sailShape.closePath();
+    const sail = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(sailShape, { depth: 0.06, bevelEnabled: false }),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4, side: THREE.DoubleSide })
+    );
+    sail.position.set(0.12, 0.88, -0.03);
+    sail.castShadow = true;
+    sailboat.add(sail);
+    const jibShape = new THREE.Shape();
+    jibShape.moveTo(0, 0);
+    jibShape.lineTo(-0.95, 0);
+    jibShape.lineTo(0, 1.8);
+    jibShape.closePath();
+    const jib = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(jibShape, { depth: 0.04, bevelEnabled: false }),
+      new THREE.MeshStandardMaterial({ color: 0xfef08a, roughness: 0.4, side: THREE.DoubleSide })
+    );
+    jib.position.set(0.05, 0.9, -0.02);
+    sailboat.add(jib);
+    sailboat.position.set(24.5, -0.82, -13.5);
+    sailboat.rotation.y = -0.55;
+    scene.add(sailboat);
+
+    // Fluffy 3D White Clouds drifting in the sky
+    const clouds = [];
+    function spawnCloud(x, y, z, scale, speed) {
+      const g = new THREE.Group();
+      const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9, emissive: 0xf0f9ff, emissiveIntensity: 0.15 });
+      [
+        [0, 0.25, 0, 1.35],
+        [-1.15, 0, 0.15, 0.98],
+        [1.15, -0.05, -0.1, 1.02],
+        [0.35, 0.15, 0.75, 0.85],
+        [-0.4, 0.1, -0.7, 0.88]
+      ].forEach(([cx, cy, cz, r]) => {
+        const s = new THREE.Mesh(new THREE.SphereGeometry(r, 14, 12), mat);
+        s.position.set(cx, cy, cz);
+        g.add(s);
+      });
+      g.position.set(x, y, z);
+      g.scale.setScalar(scale);
+      scene.add(g);
+      clouds.push({ mesh: g, speed });
+    }
+    spawnCloud(-22, 13.5, -16, 1.15, 0.018);
+    spawnCloud(-4, 15.2, -21, 1.35, 0.013);
+    spawnCloud(16, 14.0, -14, 1.05, 0.021);
+    spawnCloud(24, 12.8, 4, 0.95, 0.015);
+    spawnCloud(-25, 13.2, 8, 1.1, 0.016);
+
+    // Chubby 3D Cartoon Trees
+    const trunkMat = new THREE.MeshStandardMaterial({ color: 0x92400e, roughness: 0.85 });
+    const leafDarkMat = new THREE.MeshStandardMaterial({ color: 0x16a34a, roughness: 0.75 });
+    const leafBrightMat = new THREE.MeshStandardMaterial({ color: 0x22c55e, roughness: 0.72 });
+    const trees = [];
+    function addTree(x, z, s = 1) {
+      const g = new THREE.Group();
+      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.26, 0.95, 10), trunkMat);
+      trunk.position.y = 0.48;
+      trunk.castShadow = true;
+      g.add(trunk);
+      const c1 = new THREE.Mesh(new THREE.SphereGeometry(0.82, 14, 12), leafDarkMat);
+      c1.position.set(0, 1.28, 0);
+      c1.castShadow = true;
+      g.add(c1);
+      const c2 = new THREE.Mesh(new THREE.SphereGeometry(0.62, 12, 10), leafBrightMat);
+      c2.position.set(-0.26, 1.56, 0.2);
+      c2.castShadow = true;
+      g.add(c2);
+      g.position.set(x, 0, z);
+      g.scale.setScalar(s);
+      scene.add(g);
+      trees.push(g);
+    }
+    [
+      [-15.2, -12.6, 1.0], [-15.2, 9.6, 0.95], [16.8, -12.8, 1.05], [16.8, 10.2, 0.95],
+      [2.2, -1.0, 0.85], [10.4, -4.4, 0.9], [2.4, 4.4, 0.88], [10.4, 4.6, 0.92],
+      [-15.4, -1.5, 0.85], [15.4, 1.2, 0.88]
+    ].forEach(([tx, tz, ts]) => addTree(tx, tz, ts));
+
+    // =========================================================================
+    // 5. ASPHALT LOOP ROAD & COLORFUL 3D RICHMAN 4 BOARD TILES
+    // =========================================================================
+    // Road Loop centered around X:[-13.5..13.5], Z:[-7.8..7.8]
+    const ROAD_HALF_X = 13.5;
+    const ROAD_HALF_Z = 7.8;
+
+    const roadTexObj = makeCanvasTexture(1024, 640, (g, w, h) => {
+      g.clearRect(0, 0, w, h);
+      // Asphalt road loop drawn in UV space mapped precisely to plane
+      const marginX = 68, marginY = 64;
+      const rw = w - marginX * 2, rh = h - marginY * 2;
+      g.lineJoin = "round";
+      g.strokeStyle = "#cbd5e1";
+      g.lineWidth = 96;
+      g.beginPath(); g.roundRect(marginX, marginY, rw, rh, 56); g.stroke();
+      g.strokeStyle = "#334155";
+      g.lineWidth = 78;
+      g.beginPath(); g.roundRect(marginX, marginY, rw, rh, 56); g.stroke();
+      g.strokeStyle = "#facc15";
+      g.lineWidth = 6;
+      g.setLineDash([28, 22]);
+      g.beginPath(); g.roundRect(marginX, marginY, rw, rh, 56); g.stroke();
+    });
+    const roadPlane = new THREE.Mesh(
+      new THREE.PlaneGeometry(31.2, 19.6),
+      new THREE.MeshStandardMaterial({ map: roadTexObj.tex, transparent: true, alphaTest: 0.1, roughness: 0.82 })
+    );
+    roadPlane.rotation.x = -Math.PI / 2;
+    roadPlane.position.y = 0.025;
+    roadPlane.receiveShadow = true;
+    scene.add(roadPlane);
+
+    // Raised 3D Colorful Richman 4 Board Tiles around the outer perimeter
+    const tileBaseMat = new THREE.MeshStandardMaterial({ color: 0xfffbeb, roughness: 0.65 });
+    function addBoardTile3D(x, z, w, d, topColor, title, sub, icon = "") {
+      const texObj = makeCanvasTexture(256, 200, (g, cw, ch) => {
+        g.fillStyle = "#fffbeb";
+        g.fillRect(0, 0, cw, ch);
+        g.fillStyle = topColor;
+        g.fillRect(0, 0, cw, 56);
+        g.strokeStyle = "#1e1b18";
+        g.lineWidth = 8;
+        g.strokeRect(4, 4, cw - 8, ch - 8);
+        g.beginPath(); g.moveTo(0, 56); g.lineTo(cw, 56); g.stroke();
+
+        g.fillStyle = "#1e1b18";
+        g.font = "900 34px 'PingFang TC', 'Microsoft JhengHei', sans-serif";
+        g.textAlign = "center";
+        g.fillText(icon ? `${icon}${title}` : title, cw / 2, 114);
+
+        if (sub) {
+          g.fillStyle = "#b45309";
+          g.font = "800 28px ui-monospace, monospace";
+          g.fillText(sub, cw / 2, 166);
+        }
+      });
+
+      const mats = [
+        tileBaseMat, tileBaseMat,
+        new THREE.MeshStandardMaterial({ map: texObj.tex, roughness: 0.5 }),
+        tileBaseMat, tileBaseMat, tileBaseMat
+      ];
+      const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, 0.24, d), mats);
+      mesh.position.set(x, 0.12, z);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      scene.add(mesh);
+    }
+
+    const bottomTiles = [
+      { c: "#ef4444", t: "起點 GO",  s: "+NT$2萬", i: "🚩" },
+      { c: "#3b82f6", t: "帝寶大道", s: "$8,800",  i: "" },
+      { c: "#f59e0b", t: "機會",     s: "？",      i: "❓" },
+      { c: "#0ea5e9", t: "台股紅盤", s: "▲2.4%",   i: "📈" },
+      { c: "#22c55e", t: "銀行BANK", s: "存款",    i: "🏦" },
+      { c: "#ec4899", t: "印鈔店x5", s: "LV.5",    i: "💰" },
+      { c: "#a855f7", t: "命運",     s: "！",      i: "❗" },
+      { c: "#f97316", t: "點券中心", s: "算力+10", i: "🎟️" },
+      { c: "#14b8a6", t: "美股雷達", s: "Form4",   i: "🇺🇸" },
+      { c: "#eab308", t: "財神大吉", s: "附身",    i: "🧧" },
+      { c: "#ef4444", t: "證交所",   s: "紅漲綠跌",i: "🏛️" }
+    ];
+    bottomTiles.forEach((tl, idx) => {
+      addBoardTile3D(-14.0 + idx * 2.8, 11.4, 2.55, 2.15, tl.c, tl.t, tl.s, tl.i);
+    });
+
+    const leftTiles = [
+      { c: "#06b6d4", t: "道具屋",   s: "$3,200", i: "🛒" },
+      { c: "#3b82f6", t: "金流街",   s: "LV.5",   i: "💵" },
+      { c: "#ef4444", t: "查稅卡",   s: "風控",   i: "🚧" },
+      { c: "#f59e0b", t: "機會",     s: "？",     i: "❓" },
+      { c: "#eab308", t: "財神廟",   s: "許願",   i: "🏮" }
+    ];
+    leftTiles.forEach((tl, idx) => {
+      addBoardTile3D(-17.4, 7.2 - idx * 3.0, 2.6, 2.35, tl.c, tl.t, tl.s, tl.i);
+    });
+
+    const rightTiles = [
+      { c: "#22c55e", t: "陽光公園", s: "省電區", i: "⛲" },
+      { c: "#ec4899", t: "樂透咖啡", s: "☕+1",  i: "☕" },
+      { c: "#a855f7", t: "命運",     s: "！",     i: "❗" },
+      { c: "#0ea5e9", t: "海濱別墅", s: "$6,500", i: "🏖️" },
+      { c: "#f59e0b", t: "點券站",   s: "免費",   i: "🎟️" }
+    ];
+    rightTiles.forEach((tl, idx) => {
+      addBoardTile3D(17.4, 7.2 - idx * 3.0, 2.6, 2.35, tl.c, tl.t, tl.s, tl.i);
+    });
+
+    // =========================================================================
+    // 6. SIX 3D LANDMARK BUILDINGS (WITH DYNAMIC CANVAS TEXTURES)
+    // =========================================================================
+    const whiteMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.55 });
+    const goldMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.25, metalness: 0.65 });
+    const darkMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6 });
+
+    function makePlazaPad(x, z, w, d, fillHex, borderHex) {
+      const pad = new THREE.Mesh(
+        new THREE.BoxGeometry(w, 0.14, d),
+        new THREE.MeshStandardMaterial({ color: fillHex, roughness: 0.8 })
+      );
+      pad.position.set(x, 0.07, z);
+      pad.receiveShadow = true;
+      scene.add(pad);
+
+      const trim = new THREE.Mesh(
+        new THREE.BoxGeometry(w + 0.24, 0.09, d + 0.24),
+        new THREE.MeshStandardMaterial({ color: borderHex, roughness: 0.6 })
+      );
+      trim.position.set(x, 0.04, z);
+      trim.receiveShadow = true;
+      scene.add(trim);
+    }
+
+    function addSignBoard(x, y, z, w, h, tex, rotY = 0) {
+      const frame = new THREE.Mesh(
+        new THREE.BoxGeometry(w + 0.16, h + 0.16, 0.14),
+        new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.4, metalness: 0.35 })
+      );
+      frame.position.set(x, y, z);
+      frame.rotation.y = rotY;
+      frame.castShadow = true;
+      scene.add(frame);
+
+      const face = new THREE.Mesh(
+        new THREE.PlaneGeometry(w, h),
+        new THREE.MeshBasicMaterial({ map: tex })
+      );
+      face.position.set(0, 0, 0.08);
+      frame.add(face);
+      return frame;
+    }
+
+    // --- LANDMARK 1: 🏰 大 Boss 帝寶總部（LV.5 摩天大樓 + 旋轉黃金大元寶 + 3D紅色敞篷跑車）---
+    makePlazaPad(-11.4, -12.6, 8.6, 5.4, 0xfef3c7, 0xd97706);
+
+    const empireTower = new THREE.Group();
+    empireTower.position.set(-12.4, 0.14, -13.0);
+    scene.add(empireTower);
+
+    // Multi-tier Red-Gold Skyscraper
+    const windowTexObj = makeCanvasTexture(256, 384, (g, w, h) => {
+      g.fillStyle = "#6d28d9";
+      g.fillRect(0, 0, w, h);
+      g.fillStyle = "#fde047";
+      for (let ry = 22; ry < h - 22; ry += 42) {
+        for (let rx = 22; rx < w - 22; rx += 44) {
+          g.fillRect(rx, ry, 26, 22);
+        }
+      }
+      g.strokeStyle = "#f59e0b";
+      g.lineWidth = 10;
+      g.strokeRect(5, 5, w - 10, h - 10);
+    });
+    const towerWallMat = new THREE.MeshStandardMaterial({ map: windowTexObj.tex, roughness: 0.4 });
+    const towerTier1 = new THREE.Mesh(new THREE.BoxGeometry(3.5, 4.2, 3.2), towerWallMat);
+    towerTier1.position.y = 2.1;
+    towerTier1.castShadow = true;
+    towerTier1.receiveShadow = true;
+    empireTower.add(towerTier1);
+
+    const towerTier2 = new THREE.Mesh(new THREE.BoxGeometry(2.6, 2.2, 2.4), towerWallMat);
+    towerTier2.position.y = 5.3;
+    towerTier2.castShadow = true;
+    empireTower.add(towerTier2);
+
+    const redRoof = new THREE.Mesh(
+      new THREE.ConeGeometry(2.2, 1.7, 4),
+      new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.45 })
+    );
+    redRoof.rotation.y = Math.PI / 4;
+    redRoof.position.y = 7.25;
+    redRoof.castShadow = true;
+    empireTower.add(redRoof);
+
+    const spireOrb = new THREE.Mesh(new THREE.SphereGeometry(0.32, 12, 12), goldMat);
+    spireOrb.position.y = 8.25;
+    empireTower.add(spireOrb);
+
+    // Red Carpet Entrance
+    const carpet = new THREE.Mesh(
+      new THREE.BoxGeometry(1.15, 0.05, 2.2),
+      new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.7 })
+    );
+    carpet.position.set(0, 0.05, 2.5);
+    empireTower.add(carpet);
+
+    // Rotating 3D Golden Ingot (黃金大元寶) hovering above Empire HQ!
+    const ingotGroup = new THREE.Group();
+    const ingotBase = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.85, 0.52, 0.46, 16),
+      new THREE.MeshStandardMaterial({ color: 0xfacc15, metalness: 0.85, roughness: 0.18, emissive: 0xca8a04, emissiveIntensity: 0.25 })
+    );
+    ingotBase.scale.set(1.35, 1, 0.8);
+    ingotGroup.add(ingotBase);
+    const ingotCore = new THREE.Mesh(
+      new THREE.SphereGeometry(0.45, 14, 12),
+      new THREE.MeshStandardMaterial({ color: 0xfef08a, metalness: 0.88, roughness: 0.14, emissive: 0xeab308, emissiveIntensity: 0.3 })
+    );
+    ingotCore.scale.set(1.2, 0.72, 0.85);
+    ingotCore.position.y = 0.22;
+    ingotGroup.add(ingotCore);
+    ingotGroup.position.set(-12.4, 9.4, -13.0);
+    scene.add(ingotGroup);
+
+    // Empire Signboard
+    const empireSignTex = makeCanvasTexture(420, 140, (g, w, h) => {
+      g.fillStyle = "#b91c1c";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#fde047";
+      g.lineWidth = 8;
+      g.strokeRect(4, 4, w - 8, h - 8);
+      g.fillStyle = "#fef08a";
+      g.font = "900 42px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("🏰 帝寶總部 LV.5", w / 2, 66);
+      g.fillStyle = "#fde047";
+      g.font = "800 30px sans-serif";
+      g.fillText("★★★★★ 連鎖地標", w / 2, 114);
+    });
+    addSignBoard(-8.6, 2.2, -12.6, 3.2, 1.1, empireSignTex.tex);
+
+    // 3D Red Convertible Sports Car parked outside Empire HQ!
+    const sportsCar = new THREE.Group();
+    const carBody = new THREE.Mesh(
+      new THREE.BoxGeometry(2.1, 0.45, 1.02),
+      new THREE.MeshStandardMaterial({ color: 0xef4444, roughness: 0.25, metalness: 0.3 })
+    );
+    carBody.position.y = 0.38;
+    carBody.castShadow = true;
+    sportsCar.add(carBody);
+    const carStripe = new THREE.Mesh(
+      new THREE.BoxGeometry(2.12, 0.08, 0.26),
+      goldMat
+    );
+    carStripe.position.y = 0.61;
+    sportsCar.add(carStripe);
+    const carInterior = new THREE.Mesh(
+      new THREE.BoxGeometry(0.95, 0.16, 0.82),
+      new THREE.MeshStandardMaterial({ color: 0xfef3c7, roughness: 0.8 })
+    );
+    carInterior.position.set(-0.1, 0.64, 0);
+    sportsCar.add(carInterior);
+    const windshield = new THREE.Mesh(
+      new THREE.BoxGeometry(0.08, 0.36, 0.86),
+      new THREE.MeshStandardMaterial({ color: 0x7dd3fc, transparent: true, opacity: 0.82 })
+    );
+    windshield.position.set(0.45, 0.72, 0);
+    windshield.rotation.z = 0.38;
+    sportsCar.add(windshield);
+    const wheelMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
+    [[-0.65, 0.54], [0.65, 0.54], [-0.65, -0.54], [0.65, -0.54]].forEach(([wx, wz]) => {
+      const wh = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.14, 14), wheelMat);
+      wh.rotation.x = Math.PI / 2;
+      wh.position.set(wx, 0.24, wz);
+      sportsCar.add(wh);
+    });
+    sportsCar.position.set(-8.6, 0.14, -10.8);
+    sportsCar.rotation.y = -0.25;
+    scene.add(sportsCar);
+
+    // --- LANDMARK 2: 🏛️ 集團行政＆台灣標準時間鐘樓 ---
+    makePlazaPad(0.0, -12.6, 9.6, 5.4, 0xe0f2fe, 0x0284c7);
+
+    // Classical Blue-Gold HQ Hall
+    const hqHall = new THREE.Group();
+    hqHall.position.set(-1.6, 0.14, -13.1);
+    scene.add(hqHall);
+
+    const hqBody = new THREE.Mesh(
+      new THREE.BoxGeometry(4.4, 2.5, 2.8),
+      new THREE.MeshStandardMaterial({ color: 0x1d4ed8, roughness: 0.55 })
+    );
+    hqBody.position.y = 1.25;
+    hqBody.castShadow = true;
+    hqBody.receiveShadow = true;
+    hqHall.add(hqBody);
+
+    const hqDome = new THREE.Mesh(
+      new THREE.SphereGeometry(1.4, 20, 14, 0, Math.PI * 2, 0, Math.PI / 2),
+      goldMat
+    );
+    hqDome.position.y = 2.5;
+    hqDome.castShadow = true;
+    hqHall.add(hqDome);
+
+    [-1.6, -0.65, 0.65, 1.6].forEach(cx => {
+      const col = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.16, 2.2, 10), whiteMat);
+      col.position.set(cx, 1.1, 1.48);
+      col.castShadow = true;
+      hqHall.add(col);
+    });
+
+    const hqSignTex = makeCanvasTexture(420, 96, (g, w, h) => {
+      g.fillStyle = "#0f172a";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#fbbf24";
+      g.lineWidth = 6;
+      g.strokeRect(3, 3, w - 6, h - 6);
+      g.fillStyle = "#fde047";
+      g.font = "900 38px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("🏛️ 行政＆點券中心", w / 2, 62);
+    });
+    addSignBoard(-1.6, 2.6, -11.55, 3.3, 0.72, hqSignTex.tex);
+
+    // Taiwan Standard Time Clock Tower!
+    const clockTower = new THREE.Group();
+    clockTower.position.set(2.5, 0.14, -13.0);
+    scene.add(clockTower);
+
+    const ctBody = new THREE.Mesh(
+      new THREE.BoxGeometry(2.8, 4.6, 2.4),
+      new THREE.MeshStandardMaterial({ color: 0x0369a1, roughness: 0.5 })
+    );
+    ctBody.position.y = 2.3;
+    ctBody.castShadow = true;
+    clockTower.add(ctBody);
+
+    const ctRoof = new THREE.Mesh(
+      new THREE.ConeGeometry(2.15, 1.5, 4),
+      new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4 })
+    );
+    ctRoof.rotation.y = Math.PI / 4;
+    ctRoof.position.y = 5.35;
+    ctRoof.castShadow = true;
+    clockTower.add(ctRoof);
+
+    // Dynamic LED Clock Texture on Clock Tower
+    const clockTexObj = makeCanvasTexture(512, 256, () => {});
+    function redrawClockTexture() {
+      const { ctx: g, canvas: c } = clockTexObj;
+      const w = c.width, h = c.height;
+      g.fillStyle = "#020617";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#fbbf24";
+      g.lineWidth = 10;
+      g.strokeRect(5, 5, w - 10, h - 10);
+
+      g.fillStyle = "#7dd3fc";
+      g.font = "900 36px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("🇹🇼 台灣標準鐘樓 UTC+8", w / 2, 58);
+
+      g.fillStyle = "#fde047";
+      g.font = "900 84px ui-monospace, Menlo, monospace";
+      g.fillText(liveClockStr, w / 2, 162);
+
+      g.fillStyle = "#4ade80";
+      g.font = "800 28px 'PingFang TC', sans-serif";
+      g.fillText(`${liveDateShort} · 秒級零誤差`, w / 2, 218);
+      clockTexObj.tex.needsUpdate = true;
+    }
+    redrawClockTexture();
+
+    const clockScreen = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.45, 1.25),
+      new THREE.MeshBasicMaterial({ map: clockTexObj.tex })
+    );
+    clockScreen.position.set(0, 3.25, 1.22);
+    clockTower.add(clockScreen);
+
+    const boothTex = makeCanvasTexture(280, 96, (g, w, h) => {
+      g.fillStyle = "#fef08a";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#b45309";
+      g.lineWidth = 8;
+      g.strokeRect(4, 4, w - 8, h - 8);
+      g.fillStyle = "#92400e";
+      g.font = "900 36px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("🎟️ 算力補給站", w / 2, 62);
+    });
+    const boothFace = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.1, 0.72),
+      new THREE.MeshBasicMaterial({ map: boothTex.tex })
+    );
+    boothFace.position.set(0, 1.35, 1.22);
+    clockTower.add(boothFace);
+
+    // --- LANDMARK 3: 🗣️ 市政廳圓頂會議廣場 ---
+    makePlazaPad(11.4, -12.6, 8.6, 5.4, 0xf0f9ff, 0x0ea5e9);
+
+    const cityHall = new THREE.Group();
+    cityHall.position.set(11.6, 0.14, -13.6);
+    scene.add(cityHall);
+
+    const chWall = new THREE.Mesh(
+      new THREE.BoxGeometry(5.2, 2.0, 2.0),
+      new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.5 })
+    );
+    chWall.position.y = 1.0;
+    chWall.castShadow = true;
+    cityHall.add(chWall);
+
+    const chDome = new THREE.Mesh(
+      new THREE.SphereGeometry(1.15, 18, 12, 0, Math.PI * 2, 0, Math.PI / 2),
+      new THREE.MeshStandardMaterial({ color: 0xbae6fd, roughness: 0.35 })
+    );
+    chDome.position.y = 2.0;
+    cityHall.add(chDome);
+
+    const chSignTex = makeCanvasTexture(460, 100, (g, w, h) => {
+      g.fillStyle = "#0369a1";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#fde047";
+      g.lineWidth = 6;
+      g.strokeRect(3, 3, w - 6, h - 6);
+      g.fillStyle = "#ffffff";
+      g.font = "900 34px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("🗣️ 市政廳會議廣場 · PRO/FLASH", w / 2, 64);
+    });
+    addSignBoard(11.6, 2.6, -12.45, 4.2, 0.88, chSignTex.tex);
+
+    // Round Conference Table
+    const confTable = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.6, 1.6, 0.38, 22),
+      new THREE.MeshStandardMaterial({ color: 0xbae6fd, roughness: 0.4 })
+    );
+    confTable.position.set(11.6, 0.35, -10.8);
+    confTable.castShadow = true;
+    scene.add(confTable);
+    const confCenter = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.65, 0.65, 0.42, 18),
+      goldMat
+    );
+    confCenter.position.set(11.6, 0.37, -10.8);
+    scene.add(confCenter);
+
+    // --- LANDMARK 4: 💰 第一事業部：金流商店街（Apify 印鈔店 x5 + Gumroad 道具屋 + 屋頂旋轉金幣）---
+    makePlazaPad(-5.6, -2.5, 9.8, 4.4, 0xdbeafe, 0x2563eb);
+
+    function makeStripedAwningTex(c1, c2) {
+      return makeCanvasTexture(256, 64, (g, w, h) => {
+        for (let i = 0; i < 8; i++) {
+          g.fillStyle = i % 2 === 0 ? c1 : c2;
+          g.fillRect(i * (w / 8), 0, w / 8, h);
+        }
+        g.strokeStyle = "#1e1b18";
+        g.lineWidth = 4;
+        g.strokeRect(2, 2, w - 4, h - 4);
+      }).tex;
+    }
+
+    // Shop A: Apify 印鈔店 x5
+    const shopA = new THREE.Group();
+    shopA.position.set(-7.9, 0.14, -2.9);
+    scene.add(shopA);
+    const shopABody = new THREE.Mesh(
+      new THREE.BoxGeometry(4.0, 2.2, 2.4),
+      new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.55 })
+    );
+    shopABody.position.y = 1.1;
+    shopABody.castShadow = true;
+    shopABody.receiveShadow = true;
+    shopA.add(shopABody);
+    const awningA = new THREE.Mesh(
+      new THREE.BoxGeometry(4.1, 0.16, 0.9),
+      new THREE.MeshStandardMaterial({ map: makeStripedAwningTex("#ef4444", "#ffffff"), roughness: 0.5 })
+    );
+    awningA.position.set(0, 1.35, 1.45);
+    awningA.rotation.x = 0.25;
+    awningA.castShadow = true;
+    shopA.add(awningA);
+    const shopASignTex = makeCanvasTexture(380, 96, (g, w, h) => {
+      g.fillStyle = "#fde047";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#1e1b18";
+      g.lineWidth = 8;
+      g.strokeRect(4, 4, w - 8, h - 8);
+      g.fillStyle = "#1e1b18";
+      g.font = "900 40px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("💰 Apify 印鈔店 x5", w / 2, 64);
+    });
+    addSignBoard(-7.9, 2.55, -1.7, 3.6, 0.85, shopASignTex.tex);
+
+    // Shop B: Gumroad 道具屋
+    const shopB = new THREE.Group();
+    shopB.position.set(-3.3, 0.14, -2.9);
+    scene.add(shopB);
+    const shopBBody = new THREE.Mesh(
+      new THREE.BoxGeometry(4.0, 2.2, 2.4),
+      new THREE.MeshStandardMaterial({ color: 0x0d9488, roughness: 0.55 })
+    );
+    shopBBody.position.y = 1.1;
+    shopBBody.castShadow = true;
+    shopBBody.receiveShadow = true;
+    shopB.add(shopBBody);
+    const awningB = new THREE.Mesh(
+      new THREE.BoxGeometry(4.1, 0.16, 0.9),
+      new THREE.MeshStandardMaterial({ map: makeStripedAwningTex("#f59e0b", "#fef3c7"), roughness: 0.5 })
+    );
+    awningB.position.set(0, 1.35, 1.45);
+    awningB.rotation.x = 0.25;
+    awningB.castShadow = true;
+    shopB.add(awningB);
+    const shopBSignTex = makeCanvasTexture(380, 96, (g, w, h) => {
+      g.fillStyle = "#a7f3d0";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#064e3b";
+      g.lineWidth = 8;
+      g.strokeRect(4, 4, w - 8, h - 8);
+      g.fillStyle = "#064e3b";
+      g.font = "900 40px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("🛒 Gumroad 道具屋", w / 2, 64);
+    });
+    addSignBoard(-3.3, 2.55, -1.7, 3.6, 0.85, shopBSignTex.tex);
+
+    // Glowing Shop Windows
+    const shopWinMat = new THREE.MeshBasicMaterial({ color: 0xfef9c3 });
+    [-8.9, -6.9, -4.3, -2.3].forEach(wx => {
+      const win = new THREE.Mesh(new THREE.PlaneGeometry(1.25, 0.72), shopWinMat);
+      win.position.set(wx, 0.72, -1.68);
+      scene.add(win);
+    });
+
+    // Spinning Gold Coins on Shopping Street Roofs!
+    const roofCoins = [];
+    [-7.9, -3.3].forEach((cx, idx) => {
+      const coin = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.65, 0.65, 0.16, 20),
+        new THREE.MeshStandardMaterial({ color: 0xfacc15, metalness: 0.85, roughness: 0.15, emissive: 0xca8a04, emissiveIntensity: 0.25 })
+      );
+      coin.rotation.x = Math.PI / 2;
+      coin.position.set(cx, 3.45, -2.9);
+      coin.castShadow = true;
+      scene.add(coin);
+      roofCoins.push({ mesh: coin, phase: idx * 1.5 });
+    });
+
+    // --- LANDMARK 5: 📈 第二事業部：台灣證券交易所（希臘圓柱 + 紅漲綠跌 3D 電子看盤牆）---
+    makePlazaPad(-5.6, 3.4, 9.8, 4.8, 0xfee2e2, 0xdc2626);
+
+    const twse = new THREE.Group();
+    twse.position.set(-5.6, 0.14, 2.9);
+    scene.add(twse);
+
+    const twseBody = new THREE.Mesh(
+      new THREE.BoxGeometry(8.8, 2.8, 2.8),
+      new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.55 })
+    );
+    twseBody.position.y = 1.4;
+    twseBody.castShadow = true;
+    twseBody.receiveShadow = true;
+    twse.add(twseBody);
+
+    // Golden Triangular Pediment Roof
+    const pedShape = new THREE.Shape();
+    pedShape.moveTo(-4.7, 0);
+    pedShape.lineTo(4.7, 0);
+    pedShape.lineTo(0, 1.15);
+    pedShape.closePath();
+    const pedRoof = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(pedShape, { depth: 3.1, bevelEnabled: false }),
+      goldMat
+    );
+    pedRoof.position.set(0, 2.8, -1.55);
+    pedRoof.castShadow = true;
+    twse.add(pedRoof);
+
+    const twseTitleTex = makeCanvasTexture(600, 96, (g, w, h) => {
+      g.fillStyle = "#451a03";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#fde047";
+      g.lineWidth = 6;
+      g.strokeRect(3, 3, w - 6, h - 6);
+      g.fillStyle = "#fef08a";
+      g.font = "900 36px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("📈 台灣證券交易所 · 股市二部 & 百萬實盤室", w / 2, 62);
+    });
+    addSignBoard(-5.6, 3.2, 4.5, 6.2, 0.78, twseTitleTex.tex);
+
+    // Greek White Marble Pillars
+    [-3.85, -3.1, 3.1, 3.85].forEach(px => {
+      const p = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.21, 2.6, 12), whiteMat);
+      p.position.set(px, 1.3, 1.52);
+      p.castShadow = true;
+      twse.add(p);
+    });
+
+    // Dynamic Taiwan Stock "Red-Up / Green-Down" LED Wall!
+    const twseLedTexObj = makeCanvasTexture(640, 280, () => {});
+    function redrawTwseWall(pulseTick = 0) {
+      const { ctx: g, canvas: c } = twseLedTexObj;
+      const w = c.width, h = c.height;
+      g.fillStyle = "#060b14";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#fbbf24";
+      g.lineWidth = 8;
+      g.strokeRect(4, 4, w - 8, h - 8);
+
+      // Grid lines
+      g.strokeStyle = "rgba(56, 189, 248, 0.16)";
+      g.lineWidth = 2;
+      for (let gy = 56; gy < h - 30; gy += 48) {
+        g.beginPath(); g.moveTo(20, gy); g.lineTo(w - 20, gy); g.stroke();
+      }
+
+      // Red-Up / Green-Down Candlesticks
+      const bars = [
+        { h: 72, up: true }, { h: 108, up: true },
+        { h: 52, up: false }, { h: 132, up: true },
+        { h: 96, up: true }, { h: 64, up: false },
+        { h: 146, up: true }, { h: 118, up: true }
+      ];
+      bars.forEach((b, idx) => {
+        const pulse = (pulseTick + idx) % 4 === 0 ? 1.06 : 0.94;
+        const bh = b.h * pulse;
+        const bx = 34 + idx * 32;
+        g.fillStyle = b.up ? "#ff4d4f" : "#22c55e";
+        g.fillRect(bx + 7, 210 - bh - 18, 4, bh + 32);
+        g.fillRect(bx, 210 - bh, 18, bh);
+      });
+
+      // Live Portfolio Tickers
+      const posList = (PORTFOLIO?.positions || []).slice(0, 4);
+      const tickItems = posList.length
+        ? posList.map(p => ({
+            sym: p.symbol.replace(".TW", ""),
+            up: (p.unrealizedPnlPct ?? 0) >= 0,
+            pct: Math.abs(p.unrealizedPnlPct ?? 0).toFixed(2)
+          }))
+        : [
+            { sym: "3661世芯", up: true, pct: "1.85" },
+            { sym: "3017奇鋐", up: true, pct: "2.40" },
+            { sym: "META", up: true, pct: "1.12" },
+            { sym: "TLT", up: false, pct: "0.45" }
+          ];
+      g.font = "900 32px ui-monospace, Menlo, monospace";
+      g.textAlign = "left";
+      tickItems.forEach((tk, i) => {
+        g.fillStyle = tk.up ? "#ff4d4f" : "#4ade80";
+        g.fillText(`${tk.sym} ${tk.up ? "▲" : "▼"}${tk.pct}%`, 316, 72 + i * 48);
+      });
+
+      g.fillStyle = "#fde047";
+      g.font = "900 24px 'PingFang TC', sans-serif";
+      g.fillText("紅漲綠跌 · 百萬實盤 LIVE", 34, 252);
+      twseLedTexObj.tex.needsUpdate = true;
+    }
+    redrawTwseWall(0);
+
+    const twseScreen = new THREE.Mesh(
+      new THREE.PlaneGeometry(5.4, 2.15),
+      new THREE.MeshBasicMaterial({ map: twseLedTexObj.tex })
+    );
+    twseScreen.position.set(0, 1.42, 1.43);
+    twse.add(twseScreen);
+
+    // --- LANDMARK 6: ☕ 陽光噴水池公園（待命省電區 + 3D 噴水池粒子 + 長椅）---
+    makePlazaPad(6.4, 1.0, 9.2, 10.6, 0x86efac, 0x15803d);
+
+    const parkSignTex = makeCanvasTexture(420, 92, (g, w, h) => {
+      g.fillStyle = "#9a3412";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "#fde047";
+      g.lineWidth = 6;
+      g.strokeRect(3, 3, w - 6, h - 6);
+      g.fillStyle = "#fef08a";
+      g.font = "900 34px 'PingFang TC', sans-serif";
+      g.textAlign = "center";
+      g.fillText("☕ 陽光噴水池公園 · 省電區", w / 2, 60);
+    });
+    addSignBoard(6.4, 1.45, -3.7, 4.4, 0.78, parkSignTex.tex);
+
+    // Fountain Center
+    const fountain = new THREE.Group();
+    fountain.position.set(6.4, 0.14, 0.8);
+    scene.add(fountain);
+    const fRim = new THREE.Mesh(
+      new THREE.CylinderGeometry(2.1, 2.25, 0.36, 24),
+      new THREE.MeshStandardMaterial({ color: 0xe0f2fe, roughness: 0.4 })
+    );
+    fRim.position.y = 0.18;
+    fRim.receiveShadow = true;
+    fountain.add(fRim);
+    const fWater = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.78, 1.78, 0.39, 24),
+      new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15, metalness: 0.15 })
+    );
+    fWater.position.y = 0.2;
+    fountain.add(fWater);
+    const fSpire = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.28, 0.45, 1.05, 14),
+      whiteMat
+    );
+    fSpire.position.y = 0.65;
+    fSpire.castShadow = true;
+    fountain.add(fSpire);
+
+    // 3D Fountain Water Droplet Particles
+    const waterDrops = [];
+    const dropMat = new THREE.MeshStandardMaterial({ color: 0xe0f2fe, emissive: 0x7dd3fc, emissiveIntensity: 0.35, roughness: 0.1 });
+    const dropGeo = new THREE.SphereGeometry(0.09, 8, 8);
+    for (let i = 0; i < 28; i++) {
+      const m = new THREE.Mesh(dropGeo, dropMat);
+      fountain.add(m);
+      const ang = (i / 28) * Math.PI * 2;
+      waterDrops.push({
+        mesh: m,
+        ang,
+        phase: (i % 7) / 7,
+        speed: 0.016 + (i % 3) * 0.004,
+        radius: 0.8 + (i % 4) * 0.2
+      });
+    }
+
+    // Cafe Umbrella Table
+    const umbrellaPole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 1.6, 8), darkMat);
+    umbrellaPole.position.set(3.4, 0.94, -1.6);
+    scene.add(umbrellaPole);
+    const umbrellaTop = new THREE.Mesh(
+      new THREE.ConeGeometry(1.15, 0.55, 8),
+      new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.5 })
+    );
+    umbrellaTop.position.set(3.4, 1.8, -1.6);
+    umbrellaTop.castShadow = true;
+    scene.add(umbrellaTop);
+
+    // Wooden Park Benches
+    const benchMat = new THREE.MeshStandardMaterial({ color: 0xb45309, roughness: 0.75 });
+    [
+      [3.6, 3.2],
+      [9.2, 3.2]
+    ].forEach(([bx, bz]) => {
+      const seat = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.16, 0.55), benchMat);
+      seat.position.set(bx, 0.42, bz);
+      seat.castShadow = true;
+      scene.add(seat);
+      const back = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.36, 0.12), benchMat);
+      back.position.set(bx, 0.68, bz - 0.22);
+      back.castShadow = true;
+      scene.add(back);
+    });
+
+    // =========================================================================
+    // 7. CENTRAL 3D GIANT INTERACTIVE BOUNCING DICE
+    // =========================================================================
+    // Dice landing pad in town center square
+    const dicePad = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.5, 1.6, 0.08, 24),
+      new THREE.MeshStandardMaterial({ color: 0xfef08a, roughness: 0.5 })
+    );
+    dicePad.position.set(0.45, 0.04, 0.4);
+    dicePad.receiveShadow = true;
+    scene.add(dicePad);
+
+    function makeDieFaceTex(num) {
+      return makeCanvasTexture(256, 256, (g, w, h) => {
+        g.fillStyle = "#ffffff";
+        g.fillRect(0, 0, w, h);
+        g.strokeStyle = "#cbd5e1";
+        g.lineWidth = 14;
+        g.strokeRect(7, 7, w - 14, h - 14);
+        g.strokeStyle = "#1e1b18";
+        g.lineWidth = 6;
+        g.strokeRect(3, 3, w - 6, h - 6);
+
+        const pips = {
+          1: [[0.5, 0.5]],
+          2: [[0.28, 0.28], [0.72, 0.72]],
+          3: [[0.26, 0.26], [0.5, 0.5], [0.74, 0.74]],
+          4: [[0.28, 0.28], [0.72, 0.28], [0.28, 0.72], [0.72, 0.72]],
+          5: [[0.26, 0.26], [0.74, 0.26], [0.5, 0.5], [0.26, 0.74], [0.74, 0.74]],
+          6: [[0.28, 0.24], [0.72, 0.24], [0.28, 0.5], [0.72, 0.5], [0.28, 0.76], [0.72, 0.76]]
+        }[num];
+
+        g.fillStyle = (num === 1 || num === 4) ? "#dc2626" : "#1e293b";
+        const r = num === 1 ? 34 : 21;
+        pips.forEach(([px, py]) => {
+          g.beginPath();
+          g.arc(px * w, py * h, r, 0, Math.PI * 2);
+          g.fill();
+        });
+      }).tex;
+    }
+
+    // BoxGeometry material order: +X(3), -X(4), +Y(1), -Y(6), +Z(2), -Z(5)
+    const diceMats = [3, 4, 1, 6, 2, 5].map(n =>
+      new THREE.MeshStandardMaterial({ map: makeDieFaceTex(n), roughness: 0.32, metalness: 0.05 })
+    );
+    const diceMesh = new THREE.Mesh(new THREE.BoxGeometry(1.55, 1.55, 1.55), diceMats);
+    diceMesh.position.set(0.45, 0.86, 0.4);
+    diceMesh.castShadow = true;
+    scene.add(diceMesh);
+
+    const DICE_FACE_ROT = {
+      1: new THREE.Euler(0, 0, 0),
+      6: new THREE.Euler(Math.PI, 0, 0),
+      2: new THREE.Euler(-Math.PI / 2, 0, 0),
+      5: new THREE.Euler(Math.PI / 2, 0, 0),
+      3: new THREE.Euler(0, 0, Math.PI / 2),
+      4: new THREE.Euler(0, 0, -Math.PI / 2)
+    };
+    const diceAnim = {
+      active: false,
+      elapsed: 0,
+      duration: 1.35,
+      targetFace: 6,
+      targetQuat: new THREE.Quaternion().setFromEuler(DICE_FACE_ROT[6])
+    };
+
+    function trigger3DDice(rolled) {
+      diceAnim.active = true;
+      diceAnim.elapsed = 0;
+      diceAnim.targetFace = rolled;
+      const yaw = (Math.floor(Math.random() * 4) * Math.PI) / 2;
+      const qYaw = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
+      const qFace = new THREE.Quaternion().setFromEuler(DICE_FACE_ROT[rolled]);
+      diceAnim.targetQuat.copy(qYaw).multiply(qFace);
+    }
+
+    // =========================================================================
+    // 8. 12 Q-CHIBI 3D CHARACTERS + 3D TAIWAN SCOOTER WITH EXHAUST PUFFS
+    // =========================================================================
+    const skinMat = new THREE.MeshStandardMaterial({ color: 0xfde68a, roughness: 0.65 });
+    const shoeMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.7 });
+    const cheekMat = new THREE.MeshBasicMaterial({ color: 0xfb7185, transparent: true, opacity: 0.55 });
+    const outlineMat = new THREE.MeshBasicMaterial({ color: 0x1e1b18 });
+    const whiteEyeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+    // Scooter 3D Builder (Mint-Green Taiwan Scooter!)
+    function build3DScooter() {
+      const sc = new THREE.Group();
+      const mintMat = new THREE.MeshStandardMaterial({ color: 0x14b8a6, roughness: 0.35, metalness: 0.1 });
+      const tireMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
+      const rimMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.3, metalness: 0.6 });
+      const seatMat = new THREE.MeshStandardMaterial({ color: 0x78350f, roughness: 0.75 });
+
+      // Wheels (front at +Z, back at -Z)
+      [-0.58, 0.58].forEach(wz => {
+        const tire = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.16, 14), tireMat);
+        tire.rotation.z = Math.PI / 2;
+        tire.position.set(0, 0.24, wz);
+        tire.castShadow = true;
+        sc.add(tire);
+        const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.18, 10), rimMat);
+        rim.rotation.z = Math.PI / 2;
+        rim.position.set(0, 0.24, wz);
+        sc.add(rim);
+      });
+
+      // Floorboard & rear cowl
+      const deck = new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.22, 1.05), mintMat);
+      deck.position.set(0, 0.36, -0.05);
+      deck.castShadow = true;
+      sc.add(deck);
+
+      const rearBody = new THREE.Mesh(new THREE.BoxGeometry(0.58, 0.34, 0.65), mintMat);
+      rearBody.position.set(0, 0.52, -0.38);
+      rearBody.castShadow = true;
+      sc.add(rearBody);
+
+      // Brown seat
+      const seat = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.14, 0.62), seatMat);
+      seat.position.set(0, 0.72, -0.32);
+      sc.add(seat);
+
+      // Front shield + stem
+      const shield = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.88, 0.24), mintMat);
+      shield.position.set(0, 0.72, 0.45);
+      shield.rotation.x = -0.18;
+      shield.castShadow = true;
+      sc.add(shield);
+
+      // Handlebars
+      const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.78, 8), rimMat);
+      bar.rotation.z = Math.PI / 2;
+      bar.position.set(0, 1.18, 0.36);
+      sc.add(bar);
+
+      // Glowing Headlight + Light Beam Cone
+      const lamp = new THREE.Mesh(
+        new THREE.SphereGeometry(0.13, 12, 10),
+        new THREE.MeshBasicMaterial({ color: 0xfef08a })
+      );
+      lamp.position.set(0, 0.96, 0.58);
+      sc.add(lamp);
+
+      const beam = new THREE.Mesh(
+        new THREE.ConeGeometry(0.45, 1.35, 12, 1, true),
+        new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 0.22, side: THREE.DoubleSide, depthWrite: false })
+      );
+      beam.rotation.x = -Math.PI / 2;
+      beam.position.set(0, 0.82, 1.25);
+      sc.add(beam);
+
+      return sc;
+    }
+
+    // 3D Exhaust White Puff Particles for Steward Scooter
+    const puffParticles = [];
+    const puffMat = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.85, roughness: 0.9 });
+    const puffGeo = new THREE.SphereGeometry(0.14, 8, 8);
+    for (let i = 0; i < 14; i++) {
+      const pm = new THREE.Mesh(puffGeo, puffMat.clone());
+      pm.visible = false;
+      scene.add(pm);
+      puffParticles.push({ mesh: pm, life: 0, maxLife: 0.7, vx: 0, vy: 0.65, vz: 0 });
+    }
+    let puffIdx = 0;
+    let puffTimer = 0;
+
+    // 3D Roadblock Sign (《大富翁4》紅白路障牌 for ruthless_critic & chief_risk_officer)
+    function buildRoadblockProp() {
+      const rb = new THREE.Group();
+      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.95, 8), whiteMat);
+      post.position.y = 0.48;
+      rb.add(post);
+      const boardTex = makeCanvasTexture(128, 96, (g, w, h) => {
+        g.fillStyle = "#fef08a";
+        g.fillRect(0, 0, w, h);
+        g.fillStyle = "#ef4444";
+        g.fillRect(10, 12, w - 20, 40);
+        g.fillStyle = "#ffffff";
+        g.fillRect(26, 28, w - 52, 8);
+        g.strokeStyle = "#1e1b18";
+        g.lineWidth = 8;
+        g.strokeRect(4, 4, w - 8, h - 8);
+      });
+      const board = new THREE.Mesh(
+        new THREE.BoxGeometry(0.65, 0.48, 0.08),
+        [
+          goldMat, goldMat, goldMat, goldMat,
+          new THREE.MeshBasicMaterial({ map: boardTex.tex }),
+          new THREE.MeshBasicMaterial({ map: boardTex.tex })
+        ]
+      );
+      board.position.y = 0.95;
+      board.castShadow = true;
+      rb.add(board);
+      return rb;
+    }
+
+    // Smooth Closed Loop Waypoints for Steward's Scooter (following the exact asphalt road loop!)
+    const scooterCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3( 3.0, 0, -7.8),   // Taiwan Clock Tower
+      new THREE.Vector3(-4.0, 0, -7.8),
+      new THREE.Vector3(-11.5, 0, -7.8),  // Empire HQ
+      new THREE.Vector3(-13.5, 0, -5.8),
+      new THREE.Vector3(-13.5, 0,  0.0),  // Cashflow Shopping Street
+      new THREE.Vector3(-13.5, 0,  5.8),
+      new THREE.Vector3(-11.5, 0,  7.8),
+      new THREE.Vector3(-4.5, 0,  7.8),   // TWSE Stock Exchange
+      new THREE.Vector3( 4.5, 0,  7.8),
+      new THREE.Vector3(11.5, 0,  7.8),
+      new THREE.Vector3(13.5, 0,  5.8),
+      new THREE.Vector3(13.5, 0,  0.0),   // Sunny Fountain Park
+      new THREE.Vector3(13.5, 0, -5.8),
+      new THREE.Vector3(11.5, 0, -7.8)    // City Hall Plaza
+    ], true, "catmullrom", 0.35);
+
+    const STEWARD_NOTES = [
+      { tMax: 0.14, note: "校準台灣標準鐘樓！" },
+      { tMax: 0.30, note: "帝寶摩天樓亮晶晶！" },
+      { tMax: 0.48, note: "巡視金流商店街！" },
+      { tMax: 0.70, note: "檢查證交所紅盤！" },
+      { tMax: 0.88, note: "公園噴泉水質滿分！" },
+      { tMax: 1.01, note: "今夜做夢也會笑！" }
+    ];
+    let scooterProgress = 0;
+
+    // Build all 12 Q-Chibi Characters
+    const agentObjects = {};
+    const clickableMeshes = [];
+
+    function buildAgent3D(a, idx) {
+      const root = new THREE.Group();
+      root.userData.agentId = a.id;
+
+      // Board-Piece Colored Disc Base
+      const baseColor = new THREE.Color(a.color || "#38bdf8");
+      const disc = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.68, 0.74, 0.14, 22),
+        new THREE.MeshStandardMaterial({ color: baseColor, roughness: 0.45 })
+      );
+      disc.position.y = 0.07;
+      disc.castShadow = true;
+      disc.receiveShadow = true;
+      root.add(disc);
+
+      // Selection Golden Halo Ring
+      const selectRing = new THREE.Mesh(
+        new THREE.RingGeometry(0.78, 0.96, 28),
+        new THREE.MeshBasicMaterial({ color: 0xfde047, side: THREE.DoubleSide })
+      );
+      selectRing.rotation.x = -Math.PI / 2;
+      selectRing.position.y = 0.03;
+      selectRing.visible = a.id === selectedId;
+      root.add(selectRing);
+
+      // Optional Scooter for Steward
+      let scooter = null;
+      if (a.id === "office_steward") {
+        scooter = build3DScooter();
+        scooter.position.y = 0.06;
+        root.add(scooter);
+      }
+
+      // Roadblock prop for ruthless_critic & chief_risk_officer
+      if (a.id === "ruthless_critic" || a.id === "chief_risk_officer") {
+        const rb = buildRoadblockProp();
+        rb.position.set(0.88, 0.05, 0.12);
+        rb.rotation.y = -0.25;
+        root.add(rb);
+      }
+
+      // Chibi Body Pivot (bounces & lifts when riding scooter)
+      const bodyPivot = new THREE.Group();
+      root.add(bodyPivot);
+
+      // Legs
+      const legL = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.36, 0.24), shoeMat);
+      legL.position.set(-0.16, 0.3, 0);
+      legL.castShadow = true;
+      bodyPivot.add(legL);
+
+      const legR = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.36, 0.24), shoeMat);
+      legR.position.set(0.16, 0.3, 0);
+      legR.castShadow = true;
+      bodyPivot.add(legR);
+
+      // Boss Royal Purple-Gold Cape
+      if (a.isBoss) {
+        const cape = new THREE.Mesh(
+          new THREE.BoxGeometry(0.84, 0.68, 0.12),
+          new THREE.MeshStandardMaterial({ color: 0xb91c1c, roughness: 0.65 })
+        );
+        cape.position.set(0, 0.64, -0.28);
+        cape.rotation.x = 0.18;
+        cape.castShadow = true;
+        bodyPivot.add(cape);
+      }
+
+      // Torso (Vibrant Suit)
+      const shirtColor = a.status === "depleted" ? 0x64748b : new THREE.Color(a.shirt || a.color || "#3b82f6");
+      const torsoMat = new THREE.MeshStandardMaterial({ color: shirtColor, roughness: 0.55 });
+      const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.38, 0.64, 14), torsoMat);
+      torso.position.y = 0.74;
+      torso.castShadow = true;
+      bodyPivot.add(torso);
+
+      // White Collar + Golden Tie
+      const tie = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.34, 0.08), goldMat);
+      tie.position.set(0, 0.74, 0.35);
+      bodyPivot.add(tie);
+
+      // Hands
+      const handL = new THREE.Mesh(new THREE.SphereGeometry(0.13, 10, 10), skinMat);
+      handL.position.set(-0.44, 0.68, 0.1);
+      bodyPivot.add(handL);
+      const handR = new THREE.Mesh(new THREE.SphereGeometry(0.13, 10, 10), skinMat);
+      handR.position.set(0.44, 0.68, 0.1);
+      bodyPivot.add(handR);
+
+      // Big Q-Chibi Head
+      const headGroup = new THREE.Group();
+      headGroup.position.set(0, 1.46, 0);
+      bodyPivot.add(headGroup);
+
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.48, 20, 16), skinMat);
+      head.scale.set(1.04, 0.94, 0.98);
+      head.castShadow = true;
+      headGroup.add(head);
+
+      // Rosy Cheeks
+      [-0.27, 0.27].forEach(cx => {
+        const ch = new THREE.Mesh(new THREE.SphereGeometry(0.085, 8, 8), cheekMat);
+        ch.scale.set(1.2, 0.7, 0.5);
+        ch.position.set(cx, -0.08, 0.4);
+        headGroup.add(ch);
+      });
+
+      // Expressive Big Eyes (left & right groups for blinking!)
+      const eyeL = new THREE.Group();
+      eyeL.position.set(-0.17, 0.04, 0.43);
+      const eyeBallL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 10, 10), outlineMat);
+      const eyeShineL = new THREE.Mesh(new THREE.SphereGeometry(0.032, 6, 6), whiteEyeMat);
+      eyeShineL.position.set(-0.025, 0.025, 0.065);
+      eyeL.add(eyeBallL, eyeShineL);
+      headGroup.add(eyeL);
+
+      const eyeR = new THREE.Group();
+      eyeR.position.set(0.17, 0.04, 0.43);
+      const eyeBallR = new THREE.Mesh(new THREE.SphereGeometry(0.08, 10, 10), outlineMat);
+      const eyeShineR = new THREE.Mesh(new THREE.SphereGeometry(0.032, 6, 6), whiteEyeMat);
+      eyeShineR.position.set(-0.025, 0.025, 0.065);
+      eyeR.add(eyeBallR, eyeShineR);
+      headGroup.add(eyeR);
+
+      // Auditors / CRO Glasses
+      if (a.id === "ruthless_critic" || a.id === "chief_risk_officer") {
+        const glassMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.45 });
+        const rimGMat = new THREE.MeshBasicMaterial({ color: 0x0284c7 });
+        [-0.17, 0.17].forEach(gx => {
+          const lens = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.16, 0.04), glassMat);
+          lens.position.set(gx, 0.04, 0.48);
+          headGroup.add(lens);
+          const rim = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.03, 0.05), rimGMat);
+          rim.position.set(gx, 0.12, 0.48);
+          headGroup.add(rim);
+        });
+      }
+
+      // Character-Specific Hair & Accessories!
+      const hairColor = new THREE.Color(a.hair || "#1e293b");
+      const hairMat = new THREE.MeshStandardMaterial({ color: hairColor, roughness: 0.7 });
+
+      if (a.id === "monetization_architect") {
+        // 致敬孫小美雙丸子頭 + 紅髮飾!
+        const cap = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.52), outlineMat);
+        cap.position.y = 0.04;
+        headGroup.add(cap);
+        const redRibMat = new THREE.MeshStandardMaterial({ color: 0xef4444, roughness: 0.4 });
+        [-0.44, 0.44].forEach(bx => {
+          const bun = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 10), outlineMat);
+          bun.position.set(bx, 0.34, 0);
+          bun.castShadow = true;
+          headGroup.add(bun);
+          const rib = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), redRibMat);
+          rib.position.set(bx * 0.78, 0.24, 0.14);
+          headGroup.add(rib);
+        });
+      } else if (a.id === "pain_hunter") {
+        // 致敬阿土伯寬邊草帽!
+        const strawMat = new THREE.MeshStandardMaterial({ color: 0xeab308, roughness: 0.75 });
+        const brim = new THREE.Mesh(new THREE.CylinderGeometry(0.78, 0.84, 0.07, 18), strawMat);
+        brim.position.y = 0.34;
+        brim.castShadow = true;
+        headGroup.add(brim);
+        const cone = new THREE.Mesh(new THREE.ConeGeometry(0.48, 0.38, 16), strawMat);
+        cone.position.y = 0.54;
+        cone.castShadow = true;
+        headGroup.add(cone);
+        const band = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.46, 0.08, 16), new THREE.MeshStandardMaterial({ color: 0xdc2626 }));
+        band.position.y = 0.41;
+        headGroup.add(band);
+      } else if (a.id === "macro_etf_strategist") {
+        // 致敬錢夫人貴婦捲髮 + 珍珠耳環!
+        const richHairMat = new THREE.MeshStandardMaterial({ color: 0x7c2d12, roughness: 0.65 });
+        const topHair = new THREE.Mesh(new THREE.SphereGeometry(0.51, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.55), richHairMat);
+        topHair.position.y = 0.06;
+        headGroup.add(topHair);
+        [-0.46, 0.46].forEach(cx => {
+          const curl = new THREE.Mesh(new THREE.SphereGeometry(0.17, 10, 10), richHairMat);
+          curl.position.set(cx, -0.02, 0.04);
+          headGroup.add(curl);
+          const pearl = new THREE.Mesh(new THREE.SphereGeometry(0.065, 8, 8), goldMat);
+          pearl.position.set(cx * 0.96, -0.18, 0.14);
+          headGroup.add(pearl);
+        });
+      } else {
+        const cap = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.52), hairMat);
+        cap.position.y = 0.05;
+        cap.castShadow = true;
+        headGroup.add(cap);
+      }
+
+      // Boss Golden Crown
+      if (a.isBoss) {
+        const crown = new THREE.Group();
+        const cBand = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.28, 0.22, 12), goldMat);
+        crown.add(cBand);
+        for (let i = 0; i < 5; i++) {
+          const ang = (i / 5) * Math.PI * 2;
+          const sp = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.22, 6), goldMat);
+          sp.position.set(Math.cos(ang) * 0.24, 0.18, Math.sin(ang) * 0.24);
+          crown.add(sp);
+        }
+        const ruby = new THREE.Mesh(new THREE.SphereGeometry(0.075, 8, 8), new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0x991b1b, emissiveIntensity: 0.4 }));
+        ruby.position.set(0, 0.04, 0.3);
+        crown.add(ruby);
+        crown.position.y = 0.52;
+        headGroup.add(crown);
+      }
+
+      // Invisible hit cylinder for effortless Raycaster clicking/tapping
+      const hitMesh = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.75, 0.75, 2.3, 10),
+        new THREE.MeshBasicMaterial({ visible: false })
+      );
+      hitMesh.position.y = 1.15;
+      hitMesh.userData.agentId = a.id;
+      root.add(hitMesh);
+      clickableMeshes.push(hitMesh);
+
+      const [tx, tz] = targetFor3D(a);
+      root.position.set(tx, 0, tz);
+      scene.add(root);
+
+      // HTML Overlay Label
+      const labelEl = document.createElement("div");
+      labelEl.className = "agent-label" + (a.id === selectedId ? " selected" : "");
+      labelEl.innerHTML = `<span class="st-dot" style="background:${(STATUS_META[a.status] || STATUS_META.idle).color}"></span><span>${a.name}</span>`;
+      labelEl.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        selectAgent(a.id);
+      });
+      overlayEl.appendChild(labelEl);
+
+      // HTML Speech Bubble for Steward
+      let bubbleEl = null;
+      if (a.id === "office_steward") {
+        bubbleEl = document.createElement("div");
+        bubbleEl.className = "steward-bubble";
+        bubbleEl.textContent = STEWARD_NOTES[0].note;
+        overlayEl.appendChild(bubbleEl);
+      }
+
+      agentObjects[a.id] = {
+        agent: a,
+        root,
+        bodyPivot,
+        torsoMat,
+        selectRing,
+        scooter,
+        legL,
+        legR,
+        handL,
+        handR,
+        eyeL,
+        eyeR,
+        labelEl,
+        bubbleEl,
+        seed: idx * 37
+      };
+    }
+
+    function syncAgentsTo3D() {
+      if (!STATE?.agents) return;
+      STATE.agents.forEach((a, idx) => {
+        if (!agentObjects[a.id]) {
+          buildAgent3D(a, idx);
+        } else {
+          const obj = agentObjects[a.id];
+          obj.agent = a;
+          obj.torsoMat.color.set(a.status === "depleted" ? "#64748b" : (a.shirt || a.color || "#3b82f6"));
+          obj.selectRing.visible = a.id === selectedId;
+          obj.labelEl.classList.toggle("selected", a.id === selectedId);
+          const dot = obj.labelEl.querySelector(".st-dot");
+          if (dot) dot.style.background = (STATUS_META[a.status] || STATUS_META.idle).color;
+          if (obj.scooter) {
+            obj.scooter.visible = a.status === "working";
+          }
+          if (obj.bubbleEl) {
+            obj.bubbleEl.style.display = a.status === "working" ? "block" : "none";
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // 9. CAMERA PRESETS & RAYCASTER CLICK SELECTION
+    // =========================================================================
+    let activePreset = "overview";
+    let camLerp = null;
+
+    const PRESETS = {
+      overview: { pos: new THREE.Vector3(0, 25, 29), target: new THREE.Vector3(0, 0.5, -1.2) },
+      empire:   { pos: new THREE.Vector3(-8.2, 9.2, -1.8), target: new THREE.Vector3(-11.4, 2.5, -12.6) },
+      twse:     { pos: new THREE.Vector3(-3.2, 6.8, 12.6), target: new THREE.Vector3(-5.6, 1.8, 3.0) }
+    };
+
+    function setCameraPreset(preset) {
+      activePreset = preset;
+      document.querySelectorAll(".cam-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.preset === preset);
+      });
+      if (preset === "scooter") {
+        camLerp = null;
+        const steward = agentObjects["office_steward"];
+        if (steward) {
+          const p = steward.root.position;
+          camera.position.set(p.x + 6.5, p.y + 7.2, p.z + 8.8);
+          controls.target.set(p.x, p.y + 1.0, p.z);
+        }
+      } else if (PRESETS[preset]) {
+        camLerp = {
+          pos: PRESETS[preset].pos.clone(),
+          target: PRESETS[preset].target.clone()
+        };
+      }
+    }
+
+    document.querySelectorAll(".cam-btn").forEach(btn => {
+      btn.addEventListener("click", () => setCameraPreset(btn.dataset.preset));
+    });
+
+    // Raycaster distinguishing tap/click from drag
+    const raycaster = new THREE.Raycaster();
+    const pointerNdc = new THREE.Vector2();
+    let downX = 0, downY = 0;
+
+    canvasEl.addEventListener("pointerdown", e => {
+      downX = e.clientX;
+      downY = e.clientY;
+      camLerp = null; // stop auto-lerp if user grabs camera
+    });
+
+    canvasEl.addEventListener("pointerup", e => {
+      if (Math.hypot(e.clientX - downX, e.clientY - downY) > 6) return;
+      const rect = canvasEl.getBoundingClientRect();
+      pointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointerNdc, camera);
+      const hits = raycaster.intersectObjects(clickableMeshes, false);
+      if (hits.length > 0) {
+        const hitId = hits[0].object.userData.agentId;
+        if (hitId) selectAgent(hitId);
+      }
+    });
+
+    // =========================================================================
+    // 10. UI RENDERING, GITHUB LIVE API POLLING & DICE ROLL
+    // =========================================================================
+    function selectAgent(id) {
+      selectedId = id;
+      Object.values(agentObjects).forEach(obj => {
+        const sel = obj.agent.id === selectedId;
+        obj.selectRing.visible = sel;
+        obj.labelEl.classList.toggle("selected", sel);
+      });
+      renderInspector();
+      renderOrg();
+    }
+
     function renderPortfolioHUD() {
       const s = PORTFOLIO?.summary || {};
       const cash = Number(s.cashTwd ?? 321347);
       const nav = Number(s.navTwd ?? 999179);
       document.getElementById("hud-cash").textContent = "NT$" + Math.round(cash).toLocaleString("en-US");
       document.getElementById("hud-nav").textContent = "NT$" + Math.round(nav).toLocaleString("en-US");
+      twseNeedsRedraw = true;
     }
 
     async function fetchPortfolio() {
@@ -756,19 +2518,16 @@
       }
     }
 
-    function hydrateSpritesAndUI(pillText = "● LIVE 已同步") {
+    function hydrateAndRender(pillText = "● LIVE 已同步") {
       if (!STATE?.agents) return;
-      STATE.agents.forEach((a, idx) => {
-        const t = targetFor(a);
-        if (!sprites[a.id]) sprites[a.id] = { x: t.x, y: t.y, dir: 1, seed: idx * 37 };
-      });
+      syncAgentsTo3D();
       document.getElementById("live-pill").textContent = pillText;
       renderUI();
     }
 
     async function fetchState(manual = false) {
       const pill = document.getElementById("live-pill");
-      if (STATE && !manual) hydrateSpritesAndUI("● LIVE 快照已載入");
+      if (STATE && !manual) hydrateAndRender("● LIVE 快照已載入");
       if (manual) pill.textContent = "● 同步中...";
       try {
         let res = await fetch(
@@ -780,10 +2539,10 @@
         }
         if (!res.ok) throw new Error("HTTP " + res.status);
         STATE = await res.json();
-        hydrateSpritesAndUI("● LIVE 已同步");
+        hydrateAndRender("● LIVE 已同步");
       } catch (e) {
         if (STATE) {
-          hydrateSpritesAndUI("● 離線實盤快照");
+          hydrateAndRender("● 離線實盤快照");
         } else {
           pill.textContent = "● 讀取失敗: " + e.message;
         }
@@ -799,12 +2558,13 @@
 
       const rolled = Math.floor(Math.random() * 6) + 1;
       faceEl.textContent = rolled;
+      trigger3DDice(rolled);
 
       const msgs = [
-        `🎲 擲出 ${rolled} 點！小財神降臨帝寶總部，正在同步最新點券與實盤資產！`,
-        `🎲 擲出 ${rolled} 點！總務長騎小綿羊推進 ${rolled} 格，校準台灣標準時間成功！`,
+        `🎲 擲出 ${rolled} 點！3D 黃金財神骰落地，正在同步最新點券與實盤資產！`,
+        `🎲 擲出 ${rolled} 點！總務長騎 3D 小綿羊推進 ${rolled} 格，校準台灣標準時間成功！`,
         `🎲 擲出 ${rolled} 點！觸發「機會？紅盤大吉」，已向 GitHub 總部拉取最新報表！`,
-        `🎲 擲出 ${rolled} 點！證交所紅漲綠跌看盤牆刷新完畢，一切秩序井然！`
+        `🎲 擲出 ${rolled} 點！3D 證交所紅漲綠跌看盤牆刷新完畢，一切秩序井然！`
       ];
       toastEl.textContent = msgs[rolled % msgs.length];
       toastEl.classList.add("show");
@@ -813,6 +2573,7 @@
       fetchState(true);
       fetchPortfolio();
     }
+    document.getElementById("dice-sync-btn").addEventListener("click", rollDiceAndSync);
 
     function divBadge(div) {
       if (div === "stock") return `<span class="pill" style="background:rgba(239,68,68,0.22); border-color:#fca5a5; color:#fecaca;">📈 股市二部</span>`;
@@ -846,11 +2607,10 @@
     }
 
     function renderInspector() {
+      if (!STATE?.agents) return;
       const a = STATE.agents.find(x => x.id === selectedId) || STATE.agents[0];
       const meta = STATUS_META[a.status] || STATUS_META.idle;
-      const cards = AGENT_CARDS[a.id] || [
-        { icon: "🎲", name: "大富翁卡片", desc: "總部標準裝備" }
-      ];
+      const cards = AGENT_CARDS[a.id] || [{ icon: "🎲", name: "大富翁卡片", desc: "總部標準裝備" }];
       document.getElementById("inspector").innerHTML = `
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; padding-bottom:9px; border-bottom:1.5px solid rgba(251,191,36,0.4);">
           <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
@@ -892,6 +2652,7 @@
     }
 
     function renderOrg() {
+      if (!STATE?.agents) return;
       const boss = STATE.agents.find(a => a.tier === 0);
       const hqStaff = STATE.agents.filter(a => a.division === "hq" && !a.isBoss);
       const div1 = STATE.agents.filter(a => a.division === "cashflow");
@@ -900,7 +2661,7 @@
       const card = (a, isBoss = false) => {
         const meta = STATUS_META[a.status] || STATUS_META.idle;
         return `
-          <div class="org-node ${isBoss ? 'boss-node' : ''} ${a.id === selectedId ? 'selected' : ''}" onclick="selectedId='${a.id}'; renderInspector(); renderOrg();">
+          <div class="org-node ${isBoss ? "boss-node" : ""} ${a.id === selectedId ? "selected" : ""}" data-agent-id="${a.id}">
             <div style="display:flex; justify-content:space-between; gap:6px; align-items:center;">
               <div style="color:#ffffff;"><i class="dot" style="background:${a.color}"></i><strong>${a.name}</strong></div>
               <span style="color:${meta.color}; font-size:11px; font-weight:800;">${meta.icon} ${meta.label}</span>
@@ -912,7 +2673,8 @@
         `;
       };
 
-      document.getElementById("tab-org").innerHTML = `
+      const orgEl = document.getElementById("tab-org");
+      orgEl.innerHTML = `
         <div style="color:#fde047; font-size:11px; font-weight:900; margin-bottom:4px;">👑 LEVEL 0 · 帝寶總部最高統帥</div>
         ${card(boss, true)}
         <div class="arrow">⬇ 全權指揮（嚴守付費前必先請示紅線）</div>
@@ -929,9 +2691,14 @@
           <div class="org-grid">${div2.map(a => card(a)).join("")}</div>
         </div>
       `;
+
+      orgEl.querySelectorAll(".org-node[data-agent-id]").forEach(node => {
+        node.addEventListener("click", () => selectAgent(node.dataset.agentId));
+      });
     }
 
     function renderReports() {
+      if (!STATE?.reports) return;
       document.getElementById("tab-reports").innerHTML = STATE.reports.map(r => {
         const meta = STATUS_META[r.status] || STATUS_META.working;
         return `
@@ -947,6 +2714,7 @@
     }
 
     function renderFiles() {
+      if (!STATE) return;
       const t = STATE.telemetry || { totalLocalFiles: 0, driveSyncedFiles: 0, recentFiles: [], snapshotTime: "--" };
       document.getElementById("tab-files").innerHTML = `
         <div class="report-item" style="margin-bottom:12px;">
@@ -973,901 +2741,270 @@
       });
     });
 
-    canvas.addEventListener("click", e => {
-      if (!STATE) return;
-      const r = canvas.getBoundingClientRect();
-      const cx = (e.clientX - r.left) * (LOGICAL_W / r.width);
-      const cy = (e.clientY - r.top) * (LOGICAL_H / r.height);
-      let hit = null, minD = 36;
-      STATE.agents.forEach(a => {
-        const p = sprites[a.id];
-        if (!p) return;
-        const d = Math.hypot(p.x - cx, p.y - cy);
-        if (d < minD) { minD = d; hit = a; }
-      });
-      if (hit) { selectedId = hit.id; renderInspector(); renderOrg(); }
+    // ResizeObserver for crisp Retina responsiveness
+    const ro = new ResizeObserver(() => {
+      const w = stageEl.clientWidth;
+      const h = stageEl.clientHeight;
+      if (w > 0 && h > 0) {
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h, false);
+      }
     });
+    ro.observe(stageEl);
 
     // =========================================================================
-    // 4. RICHMAN 4 (大富翁4) SUNNY BOARD-TOWN & Q-CHIBI RENDERER
+    // 11. 60FPS ANIMATION LOOP & 3D->2D LABEL PROJECTION
     // =========================================================================
-    const OUTLINE = "#1e1b18";
+    const tmpVec = new THREE.Vector3();
+    const lookVec = new THREE.Vector3();
+    const prevStewardPos = new THREE.Vector3();
+    let lastTime = performance.now();
+    let twsePulseAcc = 0;
+    let twsePulseTick = 0;
+    let fpsFrames = 0;
+    let fpsAcc = 0;
 
-    function drawCloud(x, y, s = 1) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.scale(s, s);
-      ctx.fillStyle = "rgba(255,255,255,0.92)";
-      ctx.strokeStyle = "#93c5fd";
-      ctx.lineWidth = 1.4;
-      ctx.beginPath();
-      ctx.arc(-14, 2, 10, 0, Math.PI * 2);
-      ctx.arc(0, -4, 14, 0, Math.PI * 2);
-      ctx.arc(15, 2, 10, 0, Math.PI * 2);
-      ctx.rect(-14, 0, 29, 12);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(-24, 6);
-      ctx.quadraticCurveTo(0, 14, 25, 6);
-      ctx.stroke();
-      ctx.restore();
-    }
+    function animate(now) {
+      requestAnimationFrame(animate);
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+      const t = now * 0.001;
 
-    function drawRichmanTree(x, y, s = 1) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.scale(s, s);
-      // Shadow
-      ctx.fillStyle = "rgba(20, 83, 45, 0.28)";
-      ctx.beginPath(); ctx.ellipse(0, 12, 13, 5, 0, 0, Math.PI * 2); ctx.fill();
-      // Trunk
-      ctx.fillStyle = "#92400e";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 1.8;
-      ctx.beginPath(); ctx.roundRect(-3.5, 0, 7, 13, 2); ctx.fill(); ctx.stroke();
-      // Round fluffy cartoon foliage
-      ctx.fillStyle = "#16a34a";
-      ctx.beginPath(); ctx.arc(0, -6, 13, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#22c55e";
-      ctx.beginPath(); ctx.arc(-4, -8, 8.5, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = "#4ade80";
-      ctx.beginPath(); ctx.arc(-5, -11, 4.5, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
-    }
-
-    function drawBoardTile(x, y, w, h, topColor, title, sub, icon = "") {
-      ctx.save();
-      // Drop shadow
-      ctx.fillStyle = "rgba(0, 0, 0, 0.26)";
-      ctx.beginPath(); ctx.roundRect(x + 2, y + 3, w, h, 6); ctx.fill();
-      // Tile white body
-      ctx.fillStyle = "#fffbeb";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.roundRect(x, y, w, h, 6); ctx.fill(); ctx.stroke();
-      // Top color banner
-      ctx.save();
-      ctx.beginPath(); ctx.roundRect(x + 1, y + 1, w - 2, h - 2, 5); ctx.clip();
-      ctx.fillStyle = topColor;
-      ctx.fillRect(x, y, w, 13);
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 1.2;
-      ctx.beginPath(); ctx.moveTo(x, y + 13); ctx.lineTo(x + w, y + 13); ctx.stroke();
-      ctx.restore();
-      // Text
-      ctx.fillStyle = "#1e1b18";
-      ctx.font = "900 8.5px 'PingFang TC', 'Microsoft JhengHei', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText(icon ? `${icon}${title}` : title, x + w / 2, y + 25);
-      if (sub) {
-        ctx.fillStyle = "#b45309";
-        ctx.font = "800 7.5px ui-monospace, monospace";
-        ctx.fillText(sub, x + w / 2, y + 36);
+      // FPS Counter
+      fpsFrames++;
+      fpsAcc += dt;
+      if (fpsAcc >= 0.8) {
+        const fps = Math.round(fpsFrames / fpsAcc);
+        fpsBadge.textContent = `3D WebGL · ${fps} FPS`;
+        fpsFrames = 0;
+        fpsAcc = 0;
       }
-      ctx.restore();
-    }
 
-    function drawRedSportsCar(x, y) {
-      ctx.save();
-      ctx.translate(x, y);
-      // Shadow
-      ctx.fillStyle = "rgba(0,0,0,0.3)";
-      ctx.beginPath(); ctx.ellipse(0, 7, 17, 5, 0, 0, Math.PI * 2); ctx.fill();
-      // Car body (red convertible)
-      ctx.fillStyle = "#ef4444";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 1.8;
-      ctx.beginPath(); ctx.roundRect(-16, -3, 32, 9, 4); ctx.fill(); ctx.stroke();
-      // Windshield & cream interior
-      ctx.fillStyle = "#fef3c7";
-      ctx.fillRect(-6, -5, 11, 3.5);
-      ctx.fillStyle = "#7dd3fc";
-      ctx.beginPath(); ctx.moveTo(-7, -3); ctx.lineTo(-4, -8); ctx.lineTo(3, -8); ctx.lineTo(5, -3); ctx.closePath(); ctx.fill(); ctx.stroke();
-      // Racing gold stripe
-      ctx.fillStyle = "#fde047";
-      ctx.fillRect(-14, 0, 28, 2);
-      // Wheels
-      [-9, 9].forEach(wx => {
-        ctx.fillStyle = "#1e293b";
-        ctx.beginPath(); ctx.arc(wx, 6, 3.8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#e2e8f0";
-        ctx.beginPath(); ctx.arc(wx, 6, 1.5, 0, Math.PI * 2); ctx.fill();
+      // 1. Update Clock Tower LED Texture when second changes
+      if (clockNeedsRedraw) {
+        redrawClockTexture();
+        clockNeedsRedraw = false;
+      }
+
+      // 2. Refresh TWSE Candlestick Wall every 0.7s or on data arrival
+      twsePulseAcc += dt;
+      if (twseNeedsRedraw || twsePulseAcc > 0.7) {
+        twsePulseTick++;
+        redrawTwseWall(twsePulseTick);
+        twseNeedsRedraw = false;
+        twsePulseAcc = 0;
+      }
+
+      // 3. Ocean Gentle Ripples & Bobbing Sailboat
+      for (let i = 0; i < oceanPos.count; i++) {
+        const vx = oceanPos.getX(i);
+        const vz = oceanPos.getZ(i);
+        oceanPos.setY(i, oceanBaseY[i] + Math.sin(vx * 0.25 + t * 1.6) * 0.09 + Math.cos(vz * 0.28 + t * 1.3) * 0.08);
+      }
+      oceanPos.needsUpdate = true;
+      sailboat.position.y = -0.82 + Math.sin(t * 2.1) * 0.1;
+      sailboat.rotation.z = Math.sin(t * 1.7) * 0.06;
+      sailboat.rotation.x = Math.cos(t * 1.5) * 0.04;
+
+      // 4. Drifting Clouds
+      clouds.forEach(c => {
+        c.mesh.position.x += c.speed * (dt * 60);
+        if (c.mesh.position.x > 34) c.mesh.position.x = -34;
       });
-      ctx.restore();
-    }
 
-    function drawGodOfWealthAura(x, y) {
-      ctx.save();
-      const floatY = Math.sin(frame * 0.08) * 3;
-      ctx.translate(x, y + floatY);
-      // Golden glow
-      ctx.fillStyle = "rgba(250, 204, 21, 0.28)";
-      ctx.beginPath(); ctx.arc(0, 0, 14, 0, Math.PI * 2); ctx.fill();
-      // Mini Gold Ingot (元寶)
-      ctx.fillStyle = "#facc15";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(-10, -2);
-      ctx.quadraticCurveTo(0, 4, 10, -2);
-      ctx.lineTo(7, 5);
-      ctx.quadraticCurveTo(0, 8, -7, 5);
-      ctx.closePath();
-      ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#fef08a";
-      ctx.beginPath(); ctx.ellipse(0, -2, 5.5, 2.8, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      // Sparkle text
-      ctx.fillStyle = "#fef08a";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2.2;
-      ctx.font = "900 8px sans-serif";
-      ctx.textAlign = "center";
-      ctx.strokeText("財神附身", 0, -9);
-      ctx.fillText("財神附身", 0, -9);
-      ctx.restore();
-    }
+      // 5. Spinning Golden Ingot & Roof Coins
+      ingotGroup.rotation.y = t * 1.4;
+      ingotGroup.position.y = 9.35 + Math.sin(t * 2.4) * 0.28;
+      roofCoins.forEach(rc => {
+        rc.mesh.rotation.z = t * 2.0 + rc.phase;
+        rc.mesh.position.y = 3.45 + Math.sin(t * 2.6 + rc.phase) * 0.12;
+      });
 
-    function drawRichmanTown() {
-      // 1. Sunny Sky & Lush Meadow Base
-      const meadowGrad = ctx.createLinearGradient(0, 0, 0, LOGICAL_H);
-      meadowGrad.addColorStop(0, "#bae6fd");
-      meadowGrad.addColorStop(0.09, "#7dd3fc");
-      meadowGrad.addColorStop(0.11, "#86efac");
-      meadowGrad.addColorStop(0.5, "#4ade80");
-      meadowGrad.addColorStop(1, "#22c55e");
-      ctx.fillStyle = meadowGrad;
-      ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
+      // 6. Park Fountain Water Droplet Particles
+      waterDrops.forEach(wd => {
+        wd.phase = (wd.phase + wd.speed * (dt * 60)) % 1;
+        const p = wd.phase;
+        const r = p * wd.radius;
+        const y = 0.85 + Math.sin(p * Math.PI) * 1.05;
+        wd.mesh.position.set(Math.cos(wd.ang) * r, y, Math.sin(wd.ang) * r);
+        wd.mesh.scale.setScalar(1.0 - p * 0.45);
+      });
 
-      // Subtle sunny lawn checker patches
-      ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
-      for (let gx = 0; gx < LOGICAL_W; gx += 40) {
-        for (let gy = 68; gy < LOGICAL_H; gy += 40) {
-          if (((gx + gy) / 40) % 2 === 0) ctx.fillRect(gx, gy, 40, 40);
+      // 7. Central 3D Interactive Dice Bounce
+      if (diceAnim.active) {
+        diceAnim.elapsed += dt;
+        const u = Math.min(diceAnim.elapsed / diceAnim.duration, 1);
+        const bounce = Math.abs(Math.sin(u * Math.PI * 2.5)) * (1 - u) * 3.8;
+        diceMesh.position.y = 0.86 + bounce;
+        if (u < 0.78) {
+          diceMesh.rotation.x += dt * 11;
+          diceMesh.rotation.y += dt * 9;
+          diceMesh.rotation.z += dt * 7;
+        } else {
+          diceMesh.quaternion.slerp(diceAnim.targetQuat, 0.25);
+        }
+        if (u >= 1) {
+          diceAnim.active = false;
+          diceMesh.position.y = 0.86;
+          diceMesh.quaternion.copy(diceAnim.targetQuat);
         }
       }
 
-      // 2. Blue Coastal Corner (Top-Right Ocean Bay + Beach + Waves + Sailboat)
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(690, 0);
-      ctx.lineTo(860, 0);
-      ctx.lineTo(860, 145);
-      ctx.quadraticCurveTo(785, 115, 748, 52);
-      ctx.quadraticCurveTo(722, 18, 690, 0);
-      ctx.closePath();
-      // Sandy beach rim
-      ctx.fillStyle = "#fde68a";
-      ctx.fill();
-      ctx.strokeStyle = "#eab308";
-      ctx.lineWidth = 2;
-      ctx.stroke();
+      // 8. 12 3D Q-Chibi Characters, Blinking & Steward Scooter Patrol
+      const stageW = stageEl.clientWidth;
+      const stageH = stageEl.clientHeight;
 
-      // Deep ocean inside beach
-      ctx.beginPath();
-      ctx.moveTo(712, 0);
-      ctx.lineTo(860, 0);
-      ctx.lineTo(860, 122);
-      ctx.quadraticCurveTo(798, 95, 765, 42);
-      ctx.closePath();
-      const seaGrad = ctx.createLinearGradient(730, 0, 860, 120);
-      seaGrad.addColorStop(0, "#38bdf8");
-      seaGrad.addColorStop(1, "#0284c7");
-      ctx.fillStyle = seaGrad;
-      ctx.fill();
+      Object.values(agentObjects).forEach(obj => {
+        const a = obj.agent;
+        const root = obj.root;
+        const isScooterWorking = a.id === "office_steward" && a.status === "working";
+        let moving = false;
 
-      // Animated white sea waves
-      ctx.strokeStyle = "rgba(255,255,255,0.75)";
-      ctx.lineWidth = 1.6;
-      const wOff = Math.sin(frame * 0.06) * 4;
-      ctx.beginPath();
-      ctx.moveTo(782 + wOff, 32); ctx.quadraticCurveTo(796 + wOff, 27, 810 + wOff, 32);
-      ctx.moveTo(806 - wOff, 64); ctx.quadraticCurveTo(820 - wOff, 59, 834 - wOff, 64);
-      ctx.stroke();
+        if (isScooterWorking) {
+          moving = true;
+          prevStewardPos.copy(root.position);
+          scooterProgress = (scooterProgress + dt * 0.042) % 1;
+          const pt = scooterCurve.getPointAt(scooterProgress);
+          const ahead = scooterCurve.getPointAt((scooterProgress + 0.012) % 1);
+          root.position.copy(pt);
+          lookVec.copy(ahead);
+          lookVec.y = root.position.y;
+          root.lookAt(lookVec);
 
-      // Cute tiny sailboat
-      const boatY = 48 + Math.sin(frame * 0.07) * 2;
-      ctx.fillStyle = "#dc2626";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 1.3;
-      ctx.beginPath(); ctx.moveTo(818, boatY); ctx.lineTo(840, boatY); ctx.lineTo(835, boatY + 6); ctx.lineTo(823, boatY + 6); ctx.closePath(); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#ffffff";
-      ctx.beginPath(); ctx.moveTo(829, boatY); ctx.lineTo(829, boatY - 15); ctx.lineTo(838, boatY - 2); ctx.closePath(); ctx.fill(); ctx.stroke();
-      ctx.restore();
+          // Update Steward Speech Bubble Text based on patrol sector
+          if (obj.bubbleEl) {
+            const noteObj = STEWARD_NOTES.find(n => scooterProgress <= n.tMax) || STEWARD_NOTES[0];
+            if (obj.bubbleEl.textContent !== noteObj.note) {
+              obj.bubbleEl.textContent = noteObj.note;
+            }
+          }
 
-      // 3. Fluffy Moving Clouds
-      drawCloud((frame * 0.18) % 920 - 40, 22, 0.85);
-      drawCloud(((frame * 0.12) + 340) % 920 - 40, 16, 0.72);
-      drawCloud(((frame * 0.15) + 640) % 920 - 40, 26, 0.65);
+          // Spawn Scooter Exhaust White Puffs!
+          puffTimer += dt;
+          if (puffTimer >= 0.09) {
+            puffTimer = 0;
+            const p = puffParticles[puffIdx];
+            puffIdx = (puffIdx + 1) % puffParticles.length;
+            const backDir = new THREE.Vector3(0, 0, -0.82).applyQuaternion(root.quaternion);
+            p.mesh.position.copy(root.position).add(backDir).add(new THREE.Vector3(0, 0.28, 0));
+            p.mesh.visible = true;
+            p.mesh.scale.setScalar(0.8);
+            p.life = 0;
+            p.vx = backDir.x * 0.9 + (Math.random() - 0.5) * 0.3;
+            p.vz = backDir.z * 0.9 + (Math.random() - 0.5) * 0.3;
+          }
 
-      // 4. Asphalt Road Loop with Yellow Dashed Lines
-      ctx.save();
-      // Road outer curb
-      ctx.strokeStyle = "#cbd5e1";
-      ctx.lineWidth = 42;
-      ctx.lineJoin = "round";
-      ctx.beginPath();
-      ctx.roundRect(110, 164, 640, 348, 22);
-      ctx.stroke();
+          // Follow Camera Mode
+          if (activePreset === "scooter") {
+            const delta = new THREE.Vector3().subVectors(root.position, prevStewardPos);
+            camera.position.add(delta);
+            controls.target.add(delta);
+          }
+        } else {
+          const [tx, tz] = targetFor3D(a);
+          const dx = tx - root.position.x;
+          const dz = tz - root.position.z;
+          const dist = Math.hypot(dx, dz);
+          if (dist > 0.08) {
+            moving = true;
+            const spd = Math.min(dist, dt * 4.5);
+            root.position.x += (dx / dist) * spd;
+            root.position.z += (dz / dist) * spd;
+            root.rotation.y = Math.atan2(dx, dz);
+          } else {
+            root.position.x = tx;
+            root.position.z = tz;
+            // Face towards camera / plaza nicely
+            root.rotation.y += (0 - root.rotation.y) * 0.1;
+          }
+        }
 
-      // Road asphalt
-      ctx.strokeStyle = "#334155";
-      ctx.lineWidth = 34;
-      ctx.stroke();
+        // Bounce, Legs & Working Hand Micro-Animations
+        const seed = obj.seed;
+        if (isScooterWorking) {
+          obj.bodyPivot.position.y = 0.48 + Math.abs(Math.sin(t * 14)) * 0.04;
+          obj.legL.rotation.x = -0.35;
+          obj.legR.rotation.x = -0.35;
+          obj.handL.position.set(-0.34, 0.88, 0.32);
+          obj.handR.position.set(0.34, 0.88, 0.32);
+        } else {
+          const bounce = moving
+            ? Math.abs(Math.sin(t * 10)) * 0.16
+            : (a.status === "working" ? Math.abs(Math.sin(t * 4.5 + seed)) * 0.08 : Math.sin(t * 2.5 + seed) * 0.03);
+          obj.bodyPivot.position.y = bounce;
+          const legSwing = moving ? Math.sin(t * 10) * 0.45 : 0;
+          obj.legL.rotation.x = legSwing;
+          obj.legR.rotation.x = -legSwing;
+          const hw = a.status === "working" ? Math.sin(t * 10 + seed) * 0.08 : 0;
+          obj.handL.position.set(-0.44, 0.68 + hw, 0.1);
+          obj.handR.position.set(0.44, 0.68 - hw, 0.1);
+        }
 
-      // Yellow dashed lane markings
-      ctx.strokeStyle = "#facc15";
-      ctx.lineWidth = 2.5;
-      ctx.setLineDash([12, 10]);
-      ctx.lineDashOffset = -(frame * 0.25) % 22;
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.restore();
+        // Expressive Blinking!
+        const blinkCycle = (t * 60 + seed) % 160;
+        const isClosed = a.status === "depleted" || blinkCycle < 5;
+        obj.eyeL.scale.y = isClosed ? 0.15 : 1;
+        obj.eyeR.scale.y = isClosed ? 0.15 : 1;
 
-      // 5. Richman 4 Perimeter Colorful Board Tiles!
-      const bottomTiles = [
-        { c: "#ef4444", t: "起點 GO",  s: "+NT$2萬", i: "🚩" },
-        { c: "#3b82f6", t: "帝寶大道", s: "$8,800",  i: "" },
-        { c: "#f59e0b", t: "機會",     s: "？",      i: "❓" },
-        { c: "#0ea5e9", t: "台股紅盤", s: "▲2.4%",   i: "📈" },
-        { c: "#22c55e", t: "銀行BANK", s: "存款",    i: "🏦" },
-        { c: "#ec4899", t: "印鈔店x5", s: "LV.5",    i: "💰" },
-        { c: "#a855f7", t: "命運",     s: "！",      i: "❗" },
-        { c: "#f97316", t: "點券中心", s: "算力+10", i: "🎟️" },
-        { c: "#14b8a6", t: "美股雷達", s: "Form4",   i: "🇺🇸" },
-        { c: "#eab308", t: "財神大吉", s: "附身",    i: "🧧" },
-        { c: "#ef4444", t: "證交所",   s: "紅漲綠跌",i: "🏛️" }
-      ];
-      bottomTiles.forEach((tl, idx) => {
-        drawBoardTile(92 + idx * 62, 540, 58, 46, tl.c, tl.t, tl.s, tl.i);
+        // 3D -> 2D Screen Projection for Crisp Retina HTML Nameplates & Speech Bubbles
+        tmpVec.copy(root.position);
+        tmpVec.y += isScooterWorking ? 2.55 : 2.15;
+        tmpVec.project(camera);
+
+        if (tmpVec.z > 1 || tmpVec.z < -1) {
+          obj.labelEl.style.display = "none";
+          if (obj.bubbleEl) obj.bubbleEl.style.display = "none";
+        } else {
+          const sx = (tmpVec.x * 0.5 + 0.5) * stageW;
+          const sy = (-tmpVec.y * 0.5 + 0.5) * stageH;
+          obj.labelEl.style.display = "inline-flex";
+          obj.labelEl.style.left = `${sx.toFixed(1)}px`;
+          obj.labelEl.style.top = `${(sy - 14).toFixed(1)}px`;
+
+          if (obj.bubbleEl && isScooterWorking) {
+            obj.bubbleEl.style.display = "block";
+            obj.bubbleEl.style.left = `${sx.toFixed(1)}px`;
+            obj.bubbleEl.style.top = `${(sy - 22).toFixed(1)}px`;
+          }
+        }
       });
 
-      const leftTiles = [
-        { c: "#06b6d4", t: "道具屋",   s: "$3,200", i: "🛒" },
-        { c: "#3b82f6", t: "金流街",   s: "LV.5",   i: "💵" },
-        { c: "#ef4444", t: "查稅卡",   s: "風控",   i: "🚧" },
-        { c: "#f59e0b", t: "機會",     s: "？",     i: "❓" },
-        { c: "#eab308", t: "財神廟",   s: "許願",   i: "🏮" }
-      ];
-      leftTiles.forEach((tl, idx) => {
-        drawBoardTile(20, 468 - idx * 62, 62, 50, tl.c, tl.t, tl.s, tl.i);
+      // Update Scooter Exhaust White Puffs
+      puffParticles.forEach(p => {
+        if (!p.mesh.visible) return;
+        p.life += dt;
+        const ratio = p.life / p.maxLife;
+        if (ratio >= 1) {
+          p.mesh.visible = false;
+          return;
+        }
+        p.mesh.position.x += p.vx * dt;
+        p.mesh.position.y += p.vy * dt;
+        p.mesh.position.z += p.vz * dt;
+        p.mesh.scale.setScalar(0.8 + ratio * 1.4);
+        p.mesh.material.opacity = 0.85 * (1 - ratio);
       });
 
-      const rightTiles = [
-        { c: "#22c55e", t: "陽光公園", s: "省電區", i: "⛲" },
-        { c: "#ec4899", t: "樂透咖啡", s: "☕+1",  i: "☕" },
-        { c: "#a855f7", t: "命運",     s: "！",     i: "❗" },
-        { c: "#0ea5e9", t: "海濱別墅", s: "$6,500", i: "🏖️" },
-        { c: "#f59e0b", t: "點券站",   s: "免費",   i: "🎟️" }
-      ];
-      rightTiles.forEach((tl, idx) => {
-        drawBoardTile(778, 468 - idx * 62, 62, 50, tl.c, tl.t, tl.s, tl.i);
-      });
-
-      // =====================================================================
-      // 6. SIX CORE RICHMAN 4 LANDMARK BUILDINGS
-      // =====================================================================
-
-      // --- LANDMARK 1: 🏰 大 Boss 總裁摩天大樓 (LV.5 連鎖地標 · 帝寶總部) ---
-      ctx.save();
-      // Plaza ground
-      ctx.fillStyle = "#fef3c7";
-      ctx.strokeStyle = "#d97706";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.roundRect(22, 24, 192, 114, 12); ctx.fill(); ctx.stroke();
-      // Skyscraper body
-      ctx.fillStyle = "#7c3aed";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2.2;
-      ctx.beginPath(); ctx.roundRect(42, 34, 72, 74, 4); ctx.fill(); ctx.stroke();
-      // Gold facade stripes & glowing windows
-      ctx.fillStyle = "#fde047";
-      for (let wy = 42; wy < 94; wy += 12) {
-        for (let wx = 50; wx < 106; wx += 14) {
-          ctx.fillRect(wx, wy, 9, 7);
+      // Smooth Camera Preset Transitions
+      if (camLerp) {
+        camera.position.lerp(camLerp.pos, 0.08);
+        controls.target.lerp(camLerp.target, 0.08);
+        if (camera.position.distanceTo(camLerp.pos) < 0.08 && controls.target.distanceTo(camLerp.target) < 0.08) {
+          camLerp = null;
         }
       }
-      // Red-Gold Crown Roof
-      ctx.fillStyle = "#dc2626";
-      ctx.beginPath();
-      ctx.moveTo(36, 36); ctx.lineTo(78, 14); ctx.lineTo(120, 36); ctx.closePath();
-      ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#facc15";
-      ctx.beginPath(); ctx.arc(78, 12, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      // Red carpet
-      ctx.fillStyle = "#dc2626";
-      ctx.fillRect(68, 108, 20, 26);
-      // LV.5 Stars & Sign
-      ctx.fillStyle = "#b91c1c";
-      ctx.beginPath(); ctx.roundRect(120, 36, 86, 32, 6); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#fef08a";
-      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("🏰 帝寶總部 LV.5", 163, 50);
-      ctx.fillStyle = "#fde047";
-      ctx.font = "800 8px sans-serif";
-      ctx.fillText("★★★★★ 連鎖地標", 163, 62);
-      // Sports car + God of Wealth aura
-      drawRedSportsCar(166, 98);
-      drawGodOfWealthAura(174, 78);
-      ctx.restore();
 
-      // --- LANDMARK 2: 🏛️ 集團行政＆點券中心 (HQ & 台灣標準時間鐘樓) ---
-      ctx.save();
-      ctx.fillStyle = "#e0f2fe";
-      ctx.strokeStyle = "#0284c7";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.roundRect(236, 24, 240, 114, 12); ctx.fill(); ctx.stroke();
-
-      // Classical Blue-Gold HQ Hall
-      ctx.fillStyle = "#1d4ed8";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2.2;
-      ctx.beginPath(); ctx.roundRect(250, 50, 122, 62, 6); ctx.fill(); ctx.stroke();
-      // Gold dome
-      ctx.fillStyle = "#fbbf24";
-      ctx.beginPath(); ctx.arc(311, 50, 28, Math.PI, 0); ctx.fill(); ctx.stroke();
-      // Columns
-      ctx.fillStyle = "#f8fafc";
-      [262, 282, 332, 352].forEach(cx => {
-        ctx.fillRect(cx, 62, 7, 46);
-      });
-      // HQ Sign
-      ctx.fillStyle = "#0f172a";
-      ctx.beginPath(); ctx.roundRect(258, 54, 106, 17, 4); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#fde047";
-      ctx.font = "900 9px 'PingFang TC', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("🏛️ 行政＆點券中心", 311, 66);
-
-      // Taiwan Standard Time LED Clock Tower!
-      ctx.fillStyle = "#0369a1";
-      ctx.beginPath(); ctx.roundRect(382, 36, 84, 76, 6); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#f59e0b";
-      ctx.beginPath(); ctx.moveTo(378, 36); ctx.lineTo(424, 18); ctx.lineTo(470, 36); ctx.closePath(); ctx.fill(); ctx.stroke();
-      // LED Clock Screen
-      ctx.fillStyle = "#020617";
-      ctx.beginPath(); ctx.roundRect(388, 44, 72, 32, 5); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#7dd3fc";
-      ctx.font = "800 7.5px 'PingFang TC', sans-serif";
-      ctx.fillText("台灣標準鐘樓", 424, 54);
-      ctx.fillStyle = "#fde047";
-      ctx.font = "900 12px ui-monospace, monospace";
-      ctx.fillText(liveClockStr, 424, 70);
-      // Ticket booth window
-      ctx.fillStyle = "#fef08a";
-      ctx.beginPath(); ctx.roundRect(396, 82, 56, 22, 4); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#b45309";
-      ctx.font = "900 8.5px sans-serif";
-      ctx.fillText("🎟️ 算力補給站", 424, 96);
-      ctx.restore();
-
-      // --- LANDMARK 3: 🗣️ 市政廳會議廣場 (開會區) ---
-      ctx.save();
-      ctx.fillStyle = "#f0f9ff";
-      ctx.strokeStyle = "#0ea5e9";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.roundRect(498, 24, 240, 114, 12); ctx.fill(); ctx.stroke();
-      // Banner
-      ctx.fillStyle = "#0284c7";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.roundRect(528, 30, 180, 20, 6); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("🗣️ 市政廳會議廣場 · PRO/FLASH", 618, 43.5);
-      // Round conference table
-      ctx.fillStyle = "#bae6fd";
-      ctx.beginPath(); ctx.ellipse(618, 92, 58, 22, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#fde047";
-      ctx.beginPath(); ctx.ellipse(618, 92, 22, 8, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
-
-      // --- LANDMARK 4: 💰 第一事業部：金流商店街 (LV.5 連鎖店鋪群) ---
-      ctx.save();
-      // Boardwalk base
-      ctx.fillStyle = "#dbeafe";
-      ctx.strokeStyle = "#2563eb";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.roundRect(154, 194, 326, 134, 12); ctx.fill(); ctx.stroke();
-
-      // Shop A: Apify 印鈔店 x5
-      ctx.fillStyle = "#0284c7";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2.2;
-      ctx.beginPath(); ctx.roundRect(166, 212, 146, 78, 7); ctx.fill(); ctx.stroke();
-      // Striped awning
-      for (let i = 0; i < 7; i++) {
-        ctx.fillStyle = i % 2 === 0 ? "#ef4444" : "#ffffff";
-        ctx.fillRect(168 + i * 20.2, 246, 20.2, 11);
-      }
-      ctx.strokeRect(168, 246, 142, 11);
-      // Shop sign
-      ctx.fillStyle = "#fde047";
-      ctx.beginPath(); ctx.roundRect(172, 200, 134, 22, 5); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#1e1b18";
-      ctx.font = "900 10px 'PingFang TC', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("💰 Apify 印鈔店 x5", 239, 215);
-      // Windows
-      ctx.fillStyle = "#fef9c3";
-      ctx.fillRect(178, 262, 54, 22); ctx.strokeRect(178, 262, 54, 22);
-      ctx.fillRect(244, 262, 54, 22); ctx.strokeRect(244, 262, 54, 22);
-
-      // Shop B: Gumroad 道具屋
-      ctx.fillStyle = "#0d9488";
-      ctx.beginPath(); ctx.roundRect(324, 212, 144, 78, 7); ctx.fill(); ctx.stroke();
-      for (let i = 0; i < 7; i++) {
-        ctx.fillStyle = i % 2 === 0 ? "#f59e0b" : "#fef3c7";
-        ctx.fillRect(326 + i * 20, 246, 20, 11);
-      }
-      ctx.strokeRect(326, 246, 140, 11);
-      ctx.fillStyle = "#a7f3d0";
-      ctx.beginPath(); ctx.roundRect(330, 200, 132, 22, 5); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#064e3b";
-      ctx.fillText("🛒 Gumroad 道具屋", 396, 215);
-      ctx.fillStyle = "#fef9c3";
-      ctx.fillRect(336, 262, 54, 22); ctx.strokeRect(336, 262, 54, 22);
-      ctx.fillRect(402, 262, 54, 22); ctx.strokeRect(402, 262, 54, 22);
-
-      // Division 1 Street Label
-      ctx.fillStyle = "#1e3a8a";
-      ctx.beginPath(); ctx.roundRect(236, 293, 162, 16, 8); ctx.fill();
-      ctx.fillStyle = "#fef08a";
-      ctx.font = "900 8.5px 'PingFang TC', sans-serif";
-      ctx.fillText("第一事業部 · 金流商店街 LV.5", 317, 304);
-      ctx.restore();
-
-      // --- LANDMARK 5: 📈 第二事業部：台灣證券交易所 (紅漲綠跌) ---
-      ctx.save();
-      ctx.fillStyle = "#fee2e2";
-      ctx.strokeStyle = "#dc2626";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.roundRect(154, 342, 326, 138, 12); ctx.fill(); ctx.stroke();
-
-      // Greek-column Exchange Building
-      ctx.fillStyle = "#991b1b";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2.2;
-      ctx.beginPath(); ctx.roundRect(166, 362, 302, 76, 7); ctx.fill(); ctx.stroke();
-      // Pediment roof
-      ctx.fillStyle = "#facc15";
-      ctx.beginPath();
-      ctx.moveTo(160, 364); ctx.lineTo(317, 344); ctx.lineTo(474, 364); ctx.closePath();
-      ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#451a03";
-      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("📈 台灣證券交易所 · 股市二部 & 百萬實盤室", 317, 360);
-
-      // Left & Right White Marble Pillars
-      ctx.fillStyle = "#f8fafc";
-      [174, 192, 434, 452].forEach(px => {
-        ctx.fillRect(px, 370, 9, 64); ctx.strokeRect(px, 370, 9, 64);
-      });
-
-      // Giant Taiwan Stock LED Wall (紅漲綠跌!)
-      ctx.fillStyle = "#090d16";
-      ctx.beginPath(); ctx.roundRect(212, 370, 210, 60, 5); ctx.fill(); ctx.stroke();
-
-      // Candlesticks (Red = UP, Green = DOWN)
-      const bars = [
-        { x: 222, h: 20, up: true }, { x: 232, h: 28, up: true },
-        { x: 242, h: 14, up: false }, { x: 252, h: 32, up: true },
-        { x: 262, h: 25, up: true }, { x: 272, h: 16, up: false },
-        { x: 282, h: 34, up: true }
-      ];
-      bars.forEach((b, idx) => {
-        const pulse = (frame + idx * 7) % 40 < 20 ? 1 : 0.85;
-        ctx.fillStyle = b.up ? "#ff4d4f" : "#22c55e";
-        const bh = b.h * pulse;
-        ctx.fillRect(b.x, 412 - bh, 6, bh);
-      });
-
-      // Live Ticker Text on LED Wall (Taiwan Red-Up / Green-Down)
-      const posList = (PORTFOLIO?.positions || []).slice(0, 4);
-      const tickItems = posList.length
-        ? posList.map(p => ({
-            sym: p.symbol.replace(".TW", ""),
-            up: (p.unrealizedPnlPct ?? 0) >= 0,
-            pct: Math.abs(p.unrealizedPnlPct ?? 0).toFixed(2)
-          }))
-        : [
-            { sym: "3661世芯", up: true, pct: "2.15" },
-            { sym: "3017奇鋐", up: true, pct: "1.80" },
-            { sym: "META", up: true, pct: "1.12" },
-            { sym: "TLT", up: false, pct: "0.45" }
-          ];
-      ctx.font = "800 9px ui-monospace, monospace";
-      ctx.textAlign = "left";
-      tickItems.forEach((tk, i) => {
-        const ty = 384 + i * 12;
-        ctx.fillStyle = tk.up ? "#ff4d4f" : "#4ade80";
-        ctx.fillText(`${tk.sym} ${tk.up ? "▲" : "▼"}${tk.pct}%`, 300, ty);
-      });
-      ctx.fillStyle = "#fde047";
-      ctx.font = "800 8px 'PingFang TC', sans-serif";
-      ctx.fillText("紅漲綠跌 · 實盤LIVE", 220, 424);
-      ctx.restore();
-
-      // --- LANDMARK 6: ☕ 大富翁陽光公園 / 樂透咖啡座 (待命省電休息區) ---
-      ctx.save();
-      const parkGrad = ctx.createLinearGradient(498, 194, 498, 480);
-      parkGrad.addColorStop(0, "#bbf7d0");
-      parkGrad.addColorStop(1, "#86efac");
-      ctx.fillStyle = parkGrad;
-      ctx.strokeStyle = "#15803d";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.roundRect(498, 194, 224, 286, 12); ctx.fill(); ctx.stroke();
-
-      // Cafe header banner
-      ctx.fillStyle = "#9a3412";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.roundRect(524, 198, 172, 20, 8); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#fef08a";
-      ctx.font = "900 9.5px 'PingFang TC', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("☕ 陽光公園 · 樂透咖啡省電區", 610, 211.5);
-
-      // Espresso umbrella table
-      ctx.fillStyle = "#dc2626";
-      ctx.beginPath(); ctx.arc(544, 232, 14, Math.PI, 0); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#ffffff";
-      ctx.beginPath(); ctx.arc(544, 232, 6, Math.PI, 0); ctx.fill();
-
-      // Animated Blue Water Fountain in Park Center!
-      ctx.fillStyle = "#e0f2fe";
-      ctx.beginPath(); ctx.ellipse(612, 315, 34, 20, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#38bdf8";
-      ctx.beginPath(); ctx.ellipse(612, 315, 26, 14, 0, 0, Math.PI * 2); ctx.fill();
-      // Fountain water spray
-      const sp = Math.sin(frame * 0.16) * 3;
-      ctx.strokeStyle = "#ffffff";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(612, 313); ctx.quadraticCurveTo(600, 294 + sp, 594, 310);
-      ctx.moveTo(612, 313); ctx.quadraticCurveTo(624, 294 - sp, 630, 310);
-      ctx.stroke();
-
-      // Wooden Park Benches
-      ctx.fillStyle = "#b45309";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 1.6;
-      ctx.beginPath(); ctx.roundRect(520, 386, 46, 12, 3); ctx.fill(); ctx.stroke();
-      ctx.beginPath(); ctx.roundRect(654, 386, 46, 12, 3); ctx.fill(); ctx.stroke();
-
-      // Decorative Cartoon Trees around Town
-      drawRichmanTree(516, 272, 0.85);
-      drawRichmanTree(702, 272, 0.85);
-      drawRichmanTree(516, 456, 0.9);
-      drawRichmanTree(702, 456, 0.9);
-      drawRichmanTree(84, 214, 0.85);
-      drawRichmanTree(824, 166, 0.9);
-      ctx.restore();
+      controls.update();
+      renderer.render(scene, camera);
     }
 
-    // =========================================================================
-    // 5. RICHMAN 4 SCOOTER & Q-CHIBI BIG-HEAD CHARACTER RENDERER
-    // =========================================================================
-    function drawScooter(x, y, dir = 1) {
-      ctx.save();
-      ctx.translate(x, y + 6);
-      ctx.scale(dir, 1);
-
-      // Putt-putt exhaust white puffs
-      const puff = (frame % 24) / 24;
-      ctx.fillStyle = `rgba(255, 255, 255, ${0.85 - puff * 0.7})`;
-      ctx.beginPath(); ctx.arc(-18 - puff * 16, 2 - puff * 6, 3 + puff * 3, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(-23 - puff * 10, 0 - puff * 3, 2.2 + puff * 2, 0, Math.PI * 2); ctx.fill();
-
-      // Warm headlight beam
-      ctx.fillStyle = "rgba(254, 240, 138, 0.36)";
-      ctx.beginPath(); ctx.moveTo(14, -7); ctx.lineTo(36, -15); ctx.lineTo(36, 2); ctx.closePath(); ctx.fill();
-
-      // Wheels
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2;
-      [-10, 11].forEach(wx => {
-        ctx.fillStyle = "#1e293b";
-        ctx.beginPath(); ctx.arc(wx, 6, 5.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#e2e8f0";
-        ctx.beginPath(); ctx.arc(wx, 6, 2, 0, Math.PI * 2); ctx.fill();
-      });
-
-      // Classic Taiwan Mint/Gold Scooter Body
-      ctx.fillStyle = "#14b8a6";
-      ctx.beginPath();
-      ctx.moveTo(-14, 4);
-      ctx.quadraticCurveTo(-15, -5, -4, -5);
-      ctx.lineTo(4, -3);
-      ctx.lineTo(8, -14);
-      ctx.lineTo(14, -14);
-      ctx.lineTo(15, 4);
-      ctx.closePath();
-      ctx.fill(); ctx.stroke();
-
-      // Seat
-      ctx.fillStyle = "#78350f";
-      ctx.beginPath(); ctx.roundRect(-12, -8, 12, 5, 2.5); ctx.fill(); ctx.stroke();
-
-      // Headlight
-      ctx.fillStyle = "#fef08a";
-      ctx.beginPath(); ctx.arc(14, -10, 3.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      ctx.restore();
-    }
-
-    function drawRoadblockCard(x, y) {
-      ctx.save();
-      ctx.translate(x + 15, y - 4);
-      ctx.rotate(0.15);
-      ctx.fillStyle = "#fef08a";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 1.6;
-      ctx.beginPath(); ctx.roundRect(-6, -9, 12, 16, 2.5); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = "#ef4444";
-      ctx.fillRect(-4, -6, 8, 5);
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(-3, -4.2, 6, 1.5);
-      ctx.restore();
-    }
-
-    function drawCharacter(a) {
-      const p = sprites[a.id];
-      if (!p) return;
-      const t = targetFor(a);
-      const dx = t.x - p.x, dy = t.y - p.y, dist = Math.hypot(dx, dy);
-      const moving = dist > 1.5;
-      if (moving) {
-        const spd = a.id === "office_steward" ? 1.85 : 2.8;
-        p.x += (dx / dist) * spd;
-        p.y += (dy / dist) * spd;
-        if (Math.abs(dx) > 0.3) p.dir = dx > 0 ? 1 : -1;
-      } else {
-        p.x = t.x; p.y = t.y;
-      }
-
-      const bounce = moving
-        ? Math.abs(Math.sin(frame * 0.28)) * 3.2
-        : (a.status === "working" ? Math.abs(Math.sin((frame + p.seed) * 0.14)) * 1.8 : Math.sin((frame + p.seed) * 0.08) * 0.8);
-      const onScooter = a.id === "office_steward" && a.status === "working";
-      const x = p.x;
-      const y = p.y - bounce - (onScooter ? 5 : 0);
-      const meta = STATUS_META[a.status] || STATUS_META.idle;
-
-      ctx.save();
-
-      // Richman 4 Board-Piece Disc Base (棋子圓盤底座)
-      if (a.id === selectedId) {
-        ctx.strokeStyle = "#fde047";
-        ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.ellipse(x, p.y + 12, 22, 9.5, 0, 0, Math.PI * 2); ctx.stroke();
-      }
-      ctx.fillStyle = "rgba(0, 0, 0, 0.32)";
-      ctx.beginPath(); ctx.ellipse(x, p.y + 13, 16, 6.8, 0, 0, Math.PI * 2); ctx.fill();
-
-      ctx.fillStyle = a.color || "#38bdf8";
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.ellipse(x, p.y + 11, 14.5, 6, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-
-      // Scooter if Steward is working!
-      if (onScooter) {
-        drawScooter(x, p.y + 2, p.dir || 1);
-      }
-
-      // Chibi Body with Thick Black Cartoon Outline
-      ctx.strokeStyle = OUTLINE;
-      ctx.lineWidth = 2;
-
-      if (!onScooter) {
-        const legSwing = moving ? Math.sin(frame * 0.28) * 3 : 0;
-        ctx.fillStyle = "#1e293b";
-        ctx.beginPath(); ctx.roundRect(x - 6, y + 4 + legSwing * 0.4, 5, 6.5, 2); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.roundRect(x + 1, y + 4 - legSwing * 0.4, 5, 6.5, 2); ctx.fill(); ctx.stroke();
-      }
-
-      // Boss Royal Purple-Gold Cape
-      if (a.isBoss) {
-        ctx.fillStyle = "#b91c1c";
-        ctx.beginPath();
-        ctx.moveTo(x - 12, y - 6);
-        ctx.lineTo(x + 12, y - 6);
-        ctx.lineTo(x + 15, y + 9);
-        ctx.lineTo(x - 15, y + 9);
-        ctx.closePath();
-        ctx.fill(); ctx.stroke();
-      }
-
-      // Torso (Vibrant Richman 4 Suit / Outfit)
-      ctx.fillStyle = a.status === "depleted" ? "#64748b" : (a.shirt || a.color);
-      ctx.beginPath(); ctx.roundRect(x - 9.5, y - 7, 19, 13, 5); ctx.fill(); ctx.stroke();
-
-      // Collar / Tie
-      ctx.fillStyle = "#ffffff";
-      ctx.beginPath(); ctx.moveTo(x - 4, y - 7); ctx.lineTo(x + 4, y - 7); ctx.lineTo(x, y - 1); ctx.closePath(); ctx.fill();
-      ctx.fillStyle = "#fde047";
-      ctx.fillRect(x - 1.2, y - 3.5, 2.4, 5.5);
-
-      // Hands
-      ctx.fillStyle = "#fde68a";
-      const hw = a.status === "working" ? Math.sin(frame * 0.4 + p.seed) * 1.5 : 0;
-      ctx.beginPath(); ctx.arc(x - 10, y + 1 + hw, 3, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-      ctx.beginPath(); ctx.arc(x + 10, y + 1 - hw, 3, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-
-      // Auditors hold 《大富翁4》路障卡 / 查稅卡!
-      if (a.id === "ruthless_critic" || a.id === "chief_risk_officer") {
-        drawRoadblockCard(x, y);
-      }
-
-      // ===== Q 版大頭娃娃 (Big Richman 4 Cartoon Head) =====
-      ctx.fillStyle = "#fde68a";
-      ctx.beginPath(); ctx.roundRect(x - 11.5, y - 27, 23, 20, 9.5); ctx.fill(); ctx.stroke();
-
-      // Rosy Cheeks
-      ctx.fillStyle = "rgba(244, 63, 94, 0.42)";
-      ctx.beginPath(); ctx.ellipse(x - 7, y - 13.5, 2.8, 1.5, 0, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(x + 7, y - 13.5, 2.8, 1.5, 0, 0, Math.PI * 2); ctx.fill();
-
-      // Character-specific Hair & Tribute Accessories!
-      if (a.id === "monetization_architect") {
-        // 致敬孫小美雙丸子頭！
-        ctx.fillStyle = "#1e1b18";
-        ctx.beginPath(); ctx.arc(x - 11, y - 26, 5.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.arc(x + 11, y - 26, 5.2, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#ef4444";
-        ctx.beginPath(); ctx.arc(x - 9, y - 23, 2.2, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(x + 9, y - 23, 2.2, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = "#1e1b18";
-        ctx.beginPath(); ctx.roundRect(x - 11.5, y - 29, 23, 8.5, [9, 9, 3, 3]); ctx.fill(); ctx.stroke();
-      } else if (a.id === "pain_hunter") {
-        // 致敬阿土伯斗笠 / 草帽！
-        ctx.fillStyle = "#eab308";
-        ctx.beginPath();
-        ctx.moveTo(x - 16, y - 23); ctx.lineTo(x, y - 34); ctx.lineTo(x + 16, y - 23); ctx.closePath();
-        ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#dc2626";
-        ctx.fillRect(x - 8, y - 25, 16, 2.5);
-      } else if (a.id === "macro_etf_strategist") {
-        // 致敬錢夫人貴婦波浪髮型＋珍珠耳環！
-        ctx.fillStyle = "#7c2d12";
-        ctx.beginPath(); ctx.roundRect(x - 12.5, y - 30, 25, 10, [10, 10, 4, 4]); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.arc(x - 12, y - 19, 3.8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.arc(x + 12, y - 19, 3.8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#fef08a";
-        ctx.beginPath(); ctx.arc(x - 11.5, y - 14, 1.8, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(x + 11.5, y - 14, 1.8, 0, Math.PI * 2); ctx.fill();
-      } else {
-        ctx.fillStyle = a.hair || "#1e293b";
-        ctx.beginPath(); ctx.roundRect(x - 12, y - 29.5, 24, 9.5, [9, 9, 3, 3]); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.arc(x - 10, y - 20, 2.6, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(x + 10, y - 20, 2.6, 0, Math.PI * 2); ctx.fill();
-      }
-
-      // Expressive Big Richman 4 Eyes + Blinking
-      const blinking = ((frame + p.seed) % 150) < 5;
-      ctx.fillStyle = OUTLINE;
-      if (a.status === "depleted" || blinking) {
-        ctx.fillRect(x - 6.5, y - 17, 4.5, 1.6);
-        ctx.fillRect(x + 2, y - 17, 4.5, 1.6);
-      } else {
-        ctx.beginPath(); ctx.arc(x - 4.5, y - 16.8, 2.3, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(x + 4.5, y - 16.8, 2.3, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = "#ffffff";
-        ctx.beginPath(); ctx.arc(x - 5.1, y - 17.6, 0.9, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(x + 3.9, y - 17.6, 0.9, 0, Math.PI * 2); ctx.fill();
-      }
-
-      // Happy Smile
-      ctx.strokeStyle = "#b45309";
-      ctx.lineWidth = 1.4;
-      ctx.beginPath(); ctx.arc(x, y - 12.5, 3, 0.15 * Math.PI, 0.85 * Math.PI); ctx.stroke();
-
-      // Reflective Glasses on Auditors / CRO
-      if (a.id === "ruthless_critic" || a.id === "chief_risk_officer") {
-        ctx.strokeStyle = "#38bdf8";
-        ctx.lineWidth = 1.4;
-        ctx.fillStyle = "rgba(56, 189, 248, 0.22)";
-        ctx.fillRect(x - 8, y - 19.5, 6.5, 5); ctx.strokeRect(x - 8, y - 19.5, 6.5, 5);
-        ctx.fillRect(x + 1.5, y - 19.5, 6.5, 5); ctx.strokeRect(x + 1.5, y - 19.5, 6.5, 5);
-        ctx.beginPath(); ctx.moveTo(x - 1.5, y - 17); ctx.lineTo(x + 1.5, y - 17); ctx.stroke();
-      }
-
-      // Boss Jeweled Golden Crown
-      if (a.isBoss) {
-        ctx.fillStyle = "#facc15";
-        ctx.strokeStyle = OUTLINE;
-        ctx.lineWidth = 1.6;
-        ctx.beginPath();
-        ctx.moveTo(x - 9, y - 28);
-        ctx.lineTo(x - 10, y - 36);
-        ctx.lineTo(x - 4.5, y - 32);
-        ctx.lineTo(x, y - 38);
-        ctx.lineTo(x + 4.5, y - 32);
-        ctx.lineTo(x + 10, y - 36);
-        ctx.lineTo(x + 9, y - 28);
-        ctx.closePath();
-        ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#ef4444";
-        ctx.beginPath(); ctx.arc(x, y - 31.5, 2, 0, Math.PI * 2); ctx.fill();
-      }
-
-      // Steward Richman 4 White-Gold Speech Bubble!
-      if (onScooter) {
-        const note = STEWARD_WAYPOINTS[stewardWpIdx].note;
-        ctx.font = "900 9.5px 'PingFang TC', sans-serif";
-        const bw = ctx.measureText(note).width + 16;
-        ctx.fillStyle = "#ffffff";
-        ctx.strokeStyle = "#d97706";
-        ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.roundRect(x - bw / 2, y - 50, bw, 17, 7); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#78350f";
-        ctx.textAlign = "center";
-        ctx.fillText(note, x, y - 38.2);
-      }
-
-      // Richman 4 Beveled Nameplate
-      ctx.font = "900 9px 'PingFang TC', sans-serif";
-      ctx.textAlign = "center";
-      const lw = ctx.measureText(a.name).width + 18;
-      ctx.fillStyle = a.id === selectedId ? "#fef08a" : "#0b2549";
-      ctx.strokeStyle = a.id === selectedId ? "#d97706" : "#fbbf24";
-      ctx.lineWidth = 1.6;
-      ctx.beginPath(); ctx.roundRect(x - lw / 2, p.y + 15, lw, 14.5, 6); ctx.fill(); ctx.stroke();
-
-      ctx.fillStyle = meta.color;
-      ctx.beginPath(); ctx.arc(x - lw / 2 + 6, p.y + 22.2, 2.8, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = a.id === selectedId ? "#451a03" : "#ffffff";
-      ctx.fillText(a.name, x + 4, p.y + 25.3);
-
-      if (a.status === "depleted") {
-        ctx.fillStyle = "#fb7185";
-        ctx.strokeStyle = OUTLINE;
-        ctx.lineWidth = 2;
-        ctx.font = "900 10px ui-monospace, monospace";
-        ctx.strokeText("Zzz", x + 16, y - 28 - (frame % 45) * 0.25);
-        ctx.fillText("Zzz", x + 16, y - 28 - (frame % 45) * 0.25);
-      }
-
-      ctx.restore();
-    }
-
-    function draw() {
-      frame++;
-      drawRichmanTown();
-      if (STATE?.agents) {
-        [...STATE.agents]
-          .sort((a, b) => (sprites[a.id]?.y || 0) - (sprites[b.id]?.y || 0))
-          .forEach(a => drawCharacter(a));
-      }
-      requestAnimationFrame(draw);
-    }
-
+    // Boot!
     fetchState();
     fetchPortfolio();
     setInterval(() => fetchState(false), 20000);
     setInterval(fetchPortfolio, 60000);
-    draw();
+    requestAnimationFrame(animate);
   </script>
 </body>
 </html>
