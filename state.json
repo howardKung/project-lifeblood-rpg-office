@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 88,
+    "remaining": 84,
     "max": 100,
-    "totalSpent": 34,
+    "totalSpent": 38,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-26 10:32:00",
@@ -170,13 +170,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "alpha-div-macro-etf",
-      "status": "working",
+      "status": "idle",
       "isBoss": false,
-      "quota": 100,
+      "quota": 96,
       "maxQuota": 100,
-      "tasksCompleted": 0,
-      "currentTask": "分析 2026 Q4 Fed 利率、美債、台幣匯率與台美股 ETF 總水位配置",
-      "lastUpdate": "2026-11-26 11:16:11",
+      "tasksCompleted": 1,
+      "currentTask": "已完成 2026 Q4 總經水位與跨市場 ETF 配置報告",
+      "lastUpdate": "2026-11-26 11:28:33",
       "color": "#14b8a6",
       "shirt": "#0d9488",
       "hair": "#1e293b"
@@ -202,6 +202,14 @@
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-26 11:28:33",
+      "agentId": "macro_etf_strategist",
+      "agentName": "總經ETF配置師",
+      "status": "idle",
+      "cost": 4,
+      "summary": "總配置水位60%(純股票50%+長債TLT 10%)、現金與SGOV儲備40%；嚴禁單筆歐印採分批右側試單：核心VOO 12%/0050 12%/TLT 10%/XLF 8%/0056 5%，衛星QQQ 6%/0052 4%/SMH 3%，待VIX破23.64且台幣升破32.86加碼至70%。"
+    },
     {
       "time": "2026-11-26 11:25:55",
       "agentId": "boss",
@@ -261,21 +269,27 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 31,
+    "totalLocalFiles": 32,
     "driveSyncedFiles": 28,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 9222,
-        "mtime": "2026-11-26 11:25:59",
-        "mtimeTs": 1795692359.8783727
+        "size": 9632,
+        "mtime": "2026-11-26 11:28:33",
+        "mtimeTs": 1795692513.6168537
+      },
+      {
+        "path": "stock-division/reports/01_macro_etf_strategy.md",
+        "size": 16300,
+        "mtime": "2026-11-26 11:27:39",
+        "mtimeTs": 1795692459.0321422
       },
       {
         "path": "rpg-office/rpg_office.html",
-        "size": 33258,
-        "mtime": "2026-11-26 11:25:57",
-        "mtimeTs": 1795692357.9215367
+        "size": 33271,
+        "mtime": "2026-11-26 11:25:59",
+        "mtimeTs": 1795692359.9447987
       },
       {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
@@ -318,14 +332,8 @@
         "size": 7873,
         "mtime": "2026-11-26 10:36:10",
         "mtimeTs": 1795689370.6468017
-      },
-      {
-        "path": "products/actor2-dns-tech-signals/APIFY_LAUNCH_GUIDE_ZH.md",
-        "size": 2402,
-        "mtime": "2026-11-26 10:36:10",
-        "mtimeTs": 1795689370.6467013
       }
     ],
-    "snapshotTime": "2026-11-26 11:25:59"
+    "snapshotTime": "2026-11-26 11:28:33"
   }
 }
