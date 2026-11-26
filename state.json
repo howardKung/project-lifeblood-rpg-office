@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 66,
+    "remaining": 64,
     "max": 100,
-    "totalSpent": 114,
+    "totalSpent": 116,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-26 21:08:59",
@@ -61,11 +61,11 @@
       "conversationId": "hq-office-steward",
       "status": "working",
       "isBoss": false,
-      "quota": 78,
+      "quota": 76,
       "maxQuota": 100,
-      "tasksCompleted": 3,
-      "currentTask": "全天候巡檢總部環境、維護台灣標準時鐘 (UTC+8) 並同步離線與線上 Retina 高畫質",
-      "lastUpdate": "2026-11-26 21:18:32",
+      "tasksCompleted": 4,
+      "currentTask": "騎乘小綿羊巡視《大富翁4》集團總部棋盤城鎮與台灣標準鐘樓",
+      "lastUpdate": "2026-11-26 21:49:17",
       "color": "#2dd4bf",
       "shirt": "#0f766e",
       "hair": "#334155"
@@ -253,6 +253,14 @@
   ],
   "reports": [
     {
+      "time": "2026-11-26 21:49:17",
+      "agentId": "office_steward",
+      "agentName": "集團總務長",
+      "status": "working",
+      "cost": 2,
+      "summary": "【大富翁4風格改裝完工】總部已全面換裝為經典《大富翁4》陽光棋盤城鎮、證交所紅漲綠跌大盤、黃金浮雕介面與小綿羊機車巡邏特效！"
+    },
+    {
       "time": "2026-11-26 21:19:01",
       "agentId": "paper_fund_manager",
       "agentName": "百萬模擬操盤手",
@@ -407,71 +415,71 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 45,
-    "driveSyncedFiles": 45,
+    "totalLocalFiles": 50,
+    "driveSyncedFiles": 50,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
+      {
+        "path": "rpg-office/state.json",
+        "size": 18241,
+        "mtime": "2026-11-26 21:49:17",
+        "mtimeTs": 1795700957.3177009
+      },
+      {
+        "path": "rpg-office/index.html",
+        "size": 75846,
+        "mtime": "2026-11-26 21:48:52",
+        "mtimeTs": 1795700932.0571759
+      },
+      {
+        "path": "hq-handover/skill-bundle/SKILL.md",
+        "size": 4230,
+        "mtime": "2026-11-26 21:42:26",
+        "mtimeTs": 1795700546.2972836
+      },
+      {
+        "path": "hq-handover/skill-bundle/scripts/bootstrap_hq.py",
+        "size": 5843,
+        "mtime": "2026-11-26 21:42:26",
+        "mtimeTs": 1795700546.297084
+      },
+      {
+        "path": "hq-handover/skill-bundle/references/subagent_roster.json",
+        "size": 13449,
+        "mtime": "2026-11-26 21:42:26",
+        "mtimeTs": 1795700546.2967696
+      },
+      {
+        "path": "hq-handover/subagent_roster.json",
+        "size": 13449,
+        "mtime": "2026-11-26 21:41:34",
+        "mtimeTs": 1795700494.7821438
+      },
+      {
+        "path": "hq-handover/bootstrap_hq.py",
+        "size": 5843,
+        "mtime": "2026-11-26 21:40:29",
+        "mtimeTs": 1795700429.8101122
+      },
+      {
+        "path": "sync_to_drive.py",
+        "size": 6538,
+        "mtime": "2026-11-26 21:39:42",
+        "mtimeTs": 1795700382.581537
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 57100,
+        "mtime": "2026-11-26 21:19:24",
+        "mtimeTs": 1795699164.6127212
+      },
       {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
         "size": 9677,
         "mtime": "2026-11-26 21:19:03",
         "mtimeTs": 1795699143.1404073
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 57101,
-        "mtime": "2026-11-26 21:19:01",
-        "mtimeTs": 1795699141.688291
-      },
-      {
-        "path": "rpg-office/state.json",
-        "size": 15974,
-        "mtime": "2026-11-26 21:19:01",
-        "mtimeTs": 1795699141.6316595
-      },
-      {
-        "path": "stock-division/portfolio.json",
-        "size": 11022,
-        "mtime": "2026-11-26 21:18:30",
-        "mtimeTs": 1795699110.6286435
-      },
-      {
-        "path": "stock-division/reports/06_cro_stage2_and_insider_audit.md",
-        "size": 27010,
-        "mtime": "2026-11-26 21:15:43",
-        "mtimeTs": 1795698943.2193637
-      },
-      {
-        "path": "rpg-office/render_live_office.py",
-        "size": 3786,
-        "mtime": "2026-11-26 21:15:31",
-        "mtimeTs": 1795698931.158214
-      },
-      {
-        "path": "stock-division/data/sec_insider_buys_latest.json",
-        "size": 5024,
-        "mtime": "2026-11-26 21:14:24",
-        "mtimeTs": 1795698864.391854
-      },
-      {
-        "path": "rpg-office/index.html",
-        "size": 41689,
-        "mtime": "2026-11-26 21:13:13",
-        "mtimeTs": 1795698793.8011425
-      },
-      {
-        "path": "rpg-office/00_hq_steward_inspection.md",
-        "size": 7037,
-        "mtime": "2026-11-26 21:12:46",
-        "mtimeTs": 1795698766.6305642
-      },
-      {
-        "path": "products/actor5-sec-form4-insider/README.md",
-        "size": 5371,
-        "mtime": "2026-11-26 21:12:23",
-        "mtimeTs": 1795698743.362253
       }
     ],
-    "snapshotTime": "2026-11-26 21:19:24"
+    "snapshotTime": "2026-11-26 21:49:17"
   }
 }
