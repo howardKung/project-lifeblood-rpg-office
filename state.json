@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 64,
+    "remaining": 61,
     "max": 100,
-    "totalSpent": 116,
+    "totalSpent": 119,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-26 21:08:59",
@@ -61,11 +61,11 @@
       "conversationId": "hq-office-steward",
       "status": "working",
       "isBoss": false,
-      "quota": 76,
+      "quota": 73,
       "maxQuota": 100,
-      "tasksCompleted": 4,
-      "currentTask": "騎乘小綿羊巡視《大富翁4》集團總部棋盤城鎮與台灣標準鐘樓",
-      "lastUpdate": "2026-11-26 21:49:17",
+      "tasksCompleted": 5,
+      "currentTask": "騎乘 3D 小綿羊巡視 Three.js 立體《大富翁4》總部城鎮",
+      "lastUpdate": "2026-11-26 22:05:08",
       "color": "#2dd4bf",
       "shirt": "#0f766e",
       "hair": "#334155"
@@ -253,6 +253,14 @@
   ],
   "reports": [
     {
+      "time": "2026-11-26 22:05:08",
+      "agentId": "office_steward",
+      "agentName": "集團總務長",
+      "status": "working",
+      "cost": 3,
+      "summary": "【Three.js 真 3D 大富翁4改裝完工】已升級 WebGL 3D 立體棋盤島嶼、6 大 3D 地標、3D 擲骰子與跟拍小綿羊視角，同時保留 2D 經典版一鍵切換！"
+    },
+    {
       "time": "2026-11-26 21:49:17",
       "agentId": "office_steward",
       "agentName": "集團總務長",
@@ -415,21 +423,39 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 50,
+    "totalLocalFiles": 51,
     "driveSyncedFiles": 50,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 18241,
-        "mtime": "2026-11-26 21:49:17",
-        "mtimeTs": 1795700957.3177009
+        "size": 18596,
+        "mtime": "2026-11-26 22:05:08",
+        "mtimeTs": 1795701908.3232377
       },
       {
         "path": "rpg-office/index.html",
+        "size": 116097,
+        "mtime": "2026-11-26 22:04:46",
+        "mtimeTs": 1795701886.6316044
+      },
+      {
+        "path": "rpg-office/classic2d.html",
         "size": 75846,
-        "mtime": "2026-11-26 21:48:52",
-        "mtimeTs": 1795700932.0571759
+        "mtime": "2026-11-26 22:00:45",
+        "mtimeTs": 1795701645.3318427
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 9934,
+        "mtime": "2026-11-26 21:49:18",
+        "mtimeTs": 1795700958.950762
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 91173,
+        "mtime": "2026-11-26 21:49:17",
+        "mtimeTs": 1795700957.374745
       },
       {
         "path": "hq-handover/skill-bundle/SKILL.md",
@@ -460,26 +486,8 @@
         "size": 5843,
         "mtime": "2026-11-26 21:40:29",
         "mtimeTs": 1795700429.8101122
-      },
-      {
-        "path": "sync_to_drive.py",
-        "size": 6538,
-        "mtime": "2026-11-26 21:39:42",
-        "mtimeTs": 1795700382.581537
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 57100,
-        "mtime": "2026-11-26 21:19:24",
-        "mtimeTs": 1795699164.6127212
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 9677,
-        "mtime": "2026-11-26 21:19:03",
-        "mtimeTs": 1795699143.1404073
       }
     ],
-    "snapshotTime": "2026-11-26 21:49:17"
+    "snapshotTime": "2026-11-26 22:05:08"
   }
 }
