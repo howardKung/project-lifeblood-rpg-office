@@ -408,26 +408,26 @@
   "directives": [],
   "telemetry": {
     "totalLocalFiles": 45,
-    "driveSyncedFiles": 37,
+    "driveSyncedFiles": 45,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 9677,
+        "mtime": "2026-11-26 21:19:03",
+        "mtimeTs": 1795699143.1404073
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 57101,
+        "mtime": "2026-11-26 21:19:01",
+        "mtimeTs": 1795699141.688291
+      },
       {
         "path": "rpg-office/state.json",
         "size": 15974,
         "mtime": "2026-11-26 21:19:01",
         "mtimeTs": 1795699141.6316595
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 56822,
-        "mtime": "2026-11-26 21:18:59",
-        "mtimeTs": 1795699139.7214837
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 9456,
-        "mtime": "2026-11-26 21:18:36",
-        "mtimeTs": 1795699116.1981032
       },
       {
         "path": "stock-division/portfolio.json",
@@ -472,6 +472,6 @@
         "mtimeTs": 1795698743.362253
       }
     ],
-    "snapshotTime": "2026-11-26 21:19:01"
+    "snapshotTime": "2026-11-26 21:19:24"
   }
 }
