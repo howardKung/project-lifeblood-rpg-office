@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 60,
+    "remaining": 58,
     "max": 100,
-    "totalSpent": 120,
+    "totalSpent": 122,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-26 21:08:59",
@@ -261,17 +261,25 @@
       "conversationId": "alpha-news-social-radar",
       "status": "working",
       "isBoss": false,
-      "quota": 80,
+      "quota": 78,
       "maxQuota": 100,
-      "tasksCompleted": 1,
-      "currentTask": "【大富翁新聞電視台】蒐集台美股、國際關稅、AI商機與 PTT/Reddit/HN/X 輿情早報",
-      "lastUpdate": "2026-11-27 06:47:00",
+      "tasksCompleted": 2,
+      "currentTask": "駐守《大富翁4》新聞電視台：即時監測台美股、關稅、AI商機與 PTT/Reddit/HN/X 輿情",
+      "lastUpdate": "2026-11-27 06:53:46",
       "color": "#f43f5e",
       "shirt": "#e11d48",
       "hair": "#451a03"
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-27 06:53:46",
+      "agentId": "news_social_radar",
+      "agentName": "新聞輿情特派員",
+      "status": "working",
+      "cost": 2,
+      "summary": "【新聞輿情特派員正式報到】已完成首份大 Boss 專屬全球情報早報與四大社群風向雷達，並於戰情網與 3D 新聞電視台同步開播！"
+    },
     {
       "id": "auto-settle-2026-11-26-us",
       "time": "2026-11-26 22:51:31",
@@ -460,71 +468,71 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 52,
-    "driveSyncedFiles": 51,
+    "totalLocalFiles": 55,
+    "driveSyncedFiles": 52,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 19462,
-        "mtime": "2026-11-26 22:51:49",
-        "mtimeTs": 1795704709.670617
-      },
-      {
-        "path": "stock-division/portfolio.json",
-        "size": 11022,
-        "mtime": "2026-11-26 22:51:49",
-        "mtimeTs": 1795704709.6675205
+        "size": 20542,
+        "mtime": "2026-11-27 06:53:46",
+        "mtimeTs": 1795733626.8462608
       },
       {
         "path": "rpg-office/auto_checkin_settlement.py",
-        "size": 4630,
-        "mtime": "2026-11-26 22:51:17",
-        "mtimeTs": 1795704677.607747
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 10473,
-        "mtime": "2026-11-26 22:20:47",
-        "mtimeTs": 1795702847.3402727
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 139323,
-        "mtime": "2026-11-26 22:20:45",
-        "mtimeTs": 1795702845.8032525
+        "size": 8216,
+        "mtime": "2026-11-27 06:53:31",
+        "mtimeTs": 1795733611.306559
       },
       {
         "path": "rpg-office/classic2d.html",
-        "size": 82788,
-        "mtime": "2026-11-26 22:20:25",
-        "mtimeTs": 1795702825.3970945
+        "size": 87624,
+        "mtime": "2026-11-27 06:53:31",
+        "mtimeTs": 1795733611.3030744
       },
       {
         "path": "rpg-office/index.html",
-        "size": 123339,
-        "mtime": "2026-11-26 22:20:25",
-        "mtimeTs": 1795702825.3937895
-      },
-      {
-        "path": "hq-handover/skill-bundle/SKILL.md",
-        "size": 4230,
-        "mtime": "2026-11-26 21:42:26",
-        "mtimeTs": 1795700546.2972836
+        "size": 135131,
+        "mtime": "2026-11-27 06:53:31",
+        "mtimeTs": 1795733611.2992744
       },
       {
         "path": "hq-handover/skill-bundle/scripts/bootstrap_hq.py",
-        "size": 5843,
-        "mtime": "2026-11-26 21:42:26",
-        "mtimeTs": 1795700546.297084
+        "size": 6133,
+        "mtime": "2026-11-27 06:51:18",
+        "mtimeTs": 1795733478.0448363
+      },
+      {
+        "path": "hq-handover/bootstrap_hq.py",
+        "size": 6133,
+        "mtime": "2026-11-27 06:51:16",
+        "mtimeTs": 1795733476.3403664
+      },
+      {
+        "path": "stock-division/data/news_feed_latest.json",
+        "size": 37994,
+        "mtime": "2026-11-27 06:49:44",
+        "mtimeTs": 1795733384.4606478
+      },
+      {
+        "path": "stock-division/reports/07_news_and_social_intelligence.md",
+        "size": 10019,
+        "mtime": "2026-11-27 06:49:30",
+        "mtimeTs": 1795733370.5396943
       },
       {
         "path": "hq-handover/skill-bundle/references/subagent_roster.json",
-        "size": 13449,
-        "mtime": "2026-11-26 21:42:26",
-        "mtimeTs": 1795700546.2967696
+        "size": 15426,
+        "mtime": "2026-11-27 06:48:48",
+        "mtimeTs": 1795733328.1357417
+      },
+      {
+        "path": "hq-handover/subagent_roster.json",
+        "size": 15426,
+        "mtime": "2026-11-27 06:48:48",
+        "mtimeTs": 1795733328.135154
       }
     ],
-    "snapshotTime": "2026-11-26 22:51:50"
+    "snapshotTime": "2026-11-27 06:53:46"
   }
 }
