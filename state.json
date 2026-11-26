@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 84,
+    "remaining": 0,
     "max": 100,
-    "totalSpent": 38,
+    "totalSpent": 100,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-26 10:32:00",
@@ -37,13 +37,13 @@
       "tier": 1,
       "reportsTo": "boss",
       "conversationId": "a737e45b-0fc5-4039-adeb-314b3cfbc85e",
-      "status": "working",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 90,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 9,
-      "currentTask": "抓取 2026-11-26 即時台美股報價與總經數據，調度股市二部四位專家會診",
-      "lastUpdate": "2026-11-26 11:16:09",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#3b82f6",
       "shirt": "#2563eb",
       "hair": "#0f172a"
@@ -56,13 +56,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "8ae9bc2305e425da59833f4a344f74c9",
-      "status": "working",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 82,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 3,
-      "currentTask": "Round 3 跨平台零成本新金流賽道挖掘（GitHub Actions / MCP / 自動化微服務）",
-      "lastUpdate": "2026-11-26 11:25:59",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#10b981",
       "shirt": "#059669",
       "hair": "#3f2e21"
@@ -75,13 +75,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "7800c1ac97bb3d280a6ed10022c3caba",
-      "status": "working",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 80,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 3,
-      "currentTask": "開發金流一部第 4 台印鈔機：Shopify & WooCommerce Store Intel Actor (ecommerce-store-app-intel)",
-      "lastUpdate": "2026-11-26 11:25:57",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#06b6d4",
       "shirt": "#0891b2",
       "hair": "#1e293b"
@@ -94,13 +94,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "d56e9101e5dc1ff7610d55f4a72bc313",
-      "status": "idle",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 86,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 2,
-      "currentTask": "已完成 B2B GTM 三部曲交叉導流設計與 Gumroad 商業包打包，待命",
-      "lastUpdate": "2026-11-26 07:56:43",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#ec4899",
       "shirt": "#db2777",
       "hair": "#4c1d95"
@@ -113,13 +113,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "ec56d57e4b3941868bc0ac0c6ee53a92",
-      "status": "idle",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 86,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 2,
-      "currentTask": "已完成項目 A & B 之 Zero-PII 與 output_schema.json 上架前合規審查，待命",
-      "lastUpdate": "2026-11-26 08:00:18",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#ef4444",
       "shirt": "#b91c1c",
       "hair": "#18181b"
@@ -132,13 +132,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "alpha-div-supply-chain",
-      "status": "working",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 100,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 0,
-      "currentTask": "掃描美股 AI 巨頭財報 CapEx 與台股高純度受惠供應鏈月營收拐點",
-      "lastUpdate": "2026-11-26 11:16:13",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#eab308",
       "shirt": "#ca8a04",
       "hair": "#1c1917"
@@ -151,13 +151,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "alpha-div-chip-sniper",
-      "status": "working",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 100,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 0,
-      "currentTask": "篩選三大法人認養、美股機構強勢股與均線多頭突破共振買點",
-      "lastUpdate": "2026-11-26 11:16:15",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#a855f7",
       "shirt": "#7e22ce",
       "hair": "#0f172a"
@@ -170,13 +170,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "alpha-div-macro-etf",
-      "status": "idle",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 96,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 1,
-      "currentTask": "已完成 2026 Q4 總經水位與跨市場 ETF 配置報告",
-      "lastUpdate": "2026-11-26 11:28:33",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#14b8a6",
       "shirt": "#0d9488",
       "hair": "#1e293b"
@@ -189,19 +189,62 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "alpha-div-cro",
-      "status": "idle",
+      "status": "depleted",
       "isBoss": false,
-      "quota": 100,
+      "quota": 0,
       "maxQuota": 100,
       "tasksCompleted": 0,
-      "currentTask": "新部門報到就緒！嚴格把關 R/R >= 2.5、停損失效價與單一題材曝險上限",
-      "lastUpdate": "2026-11-26 10:32:00",
+      "currentTask": "真實子代理額度已達上限 (Individual quota reached)，任務已由總管收尾交付，自動打卡下班待命",
+      "lastUpdate": "2026-11-26 12:12:00",
       "color": "#f97316",
       "shirt": "#c2410c",
       "hair": "#27272a"
+    },
+    {
+      "id": "paper_fund_manager",
+      "name": "百萬模擬操盤手",
+      "role": "二部子部門 · 百萬實盤模擬室 (NT$1M)",
+      "division": "stock",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "alpha-paper-desk-1m",
+      "status": "depleted",
+      "isBoss": false,
+      "quota": 0,
+      "maxQuota": 100,
+      "tasksCompleted": 1,
+      "currentTask": "已完成 Day 1 (NT$1,000,000) 6 檔建倉與 GitHub Actions 每日自動結算部署；因個人子代理額度用盡自動下班",
+      "lastUpdate": "2026-11-26 12:12:00",
+      "color": "#22c55e",
+      "shirt": "#15803d",
+      "hair": "#0f172a"
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-26 12:12:00",
+      "agentId": "commander",
+      "agentName": "Antigravity (總管)",
+      "status": "depleted",
+      "cost": 10,
+      "summary": "🪫【真實額度耗盡下班通知】系統觸發真實子代理額度上限 (Individual quota reached)！總管已完成所有在途任務收尾交付，全體 10 名 AI 成員自動打卡下班移至休息區（GitHub Actions 每日收盤結算機器人不受影響，仍每天免費自動產出投資日報！）。"
+    },
+    {
+      "time": "2026-11-26 12:08:31",
+      "agentId": "paper_fund_manager",
+      "agentName": "百萬模擬操盤手",
+      "status": "working",
+      "cost": 6,
+      "summary": "已成立二部子部門【百萬實盤模擬操盤室 (NT$1,000,000)】，完成 Day 1 (2026-11-26) 6 檔核心+對沖建倉 (NAV NT$999,179，現金 32.2%) 並上線 https://howardkung.github.io/alpha-stock-warroom/ 暨每日自動結算排程！"
+    },
+    {
+      "time": "2026-11-26 12:11:30",
+      "agentId": "indie_hacker_builder",
+      "agentName": "平台套利駭客",
+      "status": "working",
+      "cost": 6,
+      "summary": "金流一部完成第 4 台印鈔機 ecommerce-store-app-intel (Shopify/WooCommerce 電商情報 Actor #4) 與 Round 3 一魚兩吃 FinTech API 提案！"
+    },
     {
       "time": "2026-11-26 11:28:33",
       "agentId": "macro_etf_strategist",
@@ -269,15 +312,57 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 32,
+    "totalLocalFiles": 37,
     "driveSyncedFiles": 28,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
+        "path": "stock-division/daily-reports/2026-11-26.md",
+        "size": 1460,
+        "mtime": "2026-11-26 12:12:04",
+        "mtimeTs": 1795695124.5615485
+      },
+      {
+        "path": "stock-division/portfolio.json",
+        "size": 7518,
+        "mtime": "2026-11-26 12:12:04",
+        "mtimeTs": 1795695124.558054
+      },
+      {
         "path": "rpg-office/state.json",
-        "size": 9632,
+        "size": 11916,
+        "mtime": "2026-11-26 12:12:04",
+        "mtimeTs": 1795695124.5467443
+      },
+      {
+        "path": "proposals/R3_01_fintech_synergy.md",
+        "size": 2705,
+        "mtime": "2026-11-26 12:09:25",
+        "mtimeTs": 1795694965.866375
+      },
+      {
+        "path": "stock-division/reports/02_supply_chain_and_cro_final.md",
+        "size": 5138,
+        "mtime": "2026-11-26 12:05:42",
+        "mtimeTs": 1795694742.4252763
+      },
+      {
+        "path": "stock-division/reports/03_chip_momentum_signals.md",
+        "size": 16716,
+        "mtime": "2026-11-26 11:30:01",
+        "mtimeTs": 1795692601.022383
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 8148,
+        "mtime": "2026-11-26 11:28:35",
+        "mtimeTs": 1795692515.3722556
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 33626,
         "mtime": "2026-11-26 11:28:33",
-        "mtimeTs": 1795692513.6168537
+        "mtimeTs": 1795692513.6938314
       },
       {
         "path": "stock-division/reports/01_macro_etf_strategy.md",
@@ -286,54 +371,12 @@
         "mtimeTs": 1795692459.0321422
       },
       {
-        "path": "rpg-office/rpg_office.html",
-        "size": 33271,
-        "mtime": "2026-11-26 11:25:59",
-        "mtimeTs": 1795692359.9447987
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 7830,
-        "mtime": "2026-11-26 11:25:57",
-        "mtimeTs": 1795692357.4484084
-      },
-      {
         "path": "stock-division/data/LIVE_MARKET_SNAPSHOT_20261126.md",
         "size": 13333,
         "mtime": "2026-11-26 11:20:58",
         "mtimeTs": 1795692058.8126652
-      },
-      {
-        "path": "stock-division/data/yahoo_quotes_20261126.json",
-        "size": 21499,
-        "mtime": "2026-11-26 11:20:58",
-        "mtimeTs": 1795692058.8113663
-      },
-      {
-        "path": "stock-division/fetch_live_quotes.py",
-        "size": 7300,
-        "mtime": "2026-11-26 11:20:54",
-        "mtimeTs": 1795692054.2432106
-      },
-      {
-        "path": "products/actor3-sec-form-d/README.md",
-        "size": 7356,
-        "mtime": "2026-11-26 10:36:10",
-        "mtimeTs": 1795689370.652326
-      },
-      {
-        "path": "products/actor3-sec-form-d/APIFY_LAUNCH_GUIDE_ZH.md",
-        "size": 2412,
-        "mtime": "2026-11-26 10:36:10",
-        "mtimeTs": 1795689370.6521778
-      },
-      {
-        "path": "products/actor2-dns-tech-signals/README.md",
-        "size": 7873,
-        "mtime": "2026-11-26 10:36:10",
-        "mtimeTs": 1795689370.6468017
       }
     ],
-    "snapshotTime": "2026-11-26 11:28:33"
+    "snapshotTime": "2026-11-26 12:12:04"
   }
 }
