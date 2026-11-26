@@ -242,9 +242,9 @@
       "isBoss": false,
       "quota": 80,
       "maxQuota": 100,
-      "tasksCompleted": 2,
-      "currentTask": "【0-額度自動】監控 6 檔底倉 + 7 檔 CRO 簽核右側條件單（嚴守 NT20,000 現金紅線）",
-      "lastUpdate": "2026-11-26 21:19:01",
+      "tasksCompleted": 3,
+      "currentTask": "【0-額度自動排程】最新總淨值 NT$999,240 (-0.08%)｜現金 NT$321,347｜持倉 6 檔・右側條件單 7 檔",
+      "lastUpdate": "2026-11-26 22:51:31",
       "color": "#22c55e",
       "shirt": "#15803d",
       "hair": "#0f172a",
@@ -252,6 +252,15 @@
     }
   ],
   "reports": [
+    {
+      "id": "auto-settle-2026-11-26-us",
+      "time": "2026-11-26 22:51:31",
+      "agentId": "paper_fund_manager",
+      "agentName": "百萬模擬操盤手",
+      "status": "working",
+      "cost": 0,
+      "summary": "【🤖 2026-11-26 美股盤後／全日結算】總資產 NT$999,240 （當日 -881 / -0.09%｜累計 -760 / -0.08%）｜現金 NT$321,347｜摘要：【建倉】買進 3661.TW 世芯-KY 40股 @ 3,735.0 (投入 NT$149,613，目標 4,480 / 停損 3,480)"
+    },
     {
       "time": "2026-11-26 22:20:45",
       "agentId": "office_steward",
