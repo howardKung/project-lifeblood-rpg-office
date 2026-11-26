@@ -23,7 +23,7 @@
       "maxQuota": 100,
       "tasksCompleted": 2,
       "currentTask": "視察 Live RPG 辦公室、控管算力額度並拍板 Top 1 動工",
-      "lastUpdate": "2026-11-25 22:13:00",
+      "lastUpdate": "2026-11-26 06:45:57",
       "color": "#f59e0b",
       "shirt": "#7c3aed",
       "hair": "#1f2937"
@@ -121,6 +121,14 @@
   ],
   "reports": [
     {
+      "time": "2026-11-26 06:45:57",
+      "agentId": "boss",
+      "agentName": "大 Boss（你）",
+      "status": "boss",
+      "cost": 0,
+      "summary": "【大 Boss 授權指令】授權 Antigravity 全權指揮啟動 Top 1 Multi-ATS Actor 開發；嚴格紅線：任何涉及付費的動作必須先向大 Boss 確認後方可執行！"
+    },
+    {
       "time": "2026-11-26 06:28:16",
       "agentId": "commander",
       "agentName": "Antigravity",
@@ -193,33 +201,39 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 6336,
+        "size": 6695,
+        "mtime": "2026-11-26 06:45:57",
+        "mtimeTs": 1795675557.243356
+      },
+      {
+        "path": "CHARTER.md",
+        "size": 3162,
+        "mtime": "2026-11-26 06:45:56",
+        "mtimeTs": 1795675556.1832125
+      },
+      {
+        "path": "rpg-office/office_cli.py",
+        "size": 7108,
+        "mtime": "2026-11-26 06:28:40",
+        "mtimeTs": 1795674520.031154
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 3275,
         "mtime": "2026-11-26 06:28:16",
-        "mtimeTs": 1795674496.5783052
+        "mtimeTs": 1795674496.640721
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 30683,
+        "mtime": "2026-11-26 06:28:16",
+        "mtimeTs": 1795674496.6358647
       },
       {
         "path": "rpg-office/render_live_office.py",
         "size": 27777,
         "mtime": "2026-11-26 06:28:00",
         "mtimeTs": 1795674480.9150734
-      },
-      {
-        "path": "rpg-office/office_cli.py",
-        "size": 7098,
-        "mtime": "2026-11-26 06:23:44",
-        "mtimeTs": 1795674224.9277298
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 30394,
-        "mtime": "2026-11-26 06:23:30",
-        "mtimeTs": 1795674210.0771315
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 3051,
-        "mtime": "2026-11-26 06:15:54",
-        "mtimeTs": 1795673754.2717438
       },
       {
         "path": "rpg-office/live_office.html",
@@ -244,14 +258,8 @@
         "size": 9692,
         "mtime": "2026-11-26 05:48:01",
         "mtimeTs": 1795672081.8150408
-      },
-      {
-        "path": "sync_to_drive.py",
-        "size": 4512,
-        "mtime": "2026-11-26 05:47:12",
-        "mtimeTs": 1795672032.9177716
       }
     ],
-    "snapshotTime": "2026-11-26 06:28:16"
+    "snapshotTime": "2026-11-26 06:45:57"
   }
 }
