@@ -359,7 +359,7 @@
               <div><i class="dot" style="background:${a.color}"></i><strong>${a.name}</strong></div>
               <span style="color:${meta.color}; font-size:11px; font-weight:600;">${meta.icon} ${meta.label}</span>
             </div>
-            <div class="muted" style="font-size:11px; margin-top:2px;">${a.role}</div>
+            <div class="muted" style="font-size:11px; margin-top:2px;">${a.role} ${a.brainTier ? `<span class="pill" style="margin-left:4px; font-size:10px;">${a.brainTier}</span>` : ""}</div>
             ${!a.isBoss ? `
               <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">
                 <div class="bar-bg" style="flex:1; height:5px;"><div class="bar-fill" style="width:${(a.quota/a.maxQuota)*100}%; background:${a.quota>30?'var(--success)':(a.quota>0?'var(--warning)':'var(--error)')}"></div></div>
