@@ -71,13 +71,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "4d45eadf25e3a97eff77f4c65e29f773",
-      "status": "idle",
+      "status": "working",
       "isBoss": false,
       "quota": 75,
       "maxQuota": 100,
       "tasksCompleted": 1,
-      "currentTask": "已完成 Round 1 提案 (Top 1 Multi-ATS & Top 2 AgentGuard)，待命準備開工",
-      "lastUpdate": "2026-11-25 21:32:03",
+      "currentTask": "開發 Top 1 Multi-ATS 徵才購買訊號 Apify Actor 並推送至 GitHub (howardKung/multi-ats-hiring-signals)",
+      "lastUpdate": "2026-11-26 06:45:59",
       "color": "#06b6d4",
       "shirt": "#0891b2",
       "hair": "#1e293b"
@@ -201,9 +201,21 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 6695,
+        "size": 6727,
+        "mtime": "2026-11-26 06:45:59",
+        "mtimeTs": 1795675559.4176078
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 3532,
+        "mtime": "2026-11-26 06:45:59",
+        "mtimeTs": 1795675559.047462
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 30987,
         "mtime": "2026-11-26 06:45:57",
-        "mtimeTs": 1795675557.243356
+        "mtimeTs": 1795675557.309127
       },
       {
         "path": "CHARTER.md",
@@ -216,18 +228,6 @@
         "size": 7108,
         "mtime": "2026-11-26 06:28:40",
         "mtimeTs": 1795674520.031154
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 3275,
-        "mtime": "2026-11-26 06:28:16",
-        "mtimeTs": 1795674496.640721
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 30683,
-        "mtime": "2026-11-26 06:28:16",
-        "mtimeTs": 1795674496.6358647
       },
       {
         "path": "rpg-office/render_live_office.py",
@@ -260,6 +260,6 @@
         "mtimeTs": 1795672081.8150408
       }
     ],
-    "snapshotTime": "2026-11-26 06:45:57"
+    "snapshotTime": "2026-11-26 06:45:59"
   }
 }
