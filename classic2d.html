@@ -362,7 +362,7 @@
     .quota-capsule {
       border-radius: 14px;
       padding: 5px 12px;
-      min-width: 185px;
+      min-width: 205px;
     }
     .quota-head {
       display: flex;
@@ -371,11 +371,21 @@
       gap: 8px;
       font-size: 10.5px;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       color: #dbeafe;
     }
+    .quota-sub {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #93c5fd;
+      margin-top: 3px;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .bar-bg {
-      height: 9px;
+      height: 8px;
       border-radius: 999px;
       background: #041126;
       overflow: hidden;
@@ -718,14 +728,15 @@
             </div>
           </div>
 
-          <div class="r4-capsule quota-capsule" title="集團算力點券額度（決定員工工時）">
-            <div class="r4-cap-icon">🎟️</div>
-            <div style="flex:1;">
+          <div id="quota-capsule" class="r4-capsule quota-capsule" title="集團算力額度（支援本機 Antigravity CLI 全自動同步）">
+            <div id="quota-cap-icon" class="r4-cap-icon">🎟️</div>
+            <div style="flex:1; min-width:0;">
               <div class="quota-head">
-                <span>點券額度</span>
+                <span id="quota-label">點券額度</span>
                 <span id="quota-text" class="mono" style="color:#fde047;">-- / -- 點</span>
               </div>
               <div class="bar-bg"><div id="quota-bar" class="bar-fill" style="width:0%;"></div></div>
+              <div id="quota-sub" class="quota-sub">本機 agy 自動橋接就緒</div>
             </div>
           </div>
 
@@ -802,6 +813,7 @@
       document.getElementById("cal-day").textContent = now.getDate();
       const miniClockEl = document.getElementById("mini-clock");
       if (miniClockEl) miniClockEl.textContent = liveClockStr;
+      if (typeof renderQuotaHUD === "function" && STATE) renderQuotaHUD();
     }
     updateLocalClock();
     setInterval(updateLocalClock, 1000);
@@ -1027,25 +1039,138 @@
       return `<span class="pill" style="background:rgba(251,191,36,0.22); border-color:#fde047; color:#fef08a;">🏛️ 集團總部</span>`;
     }
 
+    function computeQuotaTelemetry(q) {
+      const maxVal = q.max || 100;
+      const basePct = Math.max(0, Math.min(100, Math.round((q.remaining / maxVal) * 100)));
+      const live = q.live;
+      if (!live || !live.enabled) {
+        return {
+          isLive: false,
+          pct: basePct,
+          headLabel: "點券額度",
+          headVal: `${q.remaining} / ${maxVal} 點`,
+          miniVal: `${basePct}%`,
+          subText: "支援 agy 全自動回傳真實 %",
+          tooltip: "集團算力點券額度（至右側「雲端歸檔」分頁可複製一鍵全自動額度橋接指令）",
+          buckets: {},
+          countdownStr: "--",
+          syncedAt: "--"
+        };
+      }
+
+      const b = live.buckets || {};
+      let g5Pct = b.gemini5h?.pct ?? basePct;
+      const gwPct = b.geminiWeekly?.pct ?? null;
+      const tpPct = b.thirdParty5h?.pct ?? b.thirdPartyWeekly?.pct ?? null;
+      const resetIso = b.gemini5h?.resetTime || live.primaryResetTime || null;
+      let remSec = null;
+      let autoResetNow = false;
+
+      if (resetIso) {
+        const diffMs = Date.parse(resetIso) - Date.now();
+        if (!Number.isNaN(diffMs)) {
+          if (diffMs <= 0) {
+            autoResetNow = true;
+            g5Pct = 100;
+          } else {
+            remSec = Math.floor(diffMs / 1000);
+          }
+        }
+      }
+
+      const effPct = autoResetNow
+        ? (gwPct !== null ? Math.min(100, gwPct) : 100)
+        : Math.max(0, Math.min(100, gwPct !== null ? Math.min(g5Pct, gwPct) : g5Pct));
+
+      let countdownStr = autoResetNow ? "已滿血重置" : "";
+      if (remSec !== null && remSec > 0) {
+        const pad = n => String(n).padStart(2, "0");
+        if (remSec >= 86400) {
+          const d = Math.floor(remSec / 86400);
+          const h = Math.floor((remSec % 86400) / 3600);
+          countdownStr = `${d}天${h}時`;
+        } else {
+          const h = Math.floor(remSec / 3600);
+          const m = Math.floor((remSec % 3600) / 60);
+          const s = remSec % 60;
+          countdownStr = `${pad(h)}:${pad(m)}:${pad(s)}`;
+        }
+      }
+
+      const subParts = [`5h ${g5Pct}%`];
+      if (gwPct !== null) subParts.push(`週 ${gwPct}%`);
+      if (countdownStr) {
+        subParts.push(autoResetNow ? `⚡${countdownStr}` : `⏱️${countdownStr}`);
+      } else if (tpPct !== null) {
+        subParts.push(`3P ${tpPct}%`);
+      }
+
+      const dot = effPct > 35 ? "🟢" : (effPct > 0 ? "🟡" : "🔴");
+      const tipLines = [
+        `⚡ Antigravity 真實算力全自動連線 (${live.source || "agy"})`,
+        live.planTier ? `訂閱方案：${live.planTier}` : null,
+        `Gemini 5h 滾動額度：${g5Pct}%` + (countdownStr ? ` (${countdownStr})` : ""),
+        gwPct !== null ? `Gemini 7天週額度：${gwPct}%` : null,
+        tpPct !== null ? `Claude / GPT 額度：${tpPct}%` : null,
+        q.apifyFreeTier ? `Apify 免費額度：剩餘 ${q.apifyFreeTier.remainingPct}% ($${q.apifyFreeTier.usedUsd}/$${q.apifyFreeTier.maxUsd})` : null,
+        `最後同步 (台灣時間)：${live.syncedAt || "--"}`
+      ].filter(Boolean);
+
+      return {
+        isLive: true,
+        pct: effPct,
+        g5Pct,
+        gwPct,
+        tpPct,
+        headLabel: `${dot} 真實額度`,
+        headVal: `${effPct}%`,
+        miniVal: `⚡${effPct}%`,
+        subText: subParts.join(" · "),
+        tooltip: tipLines.join("\n"),
+        buckets: b,
+        countdownStr: countdownStr || "無倒數（滿額）",
+        syncedAt: live.syncedAt || "--",
+        planTier: live.planTier || "Antigravity"
+      };
+    }
+
+    function renderQuotaHUD() {
+      if (!STATE?.quota) return null;
+      const qt = computeQuotaTelemetry(STATE.quota);
+      const capEl = document.getElementById("quota-capsule");
+      const iconEl = document.getElementById("quota-cap-icon");
+      const lblEl = document.getElementById("quota-label");
+      const txtEl = document.getElementById("quota-text");
+      const subEl = document.getElementById("quota-sub");
+      const miniQuotaEl = document.getElementById("mini-quota");
+      const bar = document.getElementById("quota-bar");
+
+      if (capEl) capEl.title = qt.tooltip;
+      if (iconEl) iconEl.textContent = qt.isLive ? "⚡" : "🎟️";
+      if (lblEl) lblEl.textContent = qt.headLabel;
+      if (txtEl) txtEl.textContent = qt.headVal;
+      if (subEl) subEl.textContent = qt.subText;
+      if (miniQuotaEl) miniQuotaEl.textContent = qt.miniVal;
+      if (bar) {
+        bar.style.width = qt.pct + "%";
+        bar.style.background = qt.pct > 35
+          ? "linear-gradient(90deg, #22c55e, #4ade80)"
+          : (qt.pct > 0 ? "linear-gradient(90deg, #f59e0b, #fde047)" : "#fb7185");
+      }
+      return qt;
+    }
+
     function renderUI() {
       if (!STATE) return;
-      const q = STATE.quota;
-      const pct = Math.max(0, Math.min(100, (q.remaining / q.max) * 100));
-      document.getElementById("quota-text").textContent = `${q.remaining} / ${q.max} 點`;
-      const miniQuotaEl = document.getElementById("mini-quota");
-      if (miniQuotaEl) miniQuotaEl.textContent = `${Math.round(pct)}%`;
-      const bar = document.getElementById("quota-bar");
-      bar.style.width = pct + "%";
-      bar.style.background = pct > 35
-        ? "linear-gradient(90deg, #22c55e, #4ade80)"
-        : (pct > 0 ? "linear-gradient(90deg, #f59e0b, #fde047)" : "#fb7185");
+      const qt = renderQuotaHUD();
+      const effRem = qt ? qt.pct : STATE.quota.remaining;
 
       const workers = STATE.agents.filter(a => !a.isBoss);
       const w = workers.filter(a => a.status === "working").length;
       const m = workers.filter(a => a.status === "meeting").length;
       const i = workers.filter(a => a.status === "idle").length;
-      document.getElementById("status-pill").textContent = q.remaining <= 0
-        ? "💤 點券歸零・全員下班"
+      document.getElementById("status-pill").textContent = effRem <= 0
+        ? "💤 額度歸零・全員下班"
         : `總編制 ${STATE.agents.length} 人｜上工 ${w} · 開會 ${m} · 待命 ${i}`;
 
       renderInspector();
@@ -1155,9 +1280,48 @@
       }).join("");
     }
 
+    window.copyBridgeCmd = function(osType, btnEl) {
+      const cmd = osType === "win"
+        ? "irm https://raw.githubusercontent.com/howardKung/project-lifeblood-rpg-office/main/scripts/install_quota_bridge.ps1 | iex"
+        : "curl -fsSL https://raw.githubusercontent.com/howardKung/project-lifeblood-rpg-office/main/scripts/install_quota_bridge.sh | bash";
+      navigator.clipboard.writeText(cmd).then(() => {
+        const orig = btnEl.textContent;
+        btnEl.textContent = "✅ 已複製一鍵指令！";
+        setTimeout(() => { btnEl.textContent = orig; }, 2200);
+      });
+    };
+
     function renderFiles() {
       const t = STATE.telemetry || { totalLocalFiles: 0, driveSyncedFiles: 0, recentFiles: [], snapshotTime: "--" };
+      const qt = computeQuotaTelemetry(STATE.quota || {});
+      const g5Str = qt.isLive ? `${qt.g5Pct}%` : `${qt.pct}% (預估)`;
+      const gwStr = qt.isLive && qt.gwPct !== null ? `${qt.gwPct}%` : "--";
+      const tpStr = qt.isLive && qt.tpPct !== null ? `${qt.tpPct}%` : "--";
+      const apify = STATE.quota?.apifyFreeTier;
+
       document.getElementById("tab-files").innerHTML = `
+        <div class="report-item" style="margin-bottom:12px; border-color:rgba(74,222,128,0.55);">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; flex-wrap:wrap;">
+            <strong style="color:#fef08a;">⚡ Antigravity 真實算力全自動遙測</strong>
+            <span class="pill" style="background:${qt.isLive ? "rgba(34,197,94,0.25)" : "rgba(251,191,36,0.22)"}; border-color:${qt.isLive ? "#4ade80" : "#fde047"}; color:${qt.isLive ? "#bbf7d0" : "#fef08a"};">
+              ${qt.isLive ? "🟢 LIVE 自動連線中" : "🟡 等待本機掛載"}
+            </span>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+            <div class="org-node" style="margin:0; cursor:default;"><div class="muted" style="font-size:10.5px;">Gemini 5h 滾動</div><div class="mono" style="font-size:14px; font-weight:900; color:#4ade80;">${g5Str}</div></div>
+            <div class="org-node" style="margin:0; cursor:default;"><div class="muted" style="font-size:10.5px;">Gemini 7天週額度</div><div class="mono" style="font-size:14px; font-weight:900; color:#38bdf8;">${gwStr}</div></div>
+            <div class="org-node" style="margin:0; cursor:default;"><div class="muted" style="font-size:10.5px;">Claude / GPT 3P</div><div class="mono" style="font-size:14px; font-weight:900; color:#f472b6;">${tpStr}</div></div>
+            <div class="org-node" style="margin:0; cursor:default;"><div class="muted" style="font-size:10.5px;">5h 重置倒數</div><div class="mono" style="font-size:13px; font-weight:900; color:#fde047;">${qt.countdownStr}</div></div>
+          </div>
+          ${apify ? `<div style="font-size:11px; color:#a7f3d0; margin-top:6px;">🕷️ Apify 免費額度：剩餘 <strong>${apify.remainingPct}%</strong> ($${apify.usedUsd} / $${apify.maxUsd} USD)</div>` : ""}
+          <div style="color:#dbeafe; font-size:11px; margin-top:8px; line-height:1.45;">
+            最後回傳：<code>${qt.syncedAt}</code> · 在本機執行一次即永久掛載 <code>agy</code> 自動同步：
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;">
+            <button type="button" class="mode-btn" style="font-size:10.5px; padding:4px 9px;" onclick="copyBridgeCmd('unix', this)">📋 複製 Mac/Linux 一鍵串接</button>
+            <button type="button" class="mode-btn" style="font-size:10.5px; padding:4px 9px;" onclick="copyBridgeCmd('win', this)">📋 複製 Windows 一鍵串接</button>
+          </div>
+        </div>
         <div class="report-item" style="margin-bottom:12px;">
           <strong style="color:#fef08a;">☁️ Google Drive 集團永久歸檔庫</strong>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">

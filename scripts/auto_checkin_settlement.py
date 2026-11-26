@@ -186,6 +186,90 @@ def sync_news_social_radar(state: dict, news: Optional[dict], now_tw: datetime, 
     print(f"[AUTO-NEWS] Synced {news_key}: {top_headline}")
 
 
+def auto_recover_quota_reset(state: dict, ts_short: str, today_str: str) -> None:
+    """If a live-synced 5h quota resetTime has passed in UTC, automatically refill 5h bucket & wake depleted agents."""
+    q = state.get("quota") or {}
+    live = q.get("live") or {}
+    buckets = live.get("buckets") or {}
+    g5 = buckets.get("gemini5h")
+    if not isinstance(g5, dict):
+        return
+    rt_str = g5.get("resetTime")
+    if not rt_str:
+        return
+    try:
+        rt_utc = datetime.fromisoformat(str(rt_str).replace("Z", "+00:00"))
+    except ValueError:
+        return
+    if datetime.now(timezone.utc) < rt_utc:
+        return
+
+    gw_pct = (buckets.get("geminiWeekly") or {}).get("pct", 100)
+    recovered_pct = max(0, min(100, int(gw_pct)))
+    g5["pct"] = 100
+    g5["resetTime"] = None
+    g5["resetInSeconds"] = None
+    live["primaryResetTime"] = (buckets.get("geminiWeekly") or {}).get("resetTime")
+    live["syncedAt"] = ts_short
+    live["source"] = "auto-5h-reset-recovery"
+
+    prev_rem = int(q.get("remaining", 0))
+    q["remaining"] = recovered_pct
+    if recovered_pct > 0:
+        for agent in state.get("agents", []):
+            if agent.get("isBoss"):
+                continue
+            agent["quota"] = recovered_pct
+            if agent.get("status") == "depleted":
+                agent["status"] = "idle"
+                agent["currentTask"] = f"5h 滾動額度已自動到期重置（可用 {recovered_pct}%），待命準備上工"
+                agent["lastUpdate"] = ts_short
+
+        if prev_rem < recovered_pct:
+            upsert_report(
+                state,
+                "office_steward",
+                f"auto-quota-reset-{today_str}",
+                {
+                    "id": f"auto-quota-reset-{today_str}",
+                    "time": ts_short,
+                    "agentId": "office_steward",
+                    "agentName": "集團總務長",
+                    "status": "working",
+                    "cost": 0,
+                    "summary": f"🔋【5h 滾動額度自動到期回血】排程偵測到重置時間已過，Gemini 5h 額度自動回滿（有效額度 {recovered_pct}%），待命人力已喚醒！",
+                },
+            )
+            print(f"[AUTO-QUOTA] 5h reset time passed -> recovered to {recovered_pct}%")
+
+
+def sync_apify_free_quota_optional(state: dict, ts_short: str) -> None:
+    token = os.environ.get("APIFY_TOKEN", "").strip()
+    if not token:
+        return
+    try:
+        req = urllib.request.Request(
+            "https://api.apify.com/v2/users/me/limits",
+            headers={"Authorization": f"Bearer {token}", "Accept": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=12) as r:
+            payload = json.loads(r.read().decode("utf-8")).get("data") or {}
+        limits = payload.get("limits") or {}
+        current = payload.get("current") or {}
+        max_usd = float(limits.get("maxMonthlyUsageUsd") or 5.0)
+        used_usd = float(current.get("monthlyUsageUsd") or 0.0)
+        rem_pct = max(0, min(100, round(((max_usd - used_usd) / max_usd) * 100))) if max_usd > 0 else 0
+        state.setdefault("quota", {})["apifyFreeTier"] = {
+            "usedUsd": round(used_usd, 3),
+            "maxUsd": round(max_usd, 2),
+            "remainingPct": rem_pct,
+            "syncedAt": ts_short,
+        }
+        print(f"[AUTO-APIFY] Apify usage: ${used_usd:.3f} / ${max_usd:.2f} ({rem_pct}% left)")
+    except Exception as e:
+        print(f"[AUTO-APIFY] Skipped ({e})")
+
+
 def main() -> None:
     pf = fetch_portfolio()
     news = fetch_news_feed_optional()
@@ -195,6 +279,8 @@ def main() -> None:
     ts_short = now_tw.strftime("%Y-%m-%d %H:%M:%S")
     today_str = now_tw.strftime("%Y-%m-%d")
 
+    auto_recover_quota_reset(state, ts_short, today_str)
+    sync_apify_free_quota_optional(state, ts_short)
     sync_paper_fund(state, pf, now_tw, ts_short, today_str)
     sync_news_social_radar(state, news, now_tw, ts_short, today_str)
 
