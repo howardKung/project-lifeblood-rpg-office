@@ -66,6 +66,124 @@
       z-index: 40;
     }
     .container { max-width: 1480px; margin: 0 auto; }
+    .header-container { position: relative; }
+    .header.collapsed {
+      padding: 5px 10px;
+      border-bottom: 2px solid var(--gold);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.42);
+    }
+    .header.collapsed .header-row {
+      display: none;
+    }
+    .mini-hud {
+      display: none;
+    }
+    .header.collapsed .mini-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      white-space: nowrap;
+      gap: 6px;
+      height: 28px;
+      line-height: 1;
+    }
+    .mini-hud-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .mini-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(6, 23, 51, 0.85);
+      border: 1.5px solid rgba(251, 191, 36, 0.65);
+      border-radius: 999px;
+      padding: 3px 7px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #fef08a;
+      white-space: nowrap;
+    }
+    .mini-hud-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .mini-dice-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1.5px solid #fffbeb;
+      background: linear-gradient(180deg, #fde047 0%, #f59e0b 65%, #d97706 100%);
+      color: #451a03;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 0;
+      cursor: pointer;
+      box-shadow: 0 2px 0 #92400e;
+      flex-shrink: 0;
+    }
+    .mini-dice-btn.rolling span {
+      display: inline-block;
+      animation: diceSpin 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hud-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background: linear-gradient(180deg, #1e3a8a 0%, #0f2557 100%);
+      border: 2px solid #fbbf24;
+      color: #fef08a;
+      border-radius: 12px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 3px 0 #92400e;
+      transition: transform 0.1s ease, filter 0.15s ease;
+    }
+    .hud-toggle-btn:hover { filter: brightness(1.12); }
+    .hud-toggle-btn:active {
+      transform: translateY(1.5px);
+      box-shadow: 0 1px 0 #92400e;
+    }
+    .hud-expand-btn {
+      height: 26px;
+      padding: 0 9px;
+      border-radius: 999px;
+      border-width: 1.5px;
+      font-size: 11px;
+      box-shadow: 0 2px 0 #92400e;
+    }
+    @media (max-width: 860px) {
+      .header:not(.collapsed) {
+        padding: 8px 10px;
+      }
+      .header:not(.collapsed) .hud-collapse-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px 9px;
+        font-size: 11px;
+        z-index: 5;
+      }
+      .header:not(.collapsed) .r4-calendar-clock {
+        max-width: calc(100% - 104px);
+      }
+    }
+    @media (max-width: 390px) {
+      .mini-hud-left { gap: 4px; }
+      .mini-chip { padding: 2px 5px; font-size: 10.5px; }
+      .hud-expand-btn { padding: 0 7px; font-size: 10.5px; }
+    }
     .header-row {
       display: flex;
       flex-wrap: wrap;
@@ -435,8 +553,54 @@
       touch-action: none;
       user-select: none;
     }
-    @media (max-width: 720px) {
-      .stage-3d { height: 430px; }
+    @media (max-width: 768px) {
+      .grid {
+        padding: 6px;
+        gap: 10px;
+      }
+      .card {
+        border-width: 2px;
+        border-radius: 12px;
+      }
+      .card-head {
+        padding: 6px 10px;
+        gap: 4px;
+        font-size: 11.5px;
+      }
+      .legend {
+        gap: 6px;
+        font-size: 10px;
+      }
+      .cam-bar {
+        padding: 5px 8px;
+        gap: 0;
+      }
+      .cam-presets {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 100%;
+        gap: 6px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .cam-presets::-webkit-scrollbar { display: none; }
+      .cam-btn {
+        font-size: 11px;
+        padding: 4px 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        border-radius: 8px;
+        border-width: 1.5px;
+      }
+      .cam-hint { display: none; }
+      .viewport-wrap { padding: 5px; }
+      .stage-3d {
+        height: clamp(460px, calc(100dvh - 118px), 760px);
+        border-width: 2px;
+      }
+      .header:not(.collapsed) ~ main .stage-3d {
+        height: clamp(360px, calc(100dvh - 280px), 560px);
+      }
     }
     #webgl-canvas {
       width: 100%;
@@ -668,8 +832,26 @@
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="container">
+  <header id="main-header" class="header">
+    <div class="container header-container">
+      <!-- 收合精簡模式（Ultra-Slim Mini Bar, 38~42px 單行） -->
+      <div class="mini-hud" id="mini-hud">
+        <div class="mini-hud-left">
+          <span class="mini-chip">🕒 <span id="mini-clock" class="mono">--:--:--</span></span>
+          <span class="mini-chip">🎟️ <span id="mini-quota" class="mono">--%</span></span>
+          <span class="mini-chip">🏦 <span id="mini-nav" class="mono">NT$99.9萬</span></span>
+        </div>
+        <div class="mini-hud-right">
+          <button id="mini-dice-btn" class="mini-dice-btn" type="button" title="擲骰同步最新狀態">
+            <span>🎲</span>
+          </button>
+          <button id="hud-expand-btn" class="hud-toggle-btn hud-expand-btn" type="button" title="展開完整《大富翁4》橫幅">
+            🔽 展開
+          </button>
+        </div>
+      </div>
+
+      <!-- 展開完整模式 -->
       <div class="header-row">
         <div class="hud-left">
           <!-- 《大富翁4》經典日曆牌 + 手機同步台灣標準時間 -->
@@ -699,7 +881,7 @@
           </div>
         </div>
 
-        <!-- 《大富翁4》四大數值膠囊 + 擲骰子 + 2D 經典切換 -->
+        <!-- 《大富翁4》四大數值膠囊 + 擲骰子 + 2D 經典切換 + 收合按鈕 -->
         <div class="hud-stats">
           <div class="r4-capsule" title="模擬基金實盤可用戰備現金">
             <div class="r4-cap-icon">💵</div>
@@ -736,11 +918,20 @@
           <a class="classic-btn" href="./classic2d.html" title="切換回 2D 經典插畫版《大富翁4》辦公室">
             <span>🖼️ 2D 經典版</span>
           </a>
+
+          <button id="hud-collapse-btn" class="hud-toggle-btn hud-collapse-btn" type="button" title="收合頂部橫幅，釋放更多畫面空間">
+            🔼 收合橫幅
+          </button>
         </div>
       </div>
       <div id="dice-toast" class="toast-banner"></div>
     </div>
   </header>
+  <script>
+    if (window.innerWidth <= 860) {
+      document.getElementById("main-header").classList.add("collapsed");
+    }
+  </script>
 
   <main class="container grid">
     <div style="display:flex; flex-direction:column; gap:14px;">
@@ -813,6 +1004,8 @@
       document.getElementById("local-date").textContent = dateStr;
       document.getElementById("cal-month").textContent = `${now.getMonth() + 1}月`;
       document.getElementById("cal-day").textContent = now.getDate();
+      const miniClockEl = document.getElementById("mini-clock");
+      if (miniClockEl) miniClockEl.textContent = liveClockStr;
       clockNeedsRedraw = true;
     }
     updateLocalClock();
@@ -2492,12 +2685,21 @@
       renderOrg();
     }
 
+    function formatNavCompact(nav) {
+      const n = Number(nav || 0);
+      if (n >= 100000000) return "NT$" + (n / 100000000).toFixed(2) + "億";
+      if (n >= 10000) return "NT$" + (n / 10000).toFixed(1) + "萬";
+      return "NT$" + Math.round(n).toLocaleString("en-US");
+    }
+
     function renderPortfolioHUD() {
       const s = PORTFOLIO?.summary || {};
       const cash = Number(s.cashTwd ?? 321347);
       const nav = Number(s.navTwd ?? 999179);
       document.getElementById("hud-cash").textContent = "NT$" + Math.round(cash).toLocaleString("en-US");
       document.getElementById("hud-nav").textContent = "NT$" + Math.round(nav).toLocaleString("en-US");
+      const miniNavEl = document.getElementById("mini-nav");
+      if (miniNavEl) miniNavEl.textContent = formatNavCompact(nav);
       twseNeedsRedraw = true;
     }
 
@@ -2551,10 +2753,16 @@
 
     function rollDiceAndSync() {
       const faceEl = document.getElementById("dice-face");
+      const miniDiceBtn = document.getElementById("mini-dice-btn");
       const toastEl = document.getElementById("dice-toast");
       faceEl.classList.remove("rolling");
       void faceEl.offsetWidth;
       faceEl.classList.add("rolling");
+      if (miniDiceBtn) {
+        miniDiceBtn.classList.remove("rolling");
+        void miniDiceBtn.offsetWidth;
+        miniDiceBtn.classList.add("rolling");
+      }
 
       const rolled = Math.floor(Math.random() * 6) + 1;
       faceEl.textContent = rolled;
@@ -2574,6 +2782,20 @@
       fetchPortfolio();
     }
     document.getElementById("dice-sync-btn").addEventListener("click", rollDiceAndSync);
+    document.getElementById("mini-dice-btn").addEventListener("click", rollDiceAndSync);
+
+    const headerEl = document.getElementById("main-header");
+    function setHeaderCollapsed(collapsed, triggerResize = true) {
+      if (!headerEl) return;
+      headerEl.classList.toggle("collapsed", collapsed);
+      if (triggerResize) {
+        window.dispatchEvent(new Event("resize"));
+        requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+      }
+    }
+    document.getElementById("hud-collapse-btn").addEventListener("click", () => setHeaderCollapsed(true, true));
+    document.getElementById("hud-expand-btn").addEventListener("click", () => setHeaderCollapsed(false, true));
+    setHeaderCollapsed(window.innerWidth <= 860, false);
 
     function divBadge(div) {
       if (div === "stock") return `<span class="pill" style="background:rgba(239,68,68,0.22); border-color:#fca5a5; color:#fecaca;">📈 股市二部</span>`;
@@ -2586,6 +2808,8 @@
       const q = STATE.quota;
       const pct = Math.max(0, Math.min(100, (q.remaining / q.max) * 100));
       document.getElementById("quota-text").textContent = `${q.remaining} / ${q.max} 點`;
+      const miniQuotaEl = document.getElementById("mini-quota");
+      if (miniQuotaEl) miniQuotaEl.textContent = `${Math.round(pct)}%`;
       const bar = document.getElementById("quota-bar");
       bar.style.width = pct + "%";
       bar.style.background = pct > 35
@@ -2741,8 +2965,8 @@
       });
     });
 
-    // ResizeObserver for crisp Retina responsiveness
-    const ro = new ResizeObserver(() => {
+    // ResizeObserver + Window Resize for crisp Retina responsiveness
+    function syncRendererSize() {
       const w = stageEl.clientWidth;
       const h = stageEl.clientHeight;
       if (w > 0 && h > 0) {
@@ -2750,8 +2974,10 @@
         camera.updateProjectionMatrix();
         renderer.setSize(w, h, false);
       }
-    });
+    }
+    const ro = new ResizeObserver(syncRendererSize);
     ro.observe(stageEl);
+    window.addEventListener("resize", syncRendererSize);
 
     // =========================================================================
     // 11. 60FPS ANIMATION LOOP & 3D->2D LABEL PROJECTION
