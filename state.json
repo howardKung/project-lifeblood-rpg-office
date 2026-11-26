@@ -75,13 +75,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "7800c1ac97bb3d280a6ed10022c3caba",
-      "status": "idle",
+      "status": "working",
       "isBoss": false,
       "quota": 80,
       "maxQuota": 100,
       "tasksCompleted": 3,
-      "currentTask": "已完成項目 A (domain-dns-tech-trust-signals) 1.93s 實測與 GitHub 推送，待命",
-      "lastUpdate": "2026-11-26 10:26:23",
+      "currentTask": "開發金流一部第 4 台印鈔機：Shopify & WooCommerce Store Intel Actor (ecommerce-store-app-intel)",
+      "lastUpdate": "2026-11-26 11:25:57",
       "color": "#06b6d4",
       "shirt": "#0891b2",
       "hair": "#1e293b"
@@ -267,9 +267,21 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 9189,
+        "size": 9210,
+        "mtime": "2026-11-26 11:25:57",
+        "mtimeTs": 1795692357.8404393
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 7830,
+        "mtime": "2026-11-26 11:25:57",
+        "mtimeTs": 1795692357.4484084
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 33237,
         "mtime": "2026-11-26 11:25:55",
-        "mtimeTs": 1795692355.7417576
+        "mtimeTs": 1795692355.819303
       },
       {
         "path": "stock-division/data/LIVE_MARKET_SNAPSHOT_20261126.md",
@@ -288,18 +300,6 @@
         "size": 7300,
         "mtime": "2026-11-26 11:20:54",
         "mtimeTs": 1795692054.2432106
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 32895,
-        "mtime": "2026-11-26 11:16:15",
-        "mtimeTs": 1795691775.597875
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 7558,
-        "mtime": "2026-11-26 11:16:08",
-        "mtimeTs": 1795691768.7197511
       },
       {
         "path": "products/actor3-sec-form-d/README.md",
@@ -326,6 +326,6 @@
         "mtimeTs": 1795689370.6467013
       }
     ],
-    "snapshotTime": "2026-11-26 11:25:55"
+    "snapshotTime": "2026-11-26 11:25:57"
   }
 }
