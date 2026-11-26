@@ -242,9 +242,9 @@
       "isBoss": false,
       "quota": 80,
       "maxQuota": 100,
-      "tasksCompleted": 1,
-      "currentTask": "【二部子部門 · 0-額度自動】監控 NT$1,000,000 模擬倉並升級戰情網站 SVG 淨值圖與觀察雷達",
-      "lastUpdate": "2026-11-26 21:08:59",
+      "tasksCompleted": 2,
+      "currentTask": "【0-額度自動】監控 6 檔底倉 + 7 檔 CRO 簽核右側條件單（嚴守 NT20,000 現金紅線）",
+      "lastUpdate": "2026-11-26 21:19:01",
       "color": "#22c55e",
       "shirt": "#15803d",
       "hair": "#0f172a",
@@ -252,6 +252,14 @@
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-26 21:19:01",
+      "agentId": "paper_fund_manager",
+      "agentName": "百萬模擬操盤手",
+      "status": "working",
+      "cost": 0,
+      "summary": "已將 Stage 2 條件單與 SEC Form 4 美股高管雷達部署上線至戰情網，每日自動結算引擎已啟動 12% 現金紅線鎖。"
+    },
     {
       "time": "2026-11-26 21:18:34",
       "agentId": "chief_risk_officer",
@@ -405,21 +413,21 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 15649,
+        "size": 15974,
+        "mtime": "2026-11-26 21:19:01",
+        "mtimeTs": 1795699141.6316595
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 56822,
         "mtime": "2026-11-26 21:18:59",
-        "mtimeTs": 1795699139.6441069
+        "mtimeTs": 1795699139.7214837
       },
       {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
         "size": 9456,
         "mtime": "2026-11-26 21:18:36",
         "mtimeTs": 1795699116.1981032
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 56852,
-        "mtime": "2026-11-26 21:18:34",
-        "mtimeTs": 1795699114.6682959
       },
       {
         "path": "stock-division/portfolio.json",
@@ -464,6 +472,6 @@
         "mtimeTs": 1795698743.362253
       }
     ],
-    "snapshotTime": "2026-11-26 21:18:59"
+    "snapshotTime": "2026-11-26 21:19:01"
   }
 }
