@@ -266,7 +266,16 @@
       const pill = document.getElementById("live-pill");
       if (manual) pill.textContent = "● 同步中...";
       try {
-        const res = await fetch(`./state.json?t=${Date.now()}`, { cache: "no-store" });
+        let res = await fetch(
+          `https://api.github.com/repos/howardKung/project-lifeblood-rpg-office/contents/state.json?ref=main`,
+          {
+            headers: { "Accept": "application/vnd.github.raw+json" },
+            cache: "no-store"
+          }
+        );
+        if (!res.ok) {
+          res = await fetch(`./state.json?t=${Date.now()}`, { cache: "no-store" });
+        }
         if (!res.ok) throw new Error("HTTP " + res.status);
         STATE = await res.json();
         STATE.agents.forEach(a => {
@@ -508,7 +517,7 @@
     }
 
     fetchState();
-    setInterval(() => fetchState(false), 10000);
+    setInterval(() => fetchState(false), 20000);
     draw();
   </script>
 </body>
