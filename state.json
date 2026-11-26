@@ -1,19 +1,20 @@
 {
-  "officeName": "Project Lifeblood · 生存金流 RPG 辦公室 (LIVE)",
+  "officeName": "Project Lifeblood · 雙事業部 24/7 LIVE 集團總部",
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 32,
+    "remaining": 88,
     "max": 100,
-    "totalSpent": 68,
+    "totalSpent": 34,
     "autoClockOutOnZero": true
   },
-  "lastDriveSync": "2026-11-25 22:02:04",
+  "lastDriveSync": "2026-11-26 10:32:00",
   "agents": [
     {
       "id": "boss",
       "name": "大 Boss（你）",
-      "role": "最高決策者 & 額度發放官",
+      "role": "集團最高決策者 & 額度發放官",
+      "division": "hq",
       "tier": 0,
       "reportsTo": null,
       "conversationId": "human-commander",
@@ -21,9 +22,9 @@
       "isBoss": true,
       "quota": 100,
       "maxQuota": 100,
-      "tasksCompleted": 2,
-      "currentTask": "視察 Live RPG 辦公室、控管算力額度並拍板 Top 1 動工",
-      "lastUpdate": "2026-11-26 10:09:40",
+      "tasksCompleted": 5,
+      "currentTask": "統領【第一事業部：金流點子戰隊】與【第二事業部：Alpha 股市投資部】",
+      "lastUpdate": "2026-11-26 10:32:00",
       "color": "#f59e0b",
       "shirt": "#7c3aed",
       "hair": "#1f2937"
@@ -31,17 +32,18 @@
     {
       "id": "commander",
       "name": "Antigravity",
-      "role": "AI 總管 / 戰隊指揮官",
+      "role": "集團 AI 總管 / 雙事業部指揮官",
+      "division": "hq",
       "tier": 1,
       "reportsTo": "boss",
       "conversationId": "a737e45b-0fc5-4039-adeb-314b3cfbc85e",
       "status": "working",
       "isBoss": false,
-      "quota": 77,
+      "quota": 90,
       "maxQuota": 100,
       "tasksCompleted": 9,
-      "currentTask": "平行督導項目 A (DNS/Tech-Stack) 與項目 B (SEC Form D) 雙 Actor 開發與合規驗收",
-      "lastUpdate": "2026-11-26 10:09:42",
+      "currentTask": "完成 Apify Actor #2/#3 驗收，並正式擴編成立【第二事業部：Alpha 股市投資戰情部】",
+      "lastUpdate": "2026-11-26 10:32:00",
       "color": "#3b82f6",
       "shirt": "#2563eb",
       "hair": "#0f172a"
@@ -49,16 +51,17 @@
     {
       "id": "pain_hunter",
       "name": "痛點獵人",
-      "role": "Pain & Traffic Hunter",
+      "role": "金流一部 · Pain & Traffic Hunter",
+      "division": "cashflow",
       "tier": 2,
       "reportsTo": "commander",
-      "conversationId": "8ef986588617527a0b80f042a3e0205a",
+      "conversationId": "8ae9bc2305e425da59833f4a344f74c9",
       "status": "idle",
       "isBoss": false,
-      "quota": 70,
+      "quota": 82,
       "maxQuota": 100,
       "tasksCompleted": 3,
-      "currentTask": "已協同完成項目 B (SEC Form D Funding Actor) 並推送至 GitHub",
+      "currentTask": "已完成項目 B (sec-form-d-funding-signals) 3.20s 實測與 GitHub 推送，待命",
       "lastUpdate": "2026-11-26 10:24:48",
       "color": "#10b981",
       "shirt": "#059669",
@@ -67,16 +70,17 @@
     {
       "id": "indie_hacker_builder",
       "name": "平台套利駭客",
-      "role": "Marketplace & API Hacker",
+      "role": "金流一部 · Marketplace & API Hacker",
+      "division": "cashflow",
       "tier": 2,
       "reportsTo": "commander",
-      "conversationId": "4d45eadf25e3a97eff77f4c65e29f773",
-      "status": "working",
+      "conversationId": "7800c1ac97bb3d280a6ed10022c3caba",
+      "status": "idle",
       "isBoss": false,
-      "quota": 53,
+      "quota": 80,
       "maxQuota": 100,
-      "tasksCompleted": 4,
-      "currentTask": "已完成項目 A (DNS & Tech-Stack Actor)，等待項目 B 同步收尾",
+      "tasksCompleted": 3,
+      "currentTask": "已完成項目 A (domain-dns-tech-trust-signals) 1.93s 實測與 GitHub 推送，待命",
       "lastUpdate": "2026-11-26 10:26:23",
       "color": "#06b6d4",
       "shirt": "#0891b2",
@@ -85,17 +89,18 @@
     {
       "id": "monetization_architect",
       "name": "變現架構師",
-      "role": "Monetization & Flywheel",
+      "role": "金流一部 · Monetization & Flywheel",
+      "division": "cashflow",
       "tier": 2,
       "reportsTo": "commander",
-      "conversationId": "67b3a58dcddfdf828db8b1678e87d0b9",
+      "conversationId": "d56e9101e5dc1ff7610d55f4a72bc313",
       "status": "idle",
       "isBoss": false,
-      "quota": 76,
+      "quota": 86,
       "maxQuota": 100,
       "tasksCompleted": 2,
-      "currentTask": "已完成 Round 2 提案 (3 個 $0 啟動高毛利新變現模式)",
-      "lastUpdate": "2026-11-26 07:56:20",
+      "currentTask": "已完成 B2B GTM 三部曲交叉導流設計與 Gumroad 商業包打包，待命",
+      "lastUpdate": "2026-11-26 07:56:43",
       "color": "#ec4899",
       "shirt": "#db2777",
       "hair": "#4c1d95"
@@ -103,30 +108,115 @@
     {
       "id": "ruthless_critic",
       "name": "毒舌審計官",
-      "role": "Ruthless Risk & Auditor",
+      "role": "金流一部 · Ruthless Risk Auditor",
+      "division": "cashflow",
       "tier": 2,
       "reportsTo": "commander",
-      "conversationId": "d13ed38195f884b6922f006caba23dea",
-      "status": "working",
+      "conversationId": "ec56d57e4b3941868bc0ac0c6ee53a92",
+      "status": "idle",
       "isBoss": false,
-      "quota": 76,
+      "quota": 86,
       "maxQuota": 100,
       "tasksCompleted": 2,
-      "currentTask": "待命執行項目 A 與項目 B 之 Zero-PII 合規與 output_schema 驗收",
-      "lastUpdate": "2026-11-26 10:09:46",
+      "currentTask": "已完成項目 A & B 之 Zero-PII 與 output_schema.json 上架前合規審查，待命",
+      "lastUpdate": "2026-11-26 08:00:18",
       "color": "#ef4444",
       "shirt": "#b91c1c",
       "hair": "#18181b"
+    },
+    {
+      "id": "supply_chain_scout",
+      "name": "題材供應鏈獵手",
+      "role": "股市二部 · 美台供應鏈與營收催化",
+      "division": "stock",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "alpha-div-supply-chain",
+      "status": "idle",
+      "isBoss": false,
+      "quota": 100,
+      "maxQuota": 100,
+      "tasksCompleted": 0,
+      "currentTask": "新部門報到就緒！已連接 Drive 題材供應鏈資料夾，隨時可啟動台美股主升段掃描",
+      "lastUpdate": "2026-11-26 10:32:00",
+      "color": "#eab308",
+      "shirt": "#ca8a04",
+      "hair": "#1c1917"
+    },
+    {
+      "id": "chip_momentum_tracker",
+      "name": "籌碼波段狙擊手",
+      "role": "股市二部 · 法人籌碼與量價突破",
+      "division": "stock",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "alpha-div-chip-sniper",
+      "status": "idle",
+      "isBoss": false,
+      "quota": 100,
+      "maxQuota": 100,
+      "tasksCompleted": 0,
+      "currentTask": "新部門報到就緒！專盯投信認養、外資回補、美股 13F 與關鍵均線突破共振",
+      "lastUpdate": "2026-11-26 10:32:00",
+      "color": "#a855f7",
+      "shirt": "#7e22ce",
+      "hair": "#0f172a"
+    },
+    {
+      "id": "macro_etf_strategist",
+      "name": "總經ETF配置師",
+      "role": "股市二部 · 總經水位與跨市場ETF",
+      "division": "stock",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "alpha-div-macro-etf",
+      "status": "idle",
+      "isBoss": false,
+      "quota": 100,
+      "maxQuota": 100,
+      "tasksCompleted": 0,
+      "currentTask": "新部門報到就緒！已對接 Drive 金融情報庫，隨時評估台美股總水位與 ETF 配置",
+      "lastUpdate": "2026-11-26 10:32:00",
+      "color": "#14b8a6",
+      "shirt": "#0d9488",
+      "hair": "#1e293b"
+    },
+    {
+      "id": "chief_risk_officer",
+      "name": "毒舌風控守門員",
+      "role": "股市二部 · 停損紀律與盈虧比審計",
+      "division": "stock",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "alpha-div-cro",
+      "status": "idle",
+      "isBoss": false,
+      "quota": 100,
+      "maxQuota": 100,
+      "tasksCompleted": 0,
+      "currentTask": "新部門報到就緒！嚴格把關 R/R >= 2.5、停損失效價與單一題材曝險上限",
+      "lastUpdate": "2026-11-26 10:32:00",
+      "color": "#f97316",
+      "shirt": "#c2410c",
+      "hair": "#27272a"
     }
   ],
   "reports": [
     {
+      "time": "2026-11-26 10:32:00",
+      "agentId": "boss",
+      "agentName": "大 Boss（你）",
+      "status": "boss",
+      "cost": 0,
+      "summary": "🏛️【集團擴編里程碑】正式成立「第二事業部：Alpha 股市投資戰情部」（4 位專職投資 Agent 報到入駐 24/7 LIVE RPG 辦公室），鎖定台美股與 ETF 波段趨勢＋題材供應鏈與籌碼共振！"
+    },
+    {
       "time": "2026-11-26 10:26:23",
       "agentId": "indie_hacker_builder",
       "agentName": "平台套利駭客",
-      "status": "working",
+      "status": "idle",
       "cost": 6,
-      "summary": "Apify Actor #2 (howardKung/domain-dns-tech-trust-signals, commit abd1c9e) 已 100% 開發實測並推送至 GitHub main！內建完整 .actor 四件套 (含 output_schema.json)、85+ 企業 SaaS DNS TXT/SPF 指紋庫 (突破 Docker UDP 512B 截斷)、CNAME Trust Center 確定性偵測、數學級 0-PII 淨化器與 /bin/bash.008 PPE 零扣費保護。11 網域並發實測 1.93 秒全數通過 (OpenAI 30項/Figma 26項/Ramp 25項/Linear 23項/Stripe 22項，NXDOMAIN 15ms 0扣費，37KB JSON 驗證 0 Email/0 mailto)。"
+      "summary": "Apify Actor #2 (howardKung/domain-dns-tech-trust-signals) 已 100% 開發實測並推送至 GitHub main！內建 output_schema.json、85+ SaaS DNS 指紋、CNAME Trust Center 偵測與 0-PII 淨化器；11 網域並發實測 1.93s 全數通過。"
     },
     {
       "time": "2026-11-26 10:24:48",
@@ -134,176 +224,78 @@
       "agentName": "痛點獵人",
       "status": "idle",
       "cost": 6,
-      "summary": "Apify Actor #3 (sec-form-d-funding-signals) 已 100% 完成並推送至 GitHub main (commit 248787c)！真實連線美國 SEC EDGAR 實測：3.20s 極速完成 12 家新創融資擷取（npm start 預設 25 家亦全過並自動剔除 48 支私募/對沖基金）、有效請求率 <=3.8 req/s 合規節流、3 層數學級 Zero-PII 掃描 0 外洩、無結果查詢 ChargedEvents=0 零扣費保護驗證通過！"
+      "summary": "Apify Actor #3 (howardKung/sec-form-d-funding-signals) 已 100% 完成並推送至 GitHub main！真實連線美國 SEC EDGAR 實測 3.20s 擷取 12 家新創融資（自動排除私募基金）、內建 output_schema.json 與 3 層 Zero-PII 驗證 0 外洩。"
     },
     {
-      "time": "2026-11-26 10:09:40",
-      "agentId": "boss",
-      "agentName": "大 Boss（你）",
-      "status": "boss",
-      "cost": 0,
-      "summary": "【大 Boss 下令雙箭齊發】立即平行開發並驗收 新項目 A (Company DNS & Tech-Stack Signals) 與 新項目 B (US Startup Funding SEC Form D Signals) 兩支 Apify Actor！"
-    },
-    {
-      "time": "2026-11-26 08:00:52",
-      "agentId": "commander",
-      "agentName": "Antigravity",
-      "status": "idle",
-      "cost": 2,
-      "summary": "三線任務全部驗收達標：Top 2 AgentGuard Kit 12/12 測試通過推上 GitHub；Round 2 選出 91% 勝率 Apify Actor #2 (DNS/Email-Auth/Tech-Stack Signals)，全數檔案已同步 Google Drive。"
-    },
-    {
-      "time": "2026-11-26 08:00:01",
+      "time": "2026-11-26 08:00:20",
       "agentId": "indie_hacker_builder",
       "agentName": "平台套利駭客",
       "status": "idle",
       "cost": 8,
-      "summary": "已交付 AgentGuard Kit v1.0.0（3 套 n8n 免費引流範本含 Top 1 howardkung/multi-ats-hiring-signals 導流管線、Supabase FOR UPDATE consume_budget_atomic() 商業 Schema、零依賴 Node.js 22 MCP 護欄 Proxy、一鍵換裝白牌甲方 ROI 戰情室、英文銷售 README 與 5 分鐘 Gumroad/Lemon Squeezy 上架指南）。npm test 實測 12/12 PASS，已推上 origin main (89324c5)。"
+      "summary": "完成 Top 2 AgentGuard Kit v1.0.0 開發與 12/12 測試，商業壓縮包已備份至 Google Drive products/top2-agentguard/。"
     },
     {
-      "time": "2026-11-26 07:59:56",
-      "agentId": "ruthless_critic",
-      "agentName": "毒舌審計官",
-      "status": "idle",
-      "cost": 4,
-      "summary": "Top 3: #1 Company DNS/Email-Auth/Tech-Stack Signals (91%, 立刻動工 Actor #2, 合併去SPA與x402), #2 SEC Form D Startup Funding Zero-PII (86%, Actor #3), #3 Shopify/Woo Store Intel (74%, Actor #4); 凍結 AgentRedTeam CI、斬殺 SubprocessorWatch"
-    },
-    {
-      "time": "2026-11-26 07:56:20",
-      "agentId": "monetization_architect",
-      "agentName": "變現架構師",
-      "status": "idle",
-      "cost": 4,
-      "summary": "已提交 Round 2 三大無沙盒期、抗 AI 替代新金流方案，寫入 proposals/R2_02_monetization_architect.md。"
-    },
-    {
-      "time": "2026-11-26 07:55:39",
-      "agentId": "pain_hunter",
-      "agentName": "痛點獵人",
-      "status": "idle",
-      "cost": 4,
-      "summary": "已提交 Round 2 三大零個資合規 Apify Actor 候選方案，寫入 proposals/R2_01_pain_hunter.md。"
-    },
-    {
-      "time": "2026-11-26 07:32:33",
+      "time": "2026-11-26 07:32:31",
       "agentId": "boss",
       "agentName": "大 Boss（你）",
       "status": "boss",
       "cost": 0,
-      "summary": "🎉【重大里程碑】Top 1 金流引擎 Multi-ATS Hiring & GTM Buying Signals Normalizer 已正式發布上架 Apify Store（5 / 1,000 家，0 扣費保護），第一台 24/7 自動印鈔機正式開張！"
-    },
-    {
-      "time": "2026-11-26 06:53:23",
-      "agentId": "commander",
-      "agentName": "Antigravity",
-      "status": "idle",
-      "cost": 2,
-      "summary": "驗收通過！Top 1 Multi-ATS Apify Actor 實測 10/10 家真實企業 4.91 秒抓出 2,999 筆職缺、0 扣費保護生效，已推送至 howardKung/multi-ats-hiring-signals 並備份上架指南至 Google Drive。"
-    },
-    {
-      "time": "2026-11-26 06:52:43",
-      "agentId": "indie_hacker_builder",
-      "agentName": "平台套利駭客",
-      "status": "idle",
-      "cost": 8,
-      "summary": "支援 8 大公開 ATS JSON API（Greenhouse/Lever/Ashby/SmartRecruiters/Workable/Recruitee/Breezy/Pinpoint）+ 75+ B2B 技術棧規則抽取（0 LLM 成本）+ Zero-Charge Protection；實測 10/10 真實企業全過（共擷取 2,999 筆真實職缺、4.91 秒完成）且無 ATS 網域驗證 charged=false；已推送 GitHub howardKung/multi-ats-hiring-signals (commit f17db62)"
-    },
-    {
-      "time": "2026-11-26 06:45:57",
-      "agentId": "boss",
-      "agentName": "大 Boss（你）",
-      "status": "boss",
-      "cost": 0,
-      "summary": "【大 Boss 授權指令】授權 Antigravity 全權指揮啟動 Top 1 Multi-ATS Actor 開發；嚴格紅線：任何涉及付費的動作必須先向大 Boss 確認後方可執行！"
-    },
-    {
-      "time": "2026-11-26 06:28:16",
-      "agentId": "commander",
-      "agentName": "Antigravity",
-      "status": "working",
-      "cost": 2,
-      "summary": "已建立公開倉庫 howardKung/project-lifeblood-rpg-office 並部署 24/7 GitHub Pages Live RPG 辦公室，每 10 秒自動同步真實 state.json。"
-    },
-    {
-      "time": "2026-11-26 06:15:54",
-      "agentId": "commander",
-      "agentName": "Antigravity",
-      "status": "working",
-      "cost": 2,
-      "summary": "已啟動 Live RPG 辦公室背景伺服器 (port 8765)，正式切換為 100% 真實狀態檔 (state.json) + 磁碟監控 + 即時 Drive 同步模式。"
-    },
-    {
-      "time": "2026-11-25 22:02:04",
-      "agentId": "commander",
-      "agentName": "Antigravity",
-      "status": "working",
-      "cost": 2,
-      "summary": "已執行 sync_to_drive.py，成功將 RPG 辦公室與 WORK_REPORTS_LOG.md 同步至 Google Drive (1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844)。"
-    },
-    {
-      "time": "2026-11-25 21:48:15",
-      "agentId": "commander",
-      "agentName": "Antigravity",
-      "status": "working",
-      "cost": 3,
-      "summary": "已建立 Google Drive 永久資料夾 Antigravity_生存金流點子戰隊，上傳全數 8 份戰隊文件並更新 survival-idea-squad 技能。"
-    },
-    {
-      "time": "2026-11-25 21:38:23",
-      "agentId": "ruthless_critic",
-      "agentName": "毒舌審計官",
-      "status": "working",
-      "cost": 5,
-      "summary": "完成 9 大提案毒舌審計：淘汰 4 案、暫緩 2 案，拍板 Top 1 Multi-ATS (43/50)、Top 2 AgentGuard (40.5/50)、Top 3 FabQuoteLite (39.5/50)。"
-    },
-    {
-      "time": "2026-11-25 21:32:37",
-      "agentId": "monetization_architect",
-      "agentName": "變現架構師",
-      "status": "working",
-      "cost": 4,
-      "summary": "完成 3 份數據驅動 pSEO + 經常性分潤雙飛輪提案，寫入 proposals/03_monetization_architect.md。"
-    },
-    {
-      "time": "2026-11-25 21:32:03",
-      "agentId": "indie_hacker_builder",
-      "agentName": "平台套利駭客",
-      "status": "working",
-      "cost": 3,
-      "summary": "完成 3 份市集套利提案（Apify Actor / Chrome 擴充 / n8n 母模版），寫入 proposals/02_indie_hacker_builder.md。"
-    },
-    {
-      "time": "2026-11-25 21:32:02",
-      "agentId": "pain_hunter",
-      "agentName": "痛點獵人",
-      "status": "working",
-      "cost": 3,
-      "summary": "完成 3 份零邊際算力 Micro-SaaS 提案（PackPassport / FabQuoteLite / Local835），寫入 proposals/01_pain_hunter.md。"
+      "summary": "🎉【重大里程碑】Top 1 金流引擎 Multi-ATS Hiring & GTM Buying Signals 已正式發布上架 Apify Store（$15 / 1,000 家，0 扣費保護）！"
     }
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 23,
+    "totalLocalFiles": 28,
     "driveSyncedFiles": 23,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
+        "path": "products/actor3-sec-form-d/README.md",
+        "size": 7356,
+        "mtime": "2026-11-26 10:36:10",
+        "mtimeTs": 1795689370.652326
+      },
+      {
+        "path": "products/actor3-sec-form-d/APIFY_LAUNCH_GUIDE_ZH.md",
+        "size": 2412,
+        "mtime": "2026-11-26 10:36:10",
+        "mtimeTs": 1795689370.6521778
+      },
+      {
+        "path": "products/actor2-dns-tech-signals/README.md",
+        "size": 7873,
+        "mtime": "2026-11-26 10:36:10",
+        "mtimeTs": 1795689370.6468017
+      },
+      {
+        "path": "products/actor2-dns-tech-signals/APIFY_LAUNCH_GUIDE_ZH.md",
+        "size": 2402,
+        "mtime": "2026-11-26 10:36:10",
+        "mtimeTs": 1795689370.6467013
+      },
+      {
         "path": "rpg-office/state.json",
-        "size": 11716,
-        "mtime": "2026-11-26 10:26:23",
-        "mtimeTs": 1795688783.4554949
+        "size": 8557,
+        "mtime": "2026-11-26 10:33:23",
+        "mtimeTs": 1795689203.7791197
+      },
+      {
+        "path": "stock-division/STOCK_CHARTER.md",
+        "size": 2973,
+        "mtime": "2026-11-26 10:33:23",
+        "mtimeTs": 1795689203.3190887
       },
       {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 6737,
-        "mtime": "2026-11-26 10:24:50",
-        "mtimeTs": 1795688690.3493476
+        "size": 7337,
+        "mtime": "2026-11-26 10:26:25",
+        "mtimeTs": 1795688785.0833552
       },
       {
         "path": "rpg-office/rpg_office.html",
-        "size": 34932,
-        "mtime": "2026-11-26 10:24:48",
-        "mtimeTs": 1795688688.9119992
+        "size": 35585,
+        "mtime": "2026-11-26 10:26:23",
+        "mtimeTs": 1795688783.5109644
       },
       {
         "path": "products/top2-agentguard/AgentGuard_Kit_Pro_v1.0.0.zip",
@@ -316,38 +308,8 @@
         "size": 5557,
         "mtime": "2026-11-26 08:00:51",
         "mtimeTs": 1795680051.7496119
-      },
-      {
-        "path": "products/top2-agentguard/LAUNCH_GUIDE_ZH.md",
-        "size": 4230,
-        "mtime": "2026-11-26 08:00:51",
-        "mtimeTs": 1795680051.7468035
-      },
-      {
-        "path": "AUDIT_ROUND2.md",
-        "size": 15822,
-        "mtime": "2026-11-26 07:59:46",
-        "mtimeTs": 1795679986.5147948
-      },
-      {
-        "path": "proposals/R2_02_monetization_architect.md",
-        "size": 20741,
-        "mtime": "2026-11-26 07:56:10",
-        "mtimeTs": 1795679770.4257069
-      },
-      {
-        "path": "proposals/R2_01_pain_hunter.md",
-        "size": 19916,
-        "mtime": "2026-11-26 07:55:27",
-        "mtimeTs": 1795679727.746958
-      },
-      {
-        "path": "products/top1-multi-ats/README.md",
-        "size": 5838,
-        "mtime": "2026-11-26 06:53:22",
-        "mtimeTs": 1795676002.9016345
       }
     ],
-    "snapshotTime": "2026-11-26 10:26:23"
+    "snapshotTime": "2026-11-26 10:36:10"
   }
 }
