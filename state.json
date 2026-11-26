@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 76,
+    "remaining": 68,
     "max": 100,
-    "totalSpent": 24,
+    "totalSpent": 32,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-25 22:02:04",
@@ -71,13 +71,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "4d45eadf25e3a97eff77f4c65e29f773",
-      "status": "working",
+      "status": "idle",
       "isBoss": false,
-      "quota": 75,
+      "quota": 67,
       "maxQuota": 100,
-      "tasksCompleted": 1,
-      "currentTask": "開發 Top 1 Multi-ATS 徵才購買訊號 Apify Actor 並推送至 GitHub (howardKung/multi-ats-hiring-signals)",
-      "lastUpdate": "2026-11-26 06:45:59",
+      "tasksCompleted": 2,
+      "currentTask": "已完成 Top 1 Multi-ATS Apify Actor 並推送至 GitHub",
+      "lastUpdate": "2026-11-26 06:52:43",
       "color": "#06b6d4",
       "shirt": "#0891b2",
       "hair": "#1e293b"
@@ -120,6 +120,14 @@
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-26 06:52:43",
+      "agentId": "indie_hacker_builder",
+      "agentName": "平台套利駭客",
+      "status": "idle",
+      "cost": 8,
+      "summary": "支援 8 大公開 ATS JSON API（Greenhouse/Lever/Ashby/SmartRecruiters/Workable/Recruitee/Breezy/Pinpoint）+ 75+ B2B 技術棧規則抽取（0 LLM 成本）+ Zero-Charge Protection；實測 10/10 真實企業全過（共擷取 2,999 筆真實職缺、4.91 秒完成）且無 ATS 網域驗證 charged=false；已推送 GitHub howardKung/multi-ats-hiring-signals (commit f17db62)"
+    },
     {
       "time": "2026-11-26 06:45:57",
       "agentId": "boss",
@@ -201,15 +209,15 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 6719,
-        "mtime": "2026-11-26 06:47:05",
-        "mtimeTs": 1795675625.2683885
+        "size": 7235,
+        "mtime": "2026-11-26 06:52:43",
+        "mtimeTs": 1795675963.3701942
       },
       {
         "path": "rpg-office/rpg_office.html",
-        "size": 30998,
-        "mtime": "2026-11-26 06:46:01",
-        "mtimeTs": 1795675561.3502867
+        "size": 31012,
+        "mtime": "2026-11-26 06:47:05",
+        "mtimeTs": 1795675625.3379476
       },
       {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
@@ -260,6 +268,6 @@
         "mtimeTs": 1795672081.8150408
       }
     ],
-    "snapshotTime": "2026-11-26 06:47:05"
+    "snapshotTime": "2026-11-26 06:52:43"
   }
 }
