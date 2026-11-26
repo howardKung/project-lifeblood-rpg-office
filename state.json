@@ -8,7 +8,7 @@
     "totalSpent": 124,
     "autoClockOutOnZero": true
   },
-  "lastDriveSync": "2026-11-26 21:08:59",
+  "lastDriveSync": "2026-11-27 07:51:50",
   "agents": [
     {
       "id": "boss",
@@ -477,14 +477,26 @@
   "directives": [],
   "telemetry": {
     "totalLocalFiles": 57,
-    "driveSyncedFiles": 55,
+    "driveSyncedFiles": 58,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
         "size": 21047,
+        "mtime": "2026-11-27 07:51:50",
+        "mtimeTs": 1795737110.625157
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 11023,
+        "mtime": "2026-11-27 07:51:35",
+        "mtimeTs": 1795737095.3339028
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 161121,
         "mtime": "2026-11-27 07:51:33",
-        "mtimeTs": 1795737093.886017
+        "mtimeTs": 1795737093.9595478
       },
       {
         "path": "rpg-office/install_quota_bridge.ps1",
@@ -527,20 +539,8 @@
         "size": 6538,
         "mtime": "2026-11-27 07:38:04",
         "mtimeTs": 1795736284.5290923
-      },
-      {
-        "path": "stock-division/reports/07_news_and_social_intelligence.md",
-        "size": 10019,
-        "mtime": "2026-11-27 07:38:04",
-        "mtimeTs": 1795736284.173056
-      },
-      {
-        "path": "stock-division/reports/06_cro_stage2_and_insider_audit.md",
-        "size": 27010,
-        "mtime": "2026-11-27 07:38:03",
-        "mtimeTs": 1795736283.8770256
       }
     ],
-    "snapshotTime": "2026-11-27 07:51:33"
+    "snapshotTime": "2026-11-27 07:51:50"
   }
 }
