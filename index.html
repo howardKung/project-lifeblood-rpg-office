@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Lifeblood — 雙事業部 24/7 LIVE RPG 集團總部</title>
+  <title>大 Boss 雙事業部集團總部 · HD 24/7 LIVE RPG 辦公室</title>
   <style>
     :root {
-      --bg: #0b1120;
-      --card: #111827;
-      --card2: #0f172a;
+      --bg: #070b14;
+      --card: #0f172a;
+      --card2: #131e35;
       --border: #1e293b;
-      --text: #f1f5f9;
+      --text: #f8fafc;
       --muted: #94a3b8;
       --primary: #38bdf8;
       --success: #10b981;
       --warning: #f59e0b;
       --error: #f43f5e;
-      --purple: #a855f7;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: var(--bg);
+      background: radial-gradient(circle at 20% 0%, #111c35 0%, #070b14 60%);
       color: var(--text);
       font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans TC", sans-serif;
       font-size: 13px;
       line-height: 1.5;
+      min-height: 100vh;
     }
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -35,122 +35,107 @@
       font-size: 11px;
     }
     .header {
-      background: rgba(17, 24, 39, 0.96);
-      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.18);
       padding: 12px 16px;
       position: sticky;
       top: 0;
       z-index: 20;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
     }
-    .container { max-width: 1440px; margin: 0 auto; }
+    .container { max-width: 1460px; margin: 0 auto; }
     .header-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
     }
-    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
     .crown-box {
-      width: 38px; height: 38px; border-radius: 10px;
-      background: rgba(245, 158, 11, 0.16);
-      border: 1px solid rgba(245, 158, 11, 0.45);
+      width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.28), rgba(124,58,237,0.28));
+      border: 1px solid rgba(245, 158, 11, 0.55);
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
+      font-size: 22px;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.18);
     }
-    .title { font-size: 15px; font-weight: 700; margin: 0; }
-    .subtitle { font-size: 11px; color: var(--muted); margin: 2px 0 0; }
+    .title { font-size: 15.5px; font-weight: 800; margin: 0; letter-spacing: 0.01em; }
+    .subtitle { font-size: 11.5px; color: var(--muted); margin: 2px 0 0; }
     .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
     .pill {
-      font-size: 11px; padding: 2px 8px; border-radius: 999px;
+      font-size: 11px; padding: 2px 9px; border-radius: 999px;
       background: #1e293b; color: var(--text); font-weight: 600;
     }
     .pill-live {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--success);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      font-family: ui-monospace, monospace;
+      background: rgba(16, 185, 129, 0.15); color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.38); font-family: ui-monospace, monospace;
     }
-    .quota-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
-    .quota-box { min-width: 210px; }
+    .clock-card {
+      display: flex; align-items: center; gap: 8px;
+      background: #090f1d; border: 1px solid #283548;
+      padding: 6px 12px; border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+    }
+    .clock-time { font-size: 16px; font-weight: 800; color: #38bdf8; letter-spacing: 0.04em; }
+    .clock-date { font-size: 11px; color: var(--muted); }
+    .quota-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .quota-box { min-width: 195px; }
     .quota-head { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
     .bar-bg {
-      height: 10px; border-radius: 999px; background: #1e293b;
+      height: 9px; border-radius: 999px; background: #1e293b;
       overflow: hidden; border: 1px solid #334155;
     }
     .bar-fill { height: 100%; transition: width 0.35s ease; }
     .btn {
-      border: 1px solid #334155;
-      background: #1e293b;
-      color: var(--text);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      cursor: pointer;
-      font-weight: 600;
+      border: 1px solid #0ea5e9; background: linear-gradient(180deg, #0284c7, #0369a1);
+      color: #fff; padding: 7px 12px; border-radius: 7px; font-size: 12px; cursor: pointer; font-weight: 700;
     }
-    .btn:hover { background: #334155; }
-    .btn-primary { background: #0284c7; border-color: #0ea5e9; color: #fff; }
-    .btn-primary:hover { background: #0369a1; }
+    .btn:hover { filter: brightness(1.1); }
     .grid {
-      display: grid;
-      grid-template-columns: 1.38fr 1fr;
-      gap: 16px;
-      padding: 16px;
+      display: grid; grid-template-columns: 1.42fr 1fr; gap: 16px; padding: 16px;
     }
-    @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1020px) { .grid { grid-template-columns: 1fr; } }
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
+      background: rgba(15, 23, 42, 0.92); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35);
     }
     .card-head {
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 600;
+      padding: 10px 14px; border-bottom: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;
+      font-size: 12px; font-weight: 700;
     }
-    .legend { display: flex; flex-wrap: wrap; gap: 10px; font-weight: 400; color: var(--muted); font-size: 11px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; font-weight: 500; color: var(--muted); font-size: 11px; }
     .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
-    .canvas-wrap { padding: 8px; background: #070c17; display: flex; justify-content: center; }
-    canvas { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border); image-rendering: pixelated; cursor: pointer; }
-    .inspector { padding: 12px; }
+    .canvas-wrap { padding: 10px; background: #060a12; display: flex; justify-content: center; }
+    canvas { width: 100%; height: auto; border-radius: 8px; border: 1px solid #1e293b; cursor: pointer; display: block; }
+    .inspector { padding: 14px; }
     .inspector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
     @media (max-width: 640px) { .inspector-grid { grid-template-columns: 1fr; } }
     .tabs { display: flex; border-bottom: 1px solid var(--border); }
     .tab-btn {
       flex: 1; background: transparent; border: none; border-bottom: 2px solid transparent;
-      color: var(--muted); padding: 10px 8px; font-size: 12px; font-weight: 600; cursor: pointer;
+      color: var(--muted); padding: 11px 8px; font-size: 12px; font-weight: 700; cursor: pointer;
     }
     .tab-btn.active { color: var(--text); border-bottom-color: var(--primary); }
-    .panel-body { max-height: 680px; overflow-y: auto; padding: 12px; }
+    .panel-body { max-height: 690px; overflow-y: auto; padding: 12px; }
     .hidden { display: none; }
     .report-item {
-      padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+      padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);
       background: var(--card2); margin-bottom: 8px;
     }
     .report-top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; font-size: 11px; }
     .org-node {
       padding: 9px 10px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--card2); cursor: pointer; margin-bottom: 6px;
+      background: var(--card2); cursor: pointer; margin-bottom: 6px; transition: border-color 0.15s;
     }
-    .org-node.selected { border-color: var(--primary); }
-    .org-node.boss-node { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.4); }
+    .org-node:hover { border-color: #475569; }
+    .org-node.selected { border-color: var(--primary); box-shadow: 0 0 0 1px rgba(56,189,248,0.3); }
+    .org-node.boss-node { background: rgba(245, 158, 11, 0.11); border-color: rgba(245, 158, 11, 0.45); }
     .div-box {
-      padding: 10px; border-radius: 8px; border: 1px solid #334155;
-      background: rgba(15, 23, 42, 0.55); margin-bottom: 10px;
+      padding: 10px; border-radius: 9px; border: 1px solid #334155;
+      background: rgba(9, 14, 26, 0.65); margin-bottom: 10px;
     }
-    .div-title { font-size: 11px; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.02em; }
+    .div-title { font-size: 11.5px; font-weight: 800; margin-bottom: 8px; }
     .org-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     @media (max-width: 520px) { .org-grid { grid-template-columns: 1fr; } }
-    .arrow { text-align: center; color: var(--muted); font-size: 11px; margin: 4px 0 6px; }
+    .arrow { text-align: center; color: var(--muted); font-size: 11px; margin: 3px 0 6px; }
     .file-row {
       display: flex; justify-content: space-between; gap: 8px;
       padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border);
@@ -169,25 +154,34 @@
         <div class="crown-box">👑</div>
         <div>
           <div class="badges">
-            <h1 class="title">大 Boss 雙事業部集團總部 · 24/7 LIVE RPG 辦公室</h1>
+            <h1 class="title">大 Boss 雙事業部集團總部 · HD 24/7 LIVE RPG 辦公室</h1>
             <span id="live-pill" class="pill pill-live">● LIVE 連線中</span>
             <span id="status-pill" class="pill">載入中...</span>
           </div>
           <p class="subtitle">
-            第一事業部（生存金流點子戰隊）＋ 第二事業部（Alpha 股市投資戰情部）· GitHub API 秒級同步 · <a href="https://drive.google.com/drive/folders/1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844" target="_blank">Google Drive 總檔案庫 ↗</a>
+            總務長全天候維護環境 · Retina 高畫質渲染 · <a href="https://howardkung.github.io/alpha-stock-warroom/" target="_blank">前往股市二部百萬模擬基金戰情網 ↗</a> · <a href="https://drive.google.com/drive/folders/1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844" target="_blank">Google Drive ↗</a>
           </p>
         </div>
       </div>
 
       <div class="quota-wrap">
+        <!-- Phone-Synced Real-Time Clock -->
+        <div class="clock-card" title="已與你的手機/電腦時區 100% 即時同步">
+          <span style="font-size:16px;">🕒</span>
+          <div>
+            <div id="local-clock" class="clock-time">--:--:--</div>
+            <div id="local-date" class="clock-date">同步本機時間中</div>
+          </div>
+        </div>
+
         <div class="quota-box">
           <div class="quota-head">
-            <span class="muted">集團算力額度（歸零自動下班）</span>
+            <span class="muted">集團算力額度（決定工時）</span>
             <span id="quota-text" class="mono" style="font-weight:700">-- / --</span>
           </div>
           <div class="bar-bg"><div id="quota-bar" class="bar-fill" style="width:0%; background:var(--success)"></div></div>
         </div>
-        <button class="btn btn-primary" onclick="fetchState(true)">🔄 立即更新</button>
+        <button class="btn" onclick="fetchState(true)">🔄 立即同步</button>
       </div>
     </div>
   </header>
@@ -196,26 +190,26 @@
     <div style="display:flex; flex-direction:column; gap:14px;">
       <div class="card">
         <div class="card-head">
-          <span>🏢 雙事業部 2D RPG 總部（10 人編制 · 點擊角色查看任務與部門）</span>
+          <span>🏢 HD 集團總部平面圖（點擊任一員工檢視任務、腦力等級與額度）</span>
           <div class="legend">
             <span><i class="dot" style="background:var(--success)"></i>上工</span>
             <span><i class="dot" style="background:var(--primary)"></i>開會</span>
-            <span><i class="dot" style="background:var(--warning)"></i>閒置</span>
+            <span><i class="dot" style="background:var(--warning)"></i>待命省電</span>
             <span><i class="dot" style="background:var(--error)"></i>額度耗盡下班</span>
           </div>
         </div>
         <div class="canvas-wrap">
-          <canvas id="office-canvas" width="780" height="580"></canvas>
+          <canvas id="office-canvas"></canvas>
         </div>
       </div>
 
-      <div class="card inspector" id="inspector">載入角色資料中...</div>
+      <div class="card inspector" id="inspector">載入員工資料中...</div>
     </div>
 
     <div class="card" style="display:flex; flex-direction:column;">
       <div class="tabs">
-        <button class="tab-btn active" data-tab="org">🏛️ 集團組織架構</button>
-        <button class="tab-btn" data-tab="reports">📋 真實工作回報</button>
+        <button class="tab-btn active" data-tab="org">🏛️ 集團組織與腦力編制</button>
+        <button class="tab-btn" data-tab="reports">📋 真實打卡回報</button>
         <button class="tab-btn" data-tab="files">☁️ 檔案與 Drive</button>
       </div>
 
@@ -226,50 +220,107 @@
   </main>
 
   <script>
+    // =========================================================================
+    // 1. REAL-TIME PHONE-SYNCED CLOCK (100% EXACT DEVICE LOCAL TIME)
+    // =========================================================================
+    let liveClockStr = "--:--:--";
+    function updateLocalClock() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      liveClockStr = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      const days = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+      const dateStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} (${days[now.getDay()]})`;
+      document.getElementById("local-clock").textContent = liveClockStr;
+      document.getElementById("local-date").textContent = dateStr;
+    }
+    updateLocalClock();
+    setInterval(updateLocalClock, 1000);
+
+    // =========================================================================
+    // 2. OFFICE LAYOUT & HIGH-DPI RETINA CANVAS SETUP
+    // =========================================================================
+    const LOGICAL_W = 860;
+    const LOGICAL_H = 620;
+    const canvas = document.getElementById("office-canvas");
+    const ctx = canvas.getContext("2d");
+
+    function setupHiDPI() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+      canvas.width = Math.round(LOGICAL_W * dpr);
+      canvas.height = Math.round(LOGICAL_H * dpr);
+      canvas.style.aspectRatio = `${LOGICAL_W} / ${LOGICAL_H}`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    setupHiDPI();
+    window.addEventListener("resize", setupHiDPI);
+
     const STATUS_META = {
-      boss:     { label: "視察中",       icon: "👑", color: "#f59e0b" },
-      working:  { label: "上工中",       icon: "💻", color: "#10b981" },
-      meeting:  { label: "開會中",       icon: "🗣️", color: "#38bdf8" },
-      idle:     { label: "閒置待命",     icon: "☕", color: "#f59e0b" },
+      boss:     { label: "總裁視察中",   icon: "👑", color: "#f59e0b" },
+      working:  { label: "上工執行中",   icon: "💻", color: "#10b981" },
+      meeting:  { label: "戰略會議中",   icon: "🗣️", color: "#38bdf8" },
+      idle:     { label: "待命省電中",   icon: "☕", color: "#f59e0b" },
       depleted: { label: "額度耗盡下班", icon: "💤", color: "#f43f5e" }
     };
 
     const ROOMS = [
-      { name: "👑 大 Boss 總裁室",                   x: 14,  y: 14,  w: 220, h: 138, fill: "#231d12" },
-      { name: "🎯 集團總管中樞 (Antigravity)",       x: 246, y: 14,  w: 210, h: 138, fill: "#162032" },
-      { name: "🗣️ 跨部門戰略會議室",                 x: 468, y: 14,  w: 298, h: 190, fill: "#132238" },
-      { name: "💰 第一事業部：生存金流點子戰隊",     x: 14,  y: 164, w: 442, h: 196, fill: "#161f30" },
-      { name: "📈 第二事業部：Alpha 股市投資戰情室", x: 14,  y: 372, w: 442, h: 194, fill: "#132620" },
-      { name: "☕ 集團茶水間 / 待命休息區",          x: 468, y: 216, w: 298, h: 350, fill: "#18202c" }
+      { id: "boss",    name: "👑 大 Boss 總裁室",                   x: 14,  y: 14,  w: 230, h: 150, floor: "wood",  tint: "#281f14" },
+      { id: "hq",      name: "🎯 總管與總務行政中樞",               x: 256, y: 14,  w: 244, h: 150, floor: "slate", tint: "#142033" },
+      { id: "meet",    name: "🗣️ 跨部門玻璃會議室",                 x: 512, y: 14,  w: 334, h: 205, floor: "meet",  tint: "#112238" },
+      { id: "div1",    name: "💰 第一事業部：生存金流點子戰隊",     x: 14,  y: 176, w: 486, h: 208, floor: "slate", tint: "#141e30" },
+      { id: "div2",    name: "📈 第二事業部：Alpha 股市＆百萬模擬室", x: 14,  y: 396, w: 486, h: 210, floor: "stock", tint: "#0e221d" },
+      { id: "lounge",  name: "☕ 景觀咖啡廳 / 省電休息區",          x: 512, y: 231, w: 334, h: 375, floor: "wood",  tint: "#1b202b" }
     ];
 
     const POS = {
-      boss:                   { desk: { x: 124, y: 92 },  meet: { x: 617, y: 68 },  lounge: { x: 124, y: 92 } },
-      commander:              { desk: { x: 351, y: 92 },  meet: { x: 520, y: 112 }, lounge: { x: 525, y: 278 } },
-      // Division 1: Cash-Flow Squad
-      pain_hunter:            { desk: { x: 115, y: 230 }, meet: { x: 555, y: 162 }, lounge: { x: 615, y: 278 } },
-      indie_hacker_builder:   { desk: { x: 340, y: 230 }, meet: { x: 617, y: 168 }, lounge: { x: 705, y: 278 } },
-      monetization_architect: { desk: { x: 115, y: 312 }, meet: { x: 680, y: 162 }, lounge: { x: 525, y: 360 } },
-      ruthless_critic:        { desk: { x: 340, y: 312 }, meet: { x: 715, y: 112 }, lounge: { x: 615, y: 360 } },
-      // Division 2: Alpha Stock Division
-      supply_chain_scout:     { desk: { x: 115, y: 438 }, meet: { x: 540, y: 80 },  lounge: { x: 705, y: 360 } },
-      chip_momentum_tracker:  { desk: { x: 340, y: 438 }, meet: { x: 695, y: 80 },  lounge: { x: 525, y: 448 } },
-      macro_etf_strategist:   { desk: { x: 115, y: 520 }, meet: { x: 585, y: 165 }, lounge: { x: 615, y: 448 } },
-      chief_risk_officer:     { desk: { x: 340, y: 520 }, meet: { x: 650, y: 165 }, lounge: { x: 705, y: 448 } }
+      boss:                   { desk: { x: 128, y: 100 }, meet: { x: 678, y: 74 },  lounge: { x: 128, y: 100 } },
+      commander:              { desk: { x: 330, y: 102 }, meet: { x: 565, y: 118 }, lounge: { x: 575, y: 318 } },
+      office_steward:         { desk: { x: 435, y: 102 }, meet: { x: 785, y: 118 }, lounge: { x: 665, y: 318 } },
+      // Division 1
+      pain_hunter:            { desk: { x: 125, y: 248 }, meet: { x: 595, y: 175 }, lounge: { x: 765, y: 318 } },
+      indie_hacker_builder:   { desk: { x: 370, y: 248 }, meet: { x: 655, y: 182 }, lounge: { x: 575, y: 405 } },
+      monetization_architect: { desk: { x: 125, y: 336 }, meet: { x: 715, y: 182 }, lounge: { x: 675, y: 405 } },
+      ruthless_critic:        { desk: { x: 370, y: 336 }, meet: { x: 765, y: 172 }, lounge: { x: 775, y: 405 } },
+      // Division 2 + Paper Fund Sub-dept
+      supply_chain_scout:     { desk: { x: 105, y: 468 }, meet: { x: 595, y: 78 },  lounge: { x: 575, y: 495 } },
+      chip_momentum_tracker:  { desk: { x: 262, y: 468 }, meet: { x: 755, y: 78 },  lounge: { x: 675, y: 495 } },
+      macro_etf_strategist:   { desk: { x: 105, y: 556 }, meet: { x: 625, y: 178 }, lounge: { x: 775, y: 495 } },
+      chief_risk_officer:     { desk: { x: 262, y: 556 }, meet: { x: 730, y: 178 }, lounge: { x: 615, y: 562 } },
+      paper_fund_manager:     { desk: { x: 418, y: 512 }, meet: { x: 678, y: 184 }, lounge: { x: 735, y: 562 } }
     };
 
+    // Steward active patrol waypoints around the HQ!
+    const STEWARD_WAYPOINTS = [
+      { x: 435, y: 102, note: "校準牆面台灣標準鐘" },
+      { x: 215, y: 62,  note: "整理總裁室盆栽" },
+      { x: 560, y: 278, note: "補充義式咖啡豆" },
+      { x: 462, y: 248, note: "巡檢金流一部工位" },
+      { x: 462, y: 455, note: "巡檢股市二部看盤機" },
+      { x: 795, y: 565, note: "澆灌休息區龜背芋" }
+    ];
+
     let STATE = null;
-    let selectedId = "supply_chain_scout";
+    let selectedId = "office_steward";
     const sprites = {};
     let frame = 0;
+    let stewardWpIdx = 0;
+
+    setInterval(() => {
+      stewardWpIdx = (stewardWpIdx + 1) % STEWARD_WAYPOINTS.length;
+    }, 5500);
 
     function targetFor(a) {
-      const p = POS[a.id] || { desk: { x: 200, y: 300 }, meet: { x: 600, y: 130 }, lounge: { x: 600, y: 500 } };
+      if (a.id === "office_steward" && a.status === "working") {
+        return STEWARD_WAYPOINTS[stewardWpIdx];
+      }
+      const p = POS[a.id] || { desk: { x: 220, y: 300 }, meet: { x: 660, y: 140 }, lounge: { x: 660, y: 450 } };
       if (a.isBoss || a.status === "working") return p.desk;
       if (a.status === "meeting") return p.meet;
       return p.lounge;
     }
 
+    // =========================================================================
+    // 3. LIVE GITHUB API POLLING
+    // =========================================================================
     async function fetchState(manual = false) {
       const pill = document.getElementById("live-pill");
       if (manual) pill.textContent = "● 同步中...";
@@ -283,22 +334,28 @@
         }
         if (!res.ok) throw new Error("HTTP " + res.status);
         STATE = await res.json();
-        STATE.agents.forEach(a => {
+        STATE.agents.forEach((a, idx) => {
           const t = targetFor(a);
-          if (!sprites[a.id]) sprites[a.id] = { x: t.x, y: t.y };
+          if (!sprites[a.id]) sprites[a.id] = { x: t.x, y: t.y, seed: idx * 37 };
         });
-        pill.textContent = `● LIVE · ${new Date().toTimeString().slice(0, 8)}`;
+        pill.textContent = `● LIVE 已同步`;
         renderUI();
       } catch (e) {
         pill.textContent = "● 讀取失敗: " + e.message;
       }
     }
 
+    function divBadge(div) {
+      if (div === "stock") return `<span class="pill" style="background:rgba(234,179,8,0.16); color:#facc15;">📈 股市二部</span>`;
+      if (div === "cashflow") return `<span class="pill" style="background:rgba(56,189,248,0.15); color:#38bdf8;">💰 金流一部</span>`;
+      return `<span class="pill" style="background:rgba(168,85,247,0.18); color:#c084fc;">🏛️ 集團總部</span>`;
+    }
+
     function renderUI() {
       if (!STATE) return;
       const q = STATE.quota;
       const pct = Math.max(0, Math.min(100, (q.remaining / q.max) * 100));
-      document.getElementById("quota-text").textContent = `${q.remaining} / ${q.max} 點`;
+      document.getElementById("quota-text").textContent = `${q.remaining}% / ${q.max}%`;
       const bar = document.getElementById("quota-bar");
       bar.style.width = pct + "%";
       bar.style.background = pct > 35 ? "var(--success)" : (pct > 0 ? "var(--warning)" : "var(--error)");
@@ -309,18 +366,12 @@
       const i = workers.filter(a => a.status === "idle").length;
       document.getElementById("status-pill").textContent = q.remaining <= 0
         ? "💤 額度耗盡・全員下班"
-        : `編制 10 人｜上工 ${w} · 開會 ${m} · 待命 ${i}`;
+        : `總編制 ${STATE.agents.length} 人｜上工 ${w} · 開會 ${m} · 待命 ${i}`;
 
       renderInspector();
       renderOrg();
       renderReports();
       renderFiles();
-    }
-
-    function divBadge(div) {
-      if (div === "stock") return `<span class="pill" style="background:rgba(234,179,8,0.16); color:#facc15;">📈 股市二部</span>`;
-      if (div === "cashflow") return `<span class="pill" style="background:rgba(56,189,248,0.15); color:#38bdf8;">💰 金流一部</span>`;
-      return `<span class="pill" style="background:rgba(168,85,247,0.18); color:#c084fc;">🏛️ 集團總部</span>`;
     }
 
     function renderInspector() {
@@ -330,24 +381,24 @@
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; padding-bottom:8px; border-bottom:1px solid var(--border);">
           <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
             <span class="dot" style="background:${a.color}; width:10px; height:10px; margin:0;"></span>
-            <strong style="font-size:14px;">${a.name}</strong>
+            <strong style="font-size:14.5px;">${a.name}</strong>
             ${divBadge(a.division)}
-            <span class="muted">${a.role}</span>
+            ${a.brainTier ? `<span class="pill" style="background:#1e293b;">${a.brainTier}</span>` : ""}
             <span class="pill" style="color:${meta.color}">${meta.icon} ${meta.label}</span>
           </div>
-          <span class="mono muted" style="font-size:11px;">最後打卡：${a.lastUpdate}</span>
+          <span class="mono muted" style="font-size:11px;">打卡時間 (台灣)：${a.lastUpdate}</span>
         </div>
         <div class="inspector-grid">
+          <div><div class="muted" style="font-size:11px;">職稱與負責業務</div><div style="margin-top:3px; font-weight:600;">${a.role}</div></div>
           <div><div class="muted" style="font-size:11px;">當前真實任務</div><div style="margin-top:3px;">${a.currentTask}</div></div>
-          <div><div class="muted" style="font-size:11px;">個人額度 / 完工數</div><div class="mono" style="margin-top:3px;">${a.isBoss ? "∞ 無限" : `${a.quota} / ${a.maxQuota} 點`} · ${a.tasksCompleted} 筆</div></div>
-          <div><div class="muted" style="font-size:11px;">代理識別碼</div><div class="mono muted" style="margin-top:3px; word-break:break-all;">${a.conversationId}</div></div>
+          <div><div class="muted" style="font-size:11px;">可用額度 / 累計完工</div><div class="mono" style="margin-top:3px;">${a.isBoss ? "∞ 無限統帥權" : `${a.quota}% 額度`} · 已交付 ${a.tasksCompleted} 項</div></div>
         </div>
       `;
     }
 
     function renderOrg() {
       const boss = STATE.agents.find(a => a.tier === 0);
-      const cmd = STATE.agents.find(a => a.tier === 1);
+      const hqStaff = STATE.agents.filter(a => a.division === "hq" && !a.isBoss);
       const div1 = STATE.agents.filter(a => a.division === "cashflow");
       const div2 = STATE.agents.filter(a => a.division === "stock");
 
@@ -357,40 +408,36 @@
           <div class="org-node ${isBoss ? 'boss-node' : ''} ${a.id === selectedId ? 'selected' : ''}" onclick="selectedId='${a.id}'; renderInspector(); renderOrg();">
             <div style="display:flex; justify-content:space-between; gap:6px; align-items:center;">
               <div><i class="dot" style="background:${a.color}"></i><strong>${a.name}</strong></div>
-              <span style="color:${meta.color}; font-size:11px; font-weight:600;">${meta.icon} ${meta.label}</span>
+              <span style="color:${meta.color}; font-size:11px; font-weight:700;">${meta.icon} ${meta.label}</span>
             </div>
-            <div class="muted" style="font-size:11px; margin-top:2px;">${a.role} ${a.brainTier ? `<span class="pill" style="margin-left:4px; font-size:10px;">${a.brainTier}</span>` : ""}</div>
-            ${!a.isBoss ? `
-              <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">
-                <div class="bar-bg" style="flex:1; height:5px;"><div class="bar-fill" style="width:${(a.quota/a.maxQuota)*100}%; background:${a.quota>30?'var(--success)':(a.quota>0?'var(--warning)':'var(--error)')}"></div></div>
-                <span class="mono muted" style="font-size:11px;">${a.quota}點</span>
-              </div>
-            ` : `<div style="color:var(--warning); font-size:11px; margin-top:4px;">★ 集團最高決策、財務零付費紅線與額度總控</div>`}
+            <div class="muted" style="font-size:11px; margin-top:3px;">
+              ${a.role} ${a.brainTier ? `<span class="pill" style="margin-left:4px; font-size:10px;">${a.brainTier}</span>` : ""}
+            </div>
           </div>
         `;
       };
 
       document.getElementById("tab-org").innerHTML = `
-        <div class="muted" style="font-size:11px; margin-bottom:4px;">LEVEL 0 · 集團最高決策層</div>
+        <div class="muted" style="font-size:11px; margin-bottom:4px;">LEVEL 0 · 集團最高統帥</div>
         ${card(boss, true)}
-        <div class="arrow">↓ 全權授權調度（嚴守付費前必先請示紅線）</div>
-        <div class="muted" style="font-size:11px; margin-bottom:4px;">LEVEL 1 · 集團 AI 總管</div>
-        ${card(cmd)}
-        <div class="arrow">↙ 雙事業部平行運作 ↘</div>
-        <div class="div-box">
-          <div class="div-title" style="color:#38bdf8;">💰 第一事業部：生存金流點子戰隊（3 支 Apify Actor + AgentGuard）</div>
+        <div class="arrow">↓ 全權指揮（嚴守付費前必先請示紅線）</div>
+        <div class="div-box" style="border-color:rgba(168,85,247,0.4);">
+          <div class="div-title" style="color:#c084fc;">🎯 集團行政與總管中樞（總管調度 ＋ 總務環境時鐘維護）</div>
+          <div class="org-grid">${hqStaff.map(a => card(a)).join("")}</div>
+        </div>
+        <div class="div-box" style="border-color:rgba(56,189,248,0.35);">
+          <div class="div-title" style="color:#38bdf8;">💰 第一事業部：生存金流點子戰隊（5 支 Apify Actor + AgentGuard）</div>
           <div class="org-grid">${div1.map(a => card(a)).join("")}</div>
         </div>
         <div class="div-box" style="border-color:rgba(234,179,8,0.4);">
-          <div class="div-title" style="color:#facc15;">📈 第二事業部：Alpha 股市投資戰情部（台股 · 美股 · ETF 波段共振）</div>
+          <div class="div-title" style="color:#facc15;">📈 第二事業部：Alpha 股市投資戰情部（含子部門：百萬實盤模擬室）</div>
           <div class="org-grid">${div2.map(a => card(a)).join("")}</div>
         </div>
       `;
     }
 
     function renderReports() {
-      const el = document.getElementById("tab-reports");
-      el.innerHTML = STATE.reports.map(r => {
+      document.getElementById("tab-reports").innerHTML = STATE.reports.map(r => {
         const meta = STATUS_META[r.status] || STATUS_META.working;
         return `
           <div class="report-item">
@@ -414,11 +461,11 @@
             <div class="org-node" style="margin:0;"><div class="muted" style="font-size:11px;">已同步 Drive</div><div class="mono" style="font-size:15px; font-weight:700; color:var(--success);">${t.driveSyncedFiles} 檔</div></div>
           </div>
           <div class="muted" style="font-size:11px; margin-top:8px;">
-            最後推送時間：<code>${t.snapshotTime}</code><br/>
+            最後歸檔 (台灣時間)：<code>${t.snapshotTime}</code><br/>
             Drive 資料夾：<a href="https://drive.google.com/drive/folders/${STATE.driveFolderId}" target="_blank">開啟 Antigravity_生存金流點子戰隊 ↗</a>
           </div>
         </div>
-        <div style="font-weight:600; margin-bottom:6px;">📂 最近異動檔案（真實磁碟掃描）</div>
+        <div style="font-weight:700; margin-bottom:6px;">📂 最近異動檔案（真實磁碟掃描）</div>
         ${(t.recentFiles || []).map(f => `<div class="file-row"><span style="color:var(--primary); overflow:hidden; text-overflow:ellipsis;">${f.path}</span><span class="muted">${f.mtime.slice(5)}</span></div>`).join("")}
       `;
     }
@@ -431,14 +478,11 @@
       });
     });
 
-    const canvas = document.getElementById("office-canvas");
-    const ctx = canvas.getContext("2d");
-
     canvas.addEventListener("click", e => {
       if (!STATE) return;
       const r = canvas.getBoundingClientRect();
-      const cx = (e.clientX - r.left) * (canvas.width / r.width);
-      const cy = (e.clientY - r.top) * (canvas.height / r.height);
+      const cx = (e.clientX - r.left) * (LOGICAL_W / r.width);
+      const cy = (e.clientY - r.top) * (LOGICAL_H / r.height);
       let hit = null, minD = 34;
       STATE.agents.forEach(a => {
         const p = sprites[a.id];
@@ -449,114 +493,402 @@
       if (hit) { selectedId = hit.id; renderInspector(); renderOrg(); }
     });
 
-    function drawDesk(x, y, w, h, active, mode = "dev") {
-      ctx.fillStyle = mode === "boss" ? "#7c2d12" : (mode === "stock" ? "#1e293b" : "#92400e");
-      ctx.fillRect(x, y, w, h);
-      ctx.fillStyle = mode === "boss" ? "#431407" : (mode === "stock" ? "#0f172a" : "#78350f");
-      ctx.fillRect(x, y + h, w, 5);
+    // =========================================================================
+    // 4. HD ARCHITECTURAL ENVIRONMENT & EXPRESSIVE CHIBI CHARACTER RENDERER
+    // =========================================================================
+    function drawPlant(x, y, scale = 1) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
+      // Terracotta pot with rim
+      ctx.fillStyle = "#9a3412";
+      ctx.beginPath(); ctx.roundRect(-8, 2, 16, 12, 3); ctx.fill();
+      ctx.fillStyle = "#c2410c";
+      ctx.beginPath(); ctx.roundRect(-10, 0, 20, 4, 2); ctx.fill();
+      // Lush layered leaves
+      const leaves = [
+        { dx: -8, dy: -6, r: 7, c: "#15803d" },
+        { dx: 8,  dy: -5, r: 7, c: "#166534" },
+        { dx: 0,  dy: -11, r: 8, c: "#22c55e" },
+        { dx: -4, dy: -3, r: 5.5, c: "#4ade80" },
+        { dx: 5,  dy: -2, r: 5.5, c: "#16a34a" }
+      ];
+      leaves.forEach(l => {
+        ctx.fillStyle = l.c;
+        ctx.beginPath(); ctx.arc(l.dx, l.dy, l.r, 0, Math.PI * 2); ctx.fill();
+      });
+      ctx.restore();
+    }
 
+    function drawWorkstation(x, y, active, mode = "dev") {
+      // Ergonomic chair behind character
+      ctx.fillStyle = mode === "boss" ? "#7f1d1d" : "#1e293b";
+      ctx.beginPath(); ctx.roundRect(x - 13, y - 18, 26, 18, 6); ctx.fill();
+      ctx.strokeStyle = mode === "boss" ? "#f59e0b" : "#475569";
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      // Desk surface with rounded bevel & shadow
+      const dw = mode === "boss" ? 96 : 84;
+      const dh = 24;
+      const dx = x - dw / 2;
+      const dy = y + 6;
+
+      ctx.fillStyle = "rgba(0,0,0,0.35)";
+      ctx.beginPath(); ctx.roundRect(dx + 2, dy + 4, dw, dh + 4, 5); ctx.fill();
+
+      const grad = ctx.createLinearGradient(dx, dy, dx, dy + dh);
+      if (mode === "boss") {
+        grad.addColorStop(0, "#78350f"); grad.addColorStop(1, "#451a03");
+      } else if (mode === "stock") {
+        grad.addColorStop(0, "#1e293b"); grad.addColorStop(1, "#0f172a");
+      } else {
+        grad.addColorStop(0, "#b45309"); grad.addColorStop(1, "#78350f");
+      }
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.roundRect(dx, dy, dw, dh, 5); ctx.fill();
+      ctx.strokeStyle = mode === "boss" ? "rgba(250,204,21,0.45)" : "rgba(255,255,255,0.1)";
+      ctx.stroke();
+
+      // Desk lamp / coffee mug detail
+      ctx.fillStyle = "#f8fafc";
+      ctx.beginPath(); ctx.arc(dx + dw - 11, dy + 12, 3.5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#78350f";
+      ctx.beginPath(); ctx.arc(dx + dw - 11, dy + 12, 2.2, 0, Math.PI * 2); ctx.fill();
+
+      // Monitors
       if (mode === "stock") {
-        // Dual Bloomberg-style candlestick monitors!
-        [-16, 4].forEach((ox, idx) => {
-          const mx = x + w / 2 + ox, my = y - 5;
-          ctx.fillStyle = "#090d16"; ctx.fillRect(mx, my, 18, 13);
-          ctx.fillStyle = active ? (idx === 0 ? "#064e3b" : "#1e1b4b") : "#1e293b";
-          ctx.fillRect(mx + 1, my + 1, 16, 10);
-          // Mini green/red candles
-          ctx.fillStyle = "#10b981"; ctx.fillRect(mx + 3, my + 5, 3, 5);
-          ctx.fillStyle = "#f43f5e"; ctx.fillRect(mx + 8, my + 3, 3, 6);
-          ctx.fillStyle = "#10b981"; ctx.fillRect(mx + 13, my + 2, 3, 7);
+        [-19, 3].forEach((ox, idx) => {
+          const mx = x + ox, my = dy - 6;
+          ctx.fillStyle = "#020617";
+          ctx.beginPath(); ctx.roundRect(mx, my, 20, 14, 2.5); ctx.fill();
+          ctx.fillStyle = active ? (idx === 0 ? "#052e16" : "#172554") : "#1e293b";
+          ctx.fillRect(mx + 1.5, my + 1.5, 17, 11);
+          // Candlesticks
+          ctx.fillStyle = "#ef4444"; ctx.fillRect(mx + 4, my + 4, 2.5, 6);
+          ctx.fillStyle = "#10b981"; ctx.fillRect(mx + 9, my + 6, 2.5, 5);
+          ctx.fillStyle = "#ef4444"; ctx.fillRect(mx + 14, my + 3, 2.5, 7);
         });
       } else {
-        const mx = x + w / 2 - 14, my = y - 4;
-        ctx.fillStyle = "#0f172a"; ctx.fillRect(mx, my, 28, 15);
-        ctx.fillStyle = active ? (frame % 40 < 20 ? "#38bdf8" : "#22d3ee") : "#334155";
-        ctx.fillRect(mx + 2, my + 2, 24, 10);
+        const mx = x - 16, my = dy - 6;
+        ctx.fillStyle = "#020617";
+        ctx.beginPath(); ctx.roundRect(mx, my, 32, 15, 3); ctx.fill();
+        ctx.fillStyle = active ? (frame % 46 < 23 ? "#0284c7" : "#0ea5e9") : "#1e293b";
+        ctx.fillRect(mx + 2, my + 2, 28, 11);
+        if (active) {
+          ctx.fillStyle = "#bae6fd";
+          ctx.fillRect(mx + 4, my + 4, 14, 1.8);
+          ctx.fillRect(mx + 4, my + 7.5, 20, 1.8);
+        }
       }
+    }
+
+    function drawRoomsAndDecor() {
+      ctx.fillStyle = "#060a12";
+      ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
+
+      ROOMS.forEach(r => {
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(r.x, r.y, r.w, r.h, 8);
+        ctx.clip();
+
+        // Base room fill
+        ctx.fillStyle = r.tint;
+        ctx.fillRect(r.x, r.y, r.w, r.h);
+
+        // Subtle parquet planks or tech tiles
+        if (r.floor === "wood") {
+          ctx.strokeStyle = "rgba(255, 200, 140, 0.045)";
+          ctx.lineWidth = 1;
+          for (let py = r.y + 24; py < r.y + r.h; py += 14) {
+            ctx.beginPath(); ctx.moveTo(r.x, py); ctx.lineTo(r.x + r.w, py); ctx.stroke();
+          }
+        } else {
+          ctx.strokeStyle = "rgba(148, 163, 184, 0.05)";
+          ctx.lineWidth = 1;
+          for (let px = r.x; px < r.x + r.w; px += 24) {
+            ctx.beginPath(); ctx.moveTo(px, r.y + 24); ctx.lineTo(px, r.y + r.h); ctx.stroke();
+          }
+          for (let py = r.y + 24; py < r.y + r.h; py += 24) {
+            ctx.beginPath(); ctx.moveTo(r.x, py); ctx.lineTo(r.x + r.w, py); ctx.stroke();
+          }
+        }
+
+        // Room top header bar
+        ctx.fillStyle = "rgba(2, 6, 23, 0.55)";
+        ctx.fillRect(r.x, r.y, r.w, 24);
+        ctx.fillStyle = "#f1f5f9";
+        ctx.font = "700 11.5px ui-sans-serif, system-ui, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText(r.name, r.x + 10, r.y + 16);
+        ctx.restore();
+
+        // Crisp architectural border
+        ctx.strokeStyle = r.id === "boss" ? "rgba(245, 158, 11, 0.45)" : "#293548";
+        ctx.lineWidth = 1.8;
+        ctx.beginPath(); ctx.roundRect(r.x, r.y, r.w, r.h, 8); ctx.stroke();
+      });
+
+      // Boss Suite Royal Rug
+      ctx.fillStyle = "rgba(185, 28, 28, 0.28)";
+      ctx.beginPath(); ctx.roundRect(52, 54, 152, 92, 8); ctx.fill();
+      ctx.strokeStyle = "rgba(250, 204, 21, 0.4)";
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      // Wall-Mounted Synced Digital Clock in HQ Room!
+      ctx.fillStyle = "#020617";
+      ctx.beginPath(); ctx.roundRect(410, 18, 82, 18, 4); ctx.fill();
+      ctx.strokeStyle = "#0ea5e9"; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = "#38bdf8";
+      ctx.font = "700 10.5px ui-monospace, monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(liveClockStr, 451, 30.5);
+
+      // Division 2 Live Ticker Tape Wall
+      ctx.fillStyle = "#020617";
+      ctx.beginPath(); ctx.roundRect(245, 400, 245, 17, 4); ctx.fill();
+      ctx.fillStyle = "#10b981";
+      ctx.font = "700 9.5px ui-monospace, monospace";
+      ctx.textAlign = "left";
+      ctx.fillText("NT$1M FUND LIVE · 3661 ▲ · 3017 ▲ · META ▲ · TLT ▲", 252, 412);
+
+      // Workstations
+      const st = id => STATE?.agents.find(a => a.id === id)?.status === "working";
+      drawWorkstation(128, 100, true, "boss");
+      drawWorkstation(330, 102, st("commander"), "dev");
+      drawWorkstation(435, 102, st("office_steward"), "dev");
+
+      // Div 1 Desks
+      drawWorkstation(125, 248, st("pain_hunter"), "dev");
+      drawWorkstation(370, 248, st("indie_hacker_builder"), "dev");
+      drawWorkstation(125, 336, st("monetization_architect"), "dev");
+      drawWorkstation(370, 336, st("ruthless_critic"), "dev");
+
+      // Div 2 Desks (5 stations including NT$1M Paper Fund Desk!)
+      drawWorkstation(105, 468, st("supply_chain_scout"), "stock");
+      drawWorkstation(262, 468, st("chip_momentum_tracker"), "stock");
+      drawWorkstation(105, 556, st("macro_etf_strategist"), "stock");
+      drawWorkstation(262, 556, st("chief_risk_officer"), "stock");
+      drawWorkstation(418, 512, st("paper_fund_manager"), "stock");
+
+      // Conference Room Projector & Glass Oval Table
+      ctx.fillStyle = "#e2e8f0";
+      ctx.beginPath(); ctx.roundRect(615, 42, 130, 14, 3); ctx.fill();
+      ctx.fillStyle = "#0f172a"; ctx.font = "700 8.5px ui-monospace, monospace"; ctx.textAlign = "center";
+      ctx.fillText("PRO 70% | FLASH 30% | 0-BOT", 680, 52);
+
+      const tGrad = ctx.createLinearGradient(590, 95, 760, 160);
+      tGrad.addColorStop(0, "rgba(30, 58, 138, 0.55)");
+      tGrad.addColorStop(1, "rgba(15, 23, 42, 0.85)");
+      ctx.fillStyle = tGrad;
+      ctx.beginPath(); ctx.roundRect(592, 95, 172, 66, 28); ctx.fill();
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.45)"; ctx.lineWidth = 1.5; ctx.stroke();
+
+      // Lounge Espresso Bar + Steam + Sofas + Plants
+      ctx.fillStyle = "#78350f";
+      ctx.beginPath(); ctx.roundRect(530, 260, 115, 22, 5); ctx.fill();
+      ctx.fillStyle = "#334155";
+      ctx.beginPath(); ctx.roundRect(545, 248, 24, 15, 3); ctx.fill();
+      // Rising coffee steam wisps
+      ctx.strokeStyle = "rgba(255,255,255,0.35)";
+      ctx.lineWidth = 1.2;
+      const sy = (frame % 40) * 0.25;
+      ctx.beginPath(); ctx.arc(557 + Math.sin(frame * 0.1) * 2, 244 - sy, 2.5, 0, Math.PI); ctx.stroke();
+
+      // Plush Lounge Sofas
+      ctx.fillStyle = "#1e3a5f";
+      ctx.beginPath(); ctx.roundRect(680, 258, 138, 28, 8); ctx.fill();
+      ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 1; ctx.stroke();
+
+      ctx.fillStyle = "#14532d";
+      ctx.beginPath(); ctx.roundRect(540, 565, 145, 26, 8); ctx.fill();
+      ctx.strokeStyle = "#22c55e"; ctx.lineWidth = 1; ctx.stroke();
+
+      // Decorative Monstera Plants
+      drawPlant(34, 54, 1.0);
+      drawPlant(222, 54, 1.0);
+      drawPlant(822, 56, 1.05);
+      drawPlant(818, 578, 1.15);
+      drawPlant(480, 198, 0.9);
+    }
+
+    function drawCharacter(a) {
+      const p = sprites[a.id];
+      if (!p) return;
+      const t = targetFor(a);
+      const dx = t.x - p.x, dy = t.y - p.y, dist = Math.hypot(dx, dy);
+      const moving = dist > 1.5;
+      if (moving) {
+        const spd = a.id === "office_steward" ? 1.6 : 2.8;
+        p.x += (dx / dist) * spd;
+        p.y += (dy / dist) * spd;
+      } else {
+        p.x = t.x; p.y = t.y;
+      }
+
+      const walkBob = moving ? Math.abs(Math.sin(frame * 0.28)) * 3 : (a.status === "working" ? Math.sin((frame + p.seed) * 0.18) * 0.9 : 0);
+      const x = p.x;
+      const y = p.y - walkBob;
+      const meta = STATUS_META[a.status] || STATUS_META.idle;
+
+      ctx.save();
+
+      // Selection Halo
+      if (a.id === selectedId) {
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.ellipse(x, p.y + 11, 19, 8.5, 0, 0, Math.PI * 2); ctx.stroke();
+      }
+
+      // Soft Drop Shadow
+      ctx.fillStyle = "rgba(0, 0, 0, 0.42)";
+      ctx.beginPath(); ctx.ellipse(x, p.y + 11, 13, 5.5, 0, 0, Math.PI * 2); ctx.fill();
+
+      // Legs / Shoes
+      const legSwing = moving ? Math.sin(frame * 0.28) * 3 : 0;
+      ctx.fillStyle = "#0f172a";
+      ctx.beginPath(); ctx.roundRect(x - 6, y + 5 + legSwing * 0.4, 5, 6, 2); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(x + 1, y + 5 - legSwing * 0.4, 5, 6, 2); ctx.fill();
+
+      // Royal Cape for Boss
+      if (a.isBoss) {
+        ctx.fillStyle = "#991b1b";
+        ctx.beginPath();
+        ctx.moveTo(x - 11, y - 6);
+        ctx.lineTo(x + 11, y - 6);
+        ctx.lineTo(x + 14, y + 8);
+        ctx.lineTo(x - 14, y + 8);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // Torso / Suit Jacket
+      ctx.fillStyle = a.status === "depleted" ? "#475569" : a.shirt;
+      ctx.beginPath(); ctx.roundRect(x - 9.5, y - 7, 19, 14, 5); ctx.fill();
+
+      // White Shirt Collar & Tie
+      ctx.fillStyle = "#f8fafc";
+      ctx.beginPath();
+      ctx.moveTo(x - 3.5, y - 7); ctx.lineTo(x + 3.5, y - 7); ctx.lineTo(x, y - 2);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = a.color;
+      ctx.fillRect(x - 1, y - 4, 2, 6);
+
+      // Animated Hands (typing or steward holding clipboard)
+      ctx.fillStyle = "#fde68a";
+      const handWave = a.status === "working" ? Math.sin(frame * 0.45 + p.seed) * 1.6 : 0;
+      ctx.beginPath(); ctx.arc(x - 10, y + 1 + handWave, 2.8, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x + 10, y + 1 - handWave, 2.8, 0, Math.PI * 2); ctx.fill();
+
+      if (a.id === "office_steward") {
+        // Steward's neat gold clipboard
+        ctx.fillStyle = "#fbbf24";
+        ctx.beginPath(); ctx.roundRect(x + 8, y - 4, 7, 9, 1.5); ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(x + 9.5, y - 2, 4, 5.5);
+      }
+
+      // Rounded Chibi Head
+      ctx.fillStyle = "#fde68a";
+      ctx.beginPath(); ctx.roundRect(x - 9.5, y - 22, 19, 16, 7); ctx.fill();
+
+      // Subtle Cheek Blush
+      ctx.fillStyle = "rgba(244, 63, 94, 0.25)";
+      ctx.beginPath(); ctx.ellipse(x - 6, y - 11.5, 2.2, 1.2, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(x + 6, y - 11.5, 2.2, 1.2, 0, 0, Math.PI * 2); ctx.fill();
+
+      // Styled Hair (Top + Side bangs)
+      ctx.fillStyle = a.hair || "#1e293b";
+      ctx.beginPath();
+      ctx.roundRect(x - 10.5, y - 24.5, 21, 8.5, [8, 8, 3, 3]);
+      ctx.fill();
+      ctx.beginPath(); ctx.arc(x - 8.5, y - 17, 2.5, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x + 8.5, y - 17, 2.5, 0, Math.PI * 2); ctx.fill();
+
+      // Eyes (with natural blinking & glasses on Critic/CRO)
+      const blinking = ((frame + p.seed) % 160) < 5;
+      ctx.fillStyle = "#0f172a";
+      if (a.status === "depleted" || blinking) {
+        ctx.fillRect(x - 5.5, y - 14, 3.5, 1.3);
+        ctx.fillRect(x + 2, y - 14, 3.5, 1.3);
+      } else {
+        ctx.beginPath(); ctx.arc(x - 4, y - 14, 1.8, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 4, y - 14, 1.8, 0, Math.PI * 2); ctx.fill();
+        // Eye shine
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath(); ctx.arc(x - 4.5, y - 14.6, 0.7, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 3.5, y - 14.6, 0.7, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // Glasses on Auditors / CRO
+      if (a.id === "ruthless_critic" || a.id === "chief_risk_officer") {
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(x - 7, y - 16.5, 5.5, 4.2);
+        ctx.strokeRect(x + 1.5, y - 16.5, 5.5, 4.2);
+        ctx.beginPath(); ctx.moveTo(x - 1.5, y - 14.5); ctx.lineTo(x + 1.5, y - 14.5); ctx.stroke();
+      }
+
+      // Boss Jeweled Golden Crown
+      if (a.isBoss) {
+        ctx.fillStyle = "#facc15";
+        ctx.beginPath();
+        ctx.moveTo(x - 8, y - 24);
+        ctx.lineTo(x - 9, y - 31);
+        ctx.lineTo(x - 4, y - 27.5);
+        ctx.lineTo(x, y - 33);
+        ctx.lineTo(x + 4, y - 27.5);
+        ctx.lineTo(x + 9, y - 31);
+        ctx.lineTo(x + 8, y - 24);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "#ef4444";
+        ctx.beginPath(); ctx.arc(x, y - 27, 1.5, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // Steward Patrol Action Bubble
+      if (a.id === "office_steward" && a.status === "working") {
+        const note = STEWARD_WAYPOINTS[stewardWpIdx].note;
+        ctx.font = "600 9.5px ui-sans-serif, system-ui, sans-serif";
+        const bw = ctx.measureText(note).width + 14;
+        ctx.fillStyle = "rgba(15, 23, 42, 0.92)";
+        ctx.beginPath(); ctx.roundRect(x - bw / 2, y - 42, bw, 15, 6); ctx.fill();
+        ctx.strokeStyle = "#2dd4bf"; ctx.lineWidth = 1; ctx.stroke();
+        ctx.fillStyle = "#5eead4"; ctx.textAlign = "center";
+        ctx.fillText(note, x, y - 31.5);
+      }
+
+      // Crisp Glassmorphic Nameplate
+      ctx.font = "700 9.5px ui-sans-serif, system-ui, sans-serif";
+      ctx.textAlign = "center";
+      const lw = ctx.measureText(a.name).width + 16;
+      ctx.fillStyle = "rgba(9, 14, 26, 0.88)";
+      ctx.beginPath(); ctx.roundRect(x - lw / 2, p.y + 14, lw, 14.5, 5); ctx.fill();
+      ctx.strokeStyle = meta.color; ctx.lineWidth = 1; ctx.stroke();
+
+      ctx.fillStyle = meta.color;
+      ctx.beginPath(); ctx.arc(x - lw / 2 + 5.5, p.y + 21.2, 2.5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#f8fafc";
+      ctx.fillText(a.name, x + 3.5, p.y + 24.5);
+
+      if (a.status === "depleted") {
+        ctx.fillStyle = "#fb7185";
+        ctx.font = "700 10px ui-monospace, monospace";
+        ctx.fillText("Zzz", x + 14, y - 24 - (frame % 50) * 0.2);
+      }
+
+      ctx.restore();
     }
 
     function draw() {
       frame++;
-      ctx.fillStyle = "#0b1120"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = "rgba(255,255,255,0.03)";
-      for (let x = 0; x < canvas.width; x += 20) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke(); }
-      for (let y = 0; y < canvas.height; y += 20) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke(); }
-
-      ROOMS.forEach(r => {
-        ctx.fillStyle = r.fill; ctx.fillRect(r.x, r.y, r.w, r.h);
-        ctx.strokeStyle = "#334155"; ctx.lineWidth = 2; ctx.strokeRect(r.x, r.y, r.w, r.h);
-        ctx.fillStyle = "rgba(255,255,255,0.05)";
-        ctx.fillRect(r.x + 1, r.y + 1, r.w - 2, 21);
-        ctx.fillStyle = "#e2e8f0"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
-        ctx.fillText(r.name, r.x + 8, r.y + 15);
-      });
-
-      // Boss carpet & desk
-      ctx.fillStyle = "rgba(220,38,38,0.18)"; ctx.fillRect(54, 48, 140, 82);
-      drawDesk(84, 98, 80, 22, true, "boss");
-
-      const st = id => STATE?.agents.find(a => a.id === id)?.status;
-      drawDesk(311, 98, 80, 22, st("commander") === "working", "dev");
-
-      // Division 1 Desks
-      drawDesk(75,  238, 80, 20, st("pain_hunter") === "working", "dev");
-      drawDesk(300, 238, 80, 20, st("indie_hacker_builder") === "working", "dev");
-      drawDesk(75,  320, 80, 20, st("monetization_architect") === "working", "dev");
-      drawDesk(300, 320, 80, 20, st("ruthless_critic") === "working", "dev");
-
-      // Division 2 Stock Trading Terminals + Live Wall Ticker
-      ctx.fillStyle = "#090d16"; ctx.fillRect(210, 376, 238, 15);
-      ctx.fillStyle = "#10b981"; ctx.font = "bold 9px monospace"; ctx.textAlign = "left";
-      ctx.fillText("TWSE ▲ | NVDA ▲ | QQQ ▲ | SMH ▲ | 0050 ▲", 216, 387);
-
-      drawDesk(75,  446, 82, 20, st("supply_chain_scout") === "working", "stock");
-      drawDesk(300, 446, 82, 20, st("chip_momentum_tracker") === "working", "stock");
-      drawDesk(75,  528, 82, 20, st("macro_etf_strategist") === "working", "stock");
-      drawDesk(300, 528, 82, 20, st("chief_risk_officer") === "working", "stock");
-
-      // Meeting table & Lounge
-      ctx.fillStyle = "#1e293b"; ctx.beginPath(); ctx.roundRect(550, 88, 135, 62, 16); ctx.fill();
-      ctx.strokeStyle = "#475569"; ctx.stroke();
-      ctx.fillStyle = "#78350f"; ctx.fillRect(486, 244, 88, 16);
-      ctx.fillStyle = "#166534"; ctx.beginPath(); ctx.roundRect(630, 242, 110, 22, 6); ctx.fill();
-      ctx.fillStyle = "#1e3a8a"; ctx.beginPath(); ctx.roundRect(555, 515, 130, 24, 6); ctx.fill();
-
+      drawRoomsAndDecor();
       if (STATE?.agents) {
-        [...STATE.agents].sort((a, b) => (sprites[a.id]?.y || 0) - (sprites[b.id]?.y || 0)).forEach(a => {
-          const p = sprites[a.id]; if (!p) return;
-          const t = targetFor(a);
-          const dx = t.x - p.x, dy = t.y - p.y, dist = Math.hypot(dx, dy);
-          if (dist > 1.5) { p.x += (dx / dist) * 2.6; p.y += (dy / dist) * 2.6; } else { p.x = t.x; p.y = t.y; }
-          const bob = dist > 1.5 ? Math.sin(frame * 0.35) * 2.5 : (a.status === "working" ? Math.sin(frame * 0.25) * 1 : 0);
-          const x = Math.round(p.x), y = Math.round(p.y + bob);
-          const meta = STATUS_META[a.status] || STATUS_META.idle;
-
-          if (a.id === selectedId) {
-            ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.ellipse(x, y + 9, 17, 8, 0, 0, Math.PI * 2); ctx.stroke();
-          }
-          ctx.fillStyle = "rgba(0,0,0,0.3)"; ctx.beginPath(); ctx.ellipse(x, y + 9, 11, 4.5, 0, 0, Math.PI * 2); ctx.fill();
-          ctx.fillStyle = a.status === "depleted" ? "#64748b" : a.shirt; ctx.fillRect(x - 8, y - 6, 16, 14);
-          ctx.fillStyle = "#fde68a"; ctx.fillRect(x - 7, y - 19, 14, 13);
-          ctx.fillStyle = a.hair; ctx.fillRect(x - 8, y - 22, 16, 5);
-          ctx.fillStyle = "#0f172a"; ctx.fillRect(x - 4, y - 13, 2, 3); ctx.fillRect(x + 2, y - 13, 2, 3);
-
-          if (a.isBoss) {
-            ctx.fillStyle = "#facc15";
-            ctx.fillRect(x - 7, y - 27, 14, 5);
-            ctx.fillRect(x - 7, y - 30, 3, 3);
-            ctx.fillRect(x - 1, y - 31, 3, 4);
-            ctx.fillRect(x + 4, y - 30, 3, 3);
-          }
-
-          ctx.font = "bold 9.5px sans-serif"; ctx.textAlign = "center";
-          const lw = ctx.measureText(a.name).width + 14;
-          ctx.fillStyle = "rgba(15,23,42,0.92)";
-          ctx.beginPath(); ctx.roundRect(x - lw / 2, y + 12, lw, 14, 4); ctx.fill();
-          ctx.strokeStyle = meta.color; ctx.lineWidth = 1; ctx.stroke();
-          ctx.fillStyle = meta.color; ctx.beginPath(); ctx.arc(x - lw / 2 + 5, y + 19, 2.5, 0, Math.PI * 2); ctx.fill();
-          ctx.fillStyle = "#f8fafc"; ctx.fillText(a.name, x + 3, y + 22);
-        });
+        [...STATE.agents]
+          .sort((a, b) => (sprites[a.id]?.y || 0) - (sprites[b.id]?.y || 0))
+          .forEach(a => drawCharacter(a));
       }
       requestAnimationFrame(draw);
     }
