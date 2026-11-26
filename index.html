@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Lifeblood — 24/7 LIVE RPG 虛擬辦公室</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card: #111827;
+      --card2: #0f172a;
+      --border: #1e293b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --primary: #38bdf8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #f43f5e;
+      --purple: #8b5cf6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans TC", sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: #1e293b;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .header {
+      background: rgba(17, 24, 39, 0.96);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .crown-box {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(245, 158, 11, 0.16);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .title { font-size: 15px; font-weight: 700; margin: 0; }
+    .subtitle { font-size: 11px; color: var(--muted); margin: 2px 0 0; }
+    .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .pill {
+      font-size: 11px; padding: 2px 8px; border-radius: 999px;
+      background: #1e293b; color: var(--text); font-weight: 600;
+    }
+    .pill-live {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      font-family: ui-monospace, monospace;
+    }
+    .quota-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+    .quota-box { min-width: 210px; }
+    .quota-head { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
+    .bar-bg {
+      height: 10px; border-radius: 999px; background: #1e293b;
+      overflow: hidden; border: 1px solid #334155;
+    }
+    .bar-fill { height: 100%; transition: width 0.35s ease; }
+    .btn {
+      border: 1px solid #334155;
+      background: #1e293b;
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn:hover { background: #334155; }
+    .btn-primary { background: #0284c7; border-color: #0ea5e9; color: #fff; }
+    .btn-primary:hover { background: #0369a1; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 16px;
+      padding: 16px;
+    }
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .card-head {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; font-weight: 400; color: var(--muted); font-size: 11px; }
+    .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+    .canvas-wrap { padding: 8px; background: #070c17; display: flex; justify-content: center; }
+    canvas { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border); image-rendering: pixelated; cursor: pointer; }
+    .inspector { padding: 12px; }
+    .inspector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    @media (max-width: 640px) { .inspector-grid { grid-template-columns: 1fr; } }
+    .tabs { display: flex; border-bottom: 1px solid var(--border); }
+    .tab-btn {
+      flex: 1; background: transparent; border: none; border-bottom: 2px solid transparent;
+      color: var(--muted); padding: 10px 8px; font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+    .tab-btn.active { color: var(--text); border-bottom-color: var(--primary); }
+    .panel-body { max-height: 600px; overflow-y: auto; padding: 12px; }
+    .hidden { display: none; }
+    .report-item {
+      padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--card2); margin-bottom: 8px;
+    }
+    .report-top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; font-size: 11px; }
+    .org-node {
+      padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--card2); cursor: pointer; margin-bottom: 8px;
+    }
+    .org-node.selected { border-color: var(--primary); }
+    .org-node.boss-node { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.4); }
+    .org-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    @media (max-width: 520px) { .org-grid { grid-template-columns: 1fr; } }
+    .arrow { text-align: center; color: var(--muted); font-size: 11px; margin: 4px 0 8px; }
+    .file-row {
+      display: flex; justify-content: space-between; gap: 8px;
+      padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border);
+      background: var(--card2); margin-bottom: 6px; font-family: ui-monospace, monospace; font-size: 11px;
+    }
+    .mono { font-family: ui-monospace, monospace; }
+    .muted { color: var(--muted); }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-row">
+      <div class="brand">
+        <div class="crown-box">👑</div>
+        <div>
+          <div class="badges">
+            <h1 class="title">Project Lifeblood · 24/7 LIVE RPG 辦公室</h1>
+            <span id="live-pill" class="pill pill-live">● LIVE 連線中</span>
+            <span id="status-pill" class="pill">載入中...</span>
+          </div>
+          <p class="subtitle">
+            GitHub Pages 24/7 線上託管 · 每 10 秒自動同步真實 <code>state.json</code> · 歸檔同步 <a href="https://drive.google.com/drive/folders/1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844" target="_blank">Google Drive ↗</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="quota-wrap">
+        <div class="quota-box">
+          <div class="quota-head">
+            <span class="muted">團隊算力額度（歸零自動下班）</span>
+            <span id="quota-text" class="mono" style="font-weight:700">-- / --</span>
+          </div>
+          <div class="bar-bg"><div id="quota-bar" class="bar-fill" style="width:0%; background:var(--success)"></div></div>
+        </div>
+        <button class="btn btn-primary" onclick="fetchState(true)">🔄 立即更新</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <!-- Left Column -->
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div class="card">
+        <div class="card-head">
+          <span>🏢 2D RPG 戰情辦公室（點擊角色檢視詳細狀態）</span>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--success)"></i>上工</span>
+            <span><i class="dot" style="background:var(--primary)"></i>開會</span>
+            <span><i class="dot" style="background:var(--warning)"></i>閒置</span>
+            <span><i class="dot" style="background:var(--error)"></i>額度耗盡下班</span>
+          </div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="office-canvas" width="760" height="470"></canvas>
+        </div>
+      </div>
+
+      <div class="card inspector" id="inspector">載入角色資料中...</div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="card" style="display:flex; flex-direction:column;">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="reports">📋 真實工作回報</button>
+        <button class="tab-btn" data-tab="org">🏛️ 組織架構圖</button>
+        <button class="tab-btn" data-tab="files">☁️ 檔案與 Drive</button>
+      </div>
+
+      <div id="tab-reports" class="panel-body"></div>
+      <div id="tab-org" class="panel-body hidden"></div>
+      <div id="tab-files" class="panel-body hidden"></div>
+    </div>
+  </main>
+
+  <script>
+    const STATUS_META = {
+      boss:     { label: "視察中",       icon: "👑", color: "#f59e0b" },
+      working:  { label: "上工中",       icon: "💻", color: "#10b981" },
+      meeting:  { label: "開會中",       icon: "🗣️", color: "#38bdf8" },
+      idle:     { label: "閒置待命",     icon: "☕", color: "#f59e0b" },
+      depleted: { label: "額度耗盡下班", icon: "💤", color: "#f43f5e" }
+    };
+
+    const ROOMS = [
+      { name: "👑 大 Boss 總裁室",       x: 16,  y: 16,  w: 220, h: 150, fill: "#231d12" },
+      { name: "🎯 指揮官戰情中樞",       x: 250, y: 16,  w: 210, h: 150, fill: "#162032" },
+      { name: "🗣️ 戰略會議室",          x: 474, y: 16,  w: 270, h: 210, fill: "#132238" },
+      { name: "💻 金流戰隊開發與情報區",  x: 16,  y: 180, w: 444, h: 274, fill: "#161f30" },
+      { name: "☕ 茶水間 / 下班休息區",   x: 474, y: 240, w: 270, h: 214, fill: "#11251f" }
+    ];
+
+    const POS = {
+      boss:                   { desk: { x: 126, y: 98 },  meet: { x: 609, y: 74 },  lounge: { x: 126, y: 98 } },
+      commander:              { desk: { x: 355, y: 100 }, meet: { x: 525, y: 125 }, lounge: { x: 525, y: 315 } },
+      pain_hunter:            { desk: { x: 115, y: 265 }, meet: { x: 565, y: 182 }, lounge: { x: 580, y: 380 } },
+      indie_hacker_builder:   { desk: { x: 345, y: 265 }, meet: { x: 655, y: 182 }, lounge: { x: 655, y: 315 } },
+      monetization_architect: { desk: { x: 115, y: 385 }, meet: { x: 695, y: 125 }, lounge: { x: 675, y: 390 } },
+      ruthless_critic:        { desk: { x: 345, y: 385 }, meet: { x: 609, y: 185 }, lounge: { x: 525, y: 395 } }
+    };
+
+    let STATE = null;
+    let selectedId = "commander";
+    const sprites = {};
+    let frame = 0;
+
+    function targetFor(a) {
+      const p = POS[a.id] || { desk: { x: 200, y: 300 }, meet: { x: 600, y: 140 }, lounge: { x: 580, y: 340 } };
+      if (a.isBoss || a.status === "working") return p.desk;
+      if (a.status === "meeting") return p.meet;
+      return p.lounge;
+    }
+
+    async function fetchState(manual = false) {
+      const pill = document.getElementById("live-pill");
+      if (manual) pill.textContent = "● 同步中...";
+      try {
+        const res = await fetch(`./state.json?t=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        STATE = await res.json();
+        STATE.agents.forEach(a => {
+          const t = targetFor(a);
+          if (!sprites[a.id]) sprites[a.id] = { x: t.x, y: t.y };
+        });
+        pill.textContent = `● LIVE · ${new Date().toTimeString().slice(0, 8)}`;
+        renderUI();
+      } catch (e) {
+        pill.textContent = "● 讀取失敗: " + e.message;
+      }
+    }
+
+    function renderUI() {
+      if (!STATE) return;
+      const q = STATE.quota;
+      const pct = Math.max(0, Math.min(100, (q.remaining / q.max) * 100));
+      document.getElementById("quota-text").textContent = `${q.remaining} / ${q.max} 點`;
+      const bar = document.getElementById("quota-bar");
+      bar.style.width = pct + "%";
+      bar.style.background = pct > 35 ? "var(--success)" : (pct > 0 ? "var(--warning)" : "var(--error)");
+
+      const workers = STATE.agents.filter(a => !a.isBoss);
+      const w = workers.filter(a => a.status === "working").length;
+      const m = workers.filter(a => a.status === "meeting").length;
+      const i = workers.filter(a => a.status === "idle").length;
+      document.getElementById("status-pill").textContent = q.remaining <= 0
+        ? "💤 額度耗盡・全員下班"
+        : `上工 ${w} · 開會 ${m} · 閒置 ${i}`;
+
+      renderInspector();
+      renderReports();
+      renderOrg();
+      renderFiles();
+    }
+
+    function renderInspector() {
+      const a = STATE.agents.find(x => x.id === selectedId) || STATE.agents[0];
+      const meta = STATUS_META[a.status] || STATUS_META.idle;
+      document.getElementById("inspector").innerHTML = `
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; padding-bottom:8px; border-bottom:1px solid var(--border);">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span class="dot" style="background:${a.color}; width:10px; height:10px; margin:0;"></span>
+            <strong style="font-size:14px;">${a.name}</strong>
+            <span class="muted">${a.role}</span>
+            <span class="pill" style="color:${meta.color}">${meta.icon} ${meta.label}</span>
+          </div>
+          <span class="mono muted" style="font-size:11px;">最後打卡：${a.lastUpdate}</span>
+        </div>
+        <div class="inspector-grid">
+          <div><div class="muted" style="font-size:11px;">當前真實任務</div><div style="margin-top:3px;">${a.currentTask}</div></div>
+          <div><div class="muted" style="font-size:11px;">個人額度 / 完工數</div><div class="mono" style="margin-top:3px;">${a.isBoss ? "∞ 無限" : `${a.quota} / ${a.maxQuota} 點`} · ${a.tasksCompleted} 筆</div></div>
+          <div><div class="muted" style="font-size:11px;">Subagent ID</div><div class="mono muted" style="margin-top:3px; word-break:break-all;">${a.conversationId}</div></div>
+        </div>
+      `;
+    }
+
+    function renderReports() {
+      const el = document.getElementById("tab-reports");
+      el.innerHTML = STATE.reports.map(r => {
+        const meta = STATUS_META[r.status] || STATUS_META.working;
+        return `
+          <div class="report-item">
+            <div class="report-top">
+              <div><strong>${r.agentName}</strong> <span class="pill" style="color:${meta.color}; margin-left:4px;">${meta.icon} ${meta.label}</span></div>
+              <span class="mono muted">${r.time.slice(5)} ${r.cost > 0 ? `· -${r.cost}點` : ""}</span>
+            </div>
+            <div style="color:#cbd5e1;">${r.summary}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderOrg() {
+      const boss = STATE.agents.find(a => a.tier === 0);
+      const cmd = STATE.agents.find(a => a.tier === 1);
+      const team = STATE.agents.filter(a => a.tier === 2);
+      const card = (a, isBoss = false) => {
+        const meta = STATUS_META[a.status] || STATUS_META.idle;
+        return `
+          <div class="org-node ${isBoss ? 'boss-node' : ''} ${a.id === selectedId ? 'selected' : ''}" onclick="selectedId='${a.id}'; renderInspector(); renderOrg();">
+            <div style="display:flex; justify-content:space-between; gap:6px; align-items:center;">
+              <div><i class="dot" style="background:${a.color}"></i><strong>${a.name}</strong></div>
+              <span style="color:${meta.color}; font-size:11px; font-weight:600;">${meta.icon} ${meta.label}</span>
+            </div>
+            <div class="muted" style="font-size:11px; margin-top:2px;">${a.role}</div>
+            ${!a.isBoss ? `
+              <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                <div class="bar-bg" style="flex:1; height:6px;"><div class="bar-fill" style="width:${(a.quota/a.maxQuota)*100}%; background:${a.quota>30?'var(--success)':(a.quota>0?'var(--warning)':'var(--error)')}"></div></div>
+                <span class="mono muted" style="font-size:11px;">${a.quota}點</span>
+              </div>
+            ` : `<div style="color:var(--warning); font-size:11px; margin-top:4px;">★ 掌控全體額度發放與最終決策</div>`}
+          </div>
+        `;
+      };
+      document.getElementById("tab-org").innerHTML = `
+        <div class="muted" style="font-size:11px; margin-bottom:4px;">LEVEL 0 · 最高決策層</div>
+        ${card(boss, true)}
+        <div class="arrow">↓ 直接匯報與額度授權</div>
+        <div class="muted" style="font-size:11px; margin-bottom:4px;">LEVEL 1 · AI 總管調度層</div>
+        ${card(cmd)}
+        <div class="arrow">↓ 平行派工與毒舌審計</div>
+        <div class="muted" style="font-size:11px; margin-bottom:4px;">LEVEL 2 · 真實子代理戰隊</div>
+        <div class="org-grid">${team.map(a => card(a)).join("")}</div>
+      `;
+    }
+
+    function renderFiles() {
+      const t = STATE.telemetry || { totalLocalFiles: 0, driveSyncedFiles: 0, recentFiles: [], snapshotTime: "--" };
+      document.getElementById("tab-files").innerHTML = `
+        <div class="report-item" style="margin-bottom:12px;">
+          <strong>☁️ Google Drive 永久歸檔狀態</strong>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+            <div class="org-node" style="margin:0;"><div class="muted" style="font-size:11px;">工作區實檔數</div><div class="mono" style="font-size:15px; font-weight:700;">${t.totalLocalFiles} 檔</div></div>
+            <div class="org-node" style="margin:0;"><div class="muted" style="font-size:11px;">已同步 Drive</div><div class="mono" style="font-size:15px; font-weight:700; color:var(--success);">${t.driveSyncedFiles} 檔</div></div>
+          </div>
+          <div class="muted" style="font-size:11px; margin-top:8px;">
+            最後推送時間：<code>${t.snapshotTime}</code><br/>
+            Drive 資料夾：<a href="https://drive.google.com/drive/folders/${STATE.driveFolderId}" target="_blank">開啟 Antigravity_生存金流點子戰隊 ↗</a>
+          </div>
+        </div>
+        <div style="font-weight:600; margin-bottom:6px;">📂 最近異動檔案（真實磁碟掃描）</div>
+        ${(t.recentFiles || []).map(f => `<div class="file-row"><span style="color:var(--primary); overflow:hidden; text-overflow:ellipsis;">${f.path}</span><span class="muted">${f.mtime.slice(5)}</span></div>`).join("")}
+      `;
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.tab;
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === target));
+        ["reports", "org", "files"].forEach(t => document.getElementById("tab-" + t).classList.toggle("hidden", t !== target));
+      });
+    });
+
+    // Canvas 2D RPG Office
+    const canvas = document.getElementById("office-canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.addEventListener("click", e => {
+      if (!STATE) return;
+      const r = canvas.getBoundingClientRect();
+      const cx = (e.clientX - r.left) * (canvas.width / r.width);
+      const cy = (e.clientY - r.top) * (canvas.height / r.height);
+      let hit = null, minD = 36;
+      STATE.agents.forEach(a => {
+        const p = sprites[a.id];
+        if (!p) return;
+        const d = Math.hypot(p.x - cx, p.y - cy);
+        if (d < minD) { minD = d; hit = a; }
+      });
+      if (hit) { selectedId = hit.id; renderInspector(); renderOrg(); }
+    });
+
+    function drawDesk(x, y, w, h, active, isBoss = false) {
+      ctx.fillStyle = isBoss ? "#7c2d12" : "#92400e"; ctx.fillRect(x, y, w, h);
+      ctx.fillStyle = isBoss ? "#431407" : "#78350f"; ctx.fillRect(x, y + h, w, 6);
+      const mx = x + w / 2 - 14, my = y - 4;
+      ctx.fillStyle = "#0f172a"; ctx.fillRect(mx, my, 28, 16);
+      ctx.fillStyle = active ? (frame % 40 < 20 ? "#38bdf8" : "#22d3ee") : "#334155";
+      ctx.fillRect(mx + 2, my + 2, 24, 11);
+    }
+
+    function draw() {
+      frame++;
+      ctx.fillStyle = "#0b1120"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "rgba(255,255,255,0.03)";
+      for (let x = 0; x < canvas.width; x += 20) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke(); }
+      for (let y = 0; y < canvas.height; y += 20) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke(); }
+
+      ROOMS.forEach(r => {
+        ctx.fillStyle = r.fill; ctx.fillRect(r.x, r.y, r.w, r.h);
+        ctx.strokeStyle = "#334155"; ctx.lineWidth = 2; ctx.strokeRect(r.x, r.y, r.w, r.h);
+        ctx.fillStyle = "rgba(255,255,255,0.05)"; ctx.fillRect(r.x + 1, r.y + 1, r.w - 2, 22);
+        ctx.fillStyle = "#e2e8f0"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
+        ctx.fillText(r.name, r.x + 8, r.y + 15);
+      });
+
+      ctx.fillStyle = "rgba(220,38,38,0.18)"; ctx.fillRect(56, 56, 140, 88);
+      drawDesk(86, 108, 80, 26, true, true);
+      const st = id => STATE?.agents.find(a => a.id === id)?.status;
+      drawDesk(315, 110, 80, 26, st("commander") === "working");
+      drawDesk(75,  275, 82, 24, st("pain_hunter") === "working");
+      drawDesk(305, 275, 82, 24, st("indie_hacker_builder") === "working");
+      drawDesk(75,  395, 82, 24, st("monetization_architect") === "working");
+      drawDesk(305, 395, 82, 24, st("ruthless_critic") === "working");
+
+      ctx.fillStyle = "#1e293b"; ctx.beginPath(); ctx.roundRect(545, 95, 130, 68, 18); ctx.fill();
+      ctx.strokeStyle = "#475569"; ctx.stroke();
+      ctx.fillStyle = "#78350f"; ctx.fillRect(490, 272, 90, 20);
+      ctx.fillStyle = "#166534"; ctx.beginPath(); ctx.roundRect(625, 272, 98, 26, 6); ctx.fill();
+
+      if (STATE?.agents) {
+        [...STATE.agents].sort((a, b) => (sprites[a.id]?.y || 0) - (sprites[b.id]?.y || 0)).forEach(a => {
+          const p = sprites[a.id]; if (!p) return;
+          const t = targetFor(a);
+          const dx = t.x - p.x, dy = t.y - p.y, dist = Math.hypot(dx, dy);
+          if (dist > 1.5) { p.x += (dx / dist) * 2.5; p.y += (dy / dist) * 2.5; } else { p.x = t.x; p.y = t.y; }
+          const bob = dist > 1.5 ? Math.sin(frame * 0.35) * 2.5 : (a.status === "working" ? Math.sin(frame * 0.25) * 1 : 0);
+          const x = Math.round(p.x), y = Math.round(p.y + bob);
+          const meta = STATUS_META[a.status] || STATUS_META.idle;
+
+          if (a.id === selectedId) {
+            ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.ellipse(x, y + 10, 18, 9, 0, 0, Math.PI * 2); ctx.stroke();
+          }
+          ctx.fillStyle = "rgba(0,0,0,0.3)"; ctx.beginPath(); ctx.ellipse(x, y + 10, 12, 5, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = a.status === "depleted" ? "#64748b" : a.shirt; ctx.fillRect(x - 9, y - 6, 18, 15);
+          ctx.fillStyle = "#fde68a"; ctx.fillRect(x - 8, y - 20, 16, 14);
+          ctx.fillStyle = a.hair; ctx.fillRect(x - 9, y - 23, 18, 6);
+          ctx.fillStyle = "#0f172a"; ctx.fillRect(x - 5, y - 14, 2, 3); ctx.fillRect(x + 3, y - 14, 2, 3);
+
+          if (a.isBoss) {
+            ctx.fillStyle = "#facc15";
+            ctx.fillRect(x - 7, y - 28, 14, 5);
+            ctx.fillRect(x - 7, y - 31, 3, 3); ctx.fillRect(x - 1, y - 32, 3, 4); ctx.fillRect(x + 4, y - 31, 3, 3);
+          }
+
+          ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+          const lw = ctx.measureText(a.name).width + 16;
+          ctx.fillStyle = "rgba(15,23,42,0.92)";
+          ctx.beginPath(); ctx.roundRect(x - lw / 2, y + 14, lw, 15, 4); ctx.fill();
+          ctx.strokeStyle = meta.color; ctx.lineWidth = 1; ctx.stroke();
+          ctx.fillStyle = meta.color; ctx.beginPath(); ctx.arc(x - lw / 2 + 6, y + 21.5, 3, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = "#f8fafc"; ctx.fillText(a.name, x + 4, y + 25);
+
+          if (!a.isBoss) {
+            const bw = 34;
+            ctx.fillStyle = "#334155"; ctx.fillRect(x - bw / 2, y + 31, bw, 3.5);
+            ctx.fillStyle = a.quota > 30 ? "#10b981" : (a.quota > 0 ? "#f59e0b" : "#f43f5e");
+            ctx.fillRect(x - bw / 2, y + 31, bw * (a.quota / a.maxQuota), 3.5);
+          }
+          if (a.status === "depleted") {
+            ctx.fillStyle = "#f43f5e"; ctx.font = "bold 11px monospace";
+            ctx.fillText("Zzz", x + 14, y - 22 - (frame % 60) * 0.25);
+          }
+        });
+      }
+      requestAnimationFrame(draw);
+    }
+
+    fetchState();
+    setInterval(() => fetchState(false), 10000);
+    draw();
+  </script>
+</body>
+</html>

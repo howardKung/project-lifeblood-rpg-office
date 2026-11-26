@@ -1,0 +1,257 @@
+{
+  "officeName": "Project Lifeblood · 生存金流 RPG 辦公室 (LIVE)",
+  "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
+  "quota": {
+    "unit": "任務算力點 (Shift Credits)",
+    "remaining": 76,
+    "max": 100,
+    "totalSpent": 24,
+    "autoClockOutOnZero": true
+  },
+  "lastDriveSync": "2026-11-25 22:02:04",
+  "agents": [
+    {
+      "id": "boss",
+      "name": "大 Boss（你）",
+      "role": "最高決策者 & 額度發放官",
+      "tier": 0,
+      "reportsTo": null,
+      "conversationId": "human-commander",
+      "status": "boss",
+      "isBoss": true,
+      "quota": 100,
+      "maxQuota": 100,
+      "tasksCompleted": 2,
+      "currentTask": "視察 Live RPG 辦公室、控管算力額度並拍板 Top 1 動工",
+      "lastUpdate": "2026-11-25 22:13:00",
+      "color": "#f59e0b",
+      "shirt": "#7c3aed",
+      "hair": "#1f2937"
+    },
+    {
+      "id": "commander",
+      "name": "Antigravity",
+      "role": "AI 總管 / 戰隊指揮官",
+      "tier": 1,
+      "reportsTo": "boss",
+      "conversationId": "a737e45b-0fc5-4039-adeb-314b3cfbc85e",
+      "status": "working",
+      "isBoss": false,
+      "quota": 81,
+      "maxQuota": 100,
+      "tasksCompleted": 7,
+      "currentTask": "24/7 GitHub Pages Live RPG 辦公室已發布，等待大 Boss 下達 Top 1 開發指令",
+      "lastUpdate": "2026-11-26 06:28:16",
+      "color": "#3b82f6",
+      "shirt": "#2563eb",
+      "hair": "#0f172a"
+    },
+    {
+      "id": "pain_hunter",
+      "name": "痛點獵人",
+      "role": "Pain & Traffic Hunter",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "8ef986588617527a0b80f042a3e0205a",
+      "status": "idle",
+      "isBoss": false,
+      "quota": 80,
+      "maxQuota": 100,
+      "tasksCompleted": 1,
+      "currentTask": "已完成 Round 1 提案 (01_pain_hunter.md)，待命等待大 Boss 派工",
+      "lastUpdate": "2026-11-25 21:32:02",
+      "color": "#10b981",
+      "shirt": "#059669",
+      "hair": "#3f2e21"
+    },
+    {
+      "id": "indie_hacker_builder",
+      "name": "平台套利駭客",
+      "role": "Marketplace & API Hacker",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "4d45eadf25e3a97eff77f4c65e29f773",
+      "status": "idle",
+      "isBoss": false,
+      "quota": 75,
+      "maxQuota": 100,
+      "tasksCompleted": 1,
+      "currentTask": "已完成 Round 1 提案 (Top 1 Multi-ATS & Top 2 AgentGuard)，待命準備開工",
+      "lastUpdate": "2026-11-25 21:32:03",
+      "color": "#06b6d4",
+      "shirt": "#0891b2",
+      "hair": "#1e293b"
+    },
+    {
+      "id": "monetization_architect",
+      "name": "變現架構師",
+      "role": "Monetization & Flywheel",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "67b3a58dcddfdf828db8b1678e87d0b9",
+      "status": "idle",
+      "isBoss": false,
+      "quota": 80,
+      "maxQuota": 100,
+      "tasksCompleted": 1,
+      "currentTask": "已完成 Round 1 提案 (03_monetization_architect.md)，茶水間待命",
+      "lastUpdate": "2026-11-25 21:32:37",
+      "color": "#ec4899",
+      "shirt": "#db2777",
+      "hair": "#4c1d95"
+    },
+    {
+      "id": "ruthless_critic",
+      "name": "毒舌審計官",
+      "role": "Ruthless Risk & Auditor",
+      "tier": 2,
+      "reportsTo": "commander",
+      "conversationId": "d13ed38195f884b6922f006caba23dea",
+      "status": "idle",
+      "isBoss": false,
+      "quota": 80,
+      "maxQuota": 100,
+      "tasksCompleted": 1,
+      "currentTask": "已完成 9 選 3 五大死亡拷問審計 (AUDIT_AND_RANKING.md)，待命",
+      "lastUpdate": "2026-11-25 21:38:23",
+      "color": "#ef4444",
+      "shirt": "#b91c1c",
+      "hair": "#18181b"
+    }
+  ],
+  "reports": [
+    {
+      "time": "2026-11-26 06:28:16",
+      "agentId": "commander",
+      "agentName": "Antigravity",
+      "status": "working",
+      "cost": 2,
+      "summary": "已建立公開倉庫 howardKung/project-lifeblood-rpg-office 並部署 24/7 GitHub Pages Live RPG 辦公室，每 10 秒自動同步真實 state.json。"
+    },
+    {
+      "time": "2026-11-26 06:15:54",
+      "agentId": "commander",
+      "agentName": "Antigravity",
+      "status": "working",
+      "cost": 2,
+      "summary": "已啟動 Live RPG 辦公室背景伺服器 (port 8765)，正式切換為 100% 真實狀態檔 (state.json) + 磁碟監控 + 即時 Drive 同步模式。"
+    },
+    {
+      "time": "2026-11-25 22:02:04",
+      "agentId": "commander",
+      "agentName": "Antigravity",
+      "status": "working",
+      "cost": 2,
+      "summary": "已執行 sync_to_drive.py，成功將 RPG 辦公室與 WORK_REPORTS_LOG.md 同步至 Google Drive (1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844)。"
+    },
+    {
+      "time": "2026-11-25 21:48:15",
+      "agentId": "commander",
+      "agentName": "Antigravity",
+      "status": "working",
+      "cost": 3,
+      "summary": "已建立 Google Drive 永久資料夾 Antigravity_生存金流點子戰隊，上傳全數 8 份戰隊文件並更新 survival-idea-squad 技能。"
+    },
+    {
+      "time": "2026-11-25 21:38:23",
+      "agentId": "ruthless_critic",
+      "agentName": "毒舌審計官",
+      "status": "working",
+      "cost": 5,
+      "summary": "完成 9 大提案毒舌審計：淘汰 4 案、暫緩 2 案，拍板 Top 1 Multi-ATS (43/50)、Top 2 AgentGuard (40.5/50)、Top 3 FabQuoteLite (39.5/50)。"
+    },
+    {
+      "time": "2026-11-25 21:32:37",
+      "agentId": "monetization_architect",
+      "agentName": "變現架構師",
+      "status": "working",
+      "cost": 4,
+      "summary": "完成 3 份數據驅動 pSEO + 經常性分潤雙飛輪提案，寫入 proposals/03_monetization_architect.md。"
+    },
+    {
+      "time": "2026-11-25 21:32:03",
+      "agentId": "indie_hacker_builder",
+      "agentName": "平台套利駭客",
+      "status": "working",
+      "cost": 3,
+      "summary": "完成 3 份市集套利提案（Apify Actor / Chrome 擴充 / n8n 母模版），寫入 proposals/02_indie_hacker_builder.md。"
+    },
+    {
+      "time": "2026-11-25 21:32:02",
+      "agentId": "pain_hunter",
+      "agentName": "痛點獵人",
+      "status": "working",
+      "cost": 3,
+      "summary": "完成 3 份零邊際算力 Micro-SaaS 提案（PackPassport / FabQuoteLite / Local835），寫入 proposals/01_pain_hunter.md。"
+    }
+  ],
+  "directives": [],
+  "telemetry": {
+    "totalLocalFiles": 15,
+    "driveSyncedFiles": 15,
+    "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
+    "recentFiles": [
+      {
+        "path": "rpg-office/state.json",
+        "size": 6336,
+        "mtime": "2026-11-26 06:28:16",
+        "mtimeTs": 1795674496.5783052
+      },
+      {
+        "path": "rpg-office/render_live_office.py",
+        "size": 27777,
+        "mtime": "2026-11-26 06:28:00",
+        "mtimeTs": 1795674480.9150734
+      },
+      {
+        "path": "rpg-office/office_cli.py",
+        "size": 7098,
+        "mtime": "2026-11-26 06:23:44",
+        "mtimeTs": 1795674224.9277298
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 30394,
+        "mtime": "2026-11-26 06:23:30",
+        "mtimeTs": 1795674210.0771315
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 3051,
+        "mtime": "2026-11-26 06:15:54",
+        "mtimeTs": 1795673754.2717438
+      },
+      {
+        "path": "rpg-office/live_office.html",
+        "size": 31117,
+        "mtime": "2026-11-26 06:15:32",
+        "mtimeTs": 1795673732.7993138
+      },
+      {
+        "path": "rpg-office/server.py",
+        "size": 12589,
+        "mtime": "2026-11-26 06:15:31",
+        "mtimeTs": 1795673731.9192412
+      },
+      {
+        "path": "INDEX_戰隊紀錄總覽.md",
+        "size": 2069,
+        "mtime": "2026-11-26 06:01:57",
+        "mtimeTs": 1795672917.3228333
+      },
+      {
+        "path": "dashboard/idea_squad_board.html",
+        "size": 9692,
+        "mtime": "2026-11-26 05:48:01",
+        "mtimeTs": 1795672081.8150408
+      },
+      {
+        "path": "sync_to_drive.py",
+        "size": 4512,
+        "mtime": "2026-11-26 05:47:12",
+        "mtimeTs": 1795672032.9177716
+      }
+    ],
+    "snapshotTime": "2026-11-26 06:28:16"
+  }
+}
