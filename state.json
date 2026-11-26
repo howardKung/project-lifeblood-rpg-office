@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 71,
+    "remaining": 66,
     "max": 100,
-    "totalSpent": 109,
+    "totalSpent": 114,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-26 21:08:59",
@@ -218,13 +218,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "alpha-div-cro",
-      "status": "meeting",
+      "status": "idle",
       "isBoss": false,
-      "quota": 80,
+      "quota": 75,
       "maxQuota": 100,
-      "tasksCompleted": 0,
-      "currentTask": "【股市二部 · PRO】待命終審第二波加碼候選池與百萬模擬基金條件單門檻",
-      "lastUpdate": "2026-11-26 21:08:59",
+      "tasksCompleted": 1,
+      "currentTask": "已完成 Stage 2 觀察池與 SEC Form 4 高管買進終審，待命省電中",
+      "lastUpdate": "2026-11-26 21:18:34",
       "color": "#f97316",
       "shirt": "#c2410c",
       "hair": "#27272a",
@@ -252,6 +252,14 @@
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-26 21:18:34",
+      "agentId": "chief_risk_officer",
+      "agentName": "毒舌風控守門員",
+      "status": "idle",
+      "cost": 5,
+      "summary": "【PRO 風控終審簽核】核准 PLTR/中砂/日月光/Arista/旺矽列入條件單，直接退件光聖(-41.7%破年線)，抓包 SHMD 申報烏龍並鎖定 12% 現金保留紅線！"
+    },
     {
       "time": "2026-11-26 21:18:32",
       "agentId": "office_steward",
@@ -397,9 +405,21 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 15323,
+        "size": 15680,
+        "mtime": "2026-11-26 21:18:34",
+        "mtimeTs": 1795699114.6152723
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 9193,
+        "mtime": "2026-11-26 21:18:34",
+        "mtimeTs": 1795699114.241937
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 56586,
         "mtime": "2026-11-26 21:18:32",
-        "mtimeTs": 1795699112.642204
+        "mtimeTs": 1795699112.7078454
       },
       {
         "path": "stock-division/portfolio.json",
@@ -442,20 +462,8 @@
         "size": 5371,
         "mtime": "2026-11-26 21:12:23",
         "mtimeTs": 1795698743.362253
-      },
-      {
-        "path": "products/actor5-sec-form4-insider/APIFY_LAUNCH_GUIDE_ZH.md",
-        "size": 2521,
-        "mtime": "2026-11-26 21:12:23",
-        "mtimeTs": 1795698743.3621843
-      },
-      {
-        "path": "products/actor4-ecommerce-app-intel/README.md",
-        "size": 1391,
-        "mtime": "2026-11-26 21:12:23",
-        "mtimeTs": 1795698743.356359
       }
     ],
-    "snapshotTime": "2026-11-26 21:18:32"
+    "snapshotTime": "2026-11-26 21:18:34"
   }
 }
