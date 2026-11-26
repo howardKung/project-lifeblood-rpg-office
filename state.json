@@ -78,13 +78,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "8ae9bc2305e425da59833f4a344f74c9",
-      "status": "working",
+      "status": "idle",
       "isBoss": false,
       "quota": 80,
       "maxQuota": 100,
       "tasksCompleted": 3,
-      "currentTask": "【金流一部 · FLASH】整理已完工 5 支 Apify Actor 交叉導流與 Gumroad 轉換檢查表",
-      "lastUpdate": "2026-11-26 21:08:59",
+      "currentTask": "已完成 5 支 Apify Actor 導流整備，待命省電中（0 消耗）",
+      "lastUpdate": "2026-11-26 21:18:59",
       "color": "#10b981",
       "shirt": "#059669",
       "hair": "#3f2e21",
@@ -405,21 +405,21 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 15680,
-        "mtime": "2026-11-26 21:18:34",
-        "mtimeTs": 1795699114.6152723
+        "size": 15649,
+        "mtime": "2026-11-26 21:18:59",
+        "mtimeTs": 1795699139.6441069
       },
       {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 9193,
-        "mtime": "2026-11-26 21:18:34",
-        "mtimeTs": 1795699114.241937
+        "size": 9456,
+        "mtime": "2026-11-26 21:18:36",
+        "mtimeTs": 1795699116.1981032
       },
       {
         "path": "rpg-office/rpg_office.html",
-        "size": 56586,
-        "mtime": "2026-11-26 21:18:32",
-        "mtimeTs": 1795699112.7078454
+        "size": 56852,
+        "mtime": "2026-11-26 21:18:34",
+        "mtimeTs": 1795699114.6682959
       },
       {
         "path": "stock-division/portfolio.json",
@@ -464,6 +464,6 @@
         "mtimeTs": 1795698743.362253
       }
     ],
-    "snapshotTime": "2026-11-26 21:18:34"
+    "snapshotTime": "2026-11-26 21:18:59"
   }
 }
