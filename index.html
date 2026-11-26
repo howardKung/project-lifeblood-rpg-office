@@ -321,8 +321,19 @@
     // =========================================================================
     // 3. LIVE GITHUB API POLLING
     // =========================================================================
+    function hydrateSpritesAndUI(pillText = "● LIVE 已同步") {
+      if (!STATE?.agents) return;
+      STATE.agents.forEach((a, idx) => {
+        const t = targetFor(a);
+        if (!sprites[a.id]) sprites[a.id] = { x: t.x, y: t.y, seed: idx * 37 };
+      });
+      document.getElementById("live-pill").textContent = pillText;
+      renderUI();
+    }
+
     async function fetchState(manual = false) {
       const pill = document.getElementById("live-pill");
+      if (STATE && !manual) hydrateSpritesAndUI("● LIVE 快照已載入");
       if (manual) pill.textContent = "● 同步中...";
       try {
         let res = await fetch(
@@ -334,14 +345,13 @@
         }
         if (!res.ok) throw new Error("HTTP " + res.status);
         STATE = await res.json();
-        STATE.agents.forEach((a, idx) => {
-          const t = targetFor(a);
-          if (!sprites[a.id]) sprites[a.id] = { x: t.x, y: t.y, seed: idx * 37 };
-        });
-        pill.textContent = `● LIVE 已同步`;
-        renderUI();
+        hydrateSpritesAndUI("● LIVE 已同步");
       } catch (e) {
-        pill.textContent = "● 讀取失敗: " + e.message;
+        if (STATE) {
+          hydrateSpritesAndUI("● 離線實盤快照");
+        } else {
+          pill.textContent = "● 讀取失敗: " + e.message;
+        }
       }
     }
 
