@@ -542,71 +542,71 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 90,
-    "driveSyncedFiles": 88,
+    "totalLocalFiles": 57,
+    "driveSyncedFiles": 58,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
-        "path": "rpg-office/rpg_office.html",
-        "size": 163320,
-        "mtime": "2026-11-27 23:24:38",
-        "mtimeTs": 1795793078.6700962
-      },
-      {
         "path": "rpg-office/state.json",
-        "size": 23070,
-        "mtime": "2026-11-27 23:24:38",
-        "mtimeTs": 1795793078.604823
+        "size": 23853,
+        "mtime": "2026-11-28 00:26:44",
+        "mtimeTs": 1795796804.3408737
       },
       {
-        "path": "stock-division/reports/09_boss_real_us_portfolio_audit.md",
-        "size": 46002,
-        "mtime": "2026-11-27 23:23:32",
-        "mtimeTs": 1795793012.277027
+        "path": "rpg-office/rpg_office.html",
+        "size": 161065,
+        "mtime": "2026-11-27 07:51:50",
+        "mtimeTs": 1795737110.6922648
       },
       {
-        "path": "stock-division/data/boss_us_quotes_20261127.json",
-        "size": 5776,
-        "mtime": "2026-11-27 23:08:20",
-        "mtimeTs": 1795792100.1831892
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 11023,
+        "mtime": "2026-11-27 07:51:35",
+        "mtimeTs": 1795737095.3339028
       },
       {
-        "path": "AUDIT_ROUND4.md",
-        "size": 31738,
-        "mtime": "2026-11-27 22:59:42",
-        "mtimeTs": 1795791582.5921032
+        "path": "rpg-office/install_quota_bridge.ps1",
+        "size": 1625,
+        "mtime": "2026-11-27 07:51:33",
+        "mtimeTs": 1795737093.5456405
       },
       {
-        "path": "proposals/R4_01_pain_hunter.md",
-        "size": 34134,
-        "mtime": "2026-11-27 22:53:09",
-        "mtimeTs": 1795791189.7378283
+        "path": "rpg-office/install_quota_bridge.sh",
+        "size": 1331,
+        "mtime": "2026-11-27 07:51:33",
+        "mtimeTs": 1795737093.5455875
       },
       {
-        "path": "proposals/R4_02_monetization_architect.md",
-        "size": 35435,
-        "mtime": "2026-11-27 22:48:25",
-        "mtimeTs": 1795790905.9398336
+        "path": "rpg-office/agy_quota_sync.py",
+        "size": 28112,
+        "mtime": "2026-11-27 07:51:33",
+        "mtimeTs": 1795737093.5454314
       },
       {
-        "path": "stock-division/scripts/send_telegram_alert.py",
-        "size": 14195,
-        "mtime": "2026-11-27 22:40:20",
-        "mtimeTs": 1795790420.4684978
+        "path": "rpg-office/auto_checkin_settlement.py",
+        "size": 11841,
+        "mtime": "2026-11-27 07:51:33",
+        "mtimeTs": 1795737093.545252
       },
       {
-        "path": "stock-division/scripts/fetch_div1_traffic.py",
-        "size": 19121,
-        "mtime": "2026-11-27 22:40:20",
-        "mtimeTs": 1795790420.4683576
+        "path": "rpg-office/classic2d.html",
+        "size": 95839,
+        "mtime": "2026-11-27 07:51:33",
+        "mtimeTs": 1795737093.5450232
       },
       {
-        "path": "products/growth-kit/div1_traffic_latest.json",
-        "size": 6253,
-        "mtime": "2026-11-27 22:37:01",
-        "mtimeTs": 1795790221.8032134
+        "path": "rpg-office/index.html",
+        "size": 143344,
+        "mtime": "2026-11-27 07:51:33",
+        "mtimeTs": 1795737093.5445454
+      },
+      {
+        "path": "sync_to_drive.py",
+        "size": 6538,
+        "mtime": "2026-11-27 07:38:04",
+        "mtimeTs": 1795736284.5290923
       }
     ],
-    "snapshotTime": "2026-11-27 23:24:40"
+    "snapshotTime": "2026-11-28 00:26:44"
   }
 }
