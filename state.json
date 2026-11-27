@@ -3,9 +3,9 @@
   "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
   "quota": {
     "unit": "任務算力點 (Shift Credits)",
-    "remaining": 54,
+    "remaining": 50,
     "max": 100,
-    "totalSpent": 126,
+    "totalSpent": 130,
     "autoClockOutOnZero": true
   },
   "lastDriveSync": "2026-11-26 21:08:59",
@@ -220,11 +220,11 @@
       "conversationId": "alpha-div-cro",
       "status": "idle",
       "isBoss": false,
-      "quota": 75,
+      "quota": 71,
       "maxQuota": 100,
-      "tasksCompleted": 1,
-      "currentTask": "已完成 Stage 2 觀察池與 SEC Form 4 高管買進終審，待命省電中",
-      "lastUpdate": "2026-11-26 21:18:34",
+      "tasksCompleted": 2,
+      "currentTask": "已完成大 Boss 台股 10 檔深度財報籌碼健檢與雙軌價位處方箋，待命省電中",
+      "lastUpdate": "2026-11-27 09:37:05",
       "color": "#f97316",
       "shirt": "#c2410c",
       "hair": "#27272a",
@@ -272,6 +272,14 @@
     }
   ],
   "reports": [
+    {
+      "time": "2026-11-27 09:37:05",
+      "agentId": "chief_risk_officer",
+      "agentName": "毒舌風控守門員",
+      "status": "idle",
+      "cost": 4,
+      "summary": "【PRO 實戰健檢完成】已完成大 Boss 台股 10 檔持倉 X 光診斷（抓出二線封測雙胞胎重疊病灶，開立逐檔防守死線與月線反彈減碼處方箋），私密報告已歸檔 Google Drive！"
+    },
     {
       "time": "2026-11-27 08:30:55",
       "agentId": "paper_fund_manager",
@@ -502,71 +510,71 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 66,
-    "driveSyncedFiles": 55,
+    "totalLocalFiles": 71,
+    "driveSyncedFiles": 68,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 11218,
-        "mtime": "2026-11-27 08:30:56",
-        "mtimeTs": 1795739456.292167
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 154511,
-        "mtime": "2026-11-27 08:30:55",
-        "mtimeTs": 1795739455.6441238
-      },
-      {
         "path": "rpg-office/state.json",
-        "size": 22627,
-        "mtime": "2026-11-27 08:30:55",
-        "mtimeTs": 1795739455.5781014
+        "size": 23059,
+        "mtime": "2026-11-27 09:37:05",
+        "mtimeTs": 1795743425.995362
       },
       {
-        "path": "rpg-office/auto_checkin_settlement.py",
-        "size": 8379,
-        "mtime": "2026-11-27 08:30:53",
-        "mtimeTs": 1795739453.107955
+        "path": "stock-division/reports/08_boss_real_tw_portfolio_audit.md",
+        "size": 35283,
+        "mtime": "2026-11-27 09:35:33",
+        "mtimeTs": 1795743333.1480818
       },
       {
-        "path": "products/growth-kit/n8n-workflows/sec-form4-insider-cluster-buys-n8n.json",
-        "size": 7308,
-        "mtime": "2026-11-27 08:29:32",
-        "mtimeTs": 1795739372.756794
-      },
-      {
-        "path": "products/growth-kit/n8n-workflows/ecommerce-store-app-intel-n8n.json",
-        "size": 7053,
-        "mtime": "2026-11-27 08:29:32",
-        "mtimeTs": 1795739372.7536397
-      },
-      {
-        "path": "products/growth-kit/n8n-workflows/sec-form-d-funding-signals-n8n.json",
-        "size": 7519,
-        "mtime": "2026-11-27 08:29:32",
-        "mtimeTs": 1795739372.7504354
-      },
-      {
-        "path": "products/growth-kit/n8n-workflows/domain-dns-tech-trust-signals-n8n.json",
-        "size": 7127,
-        "mtime": "2026-11-27 08:29:32",
-        "mtimeTs": 1795739372.7472067
-      },
-      {
-        "path": "products/growth-kit/n8n-workflows/multi-ats-hiring-signals-n8n.json",
-        "size": 7596,
-        "mtime": "2026-11-27 08:29:32",
-        "mtimeTs": 1795739372.743894
+        "path": "stock-division/data/boss_watchlist.json",
+        "size": 5747,
+        "mtime": "2026-11-27 09:35:13",
+        "mtimeTs": 1795743313.4107742
       },
       {
         "path": "stock-division/scripts/send_telegram_alert.py",
-        "size": 8687,
-        "mtime": "2026-11-27 08:29:19",
-        "mtimeTs": 1795739359.9406414
+        "size": 10318,
+        "mtime": "2026-11-27 09:35:13",
+        "mtimeTs": 1795743313.4067738
+      },
+      {
+        "path": "stock-division/scripts/intraday_advisor.py",
+        "size": 21314,
+        "mtime": "2026-11-27 09:35:13",
+        "mtimeTs": 1795743313.4027736
+      },
+      {
+        "path": "stock-division/scripts/fetch_news_social.py",
+        "size": 14312,
+        "mtime": "2026-11-27 09:35:13",
+        "mtimeTs": 1795743313.3987734
+      },
+      {
+        "path": "stock-division/fetch_news_social.py",
+        "size": 14312,
+        "mtime": "2026-11-27 09:35:13",
+        "mtimeTs": 1795743313.3907728
+      },
+      {
+        "path": "stock-division/data/intraday_pulse.json",
+        "size": 13361,
+        "mtime": "2026-11-27 09:34:36",
+        "mtimeTs": 1795743276.9043314
+      },
+      {
+        "path": "stock-division/data/news_feed_latest.json",
+        "size": 31394,
+        "mtime": "2026-11-27 09:34:33",
+        "mtimeTs": 1795743273.8493354
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 162723,
+        "mtime": "2026-11-27 08:31:24",
+        "mtimeTs": 1795739484.3749394
       }
     ],
-    "snapshotTime": "2026-11-27 08:31:24"
+    "snapshotTime": "2026-11-27 09:37:06"
   }
 }
