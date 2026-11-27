@@ -218,13 +218,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "alpha-div-cro",
-      "status": "working",
+      "status": "idle",
       "isBoss": false,
       "quota": 71,
       "maxQuota": 100,
       "tasksCompleted": 2,
-      "currentTask": "PRO 毒舌終審大 Boss 美股複委託 15 檔持股 ＆ 台美股跨市場曝險總檢",
-      "lastUpdate": "2026-11-27 23:11:40",
+      "currentTask": "已完成大 Boss 美股複委託 15 檔 SEC 穿透健檢與雙軌處方箋（已私密歸檔 Drive）",
+      "lastUpdate": "2026-11-27 23:24:38",
       "color": "#f97316",
       "shirt": "#c2410c",
       "hair": "#27272a",
@@ -515,22 +515,22 @@
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
+        "path": "rpg-office/state.json",
+        "size": 23070,
+        "mtime": "2026-11-27 23:24:38",
+        "mtimeTs": 1795793078.604823
+      },
+      {
+        "path": "stock-division/reports/09_boss_real_us_portfolio_audit.md",
+        "size": 46002,
+        "mtime": "2026-11-27 23:23:32",
+        "mtimeTs": 1795793012.277027
+      },
+      {
         "path": "rpg-office/rpg_office.html",
         "size": 163300,
-        "mtime": "2026-11-27 23:11:40",
-        "mtimeTs": 1795792300.3456833
-      },
-      {
-        "path": "rpg-office/state.json",
-        "size": 23059,
-        "mtime": "2026-11-27 23:11:40",
-        "mtimeTs": 1795792300.2734191
-      },
-      {
-        "path": "stock-division/data/boss_us_portfolio_calc.json",
-        "size": 9567,
-        "mtime": "2026-11-27 23:09:30",
-        "mtimeTs": 1795792170.3426304
+        "mtime": "2026-11-27 23:12:58",
+        "mtimeTs": 1795792378.6254427
       },
       {
         "path": "stock-division/data/boss_us_quotes_20261127.json",
@@ -575,6 +575,6 @@
         "mtimeTs": 1795790221.8032134
       }
     ],
-    "snapshotTime": "2026-11-27 23:12:58"
+    "snapshotTime": "2026-11-27 23:24:38"
   }
 }
