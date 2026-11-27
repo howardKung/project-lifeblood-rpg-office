@@ -103,8 +103,8 @@
       "quota": 76,
       "maxQuota": 100,
       "tasksCompleted": 4,
-      "currentTask": "已完成第 5 台印鈔機 SEC Form 4 高管買進 API 並餵養股市二部",
-      "lastUpdate": "2026-11-26 21:09:03",
+      "currentTask": "🎉 5 台 Apify PPE 印鈔機全數 Public 收費上線營運中！",
+      "lastUpdate": "2026-11-27 20:57:31",
       "color": "#06b6d4",
       "shirt": "#0891b2",
       "hair": "#1e293b",
@@ -510,10 +510,58 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 71,
-    "driveSyncedFiles": 71,
+    "totalLocalFiles": 72,
+    "driveSyncedFiles": 72,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
+      {
+        "path": "rpg-office/state.json",
+        "size": 23050,
+        "mtime": "2026-11-27 20:57:31",
+        "mtimeTs": 1795784251.2539582
+      },
+      {
+        "path": "stock-division/fetch_news_social.py",
+        "size": 21279,
+        "mtime": "2026-11-27 19:31:20",
+        "mtimeTs": 1795779080.9790514
+      },
+      {
+        "path": "stock-division/scripts/send_telegram_alert.py",
+        "size": 13568,
+        "mtime": "2026-11-27 19:31:20",
+        "mtimeTs": 1795779080.9707139
+      },
+      {
+        "path": "stock-division/scripts/fetch_news_social.py",
+        "size": 21279,
+        "mtime": "2026-11-27 19:31:20",
+        "mtimeTs": 1795779080.9707139
+      },
+      {
+        "path": "stock-division/data/news_feed_latest.json",
+        "size": 38563,
+        "mtime": "2026-11-27 19:31:20",
+        "mtimeTs": 1795779080.4586687
+      },
+      {
+        "path": "stock-division/scripts/exact_20m_dispatcher.py",
+        "size": 3314,
+        "mtime": "2026-11-27 12:14:53",
+        "mtimeTs": 1795752893.9352453
+      },
+      {
+        "path": "stock-division/scripts/intraday_advisor.py",
+        "size": 42096,
+        "mtime": "2026-11-27 12:12:06",
+        "mtimeTs": 1795752726.5541518
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 163258,
+        "mtime": "2026-11-27 11:48:34",
+        "mtimeTs": 1795751314.9837062
+      },
       {
         "path": "rpg-office/classic2d.html",
         "size": 96169,
@@ -525,56 +573,8 @@
         "size": 143674,
         "mtime": "2026-11-27 11:48:34",
         "mtimeTs": 1795751314.6715686
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 162928,
-        "mtime": "2026-11-27 11:45:15",
-        "mtimeTs": 1795751115.6164489
-      },
-      {
-        "path": "stock-division/scripts/send_telegram_alert.py",
-        "size": 12294,
-        "mtime": "2026-11-27 10:17:52",
-        "mtimeTs": 1795745872.6953666
-      },
-      {
-        "path": "stock-division/scripts/intraday_advisor.py",
-        "size": 40226,
-        "mtime": "2026-11-27 10:17:52",
-        "mtimeTs": 1795745872.6950228
-      },
-      {
-        "path": "stock-division/data/intraday_pulse.json",
-        "size": 13896,
-        "mtime": "2026-11-27 10:17:52",
-        "mtimeTs": 1795745872.6716247
-      },
-      {
-        "path": "stock-division/portfolio.json",
-        "size": 12424,
-        "mtime": "2026-11-27 10:17:52",
-        "mtimeTs": 1795745872.6650631
-      },
-      {
-        "path": "stock-division/data/boss_watchlist.json",
-        "size": 13877,
-        "mtime": "2026-11-27 09:46:24",
-        "mtimeTs": 1795743984.786694
-      },
-      {
-        "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 11515,
-        "mtime": "2026-11-27 09:37:07",
-        "mtimeTs": 1795743427.8075817
-      },
-      {
-        "path": "rpg-office/state.json",
-        "size": 23059,
-        "mtime": "2026-11-27 09:37:05",
-        "mtimeTs": 1795743425.995362
       }
     ],
-    "snapshotTime": "2026-11-27 11:48:34"
+    "snapshotTime": "2026-11-27 20:57:31"
   }
 }
