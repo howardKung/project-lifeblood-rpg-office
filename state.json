@@ -8,7 +8,7 @@
     "totalSpent": 126,
     "autoClockOutOnZero": true
   },
-  "lastDriveSync": "2026-11-27 07:51:50",
+  "lastDriveSync": "2026-11-26 21:08:59",
   "agents": [
     {
       "id": "boss",
@@ -61,11 +61,11 @@
       "conversationId": "hq-office-steward",
       "status": "working",
       "isBoss": false,
-      "quota": 70,
+      "quota": 72,
       "maxQuota": 100,
-      "tasksCompleted": 7,
-      "currentTask": "全自動額度橋接器已部署上線（支援 agy statusLine 即時回傳 + 5h 重置自動回血）",
-      "lastUpdate": "2026-11-27 07:51:33",
+      "tasksCompleted": 6,
+      "currentTask": "優化手機版可收合精簡橫幅與 3D 滿版視野",
+      "lastUpdate": "2026-11-26 22:20:45",
       "color": "#2dd4bf",
       "shirt": "#0f766e",
       "hair": "#334155"
@@ -273,12 +273,38 @@
   ],
   "reports": [
     {
-      "time": "2026-11-27 07:51:33",
-      "agentId": "office_steward",
-      "agentName": "集團總務長",
+      "time": "2026-11-27 08:30:55",
+      "agentId": "paper_fund_manager",
+      "agentName": "百萬模擬操盤手",
       "status": "working",
       "cost": 2,
-      "summary": "⚡【全自動真實額度橋接上線】已為 3D 與 2D 辦公室部署 agy_quota_sync.py 全自動額度橋接器、1秒倒數遙測面板、5h 重置到期自動回血排程與一鍵安裝腳本（Mac/Linux/Windows）！"
+      "summary": "【0050 對照組＆TG 推播上線】今日台股 0050 重挫 -2.89%，本基金靠 32% 現金與美債對沖僅微跌 -0.35%，單日大贏大盤 +2.54% Alpha！"
+    },
+    {
+      "time": "2026-11-27 08:30:54",
+      "agentId": "monetization_architect",
+      "agentName": "變現架構師",
+      "status": "idle",
+      "cost": 2,
+      "summary": "【金流一部導流包完工】已為全部 5 台 Apify 印鈔機掛上可一鍵匯入的 n8n 工作流範本與交叉導流矩陣，並產出大 Boss 8 分鐘極速上架表！"
+    },
+    {
+      "id": "auto-news-2026-11-27-am",
+      "time": "2026-11-27 08:30:53",
+      "agentId": "news_social_radar",
+      "agentName": "新聞輿情特派員",
+      "status": "working",
+      "cost": 0,
+      "summary": "【📺 2026-11-27 台美股早報】頭條：〈台股盤前要聞〉富邦006208分割投票開跑、華南金前10月獲利284億元超過去年｜PTT 股版風向：🥶 散戶恐慌悲觀 (0% 偏多) · 往往對應短線清洗浮額低點（熱門：[心得] 投資股票快20年，這二週最刺激）｜Reddit 熱度領頭：$NVDA (207 則討論 / 24h -64%)"
+    },
+    {
+      "id": "auto-settle-2026-11-27-us",
+      "time": "2026-11-27 08:30:53",
+      "agentId": "paper_fund_manager",
+      "agentName": "百萬模擬操盤手",
+      "status": "working",
+      "cost": 0,
+      "summary": "【🤖 2026-11-27 美股盤後／全日結算】總資產 NT$996,509 （當日 -2,731 / -0.27%｜累計 -3,491 / -0.35%｜🏆 vs 0050 超額報酬 +2.54%）｜現金 NT$321,347｜摘要：今日無觸發停損/停利或新條件單，現有 6 檔核心與對沖部位續抱追蹤中。"
     },
     {
       "time": "2026-11-27 06:53:46",
@@ -476,71 +502,71 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 57,
-    "driveSyncedFiles": 58,
+    "totalLocalFiles": 66,
+    "driveSyncedFiles": 55,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
-        "path": "rpg-office/state.json",
-        "size": 21047,
-        "mtime": "2026-11-27 07:51:50",
-        "mtimeTs": 1795737110.625157
-      },
-      {
         "path": "rpg-office/WORK_REPORTS_LOG.md",
-        "size": 11023,
-        "mtime": "2026-11-27 07:51:35",
-        "mtimeTs": 1795737095.3339028
+        "size": 11218,
+        "mtime": "2026-11-27 08:30:56",
+        "mtimeTs": 1795739456.292167
       },
       {
         "path": "rpg-office/rpg_office.html",
-        "size": 161121,
-        "mtime": "2026-11-27 07:51:33",
-        "mtimeTs": 1795737093.9595478
+        "size": 154511,
+        "mtime": "2026-11-27 08:30:55",
+        "mtimeTs": 1795739455.6441238
       },
       {
-        "path": "rpg-office/install_quota_bridge.ps1",
-        "size": 1625,
-        "mtime": "2026-11-27 07:51:33",
-        "mtimeTs": 1795737093.5456405
-      },
-      {
-        "path": "rpg-office/install_quota_bridge.sh",
-        "size": 1331,
-        "mtime": "2026-11-27 07:51:33",
-        "mtimeTs": 1795737093.5455875
-      },
-      {
-        "path": "rpg-office/agy_quota_sync.py",
-        "size": 28112,
-        "mtime": "2026-11-27 07:51:33",
-        "mtimeTs": 1795737093.5454314
+        "path": "rpg-office/state.json",
+        "size": 22627,
+        "mtime": "2026-11-27 08:30:55",
+        "mtimeTs": 1795739455.5781014
       },
       {
         "path": "rpg-office/auto_checkin_settlement.py",
-        "size": 11841,
-        "mtime": "2026-11-27 07:51:33",
-        "mtimeTs": 1795737093.545252
+        "size": 8379,
+        "mtime": "2026-11-27 08:30:53",
+        "mtimeTs": 1795739453.107955
       },
       {
-        "path": "rpg-office/classic2d.html",
-        "size": 95839,
-        "mtime": "2026-11-27 07:51:33",
-        "mtimeTs": 1795737093.5450232
+        "path": "products/growth-kit/n8n-workflows/sec-form4-insider-cluster-buys-n8n.json",
+        "size": 7308,
+        "mtime": "2026-11-27 08:29:32",
+        "mtimeTs": 1795739372.756794
       },
       {
-        "path": "rpg-office/index.html",
-        "size": 143344,
-        "mtime": "2026-11-27 07:51:33",
-        "mtimeTs": 1795737093.5445454
+        "path": "products/growth-kit/n8n-workflows/ecommerce-store-app-intel-n8n.json",
+        "size": 7053,
+        "mtime": "2026-11-27 08:29:32",
+        "mtimeTs": 1795739372.7536397
       },
       {
-        "path": "sync_to_drive.py",
-        "size": 6538,
-        "mtime": "2026-11-27 07:38:04",
-        "mtimeTs": 1795736284.5290923
+        "path": "products/growth-kit/n8n-workflows/sec-form-d-funding-signals-n8n.json",
+        "size": 7519,
+        "mtime": "2026-11-27 08:29:32",
+        "mtimeTs": 1795739372.7504354
+      },
+      {
+        "path": "products/growth-kit/n8n-workflows/domain-dns-tech-trust-signals-n8n.json",
+        "size": 7127,
+        "mtime": "2026-11-27 08:29:32",
+        "mtimeTs": 1795739372.7472067
+      },
+      {
+        "path": "products/growth-kit/n8n-workflows/multi-ats-hiring-signals-n8n.json",
+        "size": 7596,
+        "mtime": "2026-11-27 08:29:32",
+        "mtimeTs": 1795739372.743894
+      },
+      {
+        "path": "stock-division/scripts/send_telegram_alert.py",
+        "size": 8687,
+        "mtime": "2026-11-27 08:29:19",
+        "mtimeTs": 1795739359.9406414
       }
     ],
-    "snapshotTime": "2026-11-27 07:51:50"
+    "snapshotTime": "2026-11-27 08:31:24"
   }
 }
