@@ -515,6 +515,12 @@
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
+        "path": "rpg-office/rpg_office.html",
+        "size": 163320,
+        "mtime": "2026-11-27 23:24:38",
+        "mtimeTs": 1795793078.6700962
+      },
+      {
         "path": "rpg-office/state.json",
         "size": 23070,
         "mtime": "2026-11-27 23:24:38",
@@ -525,12 +531,6 @@
         "size": 46002,
         "mtime": "2026-11-27 23:23:32",
         "mtimeTs": 1795793012.277027
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 163300,
-        "mtime": "2026-11-27 23:12:58",
-        "mtimeTs": 1795792378.6254427
       },
       {
         "path": "stock-division/data/boss_us_quotes_20261127.json",
@@ -575,6 +575,6 @@
         "mtimeTs": 1795790221.8032134
       }
     ],
-    "snapshotTime": "2026-11-27 23:24:38"
+    "snapshotTime": "2026-11-27 23:24:40"
   }
 }
