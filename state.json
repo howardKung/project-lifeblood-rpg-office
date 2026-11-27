@@ -218,13 +218,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "alpha-div-cro",
-      "status": "idle",
+      "status": "working",
       "isBoss": false,
       "quota": 71,
       "maxQuota": 100,
       "tasksCompleted": 2,
-      "currentTask": "已完成大 Boss 台股 10 檔深度財報籌碼健檢與雙軌價位處方箋，待命省電中",
-      "lastUpdate": "2026-11-27 09:37:05",
+      "currentTask": "PRO 毒舌終審大 Boss 美股複委託 15 檔持股 ＆ 台美股跨市場曝險總檢",
+      "lastUpdate": "2026-11-27 23:11:40",
       "color": "#f97316",
       "shirt": "#c2410c",
       "hair": "#27272a",
@@ -510,21 +510,33 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 88,
-    "driveSyncedFiles": 85,
+    "totalLocalFiles": 90,
+    "driveSyncedFiles": 88,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
-        "path": "rpg-office/rpg_office.html",
-        "size": 163335,
-        "mtime": "2026-11-27 23:00:26",
-        "mtimeTs": 1795791626.0778902
+        "path": "rpg-office/state.json",
+        "size": 23059,
+        "mtime": "2026-11-27 23:11:40",
+        "mtimeTs": 1795792300.2734191
       },
       {
-        "path": "rpg-office/state.json",
-        "size": 23065,
-        "mtime": "2026-11-27 23:00:26",
-        "mtimeTs": 1795791626.0157259
+        "path": "stock-division/data/boss_us_portfolio_calc.json",
+        "size": 9567,
+        "mtime": "2026-11-27 23:09:30",
+        "mtimeTs": 1795792170.3426304
+      },
+      {
+        "path": "stock-division/data/boss_us_quotes_20261127.json",
+        "size": 5776,
+        "mtime": "2026-11-27 23:08:20",
+        "mtimeTs": 1795792100.1831892
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 163335,
+        "mtime": "2026-11-27 23:00:28",
+        "mtimeTs": 1795791628.1277418
       },
       {
         "path": "AUDIT_ROUND4.md",
@@ -561,20 +573,8 @@
         "size": 6253,
         "mtime": "2026-11-27 22:37:01",
         "mtimeTs": 1795790221.8032134
-      },
-      {
-        "path": "products/growth-kit/n8n-workflows/ecommerce-store-app-intel-n8n.json",
-        "size": 7079,
-        "mtime": "2026-11-27 22:30:54",
-        "mtimeTs": 1795789854.076107
-      },
-      {
-        "path": "products/growth-kit/00_APIFY_FAST_PUBLISH_CHEATSHEET_ZH.md",
-        "size": 9817,
-        "mtime": "2026-11-27 22:30:54",
-        "mtimeTs": 1795789854.075868
       }
     ],
-    "snapshotTime": "2026-11-27 23:00:28"
+    "snapshotTime": "2026-11-27 23:11:40"
   }
 }
