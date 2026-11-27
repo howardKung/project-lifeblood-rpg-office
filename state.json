@@ -123,8 +123,8 @@
       "quota": 78,
       "maxQuota": 100,
       "tasksCompleted": 3,
-      "currentTask": "已完成第 2~5 台印鈔機上架速查表與 5 套 n8n 寄生導流工作流，待命省電中",
-      "lastUpdate": "2026-11-27 08:30:54",
+      "currentTask": "🎉 6 座收銀台全數通關（5 Apify + 1 Gumroad）！雙向導流閉環已啟動！",
+      "lastUpdate": "2026-11-27 21:48:32",
       "color": "#ec4899",
       "shirt": "#db2777",
       "hair": "#4c1d95",
@@ -510,71 +510,71 @@
   ],
   "directives": [],
   "telemetry": {
-    "totalLocalFiles": 72,
-    "driveSyncedFiles": 72,
+    "totalLocalFiles": 83,
+    "driveSyncedFiles": 74,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
       {
-        "path": "rpg-office/rpg_office.html",
-        "size": 163278,
-        "mtime": "2026-11-27 20:57:31",
-        "mtimeTs": 1795784251.3427691
-      },
-      {
         "path": "rpg-office/state.json",
-        "size": 23050,
-        "mtime": "2026-11-27 20:57:31",
-        "mtimeTs": 1795784251.2539582
+        "size": 23042,
+        "mtime": "2026-11-27 21:48:32",
+        "mtimeTs": 1795787312.9419956
       },
       {
-        "path": "stock-division/fetch_news_social.py",
-        "size": 21279,
-        "mtime": "2026-11-27 19:31:20",
-        "mtimeTs": 1795779080.9790514
+        "path": "products/growth-kit/n8n-workflows/agentguard-03_multi_ats_gtm_enrichment_pipeline.json",
+        "size": 9474,
+        "mtime": "2026-11-27 21:47:48",
+        "mtimeTs": 1795787268.787401
       },
       {
-        "path": "stock-division/scripts/send_telegram_alert.py",
-        "size": 13568,
-        "mtime": "2026-11-27 19:31:20",
-        "mtimeTs": 1795779080.9707139
+        "path": "products/growth-kit/n8n-workflows/agentguard-02_webhook_dlq_auto_retry.json",
+        "size": 11873,
+        "mtime": "2026-11-27 21:47:48",
+        "mtimeTs": 1795787268.7794003
       },
       {
-        "path": "stock-division/scripts/fetch_news_social.py",
-        "size": 21279,
-        "mtime": "2026-11-27 19:31:20",
-        "mtimeTs": 1795779080.9707139
+        "path": "products/growth-kit/n8n-workflows/agentguard-01_llm_budget_circuit_breaker.json",
+        "size": 10176,
+        "mtime": "2026-11-27 21:47:48",
+        "mtimeTs": 1795787268.7726352
       },
       {
-        "path": "stock-division/data/news_feed_latest.json",
-        "size": 38563,
-        "mtime": "2026-11-27 19:31:20",
-        "mtimeTs": 1795779080.4586687
+        "path": "products/top2-agentguard/pro-source-backup/package.json",
+        "size": 648,
+        "mtime": "2026-11-27 21:45:51",
+        "mtimeTs": 1795787151.6306832
       },
       {
-        "path": "stock-division/scripts/exact_20m_dispatcher.py",
-        "size": 3314,
-        "mtime": "2026-11-27 12:14:53",
-        "mtimeTs": 1795752893.9352453
+        "path": "products/top2-agentguard/pro-source-backup/tests/verify.mjs",
+        "size": 9070,
+        "mtime": "2026-11-27 21:45:51",
+        "mtimeTs": 1795787151.6288407
       },
       {
-        "path": "stock-division/scripts/intraday_advisor.py",
-        "size": 42096,
-        "mtime": "2026-11-27 12:12:06",
-        "mtimeTs": 1795752726.5541518
+        "path": "products/top2-agentguard/pro-source-backup/pro-kit/mcp-guard/README.md",
+        "size": 925,
+        "mtime": "2026-11-27 21:45:51",
+        "mtimeTs": 1795787151.6280437
       },
       {
-        "path": "rpg-office/classic2d.html",
-        "size": 96169,
-        "mtime": "2026-11-27 11:48:34",
-        "mtimeTs": 1795751314.6718009
+        "path": "products/top2-agentguard/pro-source-backup/pro-kit/mcp-guard/index.js",
+        "size": 13829,
+        "mtime": "2026-11-27 21:45:51",
+        "mtimeTs": 1795787151.6265926
       },
       {
-        "path": "rpg-office/index.html",
-        "size": 143674,
-        "mtime": "2026-11-27 11:48:34",
-        "mtimeTs": 1795751314.6715686
+        "path": "products/top2-agentguard/pro-source-backup/pro-kit/sql/001_agentguard_schema.sql",
+        "size": 12598,
+        "mtime": "2026-11-27 21:45:51",
+        "mtimeTs": 1795787151.6243322
+      },
+      {
+        "path": "products/top2-agentguard/pro-source-backup/pro-kit/white-label-dashboard/index.html",
+        "size": 26643,
+        "mtime": "2026-11-27 21:45:51",
+        "mtimeTs": 1795787151.6225924
       }
     ],
-    "snapshotTime": "2026-11-27 20:57:55"
+    "snapshotTime": "2026-11-27 21:48:33"
   }
 }
