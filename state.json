@@ -118,13 +118,13 @@
       "tier": 2,
       "reportsTo": "commander",
       "conversationId": "d56e9101e5dc1ff7610d55f4a72bc313",
-      "status": "idle",
+      "status": "working",
       "isBoss": false,
       "quota": 78,
       "maxQuota": 100,
       "tasksCompleted": 3,
-      "currentTask": "🎉 6 座收銀台全數通關（5 Apify + 1 Gumroad）！雙向導流閉環已啟動！",
-      "lastUpdate": "2026-11-27 21:48:32",
+      "currentTask": "Round 4 設計 Gumroad Pro 包 × Apify × 股市二部協同高毛利變現矩陣（8 案）",
+      "lastUpdate": "2026-11-27 22:45:08",
       "color": "#ec4899",
       "shirt": "#db2777",
       "hair": "#4c1d95",
@@ -516,9 +516,15 @@
     "recentFiles": [
       {
         "path": "rpg-office/state.json",
-        "size": 23068,
+        "size": 23075,
+        "mtime": "2026-11-27 22:45:08",
+        "mtimeTs": 1795790708.8699589
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 163515,
         "mtime": "2026-11-27 22:45:06",
-        "mtimeTs": 1795790706.7391882
+        "mtimeTs": 1795790706.8102298
       },
       {
         "path": "stock-division/scripts/send_telegram_alert.py",
@@ -567,14 +573,8 @@
         "size": 7334,
         "mtime": "2026-11-27 22:30:54",
         "mtimeTs": 1795789854.075868
-      },
-      {
-        "path": "products/growth-kit/n8n-workflows/multi-ats-hiring-signals-n8n.json",
-        "size": 7622,
-        "mtime": "2026-11-27 22:30:54",
-        "mtimeTs": 1795789854.075868
       }
     ],
-    "snapshotTime": "2026-11-27 22:45:06"
+    "snapshotTime": "2026-11-27 22:45:08"
   }
 }
