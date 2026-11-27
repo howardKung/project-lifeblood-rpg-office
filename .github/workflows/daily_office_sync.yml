@@ -4,8 +4,8 @@ on:
   schedule:
     # Weekdays 08:22 Taiwan Time (00:22 UTC) — morning global news & social radar brief
     - cron: '22 0 * * 1-5'
-    # Weekdays 14:38 Taiwan Time (06:38 UTC) — right after TWSE settlement
-    - cron: '38 6 * * 1-5'
+    # Weekdays 13:58 Taiwan Time (05:58 UTC) — right after 13:50 TWSE settlement
+    - cron: '58 5 * * 1-5'
     # Weekdays 05:38 Taiwan Time (21:38 UTC) — right after US Market settlement
     - cron: '38 21 * * 1-5'
   workflow_dispatch:
