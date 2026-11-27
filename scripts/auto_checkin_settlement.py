@@ -89,14 +89,17 @@ def sync_paper_fund(state: dict, pf: dict, now_tw: datetime, ts_short: str, toda
     session_label = "台股盤後結算" if 12 <= now_tw.hour < 20 else "美股盤後／全日結算"
     auto_key = f"auto-settle-{report_date}-{'tw' if 12 <= now_tw.hour < 20 else 'us'}"
 
+    alpha_pct = s.get("alphaVs0050Pct")
+    alpha_tag = f"｜🏆 vs 0050 超額報酬 {float(alpha_pct):+.2f}%" if alpha_pct is not None else ""
+
     summary_text = (
         f"【🤖 {report_date} {session_label}】總資產 NT${nav:,} "
-        f"（當日 {d_chg_twd:+,} / {d_chg_pct:+.2f}%｜累計 {total_ret_twd:+,} / {total_ret_pct:+.2f}%）"
+        f"（當日 {d_chg_twd:+,} / {d_chg_pct:+.2f}%｜累計 {total_ret_twd:+,} / {total_ret_pct:+.2f}%{alpha_tag}）"
         f"｜現金 NT${cash:,}｜摘要：{first_action}"
     )
     task_text = (
-        f"【0-額度自動排程】最新總淨值 NT${nav:,} ({total_ret_pct:+.2f}%)｜"
-        f"現金 NT${cash:,}｜持倉 {pos_count} 檔・右側條件單 {pend_count} 檔"
+        f"【0-額度自動排程】最新總淨值 NT${nav:,} ({total_ret_pct:+.2f}%{alpha_tag})｜"
+        f"現金 NT${cash:,}｜持倉 {pos_count} 檔・條件單 {pend_count} 檔"
     )
 
     for agent in state.get("agents", []):
