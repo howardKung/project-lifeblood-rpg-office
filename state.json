@@ -511,70 +511,70 @@
   "directives": [],
   "telemetry": {
     "totalLocalFiles": 71,
-    "driveSyncedFiles": 68,
+    "driveSyncedFiles": 71,
     "driveFolderId": "1nt2wn1MXwd_ThRvHjOmi9lS9mOKfT844",
     "recentFiles": [
+      {
+        "path": "rpg-office/classic2d.html",
+        "size": 96169,
+        "mtime": "2026-11-27 11:48:34",
+        "mtimeTs": 1795751314.6718009
+      },
+      {
+        "path": "rpg-office/index.html",
+        "size": 143674,
+        "mtime": "2026-11-27 11:48:34",
+        "mtimeTs": 1795751314.6715686
+      },
+      {
+        "path": "rpg-office/rpg_office.html",
+        "size": 162928,
+        "mtime": "2026-11-27 11:45:15",
+        "mtimeTs": 1795751115.6164489
+      },
+      {
+        "path": "stock-division/scripts/send_telegram_alert.py",
+        "size": 12294,
+        "mtime": "2026-11-27 10:17:52",
+        "mtimeTs": 1795745872.6953666
+      },
+      {
+        "path": "stock-division/scripts/intraday_advisor.py",
+        "size": 40226,
+        "mtime": "2026-11-27 10:17:52",
+        "mtimeTs": 1795745872.6950228
+      },
+      {
+        "path": "stock-division/data/intraday_pulse.json",
+        "size": 13896,
+        "mtime": "2026-11-27 10:17:52",
+        "mtimeTs": 1795745872.6716247
+      },
+      {
+        "path": "stock-division/portfolio.json",
+        "size": 12424,
+        "mtime": "2026-11-27 10:17:52",
+        "mtimeTs": 1795745872.6650631
+      },
+      {
+        "path": "stock-division/data/boss_watchlist.json",
+        "size": 13877,
+        "mtime": "2026-11-27 09:46:24",
+        "mtimeTs": 1795743984.786694
+      },
+      {
+        "path": "rpg-office/WORK_REPORTS_LOG.md",
+        "size": 11515,
+        "mtime": "2026-11-27 09:37:07",
+        "mtimeTs": 1795743427.8075817
+      },
       {
         "path": "rpg-office/state.json",
         "size": 23059,
         "mtime": "2026-11-27 09:37:05",
         "mtimeTs": 1795743425.995362
-      },
-      {
-        "path": "stock-division/reports/08_boss_real_tw_portfolio_audit.md",
-        "size": 35283,
-        "mtime": "2026-11-27 09:35:33",
-        "mtimeTs": 1795743333.1480818
-      },
-      {
-        "path": "stock-division/data/boss_watchlist.json",
-        "size": 5747,
-        "mtime": "2026-11-27 09:35:13",
-        "mtimeTs": 1795743313.4107742
-      },
-      {
-        "path": "stock-division/scripts/send_telegram_alert.py",
-        "size": 10318,
-        "mtime": "2026-11-27 09:35:13",
-        "mtimeTs": 1795743313.4067738
-      },
-      {
-        "path": "stock-division/scripts/intraday_advisor.py",
-        "size": 21314,
-        "mtime": "2026-11-27 09:35:13",
-        "mtimeTs": 1795743313.4027736
-      },
-      {
-        "path": "stock-division/scripts/fetch_news_social.py",
-        "size": 14312,
-        "mtime": "2026-11-27 09:35:13",
-        "mtimeTs": 1795743313.3987734
-      },
-      {
-        "path": "stock-division/fetch_news_social.py",
-        "size": 14312,
-        "mtime": "2026-11-27 09:35:13",
-        "mtimeTs": 1795743313.3907728
-      },
-      {
-        "path": "stock-division/data/intraday_pulse.json",
-        "size": 13361,
-        "mtime": "2026-11-27 09:34:36",
-        "mtimeTs": 1795743276.9043314
-      },
-      {
-        "path": "stock-division/data/news_feed_latest.json",
-        "size": 31394,
-        "mtime": "2026-11-27 09:34:33",
-        "mtimeTs": 1795743273.8493354
-      },
-      {
-        "path": "rpg-office/rpg_office.html",
-        "size": 162723,
-        "mtime": "2026-11-27 08:31:24",
-        "mtimeTs": 1795739484.3749394
       }
     ],
-    "snapshotTime": "2026-11-27 09:37:06"
+    "snapshotTime": "2026-11-27 11:48:34"
   }
 }

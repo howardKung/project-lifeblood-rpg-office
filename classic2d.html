@@ -800,6 +800,7 @@
     // =========================================================================
     // 1. REAL-TIME PHONE-SYNCED CLOCK (100% EXACT DEVICE LOCAL TIME)
     // =========================================================================
+    let STATE = null;
     let liveClockStr = "--:--:--";
     function updateLocalClock() {
       const now = new Date();
@@ -891,7 +892,6 @@
       news_social_radar:      [ { icon: "📰", name: "頭條快報卡", desc: "台美股 AI 關稅早報" }, { icon: "📡", name: "散戶反指標雷達", desc: "PTT/Reddit 情緒監測" }, { icon: "🦅", name: "順風耳情報卡", desc: "HN/X 矽谷風向快搜" } ]
     };
 
-    let STATE = null;
     let PORTFOLIO = {
       summary: { cashTwd: 321347, navTwd: 999179 },
       positions: [
@@ -941,14 +941,27 @@
       if (miniNavEl) miniNavEl.textContent = formatNavCompact(nav);
     }
 
+    async function fetchJsonWithFallback(urls) {
+      let lastErr = new Error("All endpoints failed");
+      for (const u of urls) {
+        try {
+          const res = await fetch(u, { cache: "no-store" });
+          if (res.ok) return await res.json();
+          lastErr = new Error("HTTP " + res.status);
+        } catch (err) {
+          lastErr = err;
+        }
+      }
+      throw lastErr;
+    }
+
     async function fetchPortfolio() {
       try {
-        const res = await fetch(
-          `https://api.github.com/repos/howardKung/alpha-stock-warroom/contents/portfolio.json?ref=main`,
-          { headers: { "Accept": "application/vnd.github.raw+json" }, cache: "no-store" }
-        );
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
+        const ts = Date.now();
+        const data = await fetchJsonWithFallback([
+          `https://howardkung.github.io/alpha-stock-warroom/portfolio.json?t=${ts}`,
+          `https://raw.githubusercontent.com/howardKung/alpha-stock-warroom/main/portfolio.json?t=${ts}`
+        ]);
         if (data?.summary) {
           PORTFOLIO = data;
           renderPortfolioHUD();
@@ -973,15 +986,14 @@
       if (STATE && !manual) hydrateSpritesAndUI("● LIVE 快照已載入");
       if (manual) pill.textContent = "● 同步中...";
       try {
-        let res = await fetch(
-          `https://api.github.com/repos/howardKung/project-lifeblood-rpg-office/contents/state.json?ref=main`,
-          { headers: { "Accept": "application/vnd.github.raw+json" }, cache: "no-store" }
-        );
-        if (!res.ok) {
-          res = await fetch(`./state.json?t=${Date.now()}`, { cache: "no-store" });
-        }
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        STATE = await res.json();
+        const ts = Date.now();
+        const urls = window.location.protocol === "file:"
+          ? [`https://raw.githubusercontent.com/howardKung/project-lifeblood-rpg-office/main/state.json?t=${ts}`]
+          : [
+              `./state.json?t=${ts}`,
+              `https://raw.githubusercontent.com/howardKung/project-lifeblood-rpg-office/main/state.json?t=${ts}`
+            ];
+        STATE = await fetchJsonWithFallback(urls);
         hydrateSpritesAndUI("● LIVE 已同步");
       } catch (e) {
         if (STATE) {

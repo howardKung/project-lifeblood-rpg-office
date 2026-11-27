@@ -999,7 +999,12 @@
     import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
     // =========================================================================
-    // 1. REAL-TIME PHONE-SYNCED CLOCK (100% EXACT DEVICE LOCAL TIME)
+    // 1. DATA & STATE HYDRATION (KEEP EXACT "let STATE = null;" FOR CLI)
+    // =========================================================================
+    let STATE = null;
+
+    // =========================================================================
+    // 2. REAL-TIME PHONE-SYNCED CLOCK (100% EXACT DEVICE LOCAL TIME)
     // =========================================================================
     let liveClockStr = "--:--:--";
     let liveDateShort = "";
@@ -1023,11 +1028,6 @@
     }
     updateLocalClock();
     setInterval(updateLocalClock, 1000);
-
-    // =========================================================================
-    // 2. DATA & STATE HYDRATION (KEEP EXACT "let STATE = null;" FOR CLI)
-    // =========================================================================
-    let STATE = null;
     let PORTFOLIO = {
       summary: { cashTwd: 321347, navTwd: 999179 },
       positions: [
@@ -2999,14 +2999,27 @@
       twseNeedsRedraw = true;
     }
 
+    async function fetchJsonWithFallback(urls) {
+      let lastErr = new Error("All endpoints failed");
+      for (const u of urls) {
+        try {
+          const res = await fetch(u, { cache: "no-store" });
+          if (res.ok) return await res.json();
+          lastErr = new Error("HTTP " + res.status);
+        } catch (err) {
+          lastErr = err;
+        }
+      }
+      throw lastErr;
+    }
+
     async function fetchPortfolio() {
       try {
-        const res = await fetch(
-          `https://api.github.com/repos/howardKung/alpha-stock-warroom/contents/portfolio.json?ref=main`,
-          { headers: { "Accept": "application/vnd.github.raw+json" }, cache: "no-store" }
-        );
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
+        const ts = Date.now();
+        const data = await fetchJsonWithFallback([
+          `https://howardkung.github.io/alpha-stock-warroom/portfolio.json?t=${ts}`,
+          `https://raw.githubusercontent.com/howardKung/alpha-stock-warroom/main/portfolio.json?t=${ts}`
+        ]);
         if (data?.summary) {
           PORTFOLIO = data;
           renderPortfolioHUD();
@@ -3028,15 +3041,14 @@
       if (STATE && !manual) hydrateAndRender("● LIVE 快照已載入");
       if (manual) pill.textContent = "● 同步中...";
       try {
-        let res = await fetch(
-          `https://api.github.com/repos/howardKung/project-lifeblood-rpg-office/contents/state.json?ref=main`,
-          { headers: { "Accept": "application/vnd.github.raw+json" }, cache: "no-store" }
-        );
-        if (!res.ok) {
-          res = await fetch(`./state.json?t=${Date.now()}`, { cache: "no-store" });
-        }
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        STATE = await res.json();
+        const ts = Date.now();
+        const urls = window.location.protocol === "file:"
+          ? [`https://raw.githubusercontent.com/howardKung/project-lifeblood-rpg-office/main/state.json?t=${ts}`]
+          : [
+              `./state.json?t=${ts}`,
+              `https://raw.githubusercontent.com/howardKung/project-lifeblood-rpg-office/main/state.json?t=${ts}`
+            ];
+        STATE = await fetchJsonWithFallback(urls);
         hydrateAndRender("● LIVE 已同步");
       } catch (e) {
         if (STATE) {
